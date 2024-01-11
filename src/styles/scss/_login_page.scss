@@ -15,7 +15,7 @@
   w-full justify-start md:justify-center md:px-10 py-16;
 
   h1 {
-    @apply text-custom-blue text-3xl font-extrabold mb-4;
+    @apply text-sky-800 text-3xl font-extrabold mb-4;
   }
 
   label {
@@ -33,7 +33,7 @@
   }
 
   .login-btn {
-    @apply bg-custom-blue text-white text-lg font-bold 
+    @apply bg-sky-800 text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
   }
 }

@@ -7,9 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        "custom-blue": "#346ba0"
-      },
       fontFamily: {
         "custom-font": ["Manrope", "Arial", "Helvetica", "sans-serif"]
       }

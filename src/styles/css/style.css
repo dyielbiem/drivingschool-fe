@@ -29,7 +29,7 @@ main {
   w-full justify-start md:justify-center md:px-10 py-16;
 }
 .login-form h1 {
-  @apply text-custom-blue text-3xl font-extrabold mb-4;
+  @apply text-sky-800 text-3xl font-extrabold mb-4;
 }
 .login-form label {
   @apply text-sm mt-2 indent-0.5 font-bold;
@@ -43,6 +43,6 @@ main {
     bg-red-200 border-2 border-red-700;
 }
 .login-form .login-btn {
-  @apply bg-custom-blue text-white text-lg font-bold 
+  @apply bg-sky-800 text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
 }
