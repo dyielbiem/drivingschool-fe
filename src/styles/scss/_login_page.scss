@@ -1,0 +1,39 @@
+.login-page {
+  @apply grid grid-cols-1 md:grid-cols-2 justify-items-center h-screen;
+
+  .img-container {
+    @apply aspect-square w-full h-full overflow-hidden relative hidden md:block;
+
+    img {
+      @apply object-cover;
+    }
+  }
+}
+
+.login-form {
+  @apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-md 
+  w-full justify-start md:justify-center md:px-10 py-16;
+
+  h1 {
+    @apply text-custom-blue text-3xl font-extrabold mb-4;
+  }
+
+  label {
+    @apply text-sm mt-2 indent-0.5 font-bold;
+  }
+
+  input {
+    @apply border-solid border-neutral-400 border-[1px] 
+    rounded-md py-2 px-2;
+  }
+
+  .error-message {
+    @apply text-red-700 font-bold p-2.5 mt-4
+    bg-red-200 border-2 border-red-700;
+  }
+
+  .login-btn {
+    @apply bg-custom-blue text-white text-lg font-bold 
+    py-3 rounded-lg mt-14;
+  }
+}

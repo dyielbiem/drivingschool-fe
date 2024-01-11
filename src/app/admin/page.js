@@ -1,7 +1,15 @@
-import LoginForm from "@/components/loginForm";
+"use client";
 
-const Admin = () => {
-  return <LoginForm />;
+import LoginForm from "@/components/LoginForm";
+import LoginImage from "@/components/LoginImage";
+
+const AdminLogin = () => {
+  return (
+    <main className="login-page">
+      <LoginImage />
+      <LoginForm role="admin" formTitle="Administrator Login" />
+    </main>
+  );
 };
 
-export default Admin;
+export default AdminLogin;

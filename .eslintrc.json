@@ -12,6 +12,7 @@
         "bracketSpacing": true
       }
     ],
-    "camelcase": ["error"]
+    "camelcase": "error",
+    "no-console": "warn"
   }
 }

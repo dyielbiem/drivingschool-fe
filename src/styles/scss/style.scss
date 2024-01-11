@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+
 * {
-  @apply m-0 p-0 box-border;
+  @apply m-0 p-0 box-border font-custom-font;
 }
+
+body {
+  @apply min-h-screen flex items-center justify-center;
+}
+
+main {
+  @apply w-10/12 sm:w-full;
+}
+
+@import "login_page";
