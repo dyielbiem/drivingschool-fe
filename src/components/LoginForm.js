@@ -1,5 +1,5 @@
-import loginAdmin from "@/utils/fetch/loginAdmin";
-import loginSuperAdmin from "@/utils/fetch/loginSuperAdmin";
+import loginAdmin from "@/services/api/loginAdmin";
+import loginSuperAdmin from "@/services/api/loginSuperAdmin";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";

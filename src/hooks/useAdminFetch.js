@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { adminRefreshAccessToken } from "@/utils/fetch/refreshAccessToken";
+import { adminRefreshAccessToken } from "@/services/api/refreshAccessToken";
 import Cookies from "js-cookie";
 
 const useAdminFetch = (fetchCallBack) => {

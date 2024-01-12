@@ -1,6 +1,6 @@
 "use client";
 
-import adminFetchSections from "@/utils/fetch/adminFetchSections";
+import adminFetchSections from "@/services/api/adminFetchSections";
 import useAdminFetch from "@/hooks/useAdminFetch";
 const AdminSections = () => {
   const response = useAdminFetch(adminFetchSections);
