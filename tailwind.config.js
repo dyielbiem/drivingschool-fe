@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "custom-font": ["Manrope", "Arial", "Helvetica", "sans-serif"]
+        "custom-font": ["Mulish", "Arial", "Helvetica", "sans-serif"]
       }
     }
   },

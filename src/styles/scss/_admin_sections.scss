@@ -1,0 +1,37 @@
+.admin-sections-container {
+  @apply flex flex-col w-full;
+
+  .header-titles-container {
+    @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center px-10 rounded-md 
+    font-semibold gap-x-4 mb-4;
+
+    p {
+      @apply font-extrabold text-lg;
+    }
+
+    p:nth-child(1) {
+      @apply justify-self-start;
+    }
+  }
+
+  ul {
+    @apply flex flex-col gap-4;
+
+    li {
+      @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 py-3.5 
+      px-10 rounded-md font-semibold gap-x-4;
+
+      p:nth-child(1) {
+        @apply justify-self-start;
+      }
+
+      p:nth-child(2) {
+        @apply break-all;
+      }
+
+      p:nth-child(3) {
+        @apply rounded-md text-xs font-extrabold py-1 px-2;
+      }
+    }
+  }
+}

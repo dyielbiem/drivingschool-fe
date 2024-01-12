@@ -1,0 +1,27 @@
+.admin-dashboard-layout {
+  @apply flex w-full;
+
+  .side-nav-container {
+    @apply flex flex-col overflow-hidden h-screen max-h-screen bg-sky-800
+    transition-[width] duration-300 items-center py-20;
+
+    .side-nav {
+      @apply text-slate-100;
+
+      .nav-items-container {
+        @apply flex flex-col gap-3;
+
+        a {
+          @apply text-xl py-4 w-80 relative 
+          after:content-[""] after:absolute after:right-0 after:top-0
+          after:w-2 after:h-full after:bg-sky-800 
+          flex justify-center items-center gap-4;
+
+          .nav-icon {
+            @apply text-3xl;
+          }
+        }
+      }
+    }
+  }
+}

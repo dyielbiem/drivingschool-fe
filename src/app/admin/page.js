@@ -7,7 +7,11 @@ const AdminLogin = () => {
   return (
     <main className="login-page">
       <LoginImage />
-      <LoginForm role="admin" formTitle="Administrator Login" />
+      <LoginForm
+        role="admin"
+        formTitle="Administrator Login"
+        redirectPath="sections"
+      />
     </main>
   );
 };

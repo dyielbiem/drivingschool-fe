@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,4 +45,64 @@ main {
 .login-form .login-btn {
   @apply bg-sky-800 text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
+}
+
+.admin-dashboard-layout {
+  @apply flex w-full;
+}
+.admin-dashboard-layout .side-nav-container {
+  @apply flex flex-col overflow-hidden h-screen max-h-screen bg-sky-800
+    transition-[width] duration-300 items-center py-20;
+}
+.admin-dashboard-layout .side-nav-container .side-nav {
+  @apply text-slate-100;
+}
+.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container {
+  @apply flex flex-col gap-3;
+}
+.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a {
+  @apply text-xl py-4 w-80 relative 
+          after:content-[""] after:absolute after:right-0 after:top-0
+          after:w-2 after:h-full after:bg-sky-800 
+          flex justify-center items-center gap-4;
+}
+.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a .nav-icon {
+  @apply text-3xl;
+}
+
+.admin-sections-layout {
+  @apply flex flex-col bg-slate-200 flex-grow px-10 py-4 gap-2;
+}
+.admin-sections-layout .header h1 {
+  @apply font-extrabold text-3xl py-6;
+}
+
+.admin-sections-container {
+  @apply flex flex-col w-full;
+}
+.admin-sections-container .header-titles-container {
+  @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center px-10 rounded-md 
+    font-semibold gap-x-4 mb-4;
+}
+.admin-sections-container .header-titles-container p {
+  @apply font-extrabold text-lg;
+}
+.admin-sections-container .header-titles-container p:nth-child(1) {
+  @apply justify-self-start;
+}
+.admin-sections-container ul {
+  @apply flex flex-col gap-4;
+}
+.admin-sections-container ul li {
+  @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 py-3.5 
+      px-10 rounded-md font-semibold gap-x-4;
+}
+.admin-sections-container ul li p:nth-child(1) {
+  @apply justify-self-start;
+}
+.admin-sections-container ul li p:nth-child(2) {
+  @apply break-all;
+}
+.admin-sections-container ul li p:nth-child(3) {
+  @apply rounded-md text-xs font-extrabold py-1 px-2;
 }

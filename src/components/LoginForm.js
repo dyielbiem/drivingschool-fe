@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
-const LoginForm = ({ role, formTitle }) => {
+const LoginForm = ({ role, formTitle, redirectPath }) => {
   if (role != "admin" && role != "superadmin") throw Error("Invalid role");
 
   const [userName, setUserName] = useState("");
@@ -43,7 +43,7 @@ const LoginForm = ({ role, formTitle }) => {
     Cookies.set("accessToken", response.json?.accessToken);
     Cookies.set("refreshToken", response.json?.refreshToken);
 
-    router.replace(`/${role}/dashboard`);
+    router.replace(`/${role}/${redirectPath}`);
     return setIsButtonDisabled(false);
   };
 

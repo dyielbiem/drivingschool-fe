@@ -7,7 +7,11 @@ const SuperAdminLogin = () => {
   return (
     <main className="login-page">
       <LoginImage />
-      <LoginForm role="superadmin" formTitle="Superadmin Login" />
+      <LoginForm
+        role="superadmin"
+        formTitle="Superadmin Login"
+        redirectPath="sections"
+      />
     </main>
   );
 };
