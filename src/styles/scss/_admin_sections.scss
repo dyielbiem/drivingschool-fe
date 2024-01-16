@@ -1,9 +1,23 @@
 .admin-sections-container {
-  @apply flex flex-col w-full;
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-slate-200
+  overflow-y-auto overflow-x-hidden p-12;
+
+  .header {
+    @apply flex justify-between items-center mb-12;
+
+    h1 {
+      @apply text-3xl font-extrabold;
+    }
+
+    & > button {
+      @apply bg-sky-700 text-slate-100 px-4 py-2.5 
+      rounded-lg text-lg font-bold;
+    }
+  }
 
   .header-titles-container {
     @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center px-10 rounded-md 
-    font-semibold gap-x-4 mb-4;
+    font-semibold gap-x-4 mb-6;
 
     p {
       @apply font-extrabold text-lg;
@@ -18,8 +32,9 @@
     @apply flex flex-col gap-4;
 
     li {
-      @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 py-3.5 
-      px-10 rounded-md font-semibold gap-x-4;
+      @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 
+      py-4 px-10 rounded-md font-semibold gap-x-4 cursor-pointer 
+      hover:scale-[1.01] duration-100;
 
       p:nth-child(1) {
         @apply justify-self-start;
@@ -30,7 +45,7 @@
       }
 
       p:nth-child(3) {
-        @apply rounded-md text-xs font-extrabold py-1 px-2;
+        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
       }
     }
   }

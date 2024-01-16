@@ -1,5 +1,5 @@
 const AdminStudents = () => {
-  return <div>Students</div>;
+  return <section>Students</section>;
 };
 
 export default AdminStudents;

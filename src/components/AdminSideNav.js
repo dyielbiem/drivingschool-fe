@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import { HiRectangleGroup } from "react-icons/hi2";
 import { MdGroups2 } from "react-icons/md";
 
-const SideNav = () => {
+const AdminSideNav = () => {
   const pathName = usePathname();
+  const regex = /^\/admin\/sections\/.+/;
 
   const navItems = [
     {
@@ -18,7 +19,9 @@ const SideNav = () => {
   ];
 
   return (
-    <div className={`side-nav-container`}>
+    <div
+      className={`side-nav-container ${regex.test(pathName) ? "!hidden" : ""}`}
+    >
       <nav className="side-nav">
         <div className="nav-items-container">
           {navItems?.length > 0 &&
@@ -27,14 +30,14 @@ const SideNav = () => {
                 key={index}
                 href={item.path}
                 className={`${
-                  pathName === item.path
+                  pathName.startsWith(item.path)
                     ? "bg-sky-950 after:!bg-sky-500 font-extrabold"
                     : ""
                 }`}
               >
                 <item.icon
                   className={`nav-icon ${
-                    pathName === item.path ? "text-sky-500" : ""
+                    pathName.startsWith(item.path) ? "text-sky-500" : ""
                   }`}
                 />
                 <span>{item.title}</span>
@@ -46,4 +49,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default AdminSideNav;

@@ -1,21 +1,23 @@
-import Cookies from "js-cookie";
+import { adminRefreshAccessToken } from "./refreshAccessToken";
 
 const adminFetchSections = async () => {
   try {
-    const accessToken = Cookies.get("accessToken");
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/admin/section/list`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`
+    const fetchMethod = async (accessToken) => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/admin/section/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          }
         }
-      }
-    );
+      );
 
-    const json = await response.json();
-    return { ok: response.ok, json };
+      return response;
+    };
+
+    return await adminRefreshAccessToken(fetchMethod);
   } catch (error) {
     return { ok: false, json: { error: error.message } };
   }

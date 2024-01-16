@@ -1,9 +1,0 @@
-.admin-sections-layout {
-  @apply flex flex-col bg-slate-200 flex-grow px-10 py-4 gap-2;
-
-  .header {
-    h1 {
-      @apply font-extrabold text-3xl py-6;
-    }
-  }
-}

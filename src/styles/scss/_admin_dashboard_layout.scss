@@ -3,16 +3,16 @@
 
   .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-sky-800
-    transition-[width] duration-300 items-center py-20;
+    transition-[width] duration-300 items-center py-20 w-80;
 
     .side-nav {
-      @apply text-slate-100;
+      @apply text-slate-100 w-full;
 
       .nav-items-container {
         @apply flex flex-col gap-3;
 
         a {
-          @apply text-xl py-4 w-80 relative 
+          @apply text-xl py-4 relative
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-2 after:h-full after:bg-sky-800 
           flex justify-center items-center gap-4;

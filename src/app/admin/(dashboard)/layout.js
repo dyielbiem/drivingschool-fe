@@ -1,9 +1,9 @@
-import SideNav from "@/components/SideNav";
+import AdminSideNav from "@/components/AdminSideNav";
 
 const AdminDashboardLayout = ({ children }) => {
   return (
     <main className="admin-dashboard-layout">
-      <SideNav />
+      <AdminSideNav />
       {children}
     </main>
   );
