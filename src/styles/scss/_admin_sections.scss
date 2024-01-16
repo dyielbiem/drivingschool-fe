@@ -34,10 +34,10 @@
     li {
       @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 
       py-4 px-10 rounded-md font-semibold gap-x-4 cursor-pointer 
-      hover:scale-[1.01] duration-100;
+      hover:-translate-y-1 hover:shadow-md duration-200;
 
       p:nth-child(1) {
-        @apply justify-self-start;
+        @apply justify-self-start font-extrabold;
       }
 
       p:nth-child(2) {

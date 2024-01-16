@@ -3,7 +3,7 @@
 
   .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-sky-800
-    transition-[width] duration-300 items-center py-20 w-80;
+    transition-[width] duration-300 items-center py-20 min-w-80;
 
     .side-nav {
       @apply text-slate-100 w-full;

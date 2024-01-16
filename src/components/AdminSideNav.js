@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiRectangleGroup } from "react-icons/hi2";
+import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
+import { GiBookshelf } from "react-icons/gi";
 
 const AdminSideNav = () => {
   const pathName = usePathname();
@@ -13,7 +14,12 @@ const AdminSideNav = () => {
     {
       title: "Manage Sections",
       path: "/admin/sections",
-      icon: HiRectangleGroup
+      icon: PiClipboardTextFill
+    },
+    {
+      title: "Offered Courses",
+      path: "/admin/courses",
+      icon: GiBookshelf
     },
     { title: "Manage Students", path: "/admin/students", icon: MdGroups2 }
   ];

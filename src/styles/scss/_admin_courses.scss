@@ -1,0 +1,46 @@
+.admin-courses-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen bg-slate-200 overflow-x-hidden overflow-y-auto pb-10;
+
+  .header {
+    @apply flex justify-between items-center mb-12;
+
+    h1 {
+      @apply font-extrabold text-3xl;
+    }
+
+    button {
+      @apply bg-sky-700 text-slate-100 px-4 py-2.5 
+      rounded-lg text-lg font-bold;
+    }
+  }
+
+  .header-title-container {
+    @apply grid grid-cols-[2fr_2fr_repeat(3,1fr)] text-lg font-extrabold gap-x-8
+    mb-6 px-4 justify-items-center;
+
+    p {
+      @apply text-center;
+    }
+  }
+
+  ul {
+    @apply flex flex-col gap-4;
+
+    li {
+      @apply grid grid-cols-[2fr_2fr_repeat(3,1fr)] gap-x-8 justify-items-center bg-slate-100 p-4 rounded-md font-semibold cursor-pointer 
+      hover:-translate-y-1 hover:shadow-md duration-200;
+
+      p:nth-child(1) {
+        @apply font-extrabold;
+      }
+
+      p:nth-child(2) {
+        @apply break-all;
+      }
+
+      p:nth-child(5) {
+        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
+      }
+    }
+  }
+}

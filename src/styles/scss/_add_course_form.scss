@@ -1,0 +1,41 @@
+.add-course-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+
+  form {
+    @apply flex flex-col p-8 rounded-lg gap-2 bg-slate-200 w-full 
+    max-w-lg z-10 relative max-h-[95%] overflow-y-auto;
+
+    .close-btn {
+      @apply absolute w-fit right-6 top-6;
+
+      svg {
+        @apply text-3xl;
+      }
+    }
+
+    h3 {
+      @apply text-2xl font-extrabold mb-4;
+    }
+
+    label {
+      @apply mt-2 text-sm font-bold indent-1;
+
+      span {
+        @apply text-red-800 font-bold;
+      }
+    }
+
+    input,
+    select {
+      @apply bg-slate-100 rounded-sm p-2 h-10 cursor-pointer;
+    }
+    textarea {
+      @apply bg-slate-100 rounded-sm p-2 h-20 cursor-pointer resize-none;
+    }
+
+    .submit-btn {
+      @apply w-full bg-sky-800 text-xl font-bold text-slate-100 rounded-lg py-2.5 mt-8;
+    }
+  }
+}

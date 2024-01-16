@@ -28,24 +28,35 @@ const AdminSections = () => {
   };
 
   const renderSection = () => {
+    if (!sections || sections.length === 0) return <></>;
     return (
-      sections &&
-      sections.length != 0 &&
-      sections.map((section, index) => (
-        <li key={index} onClick={() => handleSectionClick(section.sectionID)}>
-          <p>{section.sectionTitle}</p>
-          <p>{section.sectionID}</p>
-          <p
-            className={`${
-              section.isActive
-                ? "bg-emerald-300 text-emerald-900"
-                : "bg-red-300 text-red-900"
-            }`}
-          >
-            {section.isActive ? "ACTIVE" : "INACTIVE"}
-          </p>
-        </li>
-      ))
+      <>
+        <div className="header-titles-container">
+          <p>Section Title</p>
+          <p>Section ID</p>
+          <p>Status</p>
+        </div>
+        <ul>
+          {sections.map((section, index) => (
+            <li
+              key={index}
+              onClick={() => handleSectionClick(section.sectionID)}
+            >
+              <p>{section.sectionTitle}</p>
+              <p>{section.sectionID}</p>
+              <p
+                className={`${
+                  section.isActive
+                    ? "bg-emerald-300 text-emerald-900"
+                    : "bg-red-300 text-red-900"
+                }`}
+              >
+                {section.isActive ? "ACTIVE" : "INACTIVE"}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </>
     );
   };
 
@@ -57,12 +68,7 @@ const AdminSections = () => {
           Create new section
         </button>
       </div>
-      <div className="header-titles-container">
-        <p>Section Title</p>
-        <p>Section ID</p>
-        <p>Status</p>
-      </div>
-      <ul>{renderSection()}</ul>
+      {renderSection()}
       {searchParams.get("createNewSection") && (
         <CreateSectionForm setSections={setSections} />
       )}
