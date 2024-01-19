@@ -39,7 +39,12 @@ const ManageCourses = () => {
         {courses.map((course, index) => (
           <li key={index}>
             <p>{course.courseID}</p>
-            <p>
+            <p
+              className={`course-name`}
+              onMouseOver={(event) =>
+                event.target.setAttribute("data-before", course.courseName)
+              }
+            >
               {course.courseName.length < 16
                 ? course.courseName
                 : course.courseName.slice(0, 16) + "..."}
@@ -77,7 +82,9 @@ const ManageCourses = () => {
         <button onClick={handleAddCourseClick}>Add new course</button>
       </div>
       {renderCourses()}
-      {searchParams.get("addNewCourse") && <AddCourseForm />}
+      {searchParams.get("addNewCourse") && (
+        <AddCourseForm setCourses={setCourses} />
+      )}
     </section>
   );
 };

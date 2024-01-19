@@ -171,7 +171,7 @@ main {
 }
 .admin-courses-container .course-table li:nth-child(n+2) {
   @apply grid grid-cols-subgrid col-span-full
-        gap-x-8 justify-items-center 
+        gap-x-8 justify-items-center hover:z-50
         bg-white px-4 py-5 rounded-md cursor-pointer 
         hover:-translate-y-1 hover:shadow-md duration-200;
 }
@@ -180,6 +180,13 @@ main {
 }
 .admin-courses-container .course-table li:nth-child(n+2) p:nth-child(1) {
   @apply break-all;
+}
+.admin-courses-container .course-table li:nth-child(n+2) .course-name {
+  @apply relative before:hidden hover:before:block 
+        before:content-[attr(data-before)]
+        before:absolute before:bg-custom-white-dark
+        before:top-8 before:left-1/2 before:p-3 before:shadow-xl w-fit
+        before:rounded-md before:min-w-[250%] before:-translate-x-1/2 before:mb-16;
 }
 .admin-courses-container .course-table li:nth-child(n+2) p:nth-child(3) {
   @apply whitespace-nowrap;
@@ -234,6 +241,13 @@ main {
 }
 .add-course-form form textarea {
   @apply p-2 h-20 resize-none;
+}
+.add-course-form form select {
+  @apply cursor-pointer;
+}
+.add-course-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
 }
 .add-course-form form .submit-btn {
   @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
