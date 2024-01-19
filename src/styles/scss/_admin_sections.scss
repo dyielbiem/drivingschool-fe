@@ -1,5 +1,5 @@
 .admin-sections-container {
-  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-slate-200
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12;
 
   .header {
@@ -10,42 +10,38 @@
     }
 
     & > button {
-      @apply bg-sky-700 text-slate-100 px-4 py-2.5 
+      @apply bg-custom-blue-base text-white px-4 py-2.5 
       rounded-lg text-lg font-bold;
     }
   }
 
-  .header-titles-container {
-    @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center px-10 rounded-md 
-    font-semibold gap-x-4 mb-6;
+  .section-table {
+    @apply grid grid-cols-[8fr_1fr] gap-3;
 
-    p {
-      @apply font-extrabold text-lg;
+    .table-header {
+      @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+
+      p {
+        @apply font-extrabold text-lg;
+      }
+
+      p:nth-child(1) {
+        @apply justify-self-start;
+      }
     }
 
-    p:nth-child(1) {
-      @apply justify-self-start;
-    }
-  }
-
-  ul {
-    @apply flex flex-col gap-4;
-
-    li {
-      @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 
-      py-4 px-10 rounded-md font-semibold gap-x-4 cursor-pointer 
+    li:nth-child(n + 2) {
+      @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+      py-5 px-10 rounded-md cursor-pointer 
       hover:-translate-y-1 hover:shadow-md duration-200;
 
       p:nth-child(1) {
-        @apply justify-self-start font-extrabold;
+        @apply justify-self-start;
       }
 
       p:nth-child(2) {
-        @apply break-all;
-      }
-
-      p:nth-child(3) {
-        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
+        @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
       }
     }
   }

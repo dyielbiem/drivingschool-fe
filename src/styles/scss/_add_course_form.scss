@@ -3,7 +3,7 @@
   items-center bg-[#00000044];
 
   form {
-    @apply flex flex-col p-8 rounded-lg gap-2 bg-slate-200 w-full 
+    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
     max-w-lg z-10 relative max-h-[95%] overflow-y-auto;
 
     .close-btn {
@@ -27,15 +27,22 @@
     }
 
     input,
-    select {
-      @apply bg-slate-100 rounded-sm p-2 h-10 cursor-pointer;
-    }
+    select,
     textarea {
-      @apply bg-slate-100 rounded-sm p-2 h-20 cursor-pointer resize-none;
+      @apply bg-white rounded-md border-custom-gray-base border-[1px];
+    }
+
+    input,
+    select {
+      @apply p-2 h-10;
+    }
+
+    textarea {
+      @apply p-2 h-20 resize-none;
     }
 
     .submit-btn {
-      @apply w-full bg-sky-800 text-xl font-bold text-slate-100 rounded-lg py-2.5 mt-8;
+      @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
     }
   }
 }

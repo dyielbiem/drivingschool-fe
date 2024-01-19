@@ -30,33 +30,26 @@ const AdminSections = () => {
   const renderSection = () => {
     if (!sections || sections.length === 0) return <></>;
     return (
-      <>
-        <div className="header-titles-container">
+      <ul className="section-table">
+        <li className="table-header">
           <p>Section Title</p>
-          <p>Section ID</p>
           <p>Status</p>
-        </div>
-        <ul>
-          {sections.map((section, index) => (
-            <li
-              key={index}
-              onClick={() => handleSectionClick(section.sectionID)}
+        </li>
+        {sections.map((section, index) => (
+          <li key={index} onClick={() => handleSectionClick(section.sectionID)}>
+            <p>{section.sectionTitle}</p>
+            <p
+              className={`${
+                section.isActive
+                  ? "bg-custom-green-light text-custom-green-base"
+                  : "bg-custom-gray-base text-custom-gray-dark"
+              }`}
             >
-              <p>{section.sectionTitle}</p>
-              <p>{section.sectionID}</p>
-              <p
-                className={`${
-                  section.isActive
-                    ? "bg-emerald-300 text-emerald-900"
-                    : "bg-red-300 text-red-900"
-                }`}
-              >
-                {section.isActive ? "ACTIVE" : "INACTIVE"}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </>
+              {section.isActive ? "ACTIVE" : "INACTIVE"}
+            </p>
+          </li>
+        ))}
+      </ul>
     );
   };
 

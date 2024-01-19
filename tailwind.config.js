@@ -8,7 +8,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "custom-font": ["Mulish", "Arial", "Helvetica", "sans-serif"]
+        "custom-font": ["PT Sans", "Arial", "Helvetica", "sans-serif"]
+      },
+      colors: {
+        "custom-blue-darker": "#213D58",
+        "custom-blue-dark": "#284867",
+        "custom-blue-base": "#346BA0",
+        "custom-blue-light": "#2693FF",
+        "custom-green-light": "#CAF0AD",
+        "custom-green-base": "#41721C",
+        "custom-gray-dark": "#828282",
+        "custom-gray-base": "#E3E3E3",
+        "custom-white-darker": "#D7D7D7",
+        "custom-white-dark": "#F6F7FB",
+        "custom-white-base": "#F0F0F0",
+        "custom-red": "#AE3737"
       }
     }
   },

@@ -16,12 +16,12 @@ const AdminSideNav = () => {
       path: "/admin/sections",
       icon: PiClipboardTextFill
     },
+    { title: "Manage Students", path: "/admin/students", icon: MdGroups2 },
     {
-      title: "Offered Courses",
+      title: "Manage Courses",
       path: "/admin/courses",
       icon: GiBookshelf
-    },
-    { title: "Manage Students", path: "/admin/students", icon: MdGroups2 }
+    }
   ];
 
   return (
@@ -37,16 +37,26 @@ const AdminSideNav = () => {
                 href={item.path}
                 className={`${
                   pathName.startsWith(item.path)
-                    ? "bg-sky-950 after:!bg-sky-500 font-extrabold"
+                    ? "bg-custom-blue-darker after:!bg-custom-blue-light font-extrabold"
                     : ""
                 }`}
               >
                 <item.icon
                   className={`nav-icon ${
-                    pathName.startsWith(item.path) ? "text-sky-500" : ""
+                    pathName.startsWith(item.path)
+                      ? "!text-custom-blue-light"
+                      : ""
                   }`}
                 />
-                <span>{item.title}</span>
+                <span
+                  className={`${
+                    pathName.startsWith(item.path)
+                      ? "text-custom-white-base"
+                      : ""
+                  }`}
+                >
+                  {item.title}
+                </span>
               </Link>
             ))}
         </div>

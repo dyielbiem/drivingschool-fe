@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,7 +29,7 @@ main {
   w-full justify-start md:justify-center md:px-10 py-16;
 }
 .login-form h1 {
-  @apply text-sky-800 text-3xl font-extrabold mb-4;
+  @apply text-custom-blue-base text-2xl font-extrabold mb-4;
 }
 .login-form label {
   @apply text-sm mt-2 indent-0.5 font-bold;
@@ -43,7 +43,7 @@ main {
     bg-red-200 border-2 border-red-700;
 }
 .login-form .login-btn {
-  @apply bg-sky-800 text-white text-lg font-bold 
+  @apply bg-custom-blue-base text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
 }
 
@@ -51,11 +51,11 @@ main {
   @apply flex w-full;
 }
 .admin-dashboard-layout .side-nav-container {
-  @apply flex flex-col overflow-hidden h-screen max-h-screen bg-sky-800
-    transition-[width] duration-300 items-center py-20 min-w-80;
+  @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
+    transition-[width] duration-300 items-center py-20 min-w-72;
 }
 .admin-dashboard-layout .side-nav-container .side-nav {
-  @apply text-slate-100 w-full;
+  @apply text-custom-white-base w-full;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container {
   @apply flex flex-col gap-3;
@@ -63,15 +63,18 @@ main {
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a {
   @apply text-xl py-4 relative
           after:content-[""] after:absolute after:right-0 after:top-0
-          after:w-2 after:h-full after:bg-sky-800 
+          after:w-[6px] after:h-full after:bg-custom-blue-dark 
           flex justify-center items-center gap-4;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a .nav-icon {
-  @apply text-3xl;
+  @apply text-3xl text-custom-white-dark;
+}
+.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a span {
+  @apply text-custom-white-dark;
 }
 
 .admin-sections-container {
-  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-slate-200
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12;
 }
 .admin-sections-container .header {
@@ -81,35 +84,32 @@ main {
   @apply text-3xl font-extrabold;
 }
 .admin-sections-container .header > button {
-  @apply bg-sky-700 text-slate-100 px-4 py-2.5 
+  @apply bg-custom-blue-base text-white px-4 py-2.5 
       rounded-lg text-lg font-bold;
 }
-.admin-sections-container .header-titles-container {
-  @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center px-10 rounded-md 
-    font-semibold gap-x-4 mb-6;
+.admin-sections-container .section-table {
+  @apply grid grid-cols-[8fr_1fr] gap-3;
 }
-.admin-sections-container .header-titles-container p {
+.admin-sections-container .section-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.admin-sections-container .section-table .table-header p {
   @apply font-extrabold text-lg;
 }
-.admin-sections-container .header-titles-container p:nth-child(1) {
+.admin-sections-container .section-table .table-header p:nth-child(1) {
   @apply justify-self-start;
 }
-.admin-sections-container ul {
-  @apply flex flex-col gap-4;
-}
-.admin-sections-container ul li {
-  @apply grid grid-cols-[2fr_3fr_1fr] justify-items-center bg-slate-100 
-      py-4 px-10 rounded-md font-semibold gap-x-4 cursor-pointer 
+.admin-sections-container .section-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+      py-5 px-10 rounded-md cursor-pointer 
       hover:-translate-y-1 hover:shadow-md duration-200;
 }
-.admin-sections-container ul li p:nth-child(1) {
-  @apply justify-self-start font-extrabold;
+.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(1) {
+  @apply justify-self-start;
 }
-.admin-sections-container ul li p:nth-child(2) {
-  @apply break-all;
-}
-.admin-sections-container ul li p:nth-child(3) {
-  @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
+.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(2) {
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
 }
 
 .create-section-form {
@@ -117,7 +117,7 @@ main {
   items-center bg-[#00000044];
 }
 .create-section-form form {
-  @apply flex flex-col p-8 rounded-lg gap-2 bg-slate-200 w-full 
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
     max-w-md z-10 relative max-h-[95%] overflow-y-auto;
 }
 .create-section-form form .close-btn {
@@ -133,17 +133,20 @@ main {
   @apply mt-2 text-sm font-bold indent-1;
 }
 .create-section-form form label span {
-  @apply text-red-800 font-bold;
+  @apply text-custom-red font-bold;
 }
 .create-section-form form input {
-  @apply bg-slate-100 rounded-sm p-2 h-10 cursor-pointer;
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
 }
 .create-section-form form .submit-btn {
-  @apply w-full bg-sky-800 text-xl font-bold text-slate-100 rounded-lg py-2.5 mt-8;
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8;
 }
 
 .admin-courses-container {
-  @apply p-12 flex flex-col flex-grow h-screen max-h-screen bg-slate-200 overflow-x-hidden overflow-y-auto pb-10;
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
 }
 .admin-courses-container .header {
   @apply flex justify-between items-center mb-12;
@@ -152,31 +155,49 @@ main {
   @apply font-extrabold text-3xl;
 }
 .admin-courses-container .header button {
-  @apply bg-sky-700 text-slate-100 px-4 py-2.5 
+  @apply bg-custom-blue-base text-white px-4 py-2.5 
       rounded-lg text-lg font-bold;
 }
-.admin-courses-container .header-title-container {
-  @apply grid grid-cols-[2fr_2fr_repeat(3,1fr)] text-lg font-extrabold gap-x-8
-    mb-6 px-4 justify-items-center;
+.admin-courses-container .course-table {
+  @apply flex-col gap-3 grid grid-cols-[2fr_2fr_repeat(5,1fr)];
 }
-.admin-courses-container .header-title-container p {
+.admin-courses-container .course-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full 
+        text-lg font-extrabold gap-x-8
+        mb-4 px-4 justify-items-center;
+}
+.admin-courses-container .course-table .table-header p {
   @apply text-center;
 }
-.admin-courses-container ul {
-  @apply flex flex-col gap-4;
+.admin-courses-container .course-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full
+        gap-x-8 justify-items-center 
+        bg-white px-4 py-5 rounded-md cursor-pointer 
+        hover:-translate-y-1 hover:shadow-md duration-200;
 }
-.admin-courses-container ul li {
-  @apply grid grid-cols-[2fr_2fr_repeat(3,1fr)] gap-x-8 justify-items-center bg-slate-100 p-4 rounded-md font-semibold cursor-pointer 
-      hover:-translate-y-1 hover:shadow-md duration-200;
+.admin-courses-container .course-table li:nth-child(n+2) p {
+  @apply text-center;
 }
-.admin-courses-container ul li p:nth-child(1) {
-  @apply font-extrabold;
-}
-.admin-courses-container ul li p:nth-child(2) {
+.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(1) {
   @apply break-all;
 }
-.admin-courses-container ul li p:nth-child(5) {
+.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(3) {
+  @apply whitespace-nowrap;
+}
+.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(6) {
   @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
+}
+.admin-courses-container .course-table li:nth-child(n+2) div {
+  @apply flex justify-center items-center gap-4 h-fit;
+}
+.admin-courses-container .course-table li:nth-child(n+2) div button svg {
+  @apply text-xl;
+}
+.admin-courses-container .course-table li:nth-child(n+2) div button:nth-child(1) svg {
+  @apply text-custom-blue-light;
+}
+.admin-courses-container .course-table li:nth-child(n+2) div button:nth-child(2) svg {
+  @apply text-custom-red;
 }
 
 .add-course-form {
@@ -184,7 +205,7 @@ main {
   items-center bg-[#00000044];
 }
 .add-course-form form {
-  @apply flex flex-col p-8 rounded-lg gap-2 bg-slate-200 w-full 
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
     max-w-lg z-10 relative max-h-[95%] overflow-y-auto;
 }
 .add-course-form form .close-btn {
@@ -203,12 +224,17 @@ main {
   @apply text-red-800 font-bold;
 }
 .add-course-form form input,
+.add-course-form form select,
+.add-course-form form textarea {
+  @apply bg-white rounded-md border-custom-gray-base border-[1px];
+}
+.add-course-form form input,
 .add-course-form form select {
-  @apply bg-slate-100 rounded-sm p-2 h-10 cursor-pointer;
+  @apply p-2 h-10;
 }
 .add-course-form form textarea {
-  @apply bg-slate-100 rounded-sm p-2 h-20 cursor-pointer resize-none;
+  @apply p-2 h-20 resize-none;
 }
 .add-course-form form .submit-btn {
-  @apply w-full bg-sky-800 text-xl font-bold text-slate-100 rounded-lg py-2.5 mt-8;
+  @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
 }

@@ -3,7 +3,7 @@
   items-center bg-[#00000044];
 
   form {
-    @apply flex flex-col p-8 rounded-lg gap-2 bg-slate-200 w-full 
+    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
     max-w-md z-10 relative max-h-[95%] overflow-y-auto;
 
     .close-btn {
@@ -22,16 +22,18 @@
       @apply mt-2 text-sm font-bold indent-1;
 
       span {
-        @apply text-red-800 font-bold;
+        @apply text-custom-red font-bold;
       }
     }
 
     input {
-      @apply bg-slate-100 rounded-sm p-2 h-10 cursor-pointer;
+      @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
     }
 
     .submit-btn {
-      @apply w-full bg-sky-800 text-xl font-bold text-slate-100 rounded-lg py-2.5 mt-8;
+      @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8;
     }
   }
 }
