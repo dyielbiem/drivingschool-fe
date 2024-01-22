@@ -7,7 +7,7 @@ const AddCourseForm = ({ setCourses }) => {
   const router = useRouter();
   const [courseName, setCourseName] = useState("");
   const [courseDesc, setCourseDesc] = useState("");
-  const [coursePrice, setCoursePrice] = useState(0);
+  const [coursePrice, setCoursePrice] = useState(null);
   const [courseType, setCourseType] = useState("");
   const [error, setError] = useState("");
 
@@ -87,9 +87,10 @@ const AddCourseForm = ({ setCourses }) => {
           name="course-type"
           id="course-type"
           required
+          value={courseType}
           onChange={(event) => setCourseType(event.target.value)}
         >
-          <option value="" selected disabled>
+          <option value="" disabled>
             Select course type
           </option>
           <option value="Online">Online</option>
