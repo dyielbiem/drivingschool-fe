@@ -1,0 +1,39 @@
+.admin-billing-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+
+  .header {
+    @apply flex justify-between items-center mb-12;
+
+    h1 {
+      @apply font-extrabold text-3xl;
+    }
+  }
+
+  .billing-table {
+    @apply flex-col gap-3 grid grid-cols-6;
+
+    li {
+      @apply grid grid-cols-subgrid col-span-full justify-items-center;
+
+      p {
+        @apply text-center;
+      }
+    }
+
+    .table-header {
+      @apply text-lg font-extrabold gap-x-8
+        mb-4 px-4 justify-items-center;
+    }
+
+    li:nth-child(n + 2) {
+      @apply bg-white py-5 px-3 rounded-md;
+    }
+
+    button {
+      svg {
+        @apply text-xl text-custom-blue-light;
+      }
+    }
+  }
+}

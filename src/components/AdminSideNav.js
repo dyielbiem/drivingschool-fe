@@ -4,7 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
-import { GiBookshelf } from "react-icons/gi";
+import { RiCoupon3Fill } from "react-icons/ri";
+import { HiCreditCard } from "react-icons/hi2";
+import { FaBookOpen } from "react-icons/fa";
 
 const AdminSideNav = () => {
   const pathName = usePathname();
@@ -18,9 +20,19 @@ const AdminSideNav = () => {
     },
     { title: "Manage Students", path: "/admin/students", icon: MdGroups2 },
     {
+      title: "Manage Coupons",
+      path: "/admin/coupons",
+      icon: RiCoupon3Fill
+    },
+    {
+      title: "Billing Information",
+      path: "/admin/billing",
+      icon: HiCreditCard
+    },
+    {
       title: "Manage Courses",
       path: "/admin/courses",
-      icon: GiBookshelf
+      icon: FaBookOpen
     }
   ];
 

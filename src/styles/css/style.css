@@ -67,7 +67,7 @@ main {
           flex justify-center items-center gap-4;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a .nav-icon {
-  @apply text-3xl text-custom-white-dark;
+  @apply text-2xl text-custom-white-dark;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a span {
   @apply text-custom-white-dark;
@@ -251,4 +251,83 @@ main {
 }
 .add-course-form form .submit-btn {
   @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
+}
+
+.admin-coupons-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+}
+.admin-coupons-container .header {
+  @apply flex justify-between items-center mb-12;
+}
+.admin-coupons-container .header h1 {
+  @apply font-extrabold text-3xl;
+}
+.admin-coupons-container .header button {
+  @apply bg-custom-blue-base text-white px-4 py-2.5 
+      rounded-lg text-lg font-bold;
+}
+.admin-coupons-container .coupon-table {
+  @apply flex-col gap-3 grid grid-cols-6;
+}
+.admin-coupons-container .coupon-table li {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center;
+}
+.admin-coupons-container .coupon-table li p {
+  @apply text-center;
+}
+.admin-coupons-container .coupon-table .table-header {
+  @apply text-lg font-extrabold gap-x-8
+        mb-4 px-4 justify-items-center;
+}
+.admin-coupons-container .coupon-table li:nth-child(n+2) {
+  @apply bg-white py-5 px-3 rounded-md;
+}
+.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(1) {
+  @apply font-extrabold;
+}
+.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5) {
+  @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit;
+}
+.admin-coupons-container .coupon-table div {
+  @apply flex justify-center items-center gap-4 h-fit;
+}
+.admin-coupons-container .coupon-table div button svg {
+  @apply text-xl;
+}
+.admin-coupons-container .coupon-table div button:nth-child(1) svg {
+  @apply text-custom-blue-light;
+}
+.admin-coupons-container .coupon-table div button:nth-child(2) svg {
+  @apply text-custom-red;
+}
+
+.admin-billing-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+}
+.admin-billing-container .header {
+  @apply flex justify-between items-center mb-12;
+}
+.admin-billing-container .header h1 {
+  @apply font-extrabold text-3xl;
+}
+.admin-billing-container .billing-table {
+  @apply flex-col gap-3 grid grid-cols-6;
+}
+.admin-billing-container .billing-table li {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center;
+}
+.admin-billing-container .billing-table li p {
+  @apply text-center;
+}
+.admin-billing-container .billing-table .table-header {
+  @apply text-lg font-extrabold gap-x-8
+        mb-4 px-4 justify-items-center;
+}
+.admin-billing-container .billing-table li:nth-child(n+2) {
+  @apply bg-white py-5 px-3 rounded-md;
+}
+.admin-billing-container .billing-table button svg {
+  @apply text-xl text-custom-blue-light;
 }
