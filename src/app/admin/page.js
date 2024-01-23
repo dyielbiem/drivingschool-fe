@@ -1,5 +1,3 @@
-"use client";
-
 import LoginForm from "@/components/LoginForm";
 import LoginImage from "@/components/LoginImage";
 
@@ -10,7 +8,7 @@ const AdminLogin = () => {
       <LoginForm
         role="admin"
         formTitle="Administrator Login"
-        redirectPath="sections"
+        redirectPath="/admin/sections"
       />
     </main>
   );

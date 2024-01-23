@@ -1,41 +1,39 @@
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import adminAddCourse from "@/services/api/adminAddCourse";
-import { useState } from "react";
+import handleCourseSubmit from "@/app/actions/handleCourseSubmit";
+import { useFormState } from "react-dom";
+import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
+import { useEffect } from "react";
 
 const AddCourseForm = ({ setCourses }) => {
   const router = useRouter();
-  const [courseName, setCourseName] = useState("");
-  const [courseDesc, setCourseDesc] = useState("");
-  const [coursePrice, setCoursePrice] = useState(null);
-  const [courseType, setCourseType] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await adminAddCourse(
-      courseName,
-      courseDesc,
-      coursePrice,
-      courseType
-    );
-    if (!response.ok)
-      return setError(
-        response.json.error ? response.json.error : "An error occured"
-      );
-    setCourses((prevState) => [
-      ...prevState,
-      {
-        courseName,
-        courseDesc,
-        coursePrice: parseFloat(coursePrice).toFixed(2),
-        courseType,
-        courseID: response.json.courseID,
-        isActive: true
-      }
-    ]);
-    router.push("/admin/courses");
+  const initialState = {
+    message: "",
+    newCourse: null
   };
+
+  const [formState, formAction] = useFormState(
+    handleCourseSubmit,
+    initialState
+  );
+
+  useEffect(() => {
+    if (!formState.newCourse) return;
+    setCourses((prevState) => {
+      if (!prevState) return prevState;
+      return [
+        ...prevState,
+        {
+          ...formState.newCourse,
+          isActive: true
+        }
+      ];
+    });
+
+    router.push("/admin/courses");
+  }, [formState.newCourse, router, setCourses]);
 
   const closeForm = () => {
     router.push("/admin/courses");
@@ -43,7 +41,7 @@ const AddCourseForm = ({ setCourses }) => {
 
   return (
     <div className="add-course-form">
-      <form action="POST" onSubmit={(event) => handleSubmit(event)}>
+      <form action={formAction}>
         <button type="button" className="close-btn" onClick={() => closeForm()}>
           <IoCloseCircleSharp />
         </button>
@@ -51,21 +49,12 @@ const AddCourseForm = ({ setCourses }) => {
         <label htmlFor="course-name">
           Course name <span>*</span>
         </label>
-        <input
-          type="text"
-          name="course-name"
-          id="course-name"
-          required
-          value={courseName}
-          onChange={(event) => setCourseName(event.target.value)}
-        />
+        <input type="text" name="course-name" id="course-name" required />
         <label htmlFor="course-description">Course description</label>
         <textarea
           type="text"
           name="course-description"
           id="course-description"
-          value={courseDesc}
-          onChange={(event) => setCourseDesc(event.target.value)}
         />
         <label htmlFor="course-price">
           Course price <span>*</span>
@@ -77,29 +66,21 @@ const AddCourseForm = ({ setCourses }) => {
           name="course-price"
           id="course-price"
           required
-          value={coursePrice}
-          onChange={(event) => setCoursePrice(event.target.value)}
         />
         <label htmlFor="course-type">
           Course type <span>*</span>
         </label>
-        <select
-          name="course-type"
-          id="course-type"
-          required
-          value={courseType}
-          onChange={(event) => setCourseType(event.target.value)}
-        >
+        <select name="course-type" id="course-type" required defaultValue="">
           <option value="" disabled>
             Select course type
           </option>
           <option value="Online">Online</option>
           <option value="Non-online">Non-online</option>
         </select>
-        {error && <p className="error-message">{error}</p>}
-        <button type="submit" className="submit-btn">
-          Submit
-        </button>
+        {formState?.message && (
+          <FormErrorMessage>{formState.message}</FormErrorMessage>
+        )}
+        <FormButton>Submit</FormButton>
       </form>
     </div>
   );

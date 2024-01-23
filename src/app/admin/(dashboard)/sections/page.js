@@ -35,6 +35,7 @@ const AdminSections = () => {
           <p>Section Title</p>
           <p>Status</p>
         </li>
+
         {sections.map((section, index) => (
           <li key={index} onClick={() => handleSectionClick(section.sectionID)}>
             <p>{section.sectionTitle}</p>

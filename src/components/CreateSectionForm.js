@@ -1,31 +1,38 @@
 import { useRouter } from "next/navigation";
 import { IoCloseCircleSharp } from "react-icons/io5";
-import { useState } from "react";
-import adminCreateSection from "@/services/api/adminCreateSection";
+import FormErrorMessage from "./FormErrorMessage";
+import { useFormState } from "react-dom";
+import FormButton from "./FormButton";
+import handleSectionSubmit from "@/app/actions/handleSectionSubmit";
+import { useEffect } from "react";
 
 const CreateSectionForm = ({ setSections }) => {
   const router = useRouter();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [sectionTitle, setSectionTitle] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsButtonDisabled(true);
-    const response = await adminCreateSection(sectionTitle);
+  const initialState = {
+    message: "",
+    newSection: null
+  };
 
-    if (!response.ok) return setIsButtonDisabled(false);
+  const [formState, formAction] = useFormState(
+    handleSectionSubmit,
+    initialState
+  );
+
+  useEffect(() => {
+    if (!formState.newSection) return;
     setSections((prevState) => {
+      if (!prevState) return prevState;
+
       const newState = prevState.map((item) => {
         return { ...item, isActive: false };
       });
 
-      newState.unshift({ ...response.json, isActive: true });
-
-      return newState;
+      return [{ ...formState.newSection, isActive: true }, ...newState];
     });
 
     router.push("/admin/sections");
-  };
+  }, [formState.newSection, setSections, router]);
 
   const closeForm = () => {
     router.push("/admin/sections");
@@ -33,7 +40,7 @@ const CreateSectionForm = ({ setSections }) => {
 
   return (
     <div className="create-section-form">
-      <form action="POST" onSubmit={(event) => handleSubmit(event)}>
+      <form action={formAction}>
         <button type="button" className="close-btn" onClick={() => closeForm()}>
           <IoCloseCircleSharp />
         </button>
@@ -41,21 +48,11 @@ const CreateSectionForm = ({ setSections }) => {
         <label htmlFor="section-title">
           Section title <span>*</span>
         </label>
-        <input
-          type="text"
-          name="section-title"
-          id="section-title"
-          required
-          value={sectionTitle}
-          onChange={(event) => setSectionTitle(event.target.value)}
-        />
-        <button
-          type="submit"
-          className="submit-btn"
-          disabled={isButtonDisabled}
-        >
-          Submit
-        </button>
+        <input type="text" name="section-title" id="section-title" required />
+        {formState?.message && (
+          <FormErrorMessage>{formState.message}</FormErrorMessage>
+        )}
+        <FormButton>Submit</FormButton>
       </form>
     </div>
   );

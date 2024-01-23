@@ -29,7 +29,6 @@ const ManageCourses = () => {
     return (
       <ul className="course-table">
         <li className="table-header">
-          <p>Course ID</p>
           <p>Course Name</p>
           <p>Price</p>
           <p>Description</p>
@@ -38,19 +37,24 @@ const ManageCourses = () => {
         </li>
         {courses.map((course, index) => (
           <li key={index}>
-            <p>{course.courseID}</p>
             <p
               className={`course-name`}
               onMouseOver={(event) =>
                 event.target.setAttribute("data-before", course.courseName)
               }
             >
-              {course.courseName.length < 16
+              {course.courseName.length < 32
                 ? course.courseName
-                : course.courseName.slice(0, 16) + "..."}
+                : course.courseName.slice(0, 32) + "..."}
             </p>
-            <p>$ {course.coursePrice}</p>
-            <p>{course.courseDesc ? course.courseDesc : ""}</p>
+            <p>$ {parseFloat(course.coursePrice).toFixed(2)}</p>
+            <p>
+              {course.courseDesc
+                ? course.courseDesc.length < 32
+                  ? course.courseDesc
+                  : course.courseDesc.slice(0, 32) + "..."
+                : ""}
+            </p>
             <p>{course.courseType} Course</p>
             <p
               className={`${

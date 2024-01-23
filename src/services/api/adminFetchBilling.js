@@ -1,3 +1,4 @@
+"use server";
 import { adminRefreshAccessToken } from "./refreshAccessToken";
 
 const adminFetchBilling = async () => {

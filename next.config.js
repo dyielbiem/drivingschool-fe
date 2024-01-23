@@ -2,6 +2,11 @@
 const nextConfig = {
   images: {
     domains: ["source.unsplash.com"]
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["localhost:3000"]
+    }
   }
 };
 

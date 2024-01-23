@@ -32,8 +32,12 @@
     bg-red-200 border-2 border-red-700;
   }
 
-  .login-btn {
+  button[type="submit"] {
     @apply bg-custom-blue-base text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
+  }
+
+  button[disabled] {
+    @apply bg-custom-blue-dark cursor-wait;
   }
 }

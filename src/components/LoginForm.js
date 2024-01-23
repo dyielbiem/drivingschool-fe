@@ -1,58 +1,29 @@
-import loginAdmin from "@/services/api/loginAdmin";
-import loginSuperAdmin from "@/services/api/loginSuperAdmin";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Cookies from "js-cookie";
+"use client";
+import FormButton from "./FormButton";
+import handleLoginSubmit from "../app/actions/handleLoginSubmit";
+import FormErrorMessage from "./FormErrorMessage";
+import { useFormState } from "react-dom";
 
 const LoginForm = ({ role, formTitle, redirectPath }) => {
   if (role != "admin" && role != "superadmin") throw Error("Invalid role");
 
-  const [userName, setUserName] = useState("");
-  const [passWord, setPassWord] = useState("");
-  const [error, setError] = useState("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const router = useRouter();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsButtonDisabled(true);
-    setError("");
-
-    if (!userName) {
-      setIsButtonDisabled(false);
-      return setError("Username must not be empty");
-    }
-
-    if (!passWord) {
-      setIsButtonDisabled(false);
-      return setError("Password must not be empty");
-    }
-
-    let response;
-    if (role === "superadmin") {
-      response = await loginSuperAdmin(userName, passWord);
-    } else if (role === "admin") {
-      response = await loginAdmin(userName, passWord);
-    }
-
-    if (!response.ok) {
-      setError(response.json?.error);
-      return setIsButtonDisabled(false);
-    }
-
-    Cookies.set("accessToken", response.json?.accessToken);
-    Cookies.set("refreshToken", response.json?.refreshToken);
-
-    router.replace(`/${role}/${redirectPath}`);
-    return setIsButtonDisabled(false);
+  const initialState = {
+    message: ""
   };
 
+  const handleSubmitWithRole = handleLoginSubmit.bind(role, role);
+  const handleSubmitWithRoleAndPath = handleSubmitWithRole.bind(
+    redirectPath,
+    redirectPath
+  );
+
+  const [formState, formAction] = useFormState(
+    handleSubmitWithRoleAndPath,
+    initialState
+  );
+
   return (
-    <form
-      className="login-form"
-      onSubmit={(event) => handleSubmit(event)}
-      method="post"
-    >
+    <form className="login-form" action={formAction}>
       <h1>{formTitle}</h1>
       <label htmlFor={`${role}-username-input`}>Username</label>
       <input
@@ -60,8 +31,7 @@ const LoginForm = ({ role, formTitle, redirectPath }) => {
         name={`${role}-username-input`}
         id={`${role}-username-input`}
         className="username-input"
-        value={userName}
-        onChange={(event) => setUserName(event.target.value)}
+        required
       />
       <label htmlFor={`${role}-password-input`}>Password</label>
       <input
@@ -69,13 +39,12 @@ const LoginForm = ({ role, formTitle, redirectPath }) => {
         name={`${role}-password-input`}
         id={`${role}-password-input`}
         className="password-input"
-        value={passWord}
-        onChange={(event) => setPassWord(event.target.value)}
+        required
       />
-      {error && <p className="error-message">{error}</p>}
-      <button type="submit" className="login-btn" disabled={isButtonDisabled}>
-        Log In
-      </button>
+      {formState?.message && (
+        <FormErrorMessage>{formState.message}</FormErrorMessage>
+      )}
+      <FormButton>Log In</FormButton>
     </form>
   );
 };

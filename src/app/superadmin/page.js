@@ -1,5 +1,3 @@
-"use client";
-
 import LoginForm from "@/components/LoginForm";
 import LoginImage from "@/components/LoginImage";
 
@@ -10,7 +8,7 @@ const SuperAdminLogin = () => {
       <LoginForm
         role="superadmin"
         formTitle="Superadmin Login"
-        redirectPath="sections"
+        redirectPath="/superadmin/manage"
       />
     </main>
   );

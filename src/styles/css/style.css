@@ -42,9 +42,12 @@ main {
   @apply text-red-700 font-bold p-2.5 mt-4
     bg-red-200 border-2 border-red-700;
 }
-.login-form .login-btn {
+.login-form button[type=submit] {
   @apply bg-custom-blue-base text-white text-lg font-bold 
     py-3 rounded-lg mt-14;
+}
+.login-form button[disabled] {
+  @apply bg-custom-blue-dark cursor-wait;
 }
 
 .admin-dashboard-layout {
@@ -139,7 +142,11 @@ main {
   @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base;
 }
-.create-section-form form .submit-btn {
+.create-section-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.create-section-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold 
       text-white rounded-lg py-2.5 mt-8;
 }
@@ -159,12 +166,12 @@ main {
       rounded-lg text-lg font-bold;
 }
 .admin-courses-container .course-table {
-  @apply flex-col gap-3 grid grid-cols-[2fr_2fr_repeat(5,1fr)];
+  @apply flex-col gap-3 grid grid-cols-[2fr_1fr_2fr_repeat(3,1fr)];
 }
 .admin-courses-container .course-table .table-header {
   @apply grid grid-cols-subgrid col-span-full 
         text-lg font-extrabold gap-x-8
-        mb-4 px-4 justify-items-center;
+        mb-4 px-6 justify-items-center;
 }
 .admin-courses-container .course-table .table-header p {
   @apply text-center;
@@ -172,26 +179,23 @@ main {
 .admin-courses-container .course-table li:nth-child(n+2) {
   @apply grid grid-cols-subgrid col-span-full
         gap-x-8 justify-items-center hover:z-50
-        bg-white px-4 py-5 rounded-md cursor-pointer 
+        bg-white px-6 py-5 rounded-md cursor-pointer 
         hover:-translate-y-1 hover:shadow-md duration-200;
 }
 .admin-courses-container .course-table li:nth-child(n+2) p {
   @apply text-center;
 }
-.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(1) {
-  @apply break-all;
-}
 .admin-courses-container .course-table li:nth-child(n+2) .course-name {
   @apply relative before:hidden hover:before:block 
         before:content-[attr(data-before)]
         before:absolute before:bg-custom-white-dark
-        before:top-8 before:left-1/2 before:p-3 before:shadow-xl w-fit
-        before:rounded-md before:min-w-[250%] before:-translate-x-1/2 before:mb-16;
+        before:top-8 before:-left-4 before:p-3 before:shadow-xl w-fit
+        before:rounded-md before:min-w-[250%] before:mb-16;
 }
-.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(3) {
+.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(2) {
   @apply whitespace-nowrap;
 }
-.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(6) {
+.admin-courses-container .course-table li:nth-child(n+2) p:nth-child(5) {
   @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
 }
 .admin-courses-container .course-table li:nth-child(n+2) div {
@@ -249,7 +253,7 @@ main {
   @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;
 }
-.add-course-form form .submit-btn {
+.add-course-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
 }
 
