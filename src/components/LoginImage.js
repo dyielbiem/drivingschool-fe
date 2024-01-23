@@ -7,7 +7,7 @@ const LoginImage = () => {
         fill
         src={"https://source.unsplash.com/D5FI8jv6ndU"}
         alt="welcome-diplay-image"
-        sizes="100vw"
+        sizes={"(min-width: 768px) 100vw"}
         priority
       ></Image>
     </div>

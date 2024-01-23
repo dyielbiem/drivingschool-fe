@@ -1,5 +1,4 @@
 "use server";
-import { headers } from "next/headers";
 import { cookies } from "next/headers";
 import loginAdmin from "@/services/api/loginAdmin";
 import loginSuperAdmin from "@/services/api/loginSuperAdmin";
@@ -10,15 +9,14 @@ const handleLoginSubmit = async (role, redirectPath, prevState, formData) => {
     userName: formData.get(`${role}-username-input`),
     passWord: formData.get(`${role}-password-input`)
   };
-  const pathname = new URL(headers().get("referer")).pathname;
 
   let response;
-  if (pathname === "/admin")
+  if (role === "admin")
     response = await loginAdmin(
       formDataObject.userName,
       formDataObject.passWord
     );
-  if (pathname === "/superadmin")
+  if (role === "superadmin")
     response = await loginSuperAdmin(
       formDataObject.userName,
       formDataObject.passWord
