@@ -55,7 +55,7 @@ main {
 }
 .admin-dashboard-layout .side-nav-container {
   @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center py-20 min-w-72;
+    transition-[width] duration-300 items-start py-16 min-w-72 justify-between;
 }
 .admin-dashboard-layout .side-nav-container .side-nav {
   @apply text-custom-white-base w-full;
@@ -64,16 +64,21 @@ main {
   @apply flex flex-col gap-3;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a {
-  @apply text-xl py-4 relative
+  @apply text-xl py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
-          flex justify-center items-center gap-4;
+          flex justify-start items-center gap-4 text-custom-white-dark;
 }
 .admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a .nav-icon {
   @apply text-2xl text-custom-white-dark;
 }
-.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a span {
-  @apply text-custom-white-dark;
+.admin-dashboard-layout .side-nav-container button {
+  @apply text-xl relative px-10 w-full
+      flex items-center justify-start gap-4
+      text-custom-white-dark font-bold;
+}
+.admin-dashboard-layout .side-nav-container button svg {
+  @apply text-2xl text-custom-white-dark;
 }
 
 .admin-sections-container {
@@ -106,13 +111,181 @@ main {
 .admin-sections-container .section-table li:nth-child(n+2) {
   @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
       py-5 px-10 rounded-md cursor-pointer 
-      hover:-translate-y-1 hover:shadow-md duration-200;
+      hover:shadow-md duration-200;
 }
 .admin-sections-container .section-table li:nth-child(n+2) p:nth-child(1) {
   @apply justify-self-start;
 }
 .admin-sections-container .section-table li:nth-child(n+2) p:nth-child(2) {
   @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+}
+
+.admin-students-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+}
+.admin-students-container .header {
+  @apply flex justify-between items-center mb-12;
+}
+.admin-students-container .header h1 {
+  @apply font-extrabold text-3xl;
+}
+.admin-students-container .student-table {
+  @apply grid grid-cols-[5fr_1fr] gap-3;
+}
+.admin-students-container .student-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.admin-students-container .student-table .table-header p {
+  @apply font-extrabold text-lg;
+}
+.admin-students-container .student-table .table-header p:nth-child(1) {
+  @apply justify-self-start;
+}
+.admin-students-container .student-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+      py-5 px-10 rounded-md cursor-pointer 
+      hover:shadow-md duration-200;
+}
+.admin-students-container .student-table li:nth-child(n+2) p:nth-child(1) {
+  @apply justify-self-start;
+}
+.admin-students-container .student-table li:nth-child(n+2) p:nth-child(2) {
+  @apply font-bold text-lg;
+}
+
+.admin-students-layout {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+}
+.admin-students-layout .header {
+  @apply flex justify-between mb-12 flex-col items-start
+    gap-8;
+}
+.admin-students-layout .header h1 {
+  @apply font-extrabold text-3xl;
+}
+.admin-students-layout .header nav {
+  @apply flex gap-6 font-bold text-lg text-custom-gray-dark;
+}
+.admin-students-layout .header nav a {
+  @apply py-1.5 px-1;
+}
+
+.all-students-table {
+  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3;
+}
+.all-students-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.all-students-table .table-header p {
+  @apply font-extrabold text-lg text-center;
+}
+.all-students-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+}
+.all-students-table li:nth-child(n+2) p:nth-child(5) {
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+}
+.all-students-table li:nth-child(n+2) div {
+  @apply flex justify-center items-center gap-4 h-fit;
+}
+.all-students-table li:nth-child(n+2) div button svg {
+  @apply text-xl;
+}
+.all-students-table li:nth-child(n+2) div button:nth-child(1) svg {
+  @apply text-custom-blue-light;
+}
+.all-students-table li:nth-child(n+2) div button:nth-child(2) svg {
+  @apply text-custom-red;
+}
+
+.exam-details-table {
+  @apply grid grid-cols-4 gap-3;
+}
+.exam-details-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.exam-details-table .table-header p {
+  @apply font-extrabold text-lg text-center;
+}
+.exam-details-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+}
+.exam-details-table li:nth-child(n+2) p:nth-child(3) {
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit 
+      text-custom-green-base bg-custom-green-light;
+}
+.exam-details-table li:nth-child(n+2) div {
+  @apply flex justify-center items-center gap-3 h-fit 
+      text-custom-blue-light font-bold;
+}
+.exam-details-table li:nth-child(n+2) div p {
+  @apply whitespace-nowrap;
+}
+.exam-details-table li:nth-child(n+2) div svg {
+  @apply text-xl;
+}
+
+.latest-registrations-table {
+  @apply grid grid-cols-[repeat(6,2fr)_repeat(2,1fr)] gap-y-3 gap-x-6;
+}
+.latest-registrations-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.latest-registrations-table .table-header p {
+  @apply font-extrabold text-lg text-center;
+}
+.latest-registrations-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+}
+.latest-registrations-table li:nth-child(n+2) p {
+  @apply text-center;
+}
+.latest-registrations-table li:nth-child(n+2) p:nth-child(5) {
+  @apply break-all;
+}
+.latest-registrations-table li:nth-child(n+2) p:nth-child(8) {
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+}
+
+.latest-completions-table {
+  @apply grid grid-cols-5 gap-y-3 gap-x-6;
+}
+.latest-completions-table .table-header {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+}
+.latest-completions-table .table-header p {
+  @apply font-extrabold text-lg text-center;
+}
+.latest-completions-table li:nth-child(n+2) {
+  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+}
+.latest-completions-table li:nth-child(n+2) p {
+  @apply text-center;
+}
+.latest-completions-table li:nth-child(n+2) div {
+  @apply flex justify-center items-center gap-3 h-fit 
+      text-custom-blue-light font-bold;
+}
+.latest-completions-table li:nth-child(n+2) div p {
+  @apply whitespace-nowrap;
+}
+.latest-completions-table li:nth-child(n+2) div svg {
+  @apply text-xl;
 }
 
 .create-section-form {
@@ -180,7 +353,7 @@ main {
   @apply grid grid-cols-subgrid col-span-full
         gap-x-8 justify-items-center hover:z-50
         bg-white px-6 py-5 rounded-md cursor-pointer 
-        hover:-translate-y-1 hover:shadow-md duration-200;
+        hover:shadow-md duration-200;
 }
 .admin-courses-container .course-table li:nth-child(n+2) p {
   @apply text-center;
@@ -189,8 +362,8 @@ main {
   @apply relative before:hidden hover:before:block 
         before:content-[attr(data-before)]
         before:absolute before:bg-custom-white-dark
-        before:top-8 before:-left-4 before:p-3 before:shadow-xl w-fit
-        before:rounded-md before:min-w-[250%] before:mb-16;
+        before:top-full before:-left-4 before:p-4 before:shadow-xl w-fit
+        before:rounded-md before:min-w-[150%] before:mb-16;
 }
 .admin-courses-container .course-table li:nth-child(n+2) p:nth-child(2) {
   @apply whitespace-nowrap;
@@ -285,7 +458,8 @@ main {
         mb-4 px-4 justify-items-center;
 }
 .admin-coupons-container .coupon-table li:nth-child(n+2) {
-  @apply bg-white py-5 px-3 rounded-md;
+  @apply bg-white py-5 px-3 rounded-md
+      hover:shadow-md;
 }
 .admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(1) {
   @apply font-extrabold;
@@ -330,7 +504,8 @@ main {
         mb-4 px-4 justify-items-center;
 }
 .admin-billing-container .billing-table li:nth-child(n+2) {
-  @apply bg-white py-5 px-3 rounded-md;
+  @apply bg-white py-5 px-3 rounded-md
+      hover:shadow-md;
 }
 .admin-billing-container .billing-table button svg {
   @apply text-xl text-custom-blue-light;

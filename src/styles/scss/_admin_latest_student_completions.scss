@@ -1,0 +1,35 @@
+.latest-completions-table {
+  @apply grid grid-cols-5 gap-y-3 gap-x-6;
+
+  .table-header {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+
+    p {
+      @apply font-extrabold text-lg text-center;
+    }
+  }
+
+  li:nth-child(n + 2) {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+
+    p {
+      @apply text-center;
+    }
+
+    div {
+      @apply flex justify-center items-center gap-3 h-fit 
+      text-custom-blue-light font-bold;
+
+      p {
+        @apply whitespace-nowrap;
+      }
+
+      svg {
+        @apply text-xl;
+      }
+    }
+  }
+}

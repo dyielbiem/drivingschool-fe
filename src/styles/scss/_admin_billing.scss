@@ -27,7 +27,8 @@
     }
 
     li:nth-child(n + 2) {
-      @apply bg-white py-5 px-3 rounded-md;
+      @apply bg-white py-5 px-3 rounded-md
+      hover:shadow-md;
     }
 
     button {

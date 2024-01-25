@@ -1,0 +1,30 @@
+.latest-registrations-table {
+  @apply grid grid-cols-[repeat(6,2fr)_repeat(2,1fr)] gap-y-3 gap-x-6;
+
+  .table-header {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+
+    p {
+      @apply font-extrabold text-lg text-center;
+    }
+  }
+
+  li:nth-child(n + 2) {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+
+    p {
+      @apply text-center;
+    }
+
+    p:nth-child(5) {
+      @apply break-all;
+    }
+
+    p:nth-child(8) {
+      @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+    }
+  }
+}

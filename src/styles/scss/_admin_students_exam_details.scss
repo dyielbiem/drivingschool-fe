@@ -1,0 +1,36 @@
+.exam-details-table {
+  @apply grid grid-cols-4 gap-3;
+
+  .table-header {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+
+    p {
+      @apply font-extrabold text-lg text-center;
+    }
+  }
+
+  li:nth-child(n + 2) {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+
+    p:nth-child(3) {
+      @apply rounded-md text-xs font-bold py-1 px-2 h-fit 
+      text-custom-green-base bg-custom-green-light;
+    }
+
+    div {
+      @apply flex justify-center items-center gap-3 h-fit 
+      text-custom-blue-light font-bold;
+
+      p {
+        @apply whitespace-nowrap;
+      }
+
+      svg {
+        @apply text-xl;
+      }
+    }
+  }
+}

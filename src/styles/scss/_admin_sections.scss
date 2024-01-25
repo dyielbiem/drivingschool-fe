@@ -34,7 +34,7 @@
     li:nth-child(n + 2) {
       @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
       py-5 px-10 rounded-md cursor-pointer 
-      hover:-translate-y-1 hover:shadow-md duration-200;
+      hover:shadow-md duration-200;
 
       p:nth-child(1) {
         @apply justify-self-start;

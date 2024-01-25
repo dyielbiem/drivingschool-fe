@@ -19,6 +19,12 @@ main {
 @import "login_page";
 @import "admin_dashboard_layout";
 @import "admin_sections";
+@import "admin_students";
+@import "admin_students_layout";
+@import "admin_all_students";
+@import "admin_students_exam_details";
+@import "admin_latest_student_registrations";
+@import "admin_latest_student_completions";
 @import "create_section_form";
 @import "admin_courses";
 @import "add_course_form";

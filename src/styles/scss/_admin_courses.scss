@@ -32,7 +32,7 @@
       @apply grid grid-cols-subgrid col-span-full
         gap-x-8 justify-items-center hover:z-50
         bg-white px-6 py-5 rounded-md cursor-pointer 
-        hover:-translate-y-1 hover:shadow-md duration-200;
+        hover:shadow-md duration-200;
 
       p {
         @apply text-center;
@@ -42,8 +42,8 @@
         @apply relative before:hidden hover:before:block 
         before:content-[attr(data-before)]
         before:absolute before:bg-custom-white-dark
-        before:top-8 before:-left-4 before:p-3 before:shadow-xl w-fit
-        before:rounded-md before:min-w-[250%] before:mb-16;
+        before:top-full before:-left-4 before:p-4 before:shadow-xl w-fit
+        before:rounded-md before:min-w-[150%] before:mb-16;
       }
 
       p:nth-child(2) {

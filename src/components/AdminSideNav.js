@@ -1,15 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import adminLogoutClick from "@/app/actions/adminLogoutClick";
+import { usePathname, useRouter } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { HiCreditCard } from "react-icons/hi2";
 import { FaBookOpen } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
 
 const AdminSideNav = () => {
   const pathName = usePathname();
+  const router = useRouter();
   const regex = /^\/admin\/sections\/.+/;
 
   const navItems = [
@@ -35,6 +38,11 @@ const AdminSideNav = () => {
       icon: FaBookOpen
     }
   ];
+
+  const handleLogoutClick = async () => {
+    await adminLogoutClick();
+    router.push("/admin");
+  };
 
   return (
     <div
@@ -73,6 +81,10 @@ const AdminSideNav = () => {
             ))}
         </div>
       </nav>
+      <button onClick={handleLogoutClick}>
+        <BiLogOut />
+        <span>Logout</span>
+      </button>
     </div>
   );
 };

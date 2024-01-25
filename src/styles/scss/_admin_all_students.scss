@@ -1,0 +1,40 @@
+.all-students-table {
+  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3;
+
+  .table-header {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4;
+
+    p {
+      @apply font-extrabold text-lg text-center;
+    }
+  }
+
+  li:nth-child(n + 2) {
+    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
+    py-5 px-10 rounded-md cursor-pointer 
+    hover:shadow-md duration-200;
+
+    p:nth-child(5) {
+      @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+    }
+
+    div {
+      @apply flex justify-center items-center gap-4 h-fit;
+
+      button {
+        svg {
+          @apply text-xl;
+        }
+
+        &:nth-child(1) svg {
+          @apply text-custom-blue-light;
+        }
+
+        &:nth-child(2) svg {
+          @apply text-custom-red;
+        }
+      }
+    }
+  }
+}

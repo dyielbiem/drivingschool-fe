@@ -3,7 +3,7 @@
 
   .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center py-20 min-w-72;
+    transition-[width] duration-300 items-start py-16 min-w-72 justify-between;
 
     .side-nav {
       @apply text-custom-white-base w-full;
@@ -12,19 +12,25 @@
         @apply flex flex-col gap-3;
 
         a {
-          @apply text-xl py-4 relative
+          @apply text-xl py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
-          flex justify-center items-center gap-4;
+          flex justify-start items-center gap-4 text-custom-white-dark;
 
           .nav-icon {
             @apply text-2xl text-custom-white-dark;
           }
-
-          span {
-            @apply text-custom-white-dark;
-          }
         }
+      }
+    }
+
+    button {
+      @apply text-xl relative px-10 w-full
+      flex items-center justify-start gap-4
+      text-custom-white-dark font-bold;
+
+      svg {
+        @apply text-2xl text-custom-white-dark;
       }
     }
   }

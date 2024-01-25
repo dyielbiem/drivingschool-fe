@@ -1,0 +1,21 @@
+.admin-students-layout {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden pb-10;
+
+  .header {
+    @apply flex justify-between mb-12 flex-col items-start
+    gap-8;
+
+    h1 {
+      @apply font-extrabold text-3xl;
+    }
+
+    nav {
+      @apply flex gap-6 font-bold text-lg text-custom-gray-dark;
+
+      a {
+        @apply py-1.5 px-1;
+      }
+    }
+  }
+}
