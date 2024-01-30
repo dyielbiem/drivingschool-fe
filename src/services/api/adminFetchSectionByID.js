@@ -1,9 +1,25 @@
 "use server";
-import sectionInfo from "../../dummy_data/sectionInfo.json";
+import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminFetchSectionByID = async (sectionID) => {
   try {
-    const response = sectionInfo.find((item) => item.sectionID === sectionID);
-    return { ok: true, json: response };
+    const fetchMethod = async (accessToken) => {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+        }/api/admin/section?sectionID=${encodeURIComponent(sectionID)}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      return response;
+    };
+
+    return await adminRefreshAccessToken(fetchMethod);
   } catch (error) {
     return { ok: false, json: { error: error.message } };
   }

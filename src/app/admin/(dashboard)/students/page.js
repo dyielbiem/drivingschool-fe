@@ -2,13 +2,16 @@
 import adminFetchStudentSections from "@/services/api/adminFetchStudentSections";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useStudentsInSection } from "@/state/store";
 
 const AdminStudents = () => {
   const [studentSections, setStudentSections] = useState([]);
   const router = useRouter();
+  const { setStudents } = useStudentsInSection();
 
   useEffect(() => {
     const fetchSections = async () => {
+      setStudents([]);
       const response = await adminFetchStudentSections();
       setStudentSections(response?.ok ? response.json.studentSections : []);
     };

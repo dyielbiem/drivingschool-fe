@@ -1,12 +1,25 @@
 "use server";
-import enrolledStudents from "../../dummy_data/enrolledStudents.json";
+import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminFetchAllStudents = async (sectionID) => {
   try {
-    const response = enrolledStudents.filter(
-      (item) => item.sectionID === sectionID
-    );
+    const fetchMethod = async (accessToken) => {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+        }/api/admin/student/all?sectionID=${encodeURIComponent(sectionID)}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
 
-    return { ok: true, json: { students: response } };
+      return response;
+    };
+
+    return await adminRefreshAccessToken(fetchMethod);
   } catch (error) {
     return { ok: false, json: { error: error.message } };
   }

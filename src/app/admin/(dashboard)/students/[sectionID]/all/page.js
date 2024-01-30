@@ -1,22 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import adminFetchAllStudents from "@/services/api/adminFetchAllStudents";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa6";
-import { usePathname } from "next/navigation";
+import { useStudentsInSection } from "@/state/store";
 
 const AdminAllStudents = () => {
-  const sectionID = usePathname().split("/").at(3);
-  const [students, setStudents] = useState([]);
-
-  useEffect(() => {
-    const fetchSections = async () => {
-      const response = await adminFetchAllStudents(sectionID);
-      setStudents(response.ok ? response.json.students : []);
-    };
-
-    fetchSections();
-  }, [sectionID]);
+  const { students } = useStudentsInSection();
 
   const renderAllStudents = () => {
     if (students.length === 0) return <></>;

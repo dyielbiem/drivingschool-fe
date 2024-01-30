@@ -3,25 +3,33 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
 import Link from "next/link";
+import { useStudentsInSection } from "@/state/store";
+import adminFetchAllStudents from "@/services/api/adminFetchAllStudents";
 
 const AdminStudentsHeader = () => {
   const pathname = usePathname();
+  const { setStudents } = useStudentsInSection();
   const sectionID = String(pathname).split("/").at(3);
   const currentTab = String(pathname).split("/").pop();
   const [sectionTitle, setSectionTitle] = useState("");
   const [isSectionActive, setIsSectionActive] = useState(false);
 
   useEffect(() => {
-    const fetchSectionInfo = async () => {
+    const fetchSectionAndStudents = async () => {
       if (!sectionID) return;
-      const response = await adminFetchSectionByID(sectionID);
-      if (!response.ok) return;
-      setSectionTitle(response.json.sectionTitle);
-      setIsSectionActive(response.json.isActive);
+      const sectionResponse = await adminFetchSectionByID(sectionID);
+      if (!sectionResponse?.ok) return;
+      setSectionTitle(sectionResponse.json.sectionTitle);
+      setIsSectionActive(sectionResponse.json.isActive);
+
+      const studentResponse = await adminFetchAllStudents(sectionID);
+      if (!studentResponse?.ok) return;
+
+      setStudents(studentResponse.json.allStudents);
     };
 
-    fetchSectionInfo();
-  }, [sectionID]);
+    fetchSectionAndStudents();
+  }, [sectionID, setStudents]);
 
   const navLinks = [
     {

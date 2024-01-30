@@ -1,9 +1,23 @@
 "use server";
-import studentSections from "../../dummy_data/studentSections.json";
+import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminFetchStudentSections = async () => {
   try {
-    const response = studentSections;
-    return { ok: true, json: { studentSections: response } };
+    const fetchMethod = async (accessToken) => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/admin/student/section/list`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      return response;
+    };
+
+    return await adminRefreshAccessToken(fetchMethod);
   } catch (error) {
     return { ok: false, json: { error: error.message } };
   }
