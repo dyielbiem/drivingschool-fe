@@ -1,0 +1,29 @@
+.admin-manage-section-layout {
+  @apply flex w-full;
+
+  .side-nav-container {
+    @apply flex flex-col overflow-x-hidden overflow-y-auto 
+    h-screen max-h-screen bg-custom-blue-dark
+    transition-[width] duration-300 items-center py-4 min-w-80 max-w-80 justify-start  
+    px-3;
+
+    button {
+      @apply bg-custom-blue-base text-white mb-2 w-full font-bold text-xl px-4
+      rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light sticky top-0;
+    }
+
+    nav {
+      @apply flex flex-col text-white w-full text-lg pb-6 gap-1;
+
+      a {
+        @apply py-4 whitespace-nowrap overflow-hidden flex gap-2
+        items-center hover:bg-custom-blue-darker px-4
+        rounded-md;
+
+        span {
+          @apply overflow-hidden;
+        }
+      }
+    }
+  }
+}
