@@ -6,3 +6,20 @@ export const useStudentsInSection = create((set) => ({
     set({ students: newValue });
   }
 }));
+
+export const useChapterIndex = create((set) => ({
+  chapterIndex: undefined,
+  setChapterIndex: (newValue) => {
+    set({ chapterIndex: newValue });
+  }
+}));
+
+export const useSubChapters = create((set) => ({
+  subChapters: null,
+  setSubChapters: (newValue) => {
+    set({ subChapters: newValue });
+  },
+  setNewSubChapter: (newSubChapter) => {
+    set((state) => ({ subChapters: [...state.subChapters, newSubChapter] }));
+  }
+}));

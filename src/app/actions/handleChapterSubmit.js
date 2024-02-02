@@ -3,11 +3,11 @@ import adminAddChapter from "@/services/api/adminAddChapter";
 
 const handleChapterSubmit = async (sectionID, prevState, formData) => {
   const formDataObject = {
-    sectionTitle: formData.get("chapter-title")
+    chapterTitle: formData.get("chapter-title")
   };
 
   const response = await adminAddChapter(
-    formDataObject.sectionTitle,
+    formDataObject.chapterTitle,
     sectionID
   );
   if (!response.ok)
