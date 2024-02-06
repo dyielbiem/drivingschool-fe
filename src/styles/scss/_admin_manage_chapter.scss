@@ -3,10 +3,15 @@
   overflow-y-auto overflow-x-hidden p-12;
 
   .header {
-    @apply flex justify-between items-center mb-12;
+    @apply flex justify-between items-center;
 
     h1 {
       @apply text-3xl font-extrabold;
+    }
+
+    button {
+      @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
     }
   }
 

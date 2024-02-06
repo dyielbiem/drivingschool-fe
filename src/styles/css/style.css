@@ -120,6 +120,30 @@ main {
   @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
 }
 
+.section-content-container {
+  @apply my-10 mx-4;
+}
+.section-content-container h2 {
+  @apply text-2xl;
+}
+.section-content-container h2,
+.section-content-container h3,
+.section-content-container p {
+  @apply empty:h-4;
+}
+.section-content-container ul {
+  @apply flex flex-col gap-2;
+}
+.section-content-container ul li {
+  @apply list-disc ml-8 max-w-3xl;
+}
+.section-content-container ol {
+  @apply flex flex-col gap-2;
+}
+.section-content-container ol li {
+  @apply list-decimal ml-8 max-w-3xl;
+}
+
 .add-chapter-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
   items-center bg-[#00000044];
@@ -233,10 +257,14 @@ main {
   overflow-y-auto overflow-x-hidden p-12;
 }
 .admin-chapter-section .header {
-  @apply flex justify-between items-center mb-12;
+  @apply flex justify-between items-center;
 }
 .admin-chapter-section .header h1 {
   @apply text-3xl font-extrabold;
+}
+.admin-chapter-section .header button {
+  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
 }
 .admin-chapter-section .sub-chapters-container {
   @apply flex flex-col w-full gap-4;
@@ -645,4 +673,41 @@ main {
 }
 .admin-billing-container .billing-table button svg {
   @apply text-xl text-custom-blue-light;
+}
+
+.rich-text-editor {
+  @apply flex flex-col bg-white rounded-md gap-2 my-10;
+}
+.rich-text-editor .editor-styling-btn-container {
+  @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md;
+}
+.rich-text-editor .editor-styling-btn-container button {
+  @apply p-1 rounded font-bold text-xl;
+}
+.rich-text-editor .editor-primary-btn-container {
+  @apply flex self-end mx-8 my-6 gap-2;
+}
+.rich-text-editor .editor-primary-btn-container button {
+  @apply text-lg font-bold px-4 py-1 rounded-md;
+}
+.rich-text-editor .editor-primary-btn-container .save-btn {
+  @apply bg-custom-blue-base text-white;
+}
+.rich-text-editor .editor-primary-btn-container .cancel-btn {
+  @apply bg-custom-white-darker;
+}
+.rich-text-editor .ProseMirror {
+  @apply focus:outline-none p-4;
+}
+.rich-text-editor h2 {
+  @apply text-2xl;
+}
+.rich-text-editor h3 {
+  @apply text-xl;
+}
+.rich-text-editor .tiptap ul {
+  @apply px-8 list-disc;
+}
+.rich-text-editor .tiptap ol {
+  @apply px-8 list-decimal;
 }

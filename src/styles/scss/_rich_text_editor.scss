@@ -1,0 +1,48 @@
+.rich-text-editor {
+  @apply flex flex-col bg-white rounded-md gap-2 my-10;
+
+  .editor-styling-btn-container {
+    @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md;
+
+    button {
+      @apply p-1 rounded font-bold text-xl;
+    }
+  }
+
+  .editor-primary-btn-container {
+    @apply flex self-end mx-8 my-6 gap-2;
+
+    button {
+      @apply text-lg font-bold px-4 py-1 rounded-md;
+    }
+
+    .save-btn {
+      @apply bg-custom-blue-base text-white;
+    }
+
+    .cancel-btn {
+      @apply bg-custom-white-darker;
+    }
+  }
+
+  .ProseMirror {
+    @apply focus:outline-none p-4;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  .tiptap {
+    ul {
+      @apply px-8 list-disc;
+    }
+    ol {
+      @apply px-8 list-decimal;
+    }
+  }
+}

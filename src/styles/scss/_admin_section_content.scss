@@ -1,0 +1,29 @@
+.section-content-container {
+  @apply my-10 mx-4;
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h2,
+  h3,
+  p {
+    @apply empty:h-4;
+  }
+
+  ul {
+    @apply flex flex-col gap-2;
+
+    li {
+      @apply list-disc ml-8 max-w-3xl;
+    }
+  }
+
+  ol {
+    @apply flex flex-col gap-2;
+
+    li {
+      @apply list-decimal ml-8 max-w-3xl;
+    }
+  }
+}

@@ -19,6 +19,7 @@ main {
 @import "login_page";
 @import "admin_dashboard_layout";
 @import "admin_sections";
+@import "admin_section_content";
 @import "admin_add_chapter_form";
 @import "admin_add_sub_chapter_form";
 @import "admin_manage_section_layout";
@@ -34,3 +35,4 @@ main {
 @import "admin_add_course_form";
 @import "admin_coupons";
 @import "admin_billing";
+@import "rich_text_editor";
