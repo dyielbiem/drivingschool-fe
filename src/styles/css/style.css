@@ -121,7 +121,7 @@ main {
 }
 
 .section-content-container {
-  @apply my-10 mx-4;
+  @apply mx-4;
 }
 .section-content-container h2 {
   @apply text-2xl;
@@ -254,7 +254,7 @@ main {
 
 .admin-chapter-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12;
+  overflow-y-auto overflow-x-hidden p-12 gap-10;
 }
 .admin-chapter-section .header {
   @apply flex justify-between items-center;
@@ -282,6 +282,21 @@ main {
 .admin-chapter-section .sub-chapters-container .button-container button {
   @apply font-bold text-white flex-grow text-xl
         px-3 py-3.5 rounded-lg bg-custom-blue-base;
+}
+
+.admin-sub-chapter-section {
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10;
+}
+.admin-sub-chapter-section .header {
+  @apply flex justify-between items-center;
+}
+.admin-sub-chapter-section .header h1 {
+  @apply text-3xl font-extrabold;
+}
+.admin-sub-chapter-section .header button {
+  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
 }
 
 .admin-students-container {
@@ -676,7 +691,7 @@ main {
 }
 
 .rich-text-editor {
-  @apply flex flex-col bg-white rounded-md gap-2 my-10;
+  @apply flex flex-col bg-white rounded-md gap-2;
 }
 .rich-text-editor .editor-styling-btn-container {
   @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md;

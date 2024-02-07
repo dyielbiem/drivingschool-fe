@@ -1,6 +1,6 @@
 .admin-chapter-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12;
+  overflow-y-auto overflow-x-hidden p-12 gap-10;
 
   .header {
     @apply flex justify-between items-center;

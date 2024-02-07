@@ -1,0 +1,17 @@
+.admin-sub-chapter-section {
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10;
+
+  .header {
+    @apply flex justify-between items-center;
+
+    h1 {
+      @apply text-3xl font-extrabold;
+    }
+
+    button {
+      @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
+    }
+  }
+}

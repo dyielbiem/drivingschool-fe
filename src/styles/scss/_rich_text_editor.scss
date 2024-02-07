@@ -1,5 +1,5 @@
 .rich-text-editor {
-  @apply flex flex-col bg-white rounded-md gap-2 my-10;
+  @apply flex flex-col bg-white rounded-md gap-2;
 
   .editor-styling-btn-container {
     @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md;

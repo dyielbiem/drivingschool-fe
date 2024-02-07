@@ -2,7 +2,6 @@
 import { useChapterIndex } from "@/state/store";
 import { useEffect, useState } from "react";
 import adminFetchChapterByID from "@/services/api/adminFetchChapterByID";
-import adminFetchSubChapters from "@/services/api/adminFetchSubChapters";
 import Link from "next/link";
 import { useSubChapters } from "@/state/store";
 import AddSubChapterForm from "@/components/AddSubChapterForm";
@@ -25,13 +24,6 @@ const ChapterID = ({ params }) => {
       if (!chapterResponse.ok) return;
       setChapter(chapterResponse.json);
       setChapterContent(chapterResponse.json.chapterContent);
-
-      const subChaptersResponse = await adminFetchSubChapters(
-        chapterResponse.json.chapterID
-      );
-
-      if (!subChaptersResponse.ok) return;
-      setSubChapters(subChaptersResponse.json.subChapters);
     };
 
     fetchChapter();
@@ -94,13 +86,13 @@ const ChapterID = ({ params }) => {
   };
 
   const renderSubChapters = () => {
-    if (!subChapters || searchParams.get("edit_content") === "true")
+    if (!chapter || !subChapters || searchParams.get("edit_content") === "true")
       return <></>;
     return (
       <div className="sub-chapters-container">
         {subChapters.length != 0 &&
           subChapters.map((subChapter, index) => (
-            <Link key={index} href={`/admin`}>
+            <Link key={index} href={`${pathname}/${subChapter.subChapterID}`}>
               <span>
                 {chapterIndex + 1}.{index + 1}
               </span>{" "}

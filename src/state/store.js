@@ -14,8 +14,15 @@ export const useChapterIndex = create((set) => ({
   }
 }));
 
+export const useSubChapterIndex = create((set) => ({
+  subChapterIndex: undefined,
+  setSubChapterIndex: (newValue) => {
+    set({ subChapterIndex: newValue });
+  }
+}));
+
 export const useSubChapters = create((set) => ({
-  subChapters: null,
+  subChapters: undefined,
   setSubChapters: (newValue) => {
     set({ subChapters: newValue });
   },
