@@ -40,7 +40,12 @@
   .tiptap {
     ul {
       @apply px-8 list-disc;
+
+      ul {
+        @apply list-[circle];
+      }
     }
+
     ol {
       @apply px-8 list-decimal;
     }

@@ -132,10 +132,10 @@ main {
   @apply empty:h-4;
 }
 .section-content-container ul {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 list-disc ml-8 max-w-3xl;
 }
-.section-content-container ul li {
-  @apply list-disc ml-8 max-w-3xl;
+.section-content-container ul ul {
+  @apply list-[circle];
 }
 .section-content-container ol {
   @apply flex flex-col gap-2;
@@ -722,6 +722,9 @@ main {
 }
 .rich-text-editor .tiptap ul {
   @apply px-8 list-disc;
+}
+.rich-text-editor .tiptap ul ul {
+  @apply list-[circle];
 }
 .rich-text-editor .tiptap ol {
   @apply px-8 list-decimal;

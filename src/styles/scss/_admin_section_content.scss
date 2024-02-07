@@ -12,10 +12,10 @@
   }
 
   ul {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 list-disc ml-8 max-w-3xl;
 
-    li {
-      @apply list-disc ml-8 max-w-3xl;
+    ul {
+      @apply list-[circle];
     }
   }
 

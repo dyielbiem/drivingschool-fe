@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { CiCircleList } from "react-icons/ci";
 import {
   MdFormatBold,
   MdOutlineFormatItalic,
@@ -46,6 +47,14 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     router.push(pathname);
   };
 
+  const handleSubListClick = () => {
+    if (!editor.can().sinkListItem("listItem")) {
+      return editor.chain().focus().liftListItem("listItem").run();
+    }
+
+    editor.chain().focus().sinkListItem("listItem").run();
+  };
+
   return (
     <div className="rich-text-editor">
       <div className="editor-styling-btn-container">
@@ -82,6 +91,12 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
           className={editor.isActive("bulletList") ? "bg-white" : ""}
         >
           <MdFormatListBulleted />
+        </button>
+        <button
+          onClick={handleSubListClick}
+          className={!editor.can().sinkListItem("listItem") ? "bg-white" : ""}
+        >
+          <CiCircleList />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
