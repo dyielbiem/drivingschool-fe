@@ -38,11 +38,23 @@
   }
 
   .tiptap {
-    ul {
-      @apply px-8 list-disc;
+    & > ul {
+      @apply px-8 list-none;
 
-      ul {
-        @apply list-[circle];
+      & > li {
+        & > p {
+          @apply relative before:absolute before:content-["•"] 
+          before:-translate-x-4 before:text-inherit;
+        }
+
+        ul {
+          @apply list-none px-8;
+
+          & > li > p {
+            @apply relative before:absolute before:content-["◦"] 
+            before:-translate-x-4 before:text-inherit;
+          }
+        }
       }
     }
 

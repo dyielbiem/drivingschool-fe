@@ -12,10 +12,22 @@
   }
 
   ul {
-    @apply flex flex-col gap-2 list-disc ml-8 max-w-3xl;
+    @apply px-8 list-none;
 
-    ul {
-      @apply list-[circle];
+    & > li {
+      & > p {
+        @apply relative before:absolute before:content-["•"] 
+        before:-translate-x-4 before:text-inherit;
+      }
+
+      ul {
+        @apply list-none px-8;
+
+        & > li > p {
+          @apply relative before:absolute before:content-["◦"] 
+          before:-translate-x-4 before:text-inherit;
+        }
+      }
     }
   }
 

@@ -11,12 +11,62 @@ import {
   MdFormatAlignCenter,
   MdFormatAlignRight,
   MdFormatAlignJustify,
-  MdFormatListNumbered
+  MdFormatListNumbered,
+  MdFormatIndentIncrease,
+  MdFormatIndentDecrease
 } from "react-icons/md";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import TextAlign from "@tiptap/extension-text-align";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Extension } from "@tiptap/core";
+
+const Indent = Extension.create({
+  name: "indent",
+
+  addOptions() {
+    return {
+      types: ["heading", "paragraph"],
+      defaultIndent: "0rem"
+    };
+  },
+
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          indent: {
+            default: this.options.defaultIndent,
+            parseHTML: (element) =>
+              element.style.marginLeft || this.options.defaultIndent,
+            renderHTML: (attributes) => {
+              if (attributes.indent === this.options.defaultIndent) {
+                return {};
+              }
+
+              return {
+                style: `margin-left: ${attributes.indent}`
+              };
+            }
+          }
+        }
+      }
+    ];
+  },
+
+  addCommands() {
+    return {
+      setIndentation:
+        (indentValue) =>
+        ({ commands }) => {
+          return this.options.types.every((type) =>
+            commands.updateAttributes(type, { indent: indentValue })
+          );
+        }
+    };
+  }
+});
 
 const RichTextEditor = ({ editorAction, editorContent }) => {
   const [isSaveLoading, setIsSaveLoading] = useState(false);
@@ -25,8 +75,9 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Indent,
       TextAlign.configure({
-        types: ["heading", "paragraph"]
+        types: ["listItem", "heading", "paragraph"]
       })
     ],
     content: editorContent
@@ -53,6 +104,36 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     }
 
     editor.chain().focus().sinkListItem("listItem").run();
+  };
+
+  const handleIndentClick = () => {
+    const indent = Number(
+      editor.getAttributes("paragraph").indent?.slice(0, -3) ??
+        editor.getAttributes("heading").indent?.slice(0, -3)
+    );
+
+    if (indent >= 20) return;
+
+    editor
+      .chain()
+      .focus()
+      .setIndentation(`${indent + 2}rem`)
+      .run();
+  };
+
+  const handleOutdentClick = () => {
+    const indent = Number(
+      editor.getAttributes("paragraph").indent?.slice(0, -3) ??
+        editor.getAttributes("heading").indent?.slice(0, -3)
+    );
+
+    if (indent <= 0) return;
+
+    editor
+      .chain()
+      .focus()
+      .setIndentation(`${indent - 2}rem`)
+      .run();
   };
 
   return (
@@ -129,6 +210,12 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
           }
         >
           <MdFormatAlignJustify />
+        </button>
+        <button onClick={handleOutdentClick}>
+          <MdFormatIndentDecrease />
+        </button>
+        <button onClick={handleIndentClick}>
+          <MdFormatIndentIncrease />
         </button>
       </div>
       <EditorContent editor={editor} />
