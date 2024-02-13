@@ -16,10 +16,13 @@ import {
   MdFormatIndentDecrease
 } from "react-icons/md";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
+import { RiImageAddFill } from "react-icons/ri";
 import TextAlign from "@tiptap/extension-text-align";
-import { usePathname, useRouter } from "next/navigation";
+import Image from "@tiptap/extension-image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Extension } from "@tiptap/core";
+import ImageGalleryModal from "./ImageGalleryModal";
 
 const Indent = Extension.create({
   name: "indent",
@@ -72,12 +75,16 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
   const [isSaveLoading, setIsSaveLoading] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const editor = useEditor({
     extensions: [
       StarterKit,
       Indent,
       TextAlign.configure({
         types: ["listItem", "heading", "paragraph"]
+      }),
+      Image.configure({
+        inline: true
       })
     ],
     content: editorContent
@@ -134,6 +141,15 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
       .focus()
       .setIndentation(`${indent - 2}rem`)
       .run();
+  };
+
+  const handleImageClick = () => {
+    router.push(`${pathname}?edit_content=true&select_image=true`);
+  };
+
+  const addImage = (imageURL) => {
+    editor.chain().focus().setImage({ src: imageURL }).run();
+    router.push(`${pathname}?edit_content=true`);
   };
 
   return (
@@ -217,6 +233,9 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
         <button onClick={handleIndentClick}>
           <MdFormatIndentIncrease />
         </button>
+        <button onClick={handleImageClick}>
+          <RiImageAddFill />
+        </button>
       </div>
       <EditorContent editor={editor} />
       <div className="editor-primary-btn-container">
@@ -231,6 +250,10 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
           Cancel
         </button>
       </div>
+      {(searchParams.get("select_image") === "true" ||
+        searchParams.get("upload_image") === "true") && (
+        <ImageGalleryModal addImage={addImage} />
+      )}
     </div>
   );
 };

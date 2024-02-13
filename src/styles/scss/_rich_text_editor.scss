@@ -9,6 +9,46 @@
     }
   }
 
+  .tiptap {
+    @apply focus:outline-none py-4 px-12;
+
+    h2 {
+      @apply text-2xl;
+    }
+
+    h3 {
+      @apply text-xl;
+    }
+
+    img {
+      @apply w-auto max-h-72 inline-block;
+    }
+
+    & > ul {
+      @apply px-8 list-none;
+
+      & > li {
+        & > p {
+          @apply relative before:absolute before:content-["•"] 
+          before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+        }
+
+        ul {
+          @apply list-none px-8;
+
+          & > li > p {
+            @apply relative before:absolute before:content-["◦"] 
+            before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+          }
+        }
+      }
+    }
+
+    ol {
+      @apply px-8 list-decimal;
+    }
+  }
+
   .editor-primary-btn-container {
     @apply flex self-end mx-8 my-6 gap-2;
 
@@ -22,44 +62,6 @@
 
     .cancel-btn {
       @apply bg-custom-white-darker;
-    }
-  }
-
-  .ProseMirror {
-    @apply focus:outline-none p-4;
-  }
-
-  h2 {
-    @apply text-2xl;
-  }
-
-  h3 {
-    @apply text-xl;
-  }
-
-  .tiptap {
-    & > ul {
-      @apply px-8 list-none;
-
-      & > li {
-        & > p {
-          @apply relative before:absolute before:content-["•"] 
-          before:-translate-x-4 before:text-inherit;
-        }
-
-        ul {
-          @apply list-none px-8;
-
-          & > li > p {
-            @apply relative before:absolute before:content-["◦"] 
-            before:-translate-x-4 before:text-inherit;
-          }
-        }
-      }
-    }
-
-    ol {
-      @apply px-8 list-decimal;
     }
   }
 }

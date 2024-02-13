@@ -11,13 +11,17 @@
     @apply empty:h-4;
   }
 
+  img {
+    @apply w-auto h-auto inline-block;
+  }
+
   ul {
     @apply px-8 list-none;
 
     & > li {
       & > p {
-        @apply relative before:absolute before:content-["•"] 
-        before:-translate-x-4 before:text-inherit;
+        @apply relative before:absolute before:content-["•"]
+        before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
       }
 
       ul {
@@ -25,7 +29,7 @@
 
         & > li > p {
           @apply relative before:absolute before:content-["◦"] 
-          before:-translate-x-4 before:text-inherit;
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
         }
       }
     }
