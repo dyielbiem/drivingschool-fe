@@ -5,6 +5,10 @@
     @apply text-2xl;
   }
 
+  h3 {
+    @apply text-xl;
+  }
+
   h2,
   h3,
   p {
@@ -12,7 +16,11 @@
   }
 
   img {
-    @apply w-auto h-auto inline-block;
+    @apply inline-block;
+  }
+
+  iframe {
+    @apply w-full max-w-4xl inline-block;
   }
 
   ul {

@@ -17,12 +17,15 @@ import {
 } from "react-icons/md";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import { RiImageAddFill } from "react-icons/ri";
+import { BsYoutube } from "react-icons/bs";
 import TextAlign from "@tiptap/extension-text-align";
 import Image from "@tiptap/extension-image";
+import Youtube from "@tiptap/extension-youtube";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Extension } from "@tiptap/core";
 import ImageGalleryModal from "./ImageGalleryModal";
+import EmbedYoutubeModal from "./EmbedYoutubeModal";
 
 const Indent = Extension.create({
   name: "indent",
@@ -30,7 +33,7 @@ const Indent = Extension.create({
   addOptions() {
     return {
       types: ["heading", "paragraph"],
-      defaultIndent: "0rem"
+      defaultIndent: "0%"
     };
   },
 
@@ -85,6 +88,9 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
       }),
       Image.configure({
         inline: true
+      }),
+      Youtube.configure({
+        inline: true
       })
     ],
     content: editorContent
@@ -96,8 +102,16 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
 
   const handleSaveClick = async () => {
     setIsSaveLoading(true);
-    const result = await editorAction(editor.getHTML());
+    const tempParentElement = document.createElement("div");
+    tempParentElement.innerHTML = editor.getHTML();
 
+    const iFrameWithNoSRC =
+      tempParentElement.querySelectorAll("iframe:not([src])");
+    if (iFrameWithNoSRC.length > 0) {
+      iFrameWithNoSRC.forEach((iframe) => iframe.parentNode.remove());
+    }
+
+    const result = await editorAction(tempParentElement.innerHTML);
     if (!result) setIsSaveLoading(false);
   };
 
@@ -115,23 +129,23 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
 
   const handleIndentClick = () => {
     const indent = Number(
-      editor.getAttributes("paragraph").indent?.slice(0, -3) ??
-        editor.getAttributes("heading").indent?.slice(0, -3)
+      editor.getAttributes("paragraph").indent?.slice(0, -1) ??
+        editor.getAttributes("heading").indent?.slice(0, -1)
     );
 
-    if (indent >= 20) return;
+    if (indent >= 40) return;
 
     editor
       .chain()
       .focus()
-      .setIndentation(`${indent + 2}rem`)
+      .setIndentation(`${indent + 4}%`)
       .run();
   };
 
   const handleOutdentClick = () => {
     const indent = Number(
-      editor.getAttributes("paragraph").indent?.slice(0, -3) ??
-        editor.getAttributes("heading").indent?.slice(0, -3)
+      editor.getAttributes("paragraph").indent?.slice(0, -1) ??
+        editor.getAttributes("heading").indent?.slice(0, -1)
     );
 
     if (indent <= 0) return;
@@ -139,7 +153,7 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     editor
       .chain()
       .focus()
-      .setIndentation(`${indent - 2}rem`)
+      .setIndentation(`${indent - 4}%`)
       .run();
   };
 
@@ -147,8 +161,23 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     router.push(`${pathname}?edit_content=true&select_image=true`);
   };
 
+  const handleYoutubeClick = () => {
+    router.push(`${pathname}?edit_content=true&embed_youtube=true`);
+  };
+
   const addImage = (imageURL) => {
     editor.chain().focus().setImage({ src: imageURL }).run();
+    router.push(`${pathname}?edit_content=true`);
+  };
+
+  const embedYoutube = (yotubeURL) => {
+    editor
+      .chain()
+      .focus()
+      .setYoutubeVideo({
+        src: yotubeURL
+      })
+      .run();
     router.push(`${pathname}?edit_content=true`);
   };
 
@@ -236,6 +265,9 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
         <button onClick={handleImageClick}>
           <RiImageAddFill />
         </button>
+        <button onClick={handleYoutubeClick}>
+          <BsYoutube />
+        </button>
       </div>
       <EditorContent editor={editor} />
       <div className="editor-primary-btn-container">
@@ -253,6 +285,9 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
       {(searchParams.get("select_image") === "true" ||
         searchParams.get("upload_image") === "true") && (
         <ImageGalleryModal addImage={addImage} />
+      )}
+      {searchParams.get("embed_youtube") === "true" && (
+        <EmbedYoutubeModal embedYoutube={embedYoutube} />
       )}
     </div>
   );

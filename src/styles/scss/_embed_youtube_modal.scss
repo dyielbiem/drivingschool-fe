@@ -1,0 +1,40 @@
+.embed-youtube-modal {
+  @apply fixed top-0 left-0 w-screen h-screen
+  bg-[rgba(0,0,0,0.3)] flex justify-center items-center
+  z-50;
+
+  & > form {
+    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+
+    h3 {
+      @apply text-2xl font-extrabold mb-4;
+    }
+
+    .close-btn {
+      @apply absolute w-fit right-6 top-6;
+
+      svg {
+        @apply text-3xl;
+      }
+    }
+
+    label {
+      @apply mt-2 text-sm font-bold indent-1;
+
+      span {
+        @apply text-custom-red font-bold;
+      }
+    }
+
+    input {
+      @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+    }
+
+    .confirm-btn {
+      @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8;
+    }
+  }
+}

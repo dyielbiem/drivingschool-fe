@@ -60,7 +60,9 @@ const ChapterID = ({ params }) => {
           Chapter {String(chapterIndex + 1).padStart(2, "0")}:{" "}
           {chapter.chapterTitle}
         </h1>
-        <button onClick={handleEditContentClick}>Edit content</button>
+        {searchParams.get("edit_content") !== "true" && (
+          <button onClick={handleEditContentClick}>Edit content</button>
+        )}
       </div>
     );
   };

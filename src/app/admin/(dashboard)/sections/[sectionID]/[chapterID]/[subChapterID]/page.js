@@ -39,7 +39,9 @@ const SubChapterID = ({ params }) => {
           Chapter {chapterIndex + 1}.{subChapterIndex + 1}.{" "}
           {subChapter.subChapterTitle}
         </h1>
-        <button onClick={handleEditContentClick}>Edit Content</button>
+        {searchParams.get("edit_content") !== "true" && (
+          <button onClick={handleEditContentClick}>Edit Content</button>
+        )}
       </div>
     );
   };
