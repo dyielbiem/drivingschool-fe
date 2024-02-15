@@ -1,7 +1,7 @@
 .admin-dashboard-layout {
   @apply flex w-full;
 
-  .side-nav-container {
+  & > .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
     transition-[width] duration-300 items-start py-16 min-w-72 justify-between;
 

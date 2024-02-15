@@ -2,10 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import adminFetchChapters from "@/services/api/adminFetchChapters";
-import { FiEdit } from "react-icons/fi";
+import { TbClipboardList, TbEdit } from "react-icons/tb";
 import { useRouter, useSearchParams } from "next/navigation";
 import AddChapterForm from "./AddChapterForm";
 import {
@@ -14,6 +14,8 @@ import {
   useSubChapters
 } from "@/state/store";
 import adminFetchSubChapters from "@/services/api/adminFetchSubChapters";
+import adminFetchSectionTestQuestions from "@/services/api/adminFetchSectionTestQuestions";
+import { useChapters, useSectionTestQuestions } from "@/state/store";
 
 const ManageSectionSideNav = () => {
   const pathname = usePathname();
@@ -24,8 +26,10 @@ const ManageSectionSideNav = () => {
   const sectionID = pathname.split("/").at(3);
   const chapterID = pathname.split("/").at(4);
   const subChapterID = pathname.split("/").at(5);
-  const [chapters, setChapters] = useState([]);
+  const { chapters, setChapters, setNewChapter } = useChapters();
   const { subChapters, setSubChapters } = useSubChapters();
+  const { sectionTestQuestions, setSectionTestQuestions } =
+    useSectionTestQuestions();
 
   // To fetch all the chapters of the section
   useEffect(() => {
@@ -35,7 +39,17 @@ const ManageSectionSideNav = () => {
     };
 
     fetchChapters();
-  }, [sectionID]);
+  }, [sectionID, setChapters]);
+
+  // To fetch all the section test questions
+  useEffect(() => {
+    const fetchSectionTestQuestions = async () => {
+      const response = await adminFetchSectionTestQuestions(sectionID);
+      setSectionTestQuestions(response.ok ? response.json.test : []);
+    };
+
+    fetchSectionTestQuestions();
+  }, [sectionID, setSectionTestQuestions]);
 
   // To fetch all the sub-chapters of a chapter
   useEffect(() => {
@@ -52,7 +66,7 @@ const ManageSectionSideNav = () => {
 
   // Get the index of selected chapter
   useEffect(() => {
-    if (chapters.length === 0) return;
+    if (!chapters || chapters.length === 0) return;
 
     const index = chapters.findIndex((item) => item.chapterID === chapterID);
     setChapterIndex(index);
@@ -79,6 +93,22 @@ const ManageSectionSideNav = () => {
     setSubChapters(undefined);
   };
 
+  const renderButtons = () => {
+    if (!chapters) return <></>;
+    return (
+      <div className="btn-container">
+        <button onClick={handleAddChapterClick}>
+          Add new chapter <TbEdit />
+        </button>
+        {sectionTestQuestions?.length === 0 && chapters?.length !== 0 && (
+          <Link href={`/admin/sections/${sectionID}/final-test`}>
+            Add final test <TbClipboardList />
+          </Link>
+        )}
+      </div>
+    );
+  };
+
   const renderSubChapters = (chapterIndex) => {
     if (!subChapters) return <></>;
     return (
@@ -102,9 +132,9 @@ const ManageSectionSideNav = () => {
   };
 
   const renderChapters = () => {
-    if (chapters.length === 0) return <></>;
+    if (!chapters || chapters.length === 0) return <></>;
     return (
-      <nav>
+      <>
         {chapters.map((chapter, index) => (
           <Fragment key={index}>
             <Link
@@ -121,20 +151,36 @@ const ManageSectionSideNav = () => {
             {chapterID === chapter.chapterID ? renderSubChapters(index) : <></>}
           </Fragment>
         ))}
-      </nav>
+      </>
+    );
+  };
+
+  const renderSectionTest = () => {
+    if (
+      !chapters ||
+      sectionTestQuestions?.length === 0 ||
+      chapters?.length === 0
+    )
+      return <></>;
+    return (
+      <Link href={`/admin/sections/${sectionID}/final-test`}>
+        Chapter {String(chapters?.length + 1).padStart(2, "0")}:
+        <span>Final Test</span>
+      </Link>
     );
   };
 
   return (
     <>
       <div className="side-nav-container">
-        <button onClick={handleAddChapterClick}>
-          Add new chapter <FiEdit />
-        </button>
-        {renderChapters()}
+        {renderButtons()}
+        <nav>
+          {renderChapters()}
+          {renderSectionTest()}
+        </nav>
       </div>
       {searchParams.get("add_chapter") === "true" && (
-        <AddChapterForm sectionID={sectionID} setChapters={setChapters} />
+        <AddChapterForm sectionID={sectionID} setNewChapter={setNewChapter} />
       )}
     </>
   );

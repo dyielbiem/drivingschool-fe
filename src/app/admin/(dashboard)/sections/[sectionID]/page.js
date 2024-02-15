@@ -1,5 +1,5 @@
-const SectionID = ({ params }) => {
-  return <div>{params.sectionID}</div>;
+const SectionID = () => {
+  return <section></section>;
 };
 
 export default SectionID;

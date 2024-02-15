@@ -4,20 +4,24 @@ import adminFetchSections from "@/services/api/adminFetchSections";
 import { useRouter, useSearchParams } from "next/navigation";
 import CreateSectionForm from "@/components/CreateSectionForm";
 import { useEffect, useState } from "react";
+import { useChapters } from "@/state/store";
 
 const AdminSections = () => {
   const [sections, setSections] = useState([]);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setChapters } = useChapters();
 
   useEffect(() => {
     const fetchSections = async () => {
+      // Set the global state of chapters to undefined
+      setChapters(undefined);
       const response = await adminFetchSections();
       setSections(response.ok ? response.json.sections : []);
     };
 
     fetchSections();
-  }, []);
+  }, [setChapters]);
 
   const handleSectionClick = (id) => {
     router.push(`/admin/sections/${id}`);

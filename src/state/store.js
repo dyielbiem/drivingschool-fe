@@ -7,6 +7,16 @@ export const useStudentsInSection = create((set) => ({
   }
 }));
 
+export const useChapters = create((set) => ({
+  chapters: undefined,
+  setChapters: (newValue) => {
+    set({ chapters: newValue });
+  },
+  setNewChapter: (newChapter) => {
+    set((state) => ({ chapters: [...state.chapters, newChapter] }));
+  }
+}));
+
 export const useChapterIndex = create((set) => ({
   chapterIndex: undefined,
   setChapterIndex: (newValue) => {
@@ -28,5 +38,20 @@ export const useSubChapters = create((set) => ({
   },
   setNewSubChapter: (newSubChapter) => {
     set((state) => ({ subChapters: [...state.subChapters, newSubChapter] }));
+  }
+}));
+
+export const useSectionTestQuestions = create((set) => ({
+  sectionTestQuestions: undefined,
+  setSectionTestQuestions: (newValue) => {
+    set({ sectionTestQuestions: newValue });
+  },
+  setNewSectionTestQuestion: (newSectionTestQuestion) => {
+    set((state) => ({
+      sectionTestQuestions: [
+        ...state.sectionTestQuestions,
+        newSectionTestQuestion
+      ]
+    }));
   }
 }));

@@ -54,31 +54,31 @@ main {
 .admin-dashboard-layout {
   @apply flex w-full;
 }
-.admin-dashboard-layout .side-nav-container {
+.admin-dashboard-layout > .side-nav-container {
   @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
     transition-[width] duration-300 items-start py-16 min-w-72 justify-between;
 }
-.admin-dashboard-layout .side-nav-container .side-nav {
+.admin-dashboard-layout > .side-nav-container .side-nav {
   @apply text-custom-white-base w-full;
 }
-.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container {
+.admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container {
   @apply flex flex-col gap-3;
 }
-.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a {
+.admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container a {
   @apply text-xl py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
           flex justify-start items-center gap-4 text-custom-white-dark;
 }
-.admin-dashboard-layout .side-nav-container .side-nav .nav-items-container a .nav-icon {
+.admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container a .nav-icon {
   @apply text-2xl text-custom-white-dark;
 }
-.admin-dashboard-layout .side-nav-container button {
+.admin-dashboard-layout > .side-nav-container button {
   @apply text-xl relative px-10 w-full
       flex items-center justify-start gap-4
       text-custom-white-dark font-bold;
 }
-.admin-dashboard-layout .side-nav-container button svg {
+.admin-dashboard-layout > .side-nav-container button svg {
   @apply text-2xl text-custom-white-dark;
 }
 
@@ -240,15 +240,24 @@ main {
 .admin-manage-section-layout .side-nav-container {
   @apply flex flex-col overflow-x-hidden overflow-y-auto 
     h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center py-4 min-w-96 max-w-96 justify-start  
-    px-4;
+    transition-[width] duration-300 items-center min-w-96 max-w-96 justify-start  
+    px-4 py-0;
 }
-.admin-manage-section-layout .side-nav-container button {
-  @apply bg-custom-blue-base text-white mb-2 w-full font-bold text-xl px-4
-      rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light sticky top-0;
+.admin-manage-section-layout .side-nav-container .btn-container {
+  @apply flex flex-col w-full bg-custom-blue-dark gap-2 sticky top-0
+      py-3;
+}
+.admin-manage-section-layout .side-nav-container .btn-container button,
+.admin-manage-section-layout .side-nav-container .btn-container a {
+  @apply bg-custom-blue-base text-white w-full font-bold text-lg px-4
+        rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light;
+}
+.admin-manage-section-layout .side-nav-container .btn-container button svg,
+.admin-manage-section-layout .side-nav-container .btn-container a svg {
+  @apply text-2xl;
 }
 .admin-manage-section-layout .side-nav-container nav {
-  @apply flex flex-col text-white w-full text-lg pb-6 gap-1;
+  @apply flex flex-col text-white w-full text-base pb-6 gap-1;
 }
 .admin-manage-section-layout .side-nav-container nav > a {
   @apply py-4 whitespace-nowrap overflow-hidden flex gap-2
@@ -268,6 +277,85 @@ main {
 }
 .admin-manage-section-layout .side-nav-container nav div a span {
   @apply overflow-hidden;
+}
+
+.section-test-section {
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10;
+}
+.section-test-section .header {
+  @apply flex justify-between items-center;
+}
+.section-test-section .header h1 {
+  @apply text-3xl font-extrabold;
+}
+.section-test-section .header button {
+  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
+}
+.section-test-section .test-question-container {
+  @apply w-full flex flex-col gap-4;
+}
+.section-test-section .test-question-container > li {
+  @apply w-full flex flex-col p-6 bg-white rounded-md;
+}
+.section-test-section .test-question-container > li h2 {
+  @apply font-bold text-xl max-w-3xl mb-2;
+}
+.section-test-section .test-question-container > li h2 span {
+  @apply text-[calc(1em-2px)];
+}
+.section-test-section .test-question-container > li .question-choices {
+  @apply list-[lower-alpha] list-inside ml-10 text-base;
+}
+
+.add-question-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.add-question-form form {
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[90%] overflow-y-auto;
+}
+.add-question-form form .close-btn {
+  @apply absolute w-fit right-6 top-6;
+}
+.add-question-form form .close-btn svg {
+  @apply text-3xl;
+}
+.add-question-form form h3 {
+  @apply text-2xl font-extrabold mb-4;
+}
+.add-question-form form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.add-question-form form label span {
+  @apply text-custom-red font-bold;
+}
+.add-question-form form input {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+}
+.add-question-form form .other-answer-container {
+  @apply flex relative;
+}
+.add-question-form form .other-answer-container input {
+  @apply w-full pr-8;
+}
+.add-question-form form .other-answer-container button {
+  @apply absolute right-0 text-lg h-full pr-2.5;
+}
+.add-question-form form .add-answer-btn {
+  @apply w-full px-6 bg-custom-gray-base self-end text-base font-bold 
+      text-neutral-800 rounded-lg py-2.5 hover:bg-custom-white-darker;
+}
+.add-question-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.add-question-form form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8;
 }
 
 .admin-chapter-section {

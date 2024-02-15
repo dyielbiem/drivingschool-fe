@@ -6,7 +6,7 @@ import FormButton from "./FormButton";
 import handleChapterSubmit from "@/app/actions/handleChapterSubmit";
 import { useEffect } from "react";
 
-const AddChapterForm = ({ sectionID, setChapters }) => {
+const AddChapterForm = ({ sectionID, setNewChapter }) => {
   const router = useRouter();
 
   const handleChapterSubmitWithSection = handleChapterSubmit.bind(
@@ -26,12 +26,10 @@ const AddChapterForm = ({ sectionID, setChapters }) => {
 
   useEffect(() => {
     if (!formState.newChapter) return;
-    setChapters((state) => {
-      return [...state, formState?.newChapter];
-    });
+    setNewChapter(formState?.newChapter);
 
     router.replace(`/admin/sections/${sectionID}`);
-  }, [formState?.newChapter, setChapters, router, sectionID]);
+  }, [formState.newChapter, router, sectionID, setNewChapter]);
 
   const closeForm = () => {
     router.push(`/admin/sections/${sectionID}`);
