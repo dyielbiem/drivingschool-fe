@@ -4,25 +4,22 @@ import FormButton from "./FormButton";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormErrorMessage from "./FormErrorMessage";
-import { useSectionTestQuestions } from "@/state/store";
+// import { useSectionTestQuestions } from "@/state/store";
 
-const AddQuestionForm = ({ submitAction }) => {
+const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [otherChoices, setOtherChoices] = useState([""]);
-  const { setNewSectionTestQuestion } = useSectionTestQuestions();
   const closeForm = () => {
     router.push(pathname);
   };
-
-  const sectionID = pathname.split("/").at(3);
 
   const initialState = {
     message: "",
     newQuestion: undefined
   };
 
-  const submitActionWithSection = submitAction.bind(sectionID, sectionID);
+  const submitActionWithSection = submitAction.bind(parentID, parentID);
   const submitActionWithSectionAndChoices = submitActionWithSection.bind(
     otherChoices,
     otherChoices
@@ -35,10 +32,10 @@ const AddQuestionForm = ({ submitAction }) => {
 
   useEffect(() => {
     if (!formState?.newQuestion) return;
-    setNewSectionTestQuestion(formState?.newQuestion);
+    setNewTestQuestion(formState?.newQuestion);
 
     router.push(pathname);
-  }, [formState?.newQuestion, pathname, router, setNewSectionTestQuestion]);
+  }, [formState?.newQuestion, pathname, router, setNewTestQuestion]);
 
   const handleOtherChoicesChange = (index, event) => {
     setOtherChoices((prevState) => {

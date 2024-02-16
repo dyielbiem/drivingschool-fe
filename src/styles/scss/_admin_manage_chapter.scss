@@ -1,9 +1,9 @@
 .admin-chapter-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   .header {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center max-w-4xl w-full;
 
     h1 {
       @apply text-3xl font-extrabold;
@@ -16,7 +16,7 @@
   }
 
   .sub-chapters-container {
-    @apply flex flex-col w-full gap-4;
+    @apply flex flex-col w-full gap-4 max-w-4xl;
 
     a {
       @apply rounded-md p-4 font-bold text-lg
@@ -28,7 +28,7 @@
     }
 
     .button-container {
-      @apply flex gap-4 mt-8;
+      @apply flex flex-col gap-2 mt-8;
 
       button {
         @apply font-bold text-white flex-grow text-xl

@@ -55,3 +55,18 @@ export const useSectionTestQuestions = create((set) => ({
     }));
   }
 }));
+
+export const useChapterTestQuestions = create((set) => ({
+  chapterTestQuestions: undefined,
+  setChapterTestQuestions: (newValue) => {
+    set({ chapterTestQuestions: newValue });
+  },
+  setNewChapterTestQuestion: (newChapterTestQuestion) => {
+    set((state) => ({
+      chapterTestQuestions: [
+        ...state.chapterTestQuestions,
+        newChapterTestQuestion
+      ]
+    }));
+  }
+}));

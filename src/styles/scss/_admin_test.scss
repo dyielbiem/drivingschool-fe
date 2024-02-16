@@ -1,9 +1,9 @@
-.section-test-section {
+.test-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   .header {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center max-w-4xl w-full;
 
     h1 {
       @apply text-3xl font-extrabold;
@@ -16,13 +16,13 @@
   }
 
   .test-question-container {
-    @apply w-full flex flex-col gap-4;
+    @apply w-full flex flex-col gap-4 max-w-4xl;
 
     & > li {
       @apply w-full flex flex-col p-6 bg-white rounded-md;
 
       h2 {
-        @apply font-bold text-xl max-w-3xl mb-2;
+        @apply font-bold text-xl max-w-3xl mb-4;
 
         span {
           @apply text-[calc(1em-2px)];
@@ -30,7 +30,8 @@
       }
 
       .question-choices {
-        @apply list-[lower-alpha] list-inside ml-10 text-base;
+        @apply list-[lower-alpha] list-inside ml-8 text-base
+        grid grid-cols-2 gap-y-1;
       }
     }
   }

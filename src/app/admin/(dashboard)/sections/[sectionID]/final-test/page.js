@@ -6,8 +6,10 @@ import handleSectionTestQuestionSubmit from "@/app/actions/handleSectionTestQues
 
 const FinalTest = () => {
   const { chapters } = useChapters();
-  const { sectionTestQuestions } = useSectionTestQuestions();
+  const { sectionTestQuestions, setNewSectionTestQuestion } =
+    useSectionTestQuestions();
   const pathname = usePathname();
+  const sectionID = pathname.split("/").at(3);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -60,11 +62,15 @@ const FinalTest = () => {
   };
 
   return (
-    <section className="section-test-section">
+    <section className="test-section">
       {renderHeader()}
       {renderTest()}
       {searchParams.get("add_question") === "true" && (
-        <AddQuestionForm submitAction={handleSectionTestQuestionSubmit} />
+        <AddQuestionForm
+          submitAction={handleSectionTestQuestionSubmit}
+          parentID={sectionID}
+          setNewTestQuestion={setNewSectionTestQuestion}
+        />
       )}
     </section>
   );

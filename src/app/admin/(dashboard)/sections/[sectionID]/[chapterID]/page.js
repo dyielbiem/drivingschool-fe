@@ -8,10 +8,12 @@ import AddSubChapterForm from "@/components/AddSubChapterForm";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import RichTextEditor from "@/components/RichTextEditor";
 import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
+import { useChapterTestQuestions } from "@/state/store";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
   const [chapterContent, setChapterContent] = useState(null);
+  const { chapterTestQuestions } = useChapterTestQuestions();
   const { subChapters, setSubChapters } = useSubChapters();
   const { chapterIndex } = useChapterIndex();
   const searchParams = useSearchParams();
@@ -87,6 +89,10 @@ const ChapterID = ({ params }) => {
     );
   };
 
+  const handleAddChapterTestClick = () => {
+    router.push(`${pathname}/chapter-test`);
+  };
+
   const renderSubChapters = () => {
     if (!chapter || !subChapters || searchParams.get("edit_content") === "true")
       return <></>;
@@ -101,9 +107,21 @@ const ChapterID = ({ params }) => {
               {subChapter.subChapterTitle}
             </Link>
           ))}
+        {chapterTestQuestions && chapterTestQuestions.length !== 0 && (
+          <Link href={`${pathname}/chapter-test`}>
+            <span>
+              {chapterIndex + 1}.{subChapters.length + 1}
+            </span>{" "}
+            Chapter Test
+          </Link>
+        )}
         <div className="button-container">
           <button onClick={handleAddChapterClick}>Add new sub-chapter</button>
-          <button>Add chapter test</button>
+          {chapterTestQuestions?.length === 0 && (
+            <button onClick={handleAddChapterTestClick}>
+              Add chapter test
+            </button>
+          )}
         </div>
       </div>
     );

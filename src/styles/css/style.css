@@ -122,7 +122,7 @@ main {
 }
 
 .section-content-container {
-  @apply mx-4;
+  @apply mx-4 max-w-4xl;
 }
 .section-content-container h2 {
   @apply text-2xl;
@@ -279,34 +279,35 @@ main {
   @apply overflow-hidden;
 }
 
-.section-test-section {
+.test-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
-.section-test-section .header {
-  @apply flex justify-between items-center;
+.test-section .header {
+  @apply flex justify-between items-center max-w-4xl w-full;
 }
-.section-test-section .header h1 {
+.test-section .header h1 {
   @apply text-3xl font-extrabold;
 }
-.section-test-section .header button {
+.test-section .header button {
   @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
-.section-test-section .test-question-container {
-  @apply w-full flex flex-col gap-4;
+.test-section .test-question-container {
+  @apply w-full flex flex-col gap-4 max-w-4xl;
 }
-.section-test-section .test-question-container > li {
+.test-section .test-question-container > li {
   @apply w-full flex flex-col p-6 bg-white rounded-md;
 }
-.section-test-section .test-question-container > li h2 {
-  @apply font-bold text-xl max-w-3xl mb-2;
+.test-section .test-question-container > li h2 {
+  @apply font-bold text-xl max-w-3xl mb-4;
 }
-.section-test-section .test-question-container > li h2 span {
+.test-section .test-question-container > li h2 span {
   @apply text-[calc(1em-2px)];
 }
-.section-test-section .test-question-container > li .question-choices {
-  @apply list-[lower-alpha] list-inside ml-10 text-base;
+.test-section .test-question-container > li .question-choices {
+  @apply list-[lower-alpha] list-inside ml-8 text-base
+        grid grid-cols-2 gap-y-1;
 }
 
 .add-question-form {
@@ -360,10 +361,10 @@ main {
 
 .admin-chapter-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
 .admin-chapter-section .header {
-  @apply flex justify-between items-center;
+  @apply flex justify-between items-center max-w-4xl w-full;
 }
 .admin-chapter-section .header h1 {
   @apply text-3xl font-extrabold;
@@ -373,7 +374,7 @@ main {
       px-4 py-2;
 }
 .admin-chapter-section .sub-chapters-container {
-  @apply flex flex-col w-full gap-4;
+  @apply flex flex-col w-full gap-4 max-w-4xl;
 }
 .admin-chapter-section .sub-chapters-container a {
   @apply rounded-md p-4 font-bold text-lg
@@ -383,7 +384,7 @@ main {
   @apply mr-2;
 }
 .admin-chapter-section .sub-chapters-container .button-container {
-  @apply flex gap-4 mt-8;
+  @apply flex flex-col gap-2 mt-8;
 }
 .admin-chapter-section .sub-chapters-container .button-container button {
   @apply font-bold text-white flex-grow text-xl

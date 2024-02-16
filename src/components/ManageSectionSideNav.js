@@ -15,7 +15,12 @@ import {
 } from "@/state/store";
 import adminFetchSubChapters from "@/services/api/adminFetchSubChapters";
 import adminFetchSectionTestQuestions from "@/services/api/adminFetchSectionTestQuestions";
-import { useChapters, useSectionTestQuestions } from "@/state/store";
+import {
+  useChapters,
+  useSectionTestQuestions,
+  useChapterTestQuestions
+} from "@/state/store";
+import adminFetchChapterTestQuestions from "@/services/api/adminFetchChapterTestQuestions";
 
 const ManageSectionSideNav = () => {
   const pathname = usePathname();
@@ -30,6 +35,8 @@ const ManageSectionSideNav = () => {
   const { subChapters, setSubChapters } = useSubChapters();
   const { sectionTestQuestions, setSectionTestQuestions } =
     useSectionTestQuestions();
+  const { chapterTestQuestions, setChapterTestQuestions } =
+    useChapterTestQuestions();
 
   // To fetch all the chapters of the section
   useEffect(() => {
@@ -54,6 +61,7 @@ const ManageSectionSideNav = () => {
   // To fetch all the sub-chapters of a chapter
   useEffect(() => {
     if (!chapterID) return;
+    setChapterTestQuestions(undefined);
     const fetchSubChapters = async () => {
       const subChaptersResponse = await adminFetchSubChapters(chapterID);
 
@@ -62,7 +70,18 @@ const ManageSectionSideNav = () => {
     };
 
     fetchSubChapters();
-  }, [chapterID, setSubChapters]);
+  }, [chapterID, setChapterTestQuestions, setSubChapters]);
+
+  // To fetch all the chapter test questions
+  useEffect(() => {
+    if (!chapterID) return;
+    const fetchChapterTest = async () => {
+      const response = await adminFetchChapterTestQuestions(chapterID);
+      setChapterTestQuestions(response.ok ? response.json.test : []);
+    };
+
+    fetchChapterTest();
+  }, [chapterID, setChapterTestQuestions]);
 
   // Get the index of selected chapter
   useEffect(() => {
@@ -110,7 +129,7 @@ const ManageSectionSideNav = () => {
   };
 
   const renderSubChapters = (chapterIndex) => {
-    if (!subChapters) return <></>;
+    if (!subChapters || !chapterTestQuestions) return <></>;
     return (
       <div>
         {subChapters.length != 0 &&
@@ -127,6 +146,11 @@ const ManageSectionSideNav = () => {
               {chapterIndex + 1}.{index + 1} {subChapter.subChapterTitle}
             </Link>
           ))}
+        {chapterTestQuestions && chapterTestQuestions?.length !== 0 && (
+          <Link href={`${pathname}/chapter-test`}>
+            {chapterIndex + 1}.{subChapters.length + 1} Chapter Test
+          </Link>
+        )}
       </div>
     );
   };
