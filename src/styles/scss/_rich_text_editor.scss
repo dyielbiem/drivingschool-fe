@@ -1,5 +1,6 @@
 .rich-text-editor {
-  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto;
+  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+  max-w-4xl w-full;
 
   .editor-styling-btn-container {
     @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0

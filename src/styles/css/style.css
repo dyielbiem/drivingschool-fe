@@ -279,6 +279,33 @@ main {
   @apply overflow-hidden;
 }
 
+.admin-manage-section {
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
+}
+.admin-manage-section h1 {
+  @apply text-3xl font-extrabold max-w-4xl w-full;
+}
+.admin-manage-section .chapters-container {
+  @apply flex flex-col w-full gap-4 max-w-4xl;
+}
+.admin-manage-section .chapters-container li {
+  @apply rounded-md px-6 font-bold text-lg
+      bg-white hover:shadow-md flex;
+}
+.admin-manage-section .chapters-container li a {
+  @apply flex-grow h-full py-5;
+}
+.admin-manage-section .chapters-container li div {
+  @apply flex gap-5;
+}
+.admin-manage-section .chapters-container li div button:nth-child(1) {
+  @apply text-custom-blue-light;
+}
+.admin-manage-section .chapters-container li div button:nth-child(2) {
+  @apply text-custom-red;
+}
+
 .test-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
@@ -798,7 +825,8 @@ main {
 }
 
 .rich-text-editor {
-  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto;
+  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+  max-w-4xl w-full;
 }
 .rich-text-editor .editor-styling-btn-container {
   @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
@@ -947,4 +975,32 @@ main {
 .embed-youtube-modal > form .confirm-btn {
   @apply w-full bg-custom-blue-base text-xl font-bold 
       text-white rounded-lg py-2.5 mt-8;
+}
+
+.confirm-delete-modal {
+  @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
+  justify-center items-center;
+}
+.confirm-delete-modal > div {
+  @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+}
+.confirm-delete-modal > div .header {
+  @apply flex gap-6 items-start max-w-full;
+}
+.confirm-delete-modal > div .header p {
+  @apply text-lg flex-grow;
+}
+.confirm-delete-modal > div .header p span {
+  @apply font-extrabold;
+}
+.confirm-delete-modal > div .header .close-btn {
+  @apply w-fit;
+}
+.confirm-delete-modal > div .header .close-btn svg {
+  @apply text-3xl;
+}
+.confirm-delete-modal > div .confirm-btn {
+  @apply font-bold text-xl w-full mt-8
+      rounded-md py-2 bg-custom-blue-base text-white;
 }

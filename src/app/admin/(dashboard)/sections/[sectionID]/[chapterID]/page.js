@@ -23,9 +23,9 @@ const ChapterID = ({ params }) => {
   useEffect(() => {
     const fetchChapter = async () => {
       const chapterResponse = await adminFetchChapterByID(params.chapterID);
-      if (!chapterResponse.ok) return;
-      setChapter(chapterResponse.json);
-      setChapterContent(chapterResponse.json.chapterContent);
+      if (!chapterResponse?.ok) return;
+      setChapter(chapterResponse?.json);
+      setChapterContent(chapterResponse?.json?.chapterContent);
     };
 
     fetchChapter();

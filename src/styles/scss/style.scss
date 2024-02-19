@@ -23,6 +23,7 @@ main {
 @import "admin_add_chapter_form";
 @import "admin_add_sub_chapter_form";
 @import "admin_manage_section_layout";
+@import "admin_manage_section";
 @import "admin_test";
 @import "admin_add_question_form";
 @import "admin_manage_chapter";
@@ -41,3 +42,4 @@ main {
 @import "rich_text_editor";
 @import "image_gallery_modal";
 @import "embed_youtube_modal";
+@import "confirm_delete_modal";
