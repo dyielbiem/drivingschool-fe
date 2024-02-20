@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa6";
 import adminFetchCoupons from "@/services/api/adminFetchCoupons";
+import AddCouponForm from "@/components/AddCouponForm";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const AdminCoupons = () => {
   const [coupons, setCoupons] = useState([]);
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchCoupons = async () => {
@@ -56,13 +61,20 @@ const AdminCoupons = () => {
     );
   };
 
+  const handleAddCouponClick = () => {
+    router.push(`${pathname}?add_coupon=true`);
+  };
+
   return (
     <section className="admin-coupons-container">
       <div className="header">
         <h1>Manage Coupons</h1>
-        <button>Add new coupon</button>
+        <button onClick={handleAddCouponClick}>Add new coupon</button>
       </div>
       {renderCoupons()}
+      {searchParams.get("add_coupon") === "true" && (
+        <AddCouponForm setCoupons={setCoupons} />
+      )}
     </section>
   );
 };
