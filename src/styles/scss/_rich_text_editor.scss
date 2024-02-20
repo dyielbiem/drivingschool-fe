@@ -15,11 +15,11 @@
     @apply focus:outline-none py-4 px-12;
 
     h2 {
-      @apply text-2xl;
+      @apply text-xl font-extrabold;
     }
 
     h3 {
-      @apply text-xl;
+      @apply text-lg;
     }
 
     img {
@@ -56,18 +56,19 @@
   }
 
   .editor-primary-btn-container {
-    @apply flex self-end mx-8 my-6 gap-2;
+    @apply flex mt-8 gap-3 py-4 w-full bg-custom-white-darker
+    justify-end px-6 items-center;
 
     button {
       @apply text-lg font-bold px-4 py-1 rounded-md;
     }
 
     .save-btn {
-      @apply bg-custom-blue-base text-white;
+      @apply bg-custom-blue-base text-white px-6;
     }
 
     .cancel-btn {
-      @apply bg-custom-white-darker;
+      @apply bg-white;
     }
   }
 }

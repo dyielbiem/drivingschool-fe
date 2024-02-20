@@ -1,6 +1,6 @@
 .admin-chapter-section {
-  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
+  @apply flex flex-col flex-grow max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28;
 
   .header {
     @apply flex justify-between items-center max-w-4xl w-full;
@@ -18,22 +18,34 @@
   .sub-chapters-container {
     @apply flex flex-col w-full gap-4 max-w-4xl;
 
-    a {
-      @apply rounded-md p-4 font-bold text-lg
-      bg-white hover:shadow-md;
+    li {
+      @apply rounded-md px-6 font-bold text-lg
+      bg-white hover:shadow-md flex;
 
-      span {
-        @apply mr-2;
+      a {
+        @apply flex-grow h-full py-5;
+      }
+
+      div {
+        @apply flex gap-5;
+
+        button:nth-child(1) {
+          @apply text-custom-blue-light;
+        }
+
+        button:nth-child(2) {
+          @apply text-custom-red;
+        }
       }
     }
+  }
 
-    .button-container {
-      @apply flex flex-col gap-2 mt-8;
+  .button-container {
+    @apply flex flex-col gap-2 mt-8 w-full max-w-4xl;
 
-      button {
-        @apply font-bold text-white flex-grow text-xl
-        px-3 py-3.5 rounded-lg bg-custom-blue-base;
-      }
+    button {
+      @apply font-bold text-white flex-grow text-xl
+      px-3 py-3.5 rounded-lg bg-custom-blue-base;
     }
   }
 }

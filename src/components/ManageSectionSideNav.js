@@ -147,7 +147,12 @@ const ManageSectionSideNav = () => {
             </Link>
           ))}
         {chapterTestQuestions && chapterTestQuestions?.length !== 0 && (
-          <Link href={`${pathname}/chapter-test`}>
+          <Link
+            href={`/admin/sections/${sectionID}/${chapterID}/chapter-test`}
+            className={`${
+              subChapterID === "chapter-test" ? "bg-custom-blue-darker" : ""
+            }`}
+          >
             {chapterIndex + 1}.{subChapters.length + 1} Chapter Test
           </Link>
         )}
@@ -164,7 +169,9 @@ const ManageSectionSideNav = () => {
             <Link
               href={`/admin/sections/${sectionID}/${chapter.chapterID}`}
               className={`${
-                chapterIndex === index ? "bg-custom-blue-darker font-bold" : ""
+                chapterIndex === index
+                  ? "bg-custom-blue-darker font-bold after:bg-custom-blue-light"
+                  : ""
               } chapter-link`}
               key={index}
               onClick={() => handleChapterClick(chapter.chapterID)}
@@ -187,7 +194,14 @@ const ManageSectionSideNav = () => {
     )
       return <></>;
     return (
-      <Link href={`/admin/sections/${sectionID}/final-test`}>
+      <Link
+        href={`/admin/sections/${sectionID}/final-test`}
+        className={`${
+          chapterID === "final-test"
+            ? "bg-custom-blue-darker font-bold after:bg-custom-blue-light"
+            : ""
+        }`}
+      >
         Chapter {String(chapters?.length + 1).padStart(2, "0")}:
         <span>Final Test</span>
       </Link>

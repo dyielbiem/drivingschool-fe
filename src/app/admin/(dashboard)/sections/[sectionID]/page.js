@@ -81,7 +81,7 @@ const SectionID = () => {
             </div>
           </li>
         ))}
-        {sectionTestQuestions?.length && (
+        {sectionTestQuestions?.length !== 0 && (
           <li>
             <Link href={`${pathname}/final-test`}>
               Chapter {String(chapters?.length + 1).padStart(2, "0")}: Final

@@ -9,6 +9,9 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import RichTextEditor from "@/components/RichTextEditor";
 import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
 import { useChapterTestQuestions } from "@/state/store";
+import { FaTrashCan, FaPen } from "react-icons/fa6";
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import adminDeleteSubChapter from "@/services/api/adminDeleteSubChapter";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
@@ -19,6 +22,7 @@ const ChapterID = ({ params }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const [itemToDelete, setItemToDelete] = useState(undefined);
 
   useEffect(() => {
     const fetchChapter = async () => {
@@ -30,6 +34,20 @@ const ChapterID = ({ params }) => {
 
     fetchChapter();
   }, [params.chapterID, setChapter, setSubChapters]);
+
+  useEffect(() => {
+    if (!subChapters) return;
+    if (!searchParams.get("delete_sub_chapter"))
+      return setItemToDelete(undefined);
+    const subChapterToDelete = subChapters?.find(
+      (subChapter) =>
+        subChapter.subChapterID === searchParams.get("delete_sub_chapter")
+    );
+
+    setItemToDelete(
+      subChapterToDelete ? subChapterToDelete.subChapterTitle : undefined
+    );
+  }, [searchParams, subChapters]);
 
   const handleAddChapterClick = () => {
     router.push(pathname + "?add_sub_chapter=true");
@@ -93,28 +111,54 @@ const ChapterID = ({ params }) => {
     router.push(`${pathname}/chapter-test`);
   };
 
+  const handleEditClick = (subChapterID) => {
+    router.push(`${pathname}/${subChapterID}?edit_content=true`);
+  };
+
+  const handleDeleteClick = (subChapterID) => {
+    router.push(`${pathname}?delete_sub_chapter=${subChapterID}`);
+  };
+
   const renderSubChapters = () => {
     if (!chapter || !subChapters || searchParams.get("edit_content") === "true")
       return <></>;
     return (
-      <div className="sub-chapters-container">
-        {subChapters.length != 0 &&
-          subChapters.map((subChapter, index) => (
-            <Link key={index} href={`${pathname}/${subChapter.subChapterID}`}>
-              <span>
-                {chapterIndex + 1}.{index + 1}
-              </span>{" "}
-              {subChapter.subChapterTitle}
-            </Link>
-          ))}
-        {chapterTestQuestions && chapterTestQuestions.length !== 0 && (
-          <Link href={`${pathname}/chapter-test`}>
-            <span>
-              {chapterIndex + 1}.{subChapters.length + 1}
-            </span>{" "}
-            Chapter Test
-          </Link>
-        )}
+      <>
+        <ul className="sub-chapters-container">
+          {subChapters.length != 0 &&
+            subChapters.map((subChapter, index) => (
+              <li key={index}>
+                <Link href={`${pathname}/${subChapter.subChapterID}`}>
+                  <span>
+                    {chapterIndex + 1}.{index + 1}
+                  </span>{" "}
+                  {subChapter.subChapterTitle}
+                </Link>
+                <div>
+                  <button
+                    onClick={() => handleEditClick(subChapter.subChapterID)}
+                  >
+                    <FaPen />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClick(subChapter.subChapterID)}
+                  >
+                    <FaTrashCan />
+                  </button>
+                </div>
+              </li>
+            ))}
+          {chapterTestQuestions && chapterTestQuestions.length !== 0 && (
+            <li>
+              <Link href={`${pathname}/chapter-test`}>
+                <span>
+                  {chapterIndex + 1}.{subChapters.length + 1}
+                </span>{" "}
+                Chapter Test
+              </Link>
+            </li>
+          )}
+        </ul>
         <div className="button-container">
           <button onClick={handleAddChapterClick}>Add new sub-chapter</button>
           {chapterTestQuestions?.length === 0 && (
@@ -123,8 +167,23 @@ const ChapterID = ({ params }) => {
             </button>
           )}
         </div>
-      </div>
+      </>
     );
+  };
+
+  const deleteSubChapter = async () => {
+    if (!searchParams.get("delete_sub_chapter")) return;
+    const response = await adminDeleteSubChapter(
+      String(searchParams.get("delete_sub_chapter"))
+    );
+    if (!response.ok) return;
+    setSubChapters(
+      subChapters?.filter(
+        (subChapter) =>
+          subChapter.subChapterID !== searchParams.get("delete_sub_chapter")
+      )
+    );
+    router.push(pathname);
   };
 
   return (
@@ -137,6 +196,13 @@ const ChapterID = ({ params }) => {
       </section>
       {searchParams.get("add_sub_chapter") === "true" && (
         <AddSubChapterForm chapterID={params.chapterID} />
+      )}
+      {itemToDelete && (
+        <ConfirmDeleteModal
+          itemToDelete={itemToDelete}
+          pathWhenModalIsClosed={pathname}
+          confirmAction={deleteSubChapter}
+        />
       )}
     </>
   );

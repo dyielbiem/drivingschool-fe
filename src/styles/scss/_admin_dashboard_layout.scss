@@ -3,7 +3,7 @@
 
   & > .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-start py-16 min-w-72 justify-between;
+    transition-[width] duration-300 items-start py-16 min-w-80 justify-between;
 
     .side-nav {
       @apply text-custom-white-base w-full;

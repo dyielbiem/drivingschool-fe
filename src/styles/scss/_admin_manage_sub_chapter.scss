@@ -1,9 +1,10 @@
 .admin-sub-chapter-section {
-  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10;
+  @apply flex flex-col flex-grow pb-28 max-h-screen h-screen bg-custom-white-dark
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   .header {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center max-w-4xl
+    w-full;
 
     h1 {
       @apply text-3xl font-extrabold;
