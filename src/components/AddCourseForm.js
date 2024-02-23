@@ -1,6 +1,6 @@
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import handleCourseSubmit from "@/app/actions/handleCourseSubmit";
+import handleCourseSubmit from "@/actions/handleCourseSubmit";
 import { useFormState } from "react-dom";
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";

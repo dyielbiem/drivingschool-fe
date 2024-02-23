@@ -3,7 +3,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import FormErrorMessage from "./FormErrorMessage";
 import { useFormState } from "react-dom";
 import FormButton from "./FormButton";
-import handleChapterSubmit from "@/app/actions/handleChapterSubmit";
+import handleChapterSubmit from "@/actions/handleChapterSubmit";
 import { useEffect } from "react";
 
 const AddChapterForm = ({ sectionID, setNewChapter }) => {

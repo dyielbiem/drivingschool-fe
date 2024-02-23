@@ -1,6 +1,6 @@
 "use client";
 import FormButton from "./FormButton";
-import handleLoginSubmit from "../app/actions/handleLoginSubmit";
+import handleLoginSubmit from "../actions/handleLoginSubmit";
 import FormErrorMessage from "./FormErrorMessage";
 import { useFormState } from "react-dom";
 

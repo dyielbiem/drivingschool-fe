@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import adminLogoutClick from "@/app/actions/adminLogoutClick";
+import adminLogoutClick from "@/actions/adminLogoutClick";
 import { usePathname, useRouter } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";

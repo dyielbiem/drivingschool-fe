@@ -3,7 +3,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import FormErrorMessage from "./FormErrorMessage";
 import { useFormState } from "react-dom";
 import FormButton from "./FormButton";
-import handleSubChapterSubmit from "@/app/actions/handleSubChapterSubmit";
+import handleSubChapterSubmit from "@/actions/handleSubChapterSubmit";
 import { useEffect } from "react";
 import { useSubChapters } from "@/state/store";
 

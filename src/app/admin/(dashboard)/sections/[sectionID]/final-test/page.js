@@ -2,7 +2,7 @@
 import { useChapters, useSectionTestQuestions } from "@/state/store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddQuestionForm from "@/components/AddQuestionForm";
-import handleSectionTestQuestionSubmit from "@/app/actions/handleSectionTestQuestionSubmit";
+import handleSectionTestQuestionSubmit from "@/actions/handleSectionTestQuestionSubmit";
 
 const FinalTest = () => {
   const { chapters } = useChapters();

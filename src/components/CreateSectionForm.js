@@ -3,7 +3,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import FormErrorMessage from "./FormErrorMessage";
 import { useFormState } from "react-dom";
 import FormButton from "./FormButton";
-import handleSectionSubmit from "@/app/actions/handleSectionSubmit";
+import handleSectionSubmit from "@/actions/handleSectionSubmit";
 import { useEffect } from "react";
 
 const CreateSectionForm = ({ setSections }) => {

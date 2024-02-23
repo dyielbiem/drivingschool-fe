@@ -6,7 +6,7 @@ import {
 } from "@/state/store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddQuestionForm from "@/components/AddQuestionForm";
-import handleChapterTestQuestionSubmit from "@/app/actions/handleChapterTestQuestionSubmit";
+import handleChapterTestQuestionSubmit from "@/actions/handleChapterTestQuestionSubmit";
 
 const ChapterTest = () => {
   const { chapterTestQuestions, setNewChapterTestQuestion } =
