@@ -2,7 +2,7 @@
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden pb-10;
 
-  .header {
+  & > .header {
     @apply flex justify-between items-center mb-12;
 
     h1 {
@@ -30,7 +30,7 @@
 
     li:nth-child(n + 2) {
       @apply grid grid-cols-subgrid col-span-full
-        gap-x-8 justify-items-center hover:z-50
+        gap-x-8 justify-items-center hover:z-20
         bg-white px-6 py-5 rounded-md cursor-pointer 
         hover:shadow-md duration-200;
 
@@ -40,10 +40,11 @@
 
       .course-name {
         @apply relative before:hidden hover:before:block 
-        before:content-[attr(data-before)]
-        before:absolute before:bg-custom-white-dark
-        before:top-full before:-left-4 before:p-4 before:shadow-xl w-fit
-        before:rounded-md before:min-w-[150%] before:mb-16;
+        before:content-[attr(hover-text)]
+        before:absolute before:bg-custom-white-dark 
+        before:top-1/2 before:-left-4 before:p-4 before:shadow-xl w-fit
+        before:rounded-md before:w-[200%] before:mb-16 
+        before:text-sm before:font-bold;
       }
 
       p:nth-child(2) {
@@ -57,7 +58,7 @@
       div {
         @apply flex justify-center items-center gap-4 h-fit;
 
-        button {
+        & > button {
           svg {
             @apply text-xl;
           }

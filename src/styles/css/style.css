@@ -44,11 +44,12 @@ main {
     bg-red-200 border-2 border-red-700;
 }
 .login-form button[type=submit] {
-  @apply bg-custom-blue-base text-white text-lg font-bold 
-    py-3 rounded-lg mt-14;
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+    text-white rounded-lg py-2.5 mt-8 
+    flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
-.login-form button[disabled] {
-  @apply bg-custom-blue-dark cursor-wait;
+.login-form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-dashboard-layout {
@@ -195,7 +196,11 @@ main {
 }
 .add-chapter-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold 
-      text-white rounded-lg py-2.5 mt-8;
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-chapter-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .add-sub-chapter-form {
@@ -231,7 +236,11 @@ main {
 }
 .add-sub-chapter-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold 
-      text-white rounded-lg py-2.5 mt-8;
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-sub-chapter-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-manage-section-layout {
@@ -383,7 +392,11 @@ main {
 }
 .add-question-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold 
-      text-white rounded-lg py-2.5 mt-8;
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-question-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-chapter-section {
@@ -644,56 +657,24 @@ main {
 }
 .create-section-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-xl font-bold 
-      text-white rounded-lg py-2.5 mt-8;
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
-
-.add-coupon-form {
-  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
-}
-.add-coupon-form form {
-  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
-}
-.add-coupon-form form .close-btn {
-  @apply absolute w-fit right-6 top-6;
-}
-.add-coupon-form form .close-btn svg {
-  @apply text-3xl;
-}
-.add-coupon-form form h3 {
-  @apply text-2xl font-extrabold mb-4;
-}
-.add-coupon-form form label {
-  @apply mt-2 text-sm font-bold indent-1;
-}
-.add-coupon-form form label span {
-  @apply text-custom-red font-bold;
-}
-.add-coupon-form form input {
-  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base;
-}
-.add-coupon-form form .error-message {
-  @apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700;
-}
-.add-coupon-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
-      text-white rounded-lg py-2.5 mt-8;
+.create-section-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-courses-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden pb-10;
 }
-.admin-courses-container .header {
+.admin-courses-container > .header {
   @apply flex justify-between items-center mb-12;
 }
-.admin-courses-container .header h1 {
+.admin-courses-container > .header h1 {
   @apply font-extrabold text-3xl;
 }
-.admin-courses-container .header button {
+.admin-courses-container > .header button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
       rounded-lg text-lg font-bold;
 }
@@ -710,7 +691,7 @@ main {
 }
 .admin-courses-container .course-table li:nth-child(n+2) {
   @apply grid grid-cols-subgrid col-span-full
-        gap-x-8 justify-items-center hover:z-50
+        gap-x-8 justify-items-center hover:z-20
         bg-white px-6 py-5 rounded-md cursor-pointer 
         hover:shadow-md duration-200;
 }
@@ -719,10 +700,11 @@ main {
 }
 .admin-courses-container .course-table li:nth-child(n+2) .course-name {
   @apply relative before:hidden hover:before:block 
-        before:content-[attr(data-before)]
-        before:absolute before:bg-custom-white-dark
-        before:top-full before:-left-4 before:p-4 before:shadow-xl w-fit
-        before:rounded-md before:min-w-[150%] before:mb-16;
+        before:content-[attr(hover-text)]
+        before:absolute before:bg-custom-white-dark 
+        before:top-1/2 before:-left-4 before:p-4 before:shadow-xl w-fit
+        before:rounded-md before:w-[200%] before:mb-16 
+        before:text-sm before:font-bold;
 }
 .admin-courses-container .course-table li:nth-child(n+2) p:nth-child(2) {
   @apply whitespace-nowrap;
@@ -733,13 +715,13 @@ main {
 .admin-courses-container .course-table li:nth-child(n+2) div {
   @apply flex justify-center items-center gap-4 h-fit;
 }
-.admin-courses-container .course-table li:nth-child(n+2) div button svg {
+.admin-courses-container .course-table li:nth-child(n+2) div > button svg {
   @apply text-xl;
 }
-.admin-courses-container .course-table li:nth-child(n+2) div button:nth-child(1) svg {
+.admin-courses-container .course-table li:nth-child(n+2) div > button:nth-child(1) svg {
   @apply text-custom-blue-light;
 }
-.admin-courses-container .course-table li:nth-child(n+2) div button:nth-child(2) svg {
+.admin-courses-container .course-table li:nth-child(n+2) div > button:nth-child(2) svg {
   @apply text-custom-red;
 }
 
@@ -786,20 +768,25 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .add-course-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold text-white rounded-lg py-2.5 mt-8;
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-course-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-coupons-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden pb-10;
 }
-.admin-coupons-container .header {
+.admin-coupons-container > .header {
   @apply flex justify-between items-center mb-12;
 }
-.admin-coupons-container .header h1 {
+.admin-coupons-container > .header h1 {
   @apply font-extrabold text-3xl;
 }
-.admin-coupons-container .header button {
+.admin-coupons-container > .header button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
       rounded-lg text-lg font-bold;
 }
@@ -837,6 +824,93 @@ main {
 }
 .admin-coupons-container .coupon-table div button:nth-child(2) svg {
   @apply text-custom-red;
+}
+
+.add-coupon-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.add-coupon-form form {
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+}
+.add-coupon-form form .close-btn {
+  @apply absolute w-fit right-6 top-6;
+}
+.add-coupon-form form .close-btn svg {
+  @apply text-3xl;
+}
+.add-coupon-form form h3 {
+  @apply text-2xl font-extrabold mb-4;
+}
+.add-coupon-form form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.add-coupon-form form label span {
+  @apply text-custom-red font-bold;
+}
+.add-coupon-form form input {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+}
+.add-coupon-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.add-coupon-form form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-coupon-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+
+.edit-coupon-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.edit-coupon-form form {
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+}
+.edit-coupon-form form .close-btn {
+  @apply absolute w-fit right-6 top-6;
+}
+.edit-coupon-form form .close-btn svg {
+  @apply text-3xl;
+}
+.edit-coupon-form form h3 {
+  @apply text-2xl font-extrabold;
+}
+.edit-coupon-form form .coupon-code {
+  @apply text-lg mb-4;
+}
+.edit-coupon-form form .coupon-code span {
+  @apply font-bold;
+}
+.edit-coupon-form form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.edit-coupon-form form label span {
+  @apply text-custom-red font-bold;
+}
+.edit-coupon-form form input,
+.edit-coupon-form form select {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+}
+.edit-coupon-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.edit-coupon-form form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.edit-coupon-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .admin-billing-container {
@@ -1026,7 +1100,7 @@ main {
 
 .confirm-delete-modal {
   @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center;
+  justify-center items-center top-0 left-0 z-50;
 }
 .confirm-delete-modal > div {
   @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 

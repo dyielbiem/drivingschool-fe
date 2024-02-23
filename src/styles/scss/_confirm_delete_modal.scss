@@ -1,6 +1,6 @@
 .confirm-delete-modal {
   @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center;
+  justify-center items-center top-0 left-0 z-50;
 
   & > div {
     @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 

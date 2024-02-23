@@ -1,15 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa6";
 import adminFetchCourses from "@/services/api/adminFetchCourses";
 import AddCourseForm from "@/components/AddCourseForm";
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import adminDeleteCourse from "@/services/api/adminDeleteCourse";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [itemToDelete, setItemDelete] = useState(undefined);
 
   useEffect(() => {
     const fetchSections = async () => {
@@ -20,8 +24,24 @@ const ManageCourses = () => {
     fetchSections();
   }, []);
 
+  useEffect(() => {
+    if (!courses) return;
+    if (!searchParams.get("delete_course")) return setItemDelete(undefined);
+    const courseToDelete = courses.find(
+      (course) => course.courseID === searchParams.get("delete_course")
+    );
+
+    setItemDelete(
+      courseToDelete?.courseName ? courseToDelete?.courseName : undefined
+    );
+  }, [courses, searchParams]);
+
   const handleAddCourseClick = () => {
-    router.push("/admin/courses?addNewCourse=true");
+    router.push("/admin/courses?add_course=true");
+  };
+
+  const handleDeleteCourseClick = (courseID) => {
+    router.push(`${pathname}?delete_course=${courseID}`);
   };
 
   const renderCourses = () => {
@@ -40,7 +60,7 @@ const ManageCourses = () => {
             <p
               className={`course-name`}
               onMouseOver={(event) =>
-                event.target.setAttribute("data-before", course.courseName)
+                event.target.setAttribute("hover-text", course.courseName)
               }
             >
               {course.courseName.length < 32
@@ -69,7 +89,7 @@ const ManageCourses = () => {
               <button>
                 <FaPen />
               </button>
-              <button>
+              <button onClick={() => handleDeleteCourseClick(course.courseID)}>
                 <FaTrashCan />
               </button>
             </div>
@@ -79,6 +99,17 @@ const ManageCourses = () => {
     );
   };
 
+  const deleteCourseAction = async () => {
+    const response = await adminDeleteCourse(searchParams.get("delete_course"));
+    if (!response.ok) return;
+    setCourses((prevState) =>
+      [...prevState].filter(
+        (course) => course.courseID !== searchParams.get("delete_course")
+      )
+    );
+    router.push(pathname);
+  };
+
   return (
     <section className="admin-courses-container">
       <div className="header">
@@ -86,8 +117,15 @@ const ManageCourses = () => {
         <button onClick={handleAddCourseClick}>Add new course</button>
       </div>
       {renderCourses()}
-      {searchParams.get("addNewCourse") && (
+      {searchParams.get("add_course") && (
         <AddCourseForm setCourses={setCourses} />
+      )}
+      {itemToDelete && (
+        <ConfirmDeleteModal
+          pathWhenModalIsClosed={pathname}
+          itemToDelete={itemToDelete}
+          confirmAction={deleteCourseAction}
+        />
       )}
     </section>
   );

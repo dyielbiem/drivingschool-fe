@@ -19,7 +19,7 @@ const ConfirmDeleteModal = ({
           <p>
             Are you sure to delete{" "}
             {itemToDelete ? (
-              <span>&quot;{itemToDelete}&quot; ?</span>
+              <span>&quot;{itemToDelete}&quot;?</span>
             ) : (
               "this item?"
             )}

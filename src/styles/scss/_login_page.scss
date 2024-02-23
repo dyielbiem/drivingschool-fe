@@ -33,11 +33,12 @@
   }
 
   button[type="submit"] {
-    @apply bg-custom-blue-base text-white text-lg font-bold 
-    py-3 rounded-lg mt-14;
-  }
+    @apply w-full bg-custom-blue-base text-xl font-bold 
+    text-white rounded-lg py-2.5 mt-8 
+    flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
-  button[disabled] {
-    @apply bg-custom-blue-dark cursor-wait;
+    svg {
+      @apply text-2xl animate-spin;
+    }
   }
 }
