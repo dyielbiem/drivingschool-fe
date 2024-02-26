@@ -14,6 +14,15 @@ export const useChapters = create((set) => ({
   },
   setNewChapter: (newChapter) => {
     set((state) => ({ chapters: [...state.chapters, newChapter] }));
+  },
+  setUpdatedChapter: (updatedChapter) => {
+    set((state) => ({
+      chapters: state?.chapters.map((chapter) => {
+        if (chapter.chapterID !== updatedChapter?.chapterID) return chapter;
+        chapter.chapterTitle = updatedChapter?.chapterTitle;
+        return chapter;
+      })
+    }));
   }
 }));
 
@@ -38,6 +47,16 @@ export const useSubChapters = create((set) => ({
   },
   setNewSubChapter: (newSubChapter) => {
     set((state) => ({ subChapters: [...state.subChapters, newSubChapter] }));
+  },
+  setUpdatedSubChapter: (updatedSubChapter) => {
+    set((state) => ({
+      supChapters: state?.subChapters.map((subChapter) => {
+        if (subChapter.subChapterID !== updatedSubChapter?.subChapterID)
+          return subChapter;
+        subChapter.subChapterTitle = updatedSubChapter?.subChapterTitle;
+        return subChapter;
+      })
+    }));
   }
 }));
 

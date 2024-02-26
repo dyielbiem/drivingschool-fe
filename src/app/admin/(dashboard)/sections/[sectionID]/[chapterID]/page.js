@@ -12,6 +12,9 @@ import { useChapterTestQuestions } from "@/state/store";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteSubChapter from "@/services/api/adminDeleteSubChapter";
+import EditTitleForm from "@/components/EditTitleForm";
+import handleChapterTitleUpdate from "@/actions/handleChapterTitleUpdate";
+import { useChapters } from "@/state/store";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
@@ -23,7 +26,9 @@ const ChapterID = ({ params }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [itemToDelete, setItemToDelete] = useState(undefined);
+  const { setUpdatedChapter } = useChapters();
 
+  // Fetch the current chapter
   useEffect(() => {
     const fetchChapter = async () => {
       const chapterResponse = await adminFetchChapterByID(params.chapterID);
@@ -35,6 +40,7 @@ const ChapterID = ({ params }) => {
     fetchChapter();
   }, [params.chapterID, setChapter, setSubChapters]);
 
+  // Validate for delete sub-chapter query in URL
   useEffect(() => {
     if (!subChapters) return;
     if (!searchParams.get("delete_sub_chapter"))
@@ -48,6 +54,13 @@ const ChapterID = ({ params }) => {
       subChapterToDelete ? subChapterToDelete.subChapterTitle : undefined
     );
   }, [searchParams, subChapters]);
+
+  // Update the title of chapter on side nav to reflect
+  // the change made by the user
+  useEffect(() => {
+    if (!chapter) return;
+    setUpdatedChapter(chapter);
+  }, [chapter, setUpdatedChapter]);
 
   const handleAddChapterClick = () => {
     router.push(pathname + "?add_sub_chapter=true");
@@ -72,8 +85,17 @@ const ChapterID = ({ params }) => {
     return response;
   };
 
+  const handleEditTitleClick = () => {
+    router.push(pathname + "?edit_content=true&edit_title=true");
+  };
+
   const renderChapter = () => {
-    if (!chapter) return <></>;
+    if (
+      !chapter ||
+      (searchParams.get("edit_content") === "true" &&
+        searchParams.get("edit_title") === "true")
+    )
+      return <></>;
     return (
       <div className="header">
         <h1>
@@ -81,9 +103,39 @@ const ChapterID = ({ params }) => {
           {chapter.chapterTitle}
         </h1>
         {searchParams.get("edit_content") !== "true" && (
-          <button onClick={handleEditContentClick}>Edit content</button>
+          <button onClick={handleEditContentClick} className="edit-content-btn">
+            Edit content
+          </button>
+        )}
+        {searchParams.get("edit_content") === "true" && (
+          <button className="edit-title-btn" onClick={handleEditTitleClick}>
+            <FaPen />
+          </button>
         )}
       </div>
+    );
+  };
+
+  const handleChapterTitleUpdateWithChapter = handleChapterTitleUpdate.bind(
+    null,
+    chapter
+  );
+
+  const renderEditTitleInput = () => {
+    if (
+      !chapter ||
+      searchParams.get("edit_content") !== "true" ||
+      searchParams.get("edit_title") !== "true"
+    )
+      return <></>;
+
+    return (
+      <EditTitleForm
+        pathWhenCancelled={`${pathname}/?edit_content=true`}
+        prevTitle={chapter.chapterTitle}
+        setItemToEdit={setChapter}
+        updateAction={handleChapterTitleUpdateWithChapter}
+      />
     );
   };
 
@@ -190,6 +242,7 @@ const ChapterID = ({ params }) => {
     <>
       <section className="admin-chapter-section">
         {renderChapter()}
+        {renderEditTitleInput()}
         {renderChapterContent()}
         {renderRichTextEditor()}
         {renderSubChapters()}

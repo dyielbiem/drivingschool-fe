@@ -3,7 +3,7 @@ import adminUpdateSectionTitle from "@/services/api/adminUpdateSectionTitle";
 
 const handleSectionTitleUpdate = async (prevSection, prevState, formData) => {
   const formDataObject = {
-    sectionTitle: formData.get("section-title")
+    sectionTitle: formData.get("new-title")
   };
 
   if (prevSection?.sectionTitle === String(formDataObject?.sectionTitle).trim())

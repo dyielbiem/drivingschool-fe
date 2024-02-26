@@ -3,7 +3,7 @@
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   & > .header {
-    @apply flex max-w-4xl w-full items-center max-h-14 min-h-14;
+    @apply flex max-w-4xl w-full items-center min-h-14;
 
     h1 {
       @apply text-3xl font-extrabold max-w-4xl w-full flex-grow;
@@ -17,7 +17,7 @@
 
   & > .edit-title-form {
     @apply flex max-w-4xl w-full items-center bg-white p-2
-    rounded-md max-h-14 min-h-14;
+    rounded-md min-h-14;
 
     input {
       @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;

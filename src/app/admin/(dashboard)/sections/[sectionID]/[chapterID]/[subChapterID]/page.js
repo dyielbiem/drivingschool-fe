@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import RichTextEditor from "@/components/RichTextEditor";
 import adminUpdateSubChapterContent from "@/services/api/adminUpdateSubChapterContent";
+import EditTitleForm from "@/components/EditTitleForm";
+import { FaPen } from "react-icons/fa6";
+import handleSubChapterTitleUpdate from "@/actions/handleSubChapterTitleUpdate";
+import { useSubChapters } from "@/state/store";
 
 const SubChapterID = ({ params }) => {
   const { chapterIndex } = useChapterIndex();
@@ -14,7 +18,9 @@ const SubChapterID = ({ params }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const { setUpdatedSubChapter } = useSubChapters();
 
+  // Fetch the current sub-chapter
   useEffect(() => {
     const fetchSubChapter = async () => {
       const response = await adminFetchSubChapterByID(params.subChapterID);
@@ -27,12 +33,29 @@ const SubChapterID = ({ params }) => {
     fetchSubChapter();
   }, [params.subChapterID]);
 
+  // Update the title of sub-chapter on side nav to reflect
+  // the change made by the user
+  useEffect(() => {
+    if (!subChapter) return;
+    setUpdatedSubChapter(subChapter);
+  }, [setUpdatedSubChapter, subChapter]);
+
   const handleEditContentClick = () => {
     router.push(pathname + "?edit_content=true");
   };
 
+  const handleEditTitleClick = () => {
+    router.push(pathname + "?edit_content=true&edit_title=true");
+  };
+
   const renderSubChapter = () => {
-    if (!subChapter || subChapterIndex === undefined) return <></>;
+    if (
+      !subChapter ||
+      subChapterIndex === undefined ||
+      (searchParams.get("edit_content") === "true" &&
+        searchParams.get("edit_title") === "true")
+    )
+      return <></>;
     return (
       <div className="header">
         <h1>
@@ -40,9 +63,37 @@ const SubChapterID = ({ params }) => {
           {subChapter.subChapterTitle}
         </h1>
         {searchParams.get("edit_content") !== "true" && (
-          <button onClick={handleEditContentClick}>Edit Content</button>
+          <button onClick={handleEditContentClick} className="edit-content-btn">
+            Edit Content
+          </button>
+        )}
+        {searchParams.get("edit_content") === "true" && (
+          <button className="edit-title-btn" onClick={handleEditTitleClick}>
+            <FaPen />
+          </button>
         )}
       </div>
+    );
+  };
+
+  const handleSubChapterTitleUpdateWithSubChapter =
+    handleSubChapterTitleUpdate.bind(null, subChapter);
+
+  const renderEditTitleInput = () => {
+    if (
+      !subChapter ||
+      searchParams.get("edit_content") !== "true" ||
+      searchParams.get("edit_title") !== "true"
+    )
+      return <></>;
+
+    return (
+      <EditTitleForm
+        pathWhenCancelled={`${pathname}/?edit_content=true`}
+        prevTitle={subChapter.subChapterTitle}
+        setItemToEdit={setSubChapter}
+        updateAction={handleSubChapterTitleUpdateWithSubChapter}
+      />
     );
   };
 
@@ -90,6 +141,7 @@ const SubChapterID = ({ params }) => {
   return (
     <section className="admin-sub-chapter-section">
       {renderSubChapter()}
+      {renderEditTitleInput()}
       {renderRichTextEditor()}
       {renderSubChapterContent()}
     </section>

@@ -2,16 +2,48 @@
   @apply flex flex-col flex-grow max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28;
 
-  .header {
-    @apply flex justify-between items-center max-w-4xl w-full;
+  & > .header {
+    @apply flex justify-between items-center max-w-4xl w-full  min-h-14;
 
     h1 {
       @apply text-3xl font-extrabold;
     }
 
-    button {
+    .edit-content-btn {
       @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
+    }
+
+    .edit-title-btn {
+      @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
+      rounded-full p-3;
+    }
+  }
+
+  & > .edit-title-form {
+    @apply flex max-w-4xl w-full items-center bg-white p-2
+    rounded-md min-h-14;
+
+    input {
+      @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+    }
+
+    .btn-container {
+      @apply flex gap-2;
+
+      button {
+        @apply text-lg px-3 py-1.5 font-bold;
+      }
+
+      button[type="submit"] {
+        @apply bg-custom-blue-base 
+        rounded-md text-white;
+      }
+
+      button[type="button"] {
+        @apply text-black
+        rounded-md bg-custom-white-darker;
+      }
     }
   }
 

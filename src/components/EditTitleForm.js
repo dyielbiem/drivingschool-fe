@@ -43,8 +43,8 @@ const EditTitleForm = ({
         type="text"
         required
         defaultValue={prevTitle}
-        name="section-title"
-        id="section-title"
+        name="new-title"
+        id="new-title"
       />
       <div className="btn-container">
         <button type="submit">Update</button>
