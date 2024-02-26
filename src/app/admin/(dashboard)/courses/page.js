@@ -7,13 +7,15 @@ import adminFetchCourses from "@/services/api/adminFetchCourses";
 import AddCourseForm from "@/components/AddCourseForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteCourse from "@/services/api/adminDeleteCourse";
+import EditCourseForm from "@/components/EditCourseForm";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [itemToDelete, setItemDelete] = useState(undefined);
+  const [itemToDelete, setItemToDelete] = useState(undefined);
+  const [itemToEdit, setItemToEdit] = useState(undefined);
 
   useEffect(() => {
     const fetchSections = async () => {
@@ -26,18 +28,32 @@ const ManageCourses = () => {
 
   useEffect(() => {
     if (!courses) return;
-    if (!searchParams.get("delete_course")) return setItemDelete(undefined);
+    if (!searchParams.get("delete_course")) return setItemToDelete(undefined);
     const courseToDelete = courses.find(
       (course) => course.courseID === searchParams.get("delete_course")
     );
 
-    setItemDelete(
+    setItemToDelete(
       courseToDelete?.courseName ? courseToDelete?.courseName : undefined
     );
   }, [courses, searchParams]);
 
+  useEffect(() => {
+    if (!courses) return;
+    if (!searchParams.get("edit_course")) return setItemToEdit(undefined);
+    const courseToEdit = courses.find(
+      (course) => course.courseID === searchParams.get("edit_course")
+    );
+
+    setItemToEdit(courseToEdit || undefined);
+  }, [courses, searchParams]);
+
   const handleAddCourseClick = () => {
     router.push("/admin/courses?add_course=true");
+  };
+
+  const handleEditCourseClick = (courseID) => {
+    router.push(`${pathname}?edit_course=${courseID}`);
   };
 
   const handleDeleteCourseClick = (courseID) => {
@@ -68,7 +84,12 @@ const ManageCourses = () => {
                 : course.courseName.slice(0, 32) + "..."}
             </p>
             <p>$ {parseFloat(course.coursePrice).toFixed(2)}</p>
-            <p>
+            <p
+              className={`course-desc`}
+              onMouseOver={(event) =>
+                event.target.setAttribute("hover-text", course.courseName)
+              }
+            >
               {course.courseDesc
                 ? course.courseDesc.length < 32
                   ? course.courseDesc
@@ -86,7 +107,7 @@ const ManageCourses = () => {
               {course.isActive ? "ACTIVE" : "INACTIVE"}
             </p>
             <div>
-              <button>
+              <button onClick={() => handleEditCourseClick(course.courseID)}>
                 <FaPen />
               </button>
               <button onClick={() => handleDeleteCourseClick(course.courseID)}>
@@ -126,6 +147,9 @@ const ManageCourses = () => {
           itemToDelete={itemToDelete}
           confirmAction={deleteCourseAction}
         />
+      )}
+      {itemToEdit && (
+        <EditCourseForm prevCourse={itemToEdit} setCourses={setCourses} />
       )}
     </section>
   );

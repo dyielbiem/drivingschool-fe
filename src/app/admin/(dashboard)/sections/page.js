@@ -28,7 +28,7 @@ const AdminSections = () => {
   };
 
   const handleCreateSectionClick = () => {
-    router.push(`/admin/sections?createNewSection=true`);
+    router.push(`/admin/sections?create_section=true`);
   };
 
   const renderSection = () => {
@@ -67,7 +67,7 @@ const AdminSections = () => {
         </button>
       </div>
       {renderSection()}
-      {searchParams.get("createNewSection") && (
+      {searchParams.get("create_section") && (
         <CreateSectionForm setSections={setSections} />
       )}
     </section>

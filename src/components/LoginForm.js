@@ -11,14 +11,14 @@ const LoginForm = ({ role, formTitle, redirectPath }) => {
     message: ""
   };
 
-  const handleSubmitWithRole = handleLoginSubmit.bind(role, role);
-  const handleSubmitWithRoleAndPath = handleSubmitWithRole.bind(
-    redirectPath,
+  const handleSubmitWithBindings = handleLoginSubmit.bind(
+    null,
+    role,
     redirectPath
   );
 
   const [formState, formAction] = useFormState(
-    handleSubmitWithRoleAndPath,
+    handleSubmitWithBindings,
     initialState
   );
 

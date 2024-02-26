@@ -292,8 +292,36 @@ main {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
-.admin-manage-section h1 {
-  @apply text-3xl font-extrabold max-w-4xl w-full;
+.admin-manage-section > .header {
+  @apply flex max-w-4xl w-full items-center max-h-14 min-h-14;
+}
+.admin-manage-section > .header h1 {
+  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow;
+}
+.admin-manage-section > .header button {
+  @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
+      rounded-full p-3;
+}
+.admin-manage-section > .edit-title-form {
+  @apply flex max-w-4xl w-full items-center bg-white p-2
+    rounded-md max-h-14 min-h-14;
+}
+.admin-manage-section > .edit-title-form input {
+  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+}
+.admin-manage-section > .edit-title-form .btn-container {
+  @apply flex gap-2;
+}
+.admin-manage-section > .edit-title-form .btn-container button {
+  @apply text-lg px-3 py-1.5 font-bold;
+}
+.admin-manage-section > .edit-title-form .btn-container button[type=submit] {
+  @apply bg-custom-blue-base 
+        rounded-md text-white;
+}
+.admin-manage-section > .edit-title-form .btn-container button[type=button] {
+  @apply text-black
+        rounded-md bg-custom-white-darker;
 }
 .admin-manage-section .chapters-container {
   @apply flex flex-col w-full gap-4 max-w-4xl;
@@ -698,7 +726,8 @@ main {
 .admin-courses-container .course-table li:nth-child(n+2) p {
   @apply text-center;
 }
-.admin-courses-container .course-table li:nth-child(n+2) .course-name {
+.admin-courses-container .course-table li:nth-child(n+2) .course-name,
+.admin-courses-container .course-table li:nth-child(n+2) .course-desc {
   @apply relative before:hidden hover:before:block 
         before:content-[attr(hover-text)]
         before:absolute before:bg-custom-white-dark 
@@ -773,6 +802,57 @@ main {
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .add-course-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+
+.edit-course-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044] z-30;
+}
+.edit-course-form form {
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md relative max-h-[95%] overflow-y-auto;
+}
+.edit-course-form form .close-btn {
+  @apply absolute w-fit right-6 top-6;
+}
+.edit-course-form form .close-btn svg {
+  @apply text-3xl;
+}
+.edit-course-form form h3 {
+  @apply text-2xl font-extrabold;
+}
+.edit-course-form form .course-name {
+  @apply text-lg mb-4;
+}
+.edit-course-form form .course-name span {
+  @apply font-bold;
+}
+.edit-course-form form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.edit-course-form form label span {
+  @apply text-custom-red font-bold;
+}
+.edit-course-form form input,
+.edit-course-form form select,
+.edit-course-form form textarea {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+}
+.edit-course-form form textarea {
+  @apply p-2 h-20 resize-none;
+}
+.edit-course-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.edit-course-form form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.edit-course-form form button[type=submit] svg {
   @apply text-2xl animate-spin;
 }
 

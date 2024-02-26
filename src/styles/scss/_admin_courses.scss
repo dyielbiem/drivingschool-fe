@@ -38,7 +38,8 @@
         @apply text-center;
       }
 
-      .course-name {
+      .course-name,
+      .course-desc {
         @apply relative before:hidden hover:before:block 
         before:content-[attr(hover-text)]
         before:absolute before:bg-custom-white-dark 

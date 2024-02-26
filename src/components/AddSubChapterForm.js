@@ -13,7 +13,7 @@ const AddSubChapterForm = ({ chapterID }) => {
   const { setNewSubChapter } = useSubChapters();
 
   const handleSubChapterSubmitWithSection = handleSubChapterSubmit.bind(
-    chapterID,
+    null,
     chapterID
   );
 

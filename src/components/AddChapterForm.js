@@ -10,7 +10,7 @@ const AddChapterForm = ({ sectionID, setNewChapter }) => {
   const router = useRouter();
 
   const handleChapterSubmitWithSection = handleChapterSubmit.bind(
-    sectionID,
+    null,
     sectionID
   );
 

@@ -21,7 +21,7 @@ const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
 
   const submitActionWithSection = submitAction.bind(parentID, parentID);
   const submitActionWithSectionAndChoices = submitActionWithSection.bind(
-    otherChoices,
+    null,
     otherChoices
   );
 

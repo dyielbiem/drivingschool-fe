@@ -16,7 +16,7 @@ const EditCouponForm = ({ prevCoupon, setCoupons }) => {
   };
 
   const handleCouponUpdateWithPrevCoupon = handleCouponUpdate.bind(
-    prevCoupon,
+    null,
     prevCoupon
   );
 

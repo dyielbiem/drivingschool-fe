@@ -7,6 +7,8 @@ import { FaTrashCan, FaPen } from "react-icons/fa6";
 import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteChapter from "@/services/api/adminDeleteChapter";
+import EditTitleForm from "@/components/EditTitleForm";
+import handleSectionTitleUpdate from "@/actions/handleSectionTitleUpdate";
 
 const SectionID = () => {
   const { chapters, setChapters } = useChapters();
@@ -38,12 +40,21 @@ const SectionID = () => {
     setItemToDelete(chapterToDelete ? chapterToDelete.chapterTitle : undefined);
   }, [chapters, searchParams]);
 
+  const handleEditSectionTitle = () => {
+    router.push(`${pathname}?edit_title=true`);
+  };
+
   const renderSection = () => {
-    if (!section) return <></>;
+    if (!section || searchParams.get("edit_title") === "true") return <></>;
     return (
-      <h1>
-        {section.sectionTitle} {section.isActive ? "(Latest Version)" : ""}
-      </h1>
+      <div className="header">
+        <h1>
+          {section.sectionTitle} {section.isActive ? "(Latest Version)" : ""}
+        </h1>
+        <button onClick={handleEditSectionTitle}>
+          <FaPen />
+        </button>
+      </div>
     );
   };
 
@@ -107,10 +118,23 @@ const SectionID = () => {
     router.push(pathname);
   };
 
+  const handleSectionTitleUpdateWithSection = handleSectionTitleUpdate.bind(
+    null,
+    section
+  );
+
   return (
     <>
       <section className="admin-manage-section">
         {renderSection()}
+        {searchParams.get("edit_title") === "true" && (
+          <EditTitleForm
+            prevTitle={section?.sectionTitle}
+            pathWhenCancelled={pathname}
+            updateAction={handleSectionTitleUpdateWithSection}
+            setItemToEdit={setSection}
+          />
+        )}
         {renderChapters()}
       </section>
       {itemToDelete && (
