@@ -536,16 +536,23 @@ main {
 
 .admin-students-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10;
+  bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 }
 .admin-students-container .header {
-  @apply flex justify-between items-center mb-12;
+  @apply flex justify-between items-center mb-12 max-w-5xl w-full;
 }
 .admin-students-container .header h1 {
   @apply font-extrabold text-3xl;
 }
+.admin-students-container .header > button {
+  @apply bg-custom-blue-base text-white px-4 py-2.5 
+      rounded-lg text-lg font-bold;
+}
+.admin-students-container .no-course {
+  @apply text-lg;
+}
 .admin-students-container .student-table {
-  @apply grid grid-cols-[5fr_1fr] gap-3;
+  @apply grid grid-cols-[5fr_1fr] gap-3 max-w-5xl;
 }
 .admin-students-container .student-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
@@ -567,6 +574,65 @@ main {
 }
 .admin-students-container .student-table li:nth-child(n+2) p:nth-child(2) {
   @apply font-bold text-lg;
+}
+
+.add-student-form {
+  @apply grid grid-cols-2 w-full max-w-5xl gap-4;
+}
+.add-student-form h2 {
+  @apply text-2xl font-extrabold mb-4 col-span-full;
+}
+.add-student-form .fields {
+  @apply w-full flex flex-col gap-2;
+}
+.add-student-form .fields label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.add-student-form .fields label span {
+  @apply text-custom-red font-bold;
+}
+.add-student-form .fields input {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base w-full;
+}
+.add-student-form .fields .course-select {
+  @apply w-full relative;
+}
+.add-student-form .fields .course-select:before {
+  @apply absolute bg-white rounded-md p-2 cursor-pointer border-[1px]
+        border-custom-gray-base content-[attr(course-name)] h-full w-full
+        overflow-hidden pointer-events-none text-ellipsis whitespace-nowrap pr-8;
+}
+.add-student-form .fields .course-select ul {
+  @apply absolute top-full left-0 bg-white rounded-md 
+        border-custom-gray-dark border-[1px] max-h-52
+        overflow-y-auto p-1 flex flex-col gap-1 translate-y-0.5;
+}
+.add-student-form .fields .course-select ul li {
+  @apply hover:bg-custom-white-darker p-1.5 cursor-pointer rounded;
+}
+.add-student-form .student-address {
+  @apply col-span-full;
+}
+.add-student-form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+}
+.add-student-form .btn-container {
+  @apply row-start-10 col-start-2 flex gap-4 w-full justify-end
+    items-center mt-4;
+}
+.add-student-form .btn-container button[type=submit] {
+  @apply w-40 bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.add-student-form .btn-container button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+.add-student-form .btn-container button[type=button] {
+  @apply w-40 bg-custom-gray-base text-xl font-bold 
+      text-black rounded-lg py-2.5 h-12;
 }
 
 .admin-students-layout {

@@ -1,0 +1,73 @@
+.add-student-form {
+  @apply grid grid-cols-2 w-full max-w-5xl gap-4;
+
+  h2 {
+    @apply text-2xl font-extrabold mb-4 col-span-full;
+  }
+
+  .fields {
+    @apply w-full flex flex-col gap-2;
+
+    label {
+      @apply mt-2 text-sm font-bold indent-1;
+
+      span {
+        @apply text-custom-red font-bold;
+      }
+    }
+
+    input {
+      @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base w-full;
+    }
+
+    .course-select {
+      @apply w-full relative;
+
+      &:before {
+        @apply absolute bg-white rounded-md p-2 cursor-pointer border-[1px]
+        border-custom-gray-base content-[attr(course-name)] h-full w-full
+        overflow-hidden pointer-events-none text-ellipsis whitespace-nowrap pr-8;
+      }
+
+      ul {
+        @apply absolute top-full left-0 bg-white rounded-md 
+        border-custom-gray-dark border-[1px] max-h-52
+        overflow-y-auto p-1 flex flex-col gap-1 translate-y-0.5;
+
+        li {
+          @apply hover:bg-custom-white-darker p-1.5 cursor-pointer rounded;
+        }
+      }
+    }
+  }
+
+  .student-address {
+    @apply col-span-full;
+  }
+
+  .error-message {
+    @apply text-red-700 font-bold p-2.5 mt-4
+    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+  }
+
+  .btn-container {
+    @apply row-start-10 col-start-2 flex gap-4 w-full justify-end
+    items-center mt-4;
+
+    button[type="submit"] {
+      @apply w-40 bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+      svg {
+        @apply text-2xl animate-spin;
+      }
+    }
+
+    button[type="button"] {
+      @apply w-40 bg-custom-gray-base text-xl font-bold 
+      text-black rounded-lg py-2.5 h-12;
+    }
+  }
+}

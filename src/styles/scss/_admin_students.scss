@@ -1,17 +1,26 @@
 .admin-students-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10;
+  bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 
   .header {
-    @apply flex justify-between items-center mb-12;
+    @apply flex justify-between items-center mb-12 max-w-5xl w-full;
 
     h1 {
       @apply font-extrabold text-3xl;
     }
+
+    & > button {
+      @apply bg-custom-blue-base text-white px-4 py-2.5 
+      rounded-lg text-lg font-bold;
+    }
+  }
+
+  .no-course {
+    @apply text-lg;
   }
 
   .student-table {
-    @apply grid grid-cols-[5fr_1fr] gap-3;
+    @apply grid grid-cols-[5fr_1fr] gap-3 max-w-5xl;
 
     .table-header {
       @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
