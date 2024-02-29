@@ -2,7 +2,7 @@ import FormButton from "./FormButton";
 import { useFormState } from "react-dom";
 import FormErrorMessage from "./FormErrorMessage";
 import handleStudentSubmit from "@/actions/handleStudentSubmit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const AddStudentForm = ({ courses, setStudentSections }) => {
@@ -28,7 +28,8 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     setIsCourseSelectOnFocus(false);
   };
 
-  if (formState?.ok) {
+  useEffect(() => {
+    if (!formState?.ok) return;
     setStudentSections((state) =>
       state.map((item) => {
         if (!item?.isActive) return item;
@@ -36,7 +37,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       })
     );
     router.push(pathname);
-  }
+  }, [formState?.ok, pathname, router, setStudentSections]);
 
   const renderCourseSelect = () => {
     return (
@@ -72,6 +73,10 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         )}
       </div>
     );
+  };
+
+  const handleCancelClick = () => {
+    router.push(pathname);
   };
 
   return (
@@ -205,7 +210,9 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       )}
       <div className="btn-container">
         <FormButton>Submit</FormButton>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={handleCancelClick}>
+          Cancel
+        </button>
       </div>
     </form>
   );
