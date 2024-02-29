@@ -6,9 +6,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
 import { RiCoupon3Fill } from "react-icons/ri";
-import { HiCreditCard } from "react-icons/hi2";
-import { FaBookOpen } from "react-icons/fa";
+import { HiCreditCard, HiBookOpen } from "react-icons/hi2";
 import { BiLogOut } from "react-icons/bi";
+import { RiSettings4Fill } from "react-icons/ri";
 
 const AdminSideNav = () => {
   const pathName = usePathname();
@@ -35,7 +35,12 @@ const AdminSideNav = () => {
     {
       title: "Manage Courses",
       path: "/admin/courses",
-      icon: FaBookOpen
+      icon: HiBookOpen
+    },
+    {
+      title: "Settings",
+      path: "/admin/settings",
+      icon: RiSettings4Fill
     }
   ];
 

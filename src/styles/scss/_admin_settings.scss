@@ -1,0 +1,8 @@
+.admin-settings-section {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen
+  bg-custom-white-dark overflow-x-hidden pb-10 items-center;
+
+  h1 {
+    @apply font-extrabold text-3xl mb-12 w-full;
+  }
+}

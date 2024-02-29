@@ -1,0 +1,77 @@
+.admin-settings-form {
+  @apply flex flex-col rounded-lg gap-2 bg-inherit
+    w-full z-10 relative mb-12;
+
+  & > * {
+    @apply max-w-md;
+  }
+
+  h2 {
+    @apply text-2xl font-extrabold mb-2;
+  }
+
+  label {
+    @apply mt-2 text-sm font-bold indent-1;
+
+    span {
+      @apply text-custom-red font-bold;
+    }
+  }
+
+  input {
+    @apply h-10;
+  }
+
+  textarea {
+    &:nth-of-type(1) {
+      @apply min-h-16 h-16;
+    }
+
+    &:nth-of-type(2) {
+      @apply min-h-28 h-28;
+    }
+  }
+
+  textarea,
+  input {
+    @apply bg-white rounded-md p-2 cursor-pointer border-[1px]
+    border-custom-gray-base ml-0.5;
+
+    &:disabled {
+      @apply cursor-not-allowed bg-custom-white-base border-custom-white-darker;
+    }
+  }
+
+  .error-message {
+    @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+  }
+
+  .btn-container {
+    @apply flex w-full mt-4 gap-2 justify-end;
+
+    & > button {
+      @apply w-28 rounded-lg h-11 text-lg font-bold;
+    }
+
+    .edit-btn {
+      @apply bg-custom-blue-base  
+      text-white;
+    }
+
+    button[type="submit"] {
+      @apply bg-custom-blue-base  
+      text-white disabled:cursor-not-allowed
+      flex items-center justify-center;
+
+      svg {
+        @apply text-2xl animate-spin;
+      }
+    }
+
+    .cancel-btn {
+      @apply bg-custom-gray-base 
+      text-black;
+    }
+  }
+}

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "custom-font": ["DM Sans", "Arial", "Helvetica", "sans-serif"]
+        "custom-font": ["Inter", "DM Sans", "Arial", "Helvetica", "sans-serif"]
       },
       colors: {
         "custom-blue-darker": "#213D58",

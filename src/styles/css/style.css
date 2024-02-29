@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -1138,6 +1138,75 @@ main {
 }
 .admin-billing-container .billing-table button svg {
   @apply text-xl text-custom-blue-light;
+}
+
+.admin-settings-section {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen
+  bg-custom-white-dark overflow-x-hidden pb-10 items-center;
+}
+.admin-settings-section h1 {
+  @apply font-extrabold text-3xl mb-12 w-full;
+}
+
+.admin-settings-form {
+  @apply flex flex-col rounded-lg gap-2 bg-inherit
+    w-full z-10 relative mb-12;
+}
+.admin-settings-form > * {
+  @apply max-w-md;
+}
+.admin-settings-form h2 {
+  @apply text-2xl font-extrabold mb-2;
+}
+.admin-settings-form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.admin-settings-form label span {
+  @apply text-custom-red font-bold;
+}
+.admin-settings-form input {
+  @apply h-10;
+}
+.admin-settings-form textarea:nth-of-type(1) {
+  @apply min-h-16 h-16;
+}
+.admin-settings-form textarea:nth-of-type(2) {
+  @apply min-h-28 h-28;
+}
+.admin-settings-form textarea,
+.admin-settings-form input {
+  @apply bg-white rounded-md p-2 cursor-pointer border-[1px]
+    border-custom-gray-base ml-0.5;
+}
+.admin-settings-form textarea:disabled,
+.admin-settings-form input:disabled {
+  @apply cursor-not-allowed bg-custom-white-base border-custom-white-darker;
+}
+.admin-settings-form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.admin-settings-form .btn-container {
+  @apply flex w-full mt-4 gap-2 justify-end;
+}
+.admin-settings-form .btn-container > button {
+  @apply w-28 rounded-lg h-11 text-lg font-bold;
+}
+.admin-settings-form .btn-container .edit-btn {
+  @apply bg-custom-blue-base  
+      text-white;
+}
+.admin-settings-form .btn-container button[type=submit] {
+  @apply bg-custom-blue-base  
+      text-white disabled:cursor-not-allowed
+      flex items-center justify-center;
+}
+.admin-settings-form .btn-container button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+.admin-settings-form .btn-container .cancel-btn {
+  @apply bg-custom-gray-base 
+      text-black;
 }
 
 .rich-text-editor {
