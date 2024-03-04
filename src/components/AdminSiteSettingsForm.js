@@ -1,8 +1,53 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
+import adminFetchSiteSettings from "@/services/api/adminFetchSiteSettings";
+import { useFormState } from "react-dom";
+import handleSiteSettingsUpdate from "@/actions/handleSiteSettingsUpdate";
+
 const AdminSiteSettingsForm = () => {
   const [isEditActive, setIsEditActive] = useState(false);
+  const [defaultValue, setDefaultValue] = useState(undefined);
+  const formRef = useRef(undefined);
+
+  useEffect(() => {
+    const fetchSiteSettings = async () => {
+      const response = await adminFetchSiteSettings();
+      if (!response.ok) return;
+      setDefaultValue(response.json);
+    };
+
+    fetchSiteSettings();
+  }, []);
+
+  const initialState = {
+    message: undefined,
+    updatedSiteSettings: undefined
+  };
+
+  const initialAction = handleSiteSettingsUpdate.bind(null, defaultValue);
+  const [formState, formAction] = useFormState(initialAction, initialState);
+
+  // Update the input fields after successful site settings update
+  useEffect(() => {
+    if (!formState?.updatedSiteSettings) return;
+    setDefaultValue((prevState) => {
+      return {
+        ...prevState,
+        noOfRows: formState?.updatedSiteSettings.noOfRows || "",
+        email: formState?.updatedSiteSettings.email
+      };
+    });
+    setIsEditActive(false);
+  }, [formState?.updatedSiteSettings]);
+
+  const handleCancelClick = () => {
+    if (!formRef?.current) return;
+    formRef.current.reset();
+    formRef.current.requestSubmit();
+    setIsEditActive(false);
+  };
 
   const renderButtons = () => {
     return (
@@ -22,7 +67,7 @@ const AdminSiteSettingsForm = () => {
             <button
               type="button"
               className="cancel-btn"
-              onClick={() => setIsEditActive(false)}
+              onClick={handleCancelClick}
             >
               Cancel
             </button>
@@ -32,8 +77,10 @@ const AdminSiteSettingsForm = () => {
     );
   };
 
+  if (!defaultValue) return null;
+
   return (
-    <form className="admin-settings-form">
+    <form className="admin-settings-form" ref={formRef} action={formAction}>
       <h2>Site Settings</h2>
       <label htmlFor="admin-email-address">
         Admin Email Address <span>*</span>
@@ -44,6 +91,7 @@ const AdminSiteSettingsForm = () => {
         name="admin-email-address"
         required
         disabled={!isEditActive}
+        defaultValue={defaultValue?.email || ""}
       />
       <label htmlFor="no-of-rows">No. of Rows</label>
       <input
@@ -53,7 +101,11 @@ const AdminSiteSettingsForm = () => {
         min={0}
         step={1}
         disabled={!isEditActive}
+        defaultValue={defaultValue?.noOfRows || ""}
       />
+      {formState?.message && (
+        <FormErrorMessage>{formState?.message}</FormErrorMessage>
+      )}
       {renderButtons()}
     </form>
   );
