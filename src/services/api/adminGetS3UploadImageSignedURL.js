@@ -1,7 +1,7 @@
 "use server";
 import { adminRefreshAccessToken } from "./refreshAccessToken";
 
-const adminGetS3PreSignedURL = async () => {
+const adminGetS3UploadImageSignedURL = async () => {
   try {
     const fetchMethod = async (accessToken) => {
       const response = await fetch(
@@ -24,4 +24,4 @@ const adminGetS3PreSignedURL = async () => {
   }
 };
 
-export default adminGetS3PreSignedURL;
+export default adminGetS3UploadImageSignedURL;

@@ -1,6 +1,6 @@
 "use server";
 
-const adminS3PreSignedURLUploadImage = async (preSignedURL, formData) => {
+const adminPutS3Image = async (preSignedURL, formData) => {
   try {
     const image = formData.get("image");
     const response = await fetch(preSignedURL, {
@@ -18,4 +18,4 @@ const adminS3PreSignedURLUploadImage = async (preSignedURL, formData) => {
   }
 };
 
-export default adminS3PreSignedURLUploadImage;
+export default adminPutS3Image;

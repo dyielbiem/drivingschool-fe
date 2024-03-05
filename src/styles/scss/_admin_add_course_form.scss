@@ -4,7 +4,7 @@
 
   form {
     @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-lg z-10 relative max-h-[95%] overflow-y-auto;
+    max-w-xl z-10 relative max-h-[90%] overflow-y-auto;
 
     .close-btn {
       @apply absolute w-fit right-6 top-6;
@@ -26,6 +26,15 @@
       }
     }
 
+    .upload-img-box {
+      @apply flex flex-col cursor-pointer text-base items-center py-8 px-3 rounded-md
+      bg-custom-white-dark border-[1px] border-custom-gray-base m-0;
+
+      span {
+        @apply text-black font-bold text-3xl;
+      }
+    }
+
     input,
     select,
     textarea {
@@ -43,6 +52,19 @@
 
     select {
       @apply cursor-pointer;
+    }
+
+    .img-to-upload-container {
+      @apply w-full relative;
+
+      & > button {
+        @apply absolute top-0 right-0 text-3xl translate-x-1/2
+        -translate-y-1/2 bg-white rounded-full;
+      }
+
+      & > img {
+        @apply object-contain max-h-64;
+      }
     }
 
     .error-message {

@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { BiSolidCloudUpload } from "react-icons/bi";
 import adminFetchAllUploadedImageKey from "@/services/api/adminFetchAllUploadedImageKey";
 import Image from "next/image";
-import adminGetS3PreSignedURL from "@/services/api/adminGetS3PreSignedURL";
-import adminS3PreSignedURLUploadImage from "@/services/api/adminS3PreSignedURLUploadImage";
+import adminGetS3UploadImageSignedURL from "@/services/api/adminGetS3UploadImageSignedURL";
+import adminPutS3Image from "@/services/api/adminPutS3Image";
 
 const ImageGalleryModal = ({ addImage }) => {
   const router = useRouter();
@@ -82,11 +82,11 @@ const ImageGalleryModal = ({ addImage }) => {
 
   const handleUploadClick = async () => {
     if (!imageToUpload || !String(imageToUpload.type).includes("image")) return;
-    const preSignedResponse = await adminGetS3PreSignedURL();
+    const preSignedResponse = await adminGetS3UploadImageSignedURL();
     if (!preSignedResponse.ok) return;
     const formData = new FormData();
     formData.append("image", imageToUpload);
-    const isUploadSuccessful = await adminS3PreSignedURLUploadImage(
+    const isUploadSuccessful = await adminPutS3Image(
       preSignedResponse.json.preSignedURL,
       formData
     );
@@ -117,7 +117,7 @@ const ImageGalleryModal = ({ addImage }) => {
           accept="image/*"
           className="hidden"
           onChange={(event) => setImageToUpload(event.target.files[0])}
-        ></input>
+        />
       </>
     );
   };

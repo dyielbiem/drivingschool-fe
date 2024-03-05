@@ -4,10 +4,14 @@ import handleCourseSubmit from "@/actions/handleCourseSubmit";
 import { useFormState } from "react-dom";
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { BiSolidCloudUpload } from "react-icons/bi";
+import Image from "next/image";
 
 const AddCourseForm = ({ setCourses }) => {
   const router = useRouter();
+  const [imageToUpload, setImageToUpload] = useState(undefined);
+  const inputImageRef = useRef(undefined);
 
   const initialState = {
     message: "",
@@ -37,6 +41,42 @@ const AddCourseForm = ({ setCourses }) => {
 
   const closeForm = () => {
     router.push("/admin/courses");
+  };
+
+  const renderUploadImageBox = () => {
+    if (imageToUpload) return <></>;
+    return (
+      <label htmlFor="upload-img" className="upload-img-box">
+        <span>
+          <BiSolidCloudUpload />
+        </span>
+        Upload image from your system
+      </label>
+    );
+  };
+
+  const resetImageToUpload = () => {
+    if (!inputImageRef) return;
+    setImageToUpload(undefined);
+    inputImageRef.current.value = "";
+  };
+
+  const renderImageToUpload = () => {
+    if (!imageToUpload) return null;
+    return (
+      <div className="img-to-upload-container">
+        <button type="button" onClick={resetImageToUpload}>
+          <IoCloseCircleSharp />
+        </button>
+        <Image
+          alt="image-to-uplod"
+          src={URL.createObjectURL(imageToUpload)}
+          width={500}
+          height={500}
+          priority
+        />
+      </div>
+    );
   };
 
   return (
@@ -77,6 +117,20 @@ const AddCourseForm = ({ setCourses }) => {
           <option value="Online">Online</option>
           <option value="Non-online">Non-online</option>
         </select>
+        <label htmlFor="upload-img" className="upload-img">
+          Course Image <span>*</span>
+        </label>
+        {renderUploadImageBox()}
+        <input
+          ref={inputImageRef}
+          type="file"
+          id="upload-img"
+          name="upload-img"
+          accept="image/*"
+          className="hidden"
+          onChange={(event) => setImageToUpload(event.target.files[0])}
+        />
+        {renderImageToUpload()}
         {formState?.message && (
           <FormErrorMessage>{formState.message}</FormErrorMessage>
         )}
