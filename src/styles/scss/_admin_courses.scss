@@ -16,60 +16,90 @@
   }
 
   .course-table {
-    @apply flex-col gap-3 grid grid-cols-[2fr_1fr_2fr_repeat(3,1fr)];
+    @apply flex-col gap-6 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))];
 
-    .table-header {
-      @apply grid grid-cols-subgrid col-span-full 
-        text-lg font-extrabold gap-x-8
-        mb-4 px-6 justify-items-center;
+    li {
+      @apply flex flex-col justify-start relative
+      gap-x-8 hover:z-20 gap-2 overflow-hidden
+      bg-white rounded-lg cursor-pointer 
+      hover:shadow-md duration-200;
+
+      .status {
+        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit
+        absolute z-10 top-3 right-3 border-[1.5px];
+      }
+
+      .course-img-container {
+        @apply w-full min-h-44 max-h-44 relative hover:before:inline-block
+        hover:z-20;
+
+        &::before {
+          @apply content-[""] absolute left-0 top-0 
+          w-full h-full bg-[rgba(0,0,0,0.6)] hidden;
+        }
+
+        img {
+          @apply object-cover w-full h-full text-center leading-[11rem];
+        }
+
+        button {
+          @apply text-2xl absolute bottom-3.5 left-3.5 text-white hidden;
+        }
+
+        &:hover button {
+          @apply inline-block;
+        }
+      }
 
       p {
-        @apply text-center;
-      }
-    }
-
-    li:nth-child(n + 2) {
-      @apply grid grid-cols-subgrid col-span-full
-        gap-x-8 justify-items-center hover:z-20
-        bg-white px-6 py-5 rounded-md cursor-pointer 
-        hover:shadow-md duration-200;
-
-      p {
-        @apply text-center;
+        @apply text-sm;
       }
 
-      .course-name,
-      .course-desc {
-        @apply relative before:hidden hover:before:block 
-        before:content-[attr(hover-text)]
-        before:absolute before:bg-custom-white-dark 
-        before:top-1/2 before:-left-4 before:p-4 before:shadow-xl w-fit
-        before:rounded-md before:w-[200%] before:mb-16 
-        before:text-sm before:font-bold;
-      }
+      .course-details {
+        @apply flex flex-col px-4 flex-grow gap-2;
 
-      p:nth-child(2) {
-        @apply whitespace-nowrap;
-      }
+        .course-name {
+          @apply relative before:hidden hover:before:block
+          before:content-[attr(hover-text)]
+          before:absolute before:bg-custom-white-dark 
+          before:top-1/2 before:left-0 before:p-2 before:shadow-xl w-fit
+          before:rounded-md before:w-[100%] before:mb-16 
+          before:text-sm before:font-bold before:z-20 font-bold text-base;
+        }
 
-      p:nth-child(5) {
-        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit;
-      }
-
-      div {
-        @apply flex justify-center items-center gap-4 h-fit;
-
-        & > button {
-          svg {
-            @apply text-xl;
+        .course-type {
+          span {
+            @apply font-bold;
           }
+        }
 
-          &:nth-child(1) svg {
-            @apply text-custom-blue-light;
-          }
+        .course-desc {
+          @apply text-xs mb-4;
+        }
+      }
 
-          &:nth-child(2) svg {
-            @apply text-custom-red;
+      & > .bottom {
+        @apply flex justify-between items-center px-4 pb-4;
+
+        .course-price {
+          @apply font-bold text-xl flex-grow flex items-end;
+        }
+
+        .btn-container {
+          @apply flex justify-center items-center gap-4 h-fit;
+
+          & > button {
+            svg {
+              @apply text-xl;
+            }
+
+            &:nth-child(1) svg {
+              @apply text-custom-blue-light;
+            }
+
+            &:nth-child(2) svg {
+              @apply text-custom-red;
+            }
           }
         }
       }

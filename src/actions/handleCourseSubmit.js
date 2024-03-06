@@ -39,7 +39,7 @@ const handleCourseSubmit = async (prevState, formData) => {
 
   if (preSignedURL) {
     const imageFormData = new FormData();
-    imageFormData.append("image", formData.courseImage);
+    imageFormData.append("image", formDataObject.courseImage);
     await adminPutS3Image(preSignedURL, imageFormData);
   }
 

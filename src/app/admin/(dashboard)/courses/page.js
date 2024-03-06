@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FaTrashCan } from "react-icons/fa6";
-import { FaPen } from "react-icons/fa6";
+import { FaTrashCan, FaPen } from "react-icons/fa6";
+import { PiUploadSimpleFill } from "react-icons/pi";
 import adminFetchCourses from "@/services/api/adminFetchCourses";
 import AddCourseForm from "@/components/AddCourseForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteCourse from "@/services/api/adminDeleteCourse";
 import EditCourseForm from "@/components/EditCourseForm";
+import ChangeCourseImageModal from "@/components/ChangeCourseImageModal";
+import NextImage from "next/image";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -16,6 +18,8 @@ const ManageCourses = () => {
   const searchParams = useSearchParams();
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [itemToEdit, setItemToEdit] = useState(undefined);
+  const [courseImageToChange, setCourseImageToChange] = useState(undefined);
+  const [imageRefresher, setImageRefresher] = useState(0);
 
   useEffect(() => {
     const fetchSections = async () => {
@@ -26,6 +30,7 @@ const ManageCourses = () => {
     fetchSections();
   }, []);
 
+  // Observer for delete_course query
   useEffect(() => {
     if (!courses) return;
     if (!searchParams.get("delete_course")) return setItemToDelete(undefined);
@@ -38,6 +43,7 @@ const ManageCourses = () => {
     );
   }, [courses, searchParams]);
 
+  // Observer for edit_course query
   useEffect(() => {
     if (!courses) return;
     if (!searchParams.get("edit_course")) return setItemToEdit(undefined);
@@ -46,6 +52,20 @@ const ManageCourses = () => {
     );
 
     setItemToEdit(courseToEdit || undefined);
+  }, [courses, searchParams]);
+
+  // Observer for change_course_image query
+  useEffect(() => {
+    if (!courses) return;
+    if (!searchParams.get("change_course_image"))
+      return setCourseImageToChange(undefined);
+    const courseToChange = courses.find(
+      (course) => course.courseID === searchParams.get("change_course_image")
+    );
+
+    if (!courseToChange) return setCourseImageToChange(undefined);
+
+    setCourseImageToChange(courseToChange);
   }, [courses, searchParams]);
 
   const handleAddCourseClick = () => {
@@ -60,59 +80,82 @@ const ManageCourses = () => {
     router.push(`${pathname}?delete_course=${courseID}`);
   };
 
+  const renderButtons = (course) => {
+    return (
+      <div className="btn-container">
+        <button onClick={() => handleEditCourseClick(course.courseID)}>
+          <FaPen />
+        </button>
+        <button onClick={() => handleDeleteCourseClick(course.courseID)}>
+          <FaTrashCan />
+        </button>
+      </div>
+    );
+  };
+
+  const handleUploadClick = (courseID) => {
+    router.push(`${pathname}?change_course_image=${courseID}`);
+  };
+
+  const renderCourseImage = (courseID) => {
+    return (
+      <div className="course-img-container">
+        <NextImage
+          alt="course-image"
+          src={`${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/course/${courseID}?image_refresher=${imageRefresher}`}
+          width={1000}
+          height={1000}
+          unoptimized={true}
+          priority
+        />
+        <button onClick={() => handleUploadClick(courseID)}>
+          <PiUploadSimpleFill />
+        </button>
+      </div>
+    );
+  };
+
   const renderCourses = () => {
     if (!courses || courses.length === 0) return <></>;
     return (
       <ul className="course-table">
-        <li className="table-header">
-          <p>Course Name</p>
-          <p>Price</p>
-          <p>Description</p>
-          <p>Course Type</p>
-          <p>Status</p>
-        </li>
         {courses.map((course, index) => (
           <li key={index}>
             <p
-              className={`course-name`}
-              onMouseOver={(event) =>
-                event.target.setAttribute("hover-text", course.courseName)
-              }
-            >
-              {course.courseName.length < 32
-                ? course.courseName
-                : course.courseName.slice(0, 32) + "..."}
-            </p>
-            <p>$ {parseFloat(course.coursePrice).toFixed(2)}</p>
-            <p
-              className={`course-desc`}
-              onMouseOver={(event) =>
-                event.target.setAttribute("hover-text", course.courseName)
-              }
-            >
-              {course.courseDesc
-                ? course.courseDesc.length < 32
-                  ? course.courseDesc
-                  : course.courseDesc.slice(0, 32) + "..."
-                : ""}
-            </p>
-            <p>{course.courseType} Course</p>
-            <p
               className={`${
                 course.isActive
-                  ? "bg-custom-green-light text-custom-green-base"
-                  : "bg-custom-gray-base text-custom-gray-dark"
-              }`}
+                  ? "bg-custom-green-light text-custom-green-base border-custom-green-base"
+                  : "bg-custom-gray-base text-custom-gray-dark border-custom-gray-dark"
+              } status`}
             >
               {course.isActive ? "ACTIVE" : "INACTIVE"}
             </p>
-            <div>
-              <button onClick={() => handleEditCourseClick(course.courseID)}>
-                <FaPen />
-              </button>
-              <button onClick={() => handleDeleteCourseClick(course.courseID)}>
-                <FaTrashCan />
-              </button>
+            {renderCourseImage(course.courseID)}
+            <div className="course-details">
+              <p
+                className={`course-name`}
+                onMouseOver={(event) =>
+                  event.target.setAttribute("hover-text", course.courseName)
+                }
+              >
+                {course.courseName.length < 50
+                  ? course.courseName.toUpperCase()
+                  : course.courseName.slice(0, 50).toUpperCase() + "..."}
+              </p>
+              <p className="course-type">
+                <span>Course Type:</span> {course.courseType}
+              </p>
+              <p
+                className={`course-desc ${course?.courseDesc ? "" : "hidden"}`}
+              >
+                {course.courseDesc}
+              </p>
+            </div>
+            <div className="bottom">
+              <p className="course-price">
+                $ {parseFloat(course.coursePrice).toFixed(2)}
+              </p>
+              {renderButtons(course)}
             </div>
           </li>
         ))}
@@ -150,6 +193,12 @@ const ManageCourses = () => {
       )}
       {itemToEdit && (
         <EditCourseForm prevCourse={itemToEdit} setCourses={setCourses} />
+      )}
+      {courseImageToChange && (
+        <ChangeCourseImageModal
+          course={courseImageToChange}
+          setImageRefresher={setImageRefresher}
+        />
       )}
     </section>
   );

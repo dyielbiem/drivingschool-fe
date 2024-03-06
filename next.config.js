@@ -1,9 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "source.unsplash.com",
-      "driving-school-backend-images.s3.amazonaws.com"
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "driving-school-backend-images.s3.amazonaws.com",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "source.unsplash.com",
+        port: "",
+        pathname: "/**"
+      }
     ]
   },
   experimental: {
