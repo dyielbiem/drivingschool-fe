@@ -1,13 +1,15 @@
 "use client";
 import { useStudentsInSection } from "@/state/store";
+import { useSearchParams } from "next/navigation";
 
 const AdminLatestStudentRegistration = () => {
   const { students } = useStudentsInSection();
-  const latestRegistrations = [...students].sort(
-    (a, b) => new Date(b.enrollmentDate) - new Date(a.enrollmentDate)
-  );
+  const searchParams = useSearchParams();
 
   const renderLatestRegistrations = () => {
+    const latestRegistrations = [...students].sort(
+      (a, b) => new Date(b.enrollmentDate) - new Date(a.enrollmentDate)
+    );
     if (latestRegistrations.length === 0) return <></>;
 
     return (
@@ -27,6 +29,16 @@ const AdminLatestStudentRegistration = () => {
           const enrollmentMonth =
             new Date(student.enrollmentDate).getMonth() + 1;
           const enrollmentDay = new Date(student.enrollmentDate).getDate();
+
+          // Filter students based on search query
+          if (searchParams.get("search")) {
+            const search = searchParams.get("search");
+            const username = student.studentUserName.toLowerCase();
+            const fullName =
+              `${student.mailingFirstName} ${student.mailingLastName}`.toLowerCase();
+            if (!username.includes(search) && !fullName.includes(search))
+              return null;
+          }
 
           return (
             <li key={index}>

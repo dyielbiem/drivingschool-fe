@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import adminFetchAllStudents from "@/services/api/adminFetchAllStudents";
 
 const AdminStudentsHeader = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { setStudents } = useStudentsInSection();
   const sectionID = String(pathname).split("/").at(3);
   const currentTab = String(pathname).split("/").pop();
@@ -54,7 +55,11 @@ const AdminStudentsHeader = () => {
     if (!sectionTitle) return;
     return navLinks.map((item, index) => (
       <Link
-        href={item.link}
+        href={`${item.link}${
+          searchParams.get("search")
+            ? "?search=" + searchParams.get("search")
+            : ""
+        }`}
         key={index}
         className={`${
           currentTab === item.link

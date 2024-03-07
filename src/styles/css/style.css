@@ -636,12 +636,24 @@ main {
 }
 
 .admin-students-layout {
-  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10;
+  @apply pb-10 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden;
+}
+.admin-students-layout > * {
+  @apply mx-12;
+}
+.admin-students-layout .top-search-bar {
+  @apply w-full flex m-0 gap-1;
+}
+.admin-students-layout .top-search-bar > input {
+  @apply flex-grow py-3 px-12 h-full outline-none;
+}
+.admin-students-layout .top-search-bar > button {
+  @apply bg-white text-xl py-4 px-6;
 }
 .admin-students-layout .header {
   @apply flex justify-between mb-12 flex-col items-start
-    gap-8;
+    gap-8 mt-8;
 }
 .admin-students-layout .header h1 {
   @apply font-extrabold text-3xl;
