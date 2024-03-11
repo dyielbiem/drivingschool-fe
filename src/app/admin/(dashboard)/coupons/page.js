@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteCoupon from "@/services/api/adminDeleteCoupon";
 import EditCouponForm from "@/components/EditCouponForm";
+import dateFormatter from "@/utils/dateFormatter";
 
 const AdminCoupons = () => {
   const [coupons, setCoupons] = useState([]);
@@ -71,8 +72,8 @@ const AdminCoupons = () => {
           <li key={index}>
             <p>{coupon.couponCode}</p>
             <p>$ {coupon.couponAmount}</p>
-            <p>{coupon.fromDate}</p>
-            <p>{coupon.toDate}</p>
+            <p>{dateFormatter(coupon.fromDate)}</p>
+            <p>{dateFormatter(coupon.toDate)}</p>
             <p
               className={`${
                 coupon.isActive

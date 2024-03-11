@@ -1,24 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
-import adminFetchLatestStudentCompletions from "@/services/api/adminFetchLatestStudentCompletions";
-import { usePathname } from "next/navigation";
 import { RiExternalLinkFill } from "react-icons/ri";
+import { useStudentsInSection } from "@/state/store";
+import dateFormatter from "@/utils/dateFormatter";
+import { useSearchParams } from "next/navigation";
 
 const AdminLatestStudentCompletion = () => {
-  const sectionID = usePathname().split("/").at(3);
-  const [latestCompletions, setLatestCompletions] = useState([]);
-
-  useEffect(() => {
-    const fetchSections = async () => {
-      const response = await adminFetchLatestStudentCompletions(sectionID);
-      setLatestCompletions(response.ok ? response.json.latestCompletions : []);
-    };
-
-    fetchSections();
-  }, [sectionID]);
+  const { students } = useStudentsInSection();
+  const searchParams = useSearchParams();
 
   const renderLatestCompletions = () => {
-    if (latestCompletions.length === 0) return <></>;
+    if (students.length === 0) return <></>;
+
+    const sortedStudents = students.sort(
+      (a, b) => new Date(b?.completionDate) - new Date(a?.completionDate)
+    );
 
     return (
       <ul className="latest-completions-table">
@@ -28,20 +23,32 @@ const AdminLatestStudentCompletion = () => {
           <p>Registration Date</p>
           <p>Completion Date</p>
         </li>
-        {latestCompletions.map((student, index) => (
-          <li key={index}>
-            <p>{student.studentUserName}</p>
-            <p>
-              {student.mailingFirstName} {student.mailingLastName}
-            </p>
-            <p>{student.enrollmentDate}</p>
-            <p>{student.completionDate}</p>
-            <div>
-              <p>View Details</p>
-              <RiExternalLinkFill />
-            </div>
-          </li>
-        ))}
+        {sortedStudents.map((student, index) => {
+          // Filter students based on search query
+          if (searchParams.get("search")) {
+            const search = searchParams.get("search");
+            const username = student.studentUserName.toLowerCase();
+            const fullName =
+              `${student.mailingFirstName} ${student.mailingLastName}`.toLowerCase();
+            if (!username.includes(search) && !fullName.includes(search))
+              return null;
+          }
+
+          return (
+            <li key={index}>
+              <p>{student.studentUserName}</p>
+              <p>
+                {student.mailingFirstName} {student.mailingLastName}
+              </p>
+              <p>{dateFormatter(student.enrollmentDate)}</p>
+              <p>{dateFormatter(student.completionDate)}</p>
+              <div>
+                <p>View Details</p>
+                <RiExternalLinkFill />
+              </div>
+            </li>
+          );
+        })}
       </ul>
     );
   };

@@ -712,8 +712,7 @@ main {
     hover:shadow-md duration-200;
 }
 .exam-details-table li:nth-child(n+2) p:nth-child(3) {
-  @apply rounded-md text-xs font-bold py-1 px-2 h-fit 
-      text-custom-green-base bg-custom-green-light;
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
 }
 .exam-details-table li:nth-child(n+2) div {
   @apply flex justify-center items-center gap-3 h-fit 

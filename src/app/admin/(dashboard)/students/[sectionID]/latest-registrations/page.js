@@ -1,6 +1,7 @@
 "use client";
 import { useStudentsInSection } from "@/state/store";
 import { useSearchParams } from "next/navigation";
+import dateFormatter from "@/utils/dateFormatter";
 
 const AdminLatestStudentRegistration = () => {
   const { students } = useStudentsInSection();
@@ -25,11 +26,6 @@ const AdminLatestStudentRegistration = () => {
           <p>Status</p>
         </li>
         {latestRegistrations.map((student, index) => {
-          const enrollmentYear = new Date(student.enrollmentDate).getFullYear();
-          const enrollmentMonth =
-            new Date(student.enrollmentDate).getMonth() + 1;
-          const enrollmentDay = new Date(student.enrollmentDate).getDate();
-
           // Filter students based on search query
           if (searchParams.get("search")) {
             const search = searchParams.get("search");
@@ -43,9 +39,7 @@ const AdminLatestStudentRegistration = () => {
           return (
             <li key={index}>
               <p>{student.studentUserName}</p>
-              <p>
-                {enrollmentMonth}/{enrollmentDay}/{enrollmentYear}
-              </p>
+              <p>{dateFormatter(student.enrollmentDate)}</p>
               <p>
                 {student.mailingFirstName} {student.mailingLastName}
               </p>

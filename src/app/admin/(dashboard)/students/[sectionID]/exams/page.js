@@ -1,24 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
-import adminFetchStudentExamDetails from "@/services/api/adminFetchStudentExamDetails";
-import { usePathname } from "next/navigation";
 import { RiExternalLinkFill } from "react-icons/ri";
+import { useStudentsInSection } from "@/state/store";
+import { useSearchParams } from "next/navigation";
 
-const AdminStudentsExamDetails = () => {
-  const sectionID = usePathname().split("/").at(3);
-  const [examDetails, setExamDetails] = useState([]);
+const AdminStudentsstudents = () => {
+  const { students } = useStudentsInSection();
+  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const fetchExamDetails = async () => {
-      const response = await adminFetchStudentExamDetails(sectionID);
-      setExamDetails(response.ok ? response.json.examDetails : []);
-    };
-
-    fetchExamDetails();
-  }, [sectionID]);
-
-  const renderAllExamDetails = () => {
-    if (examDetails.length === 0) return <></>;
+  const renderAllstudents = () => {
+    if (students.length === 0) return <></>;
 
     return (
       <ul className="exam-details-table">
@@ -27,24 +17,44 @@ const AdminStudentsExamDetails = () => {
           <p>Name</p>
           <p>Status</p>
         </li>
-        {examDetails.map((examDetail, index) => (
-          <li key={index}>
-            <p>{examDetail.studentUserName}</p>
-            <p>
-              {examDetail.mailingFirstName} {examDetail.mailingLastName}
-            </p>
-            <p>{examDetail.examStatus.toUpperCase()}</p>
-            <div>
-              <p>View Details</p>
-              <RiExternalLinkFill />
-            </div>
-          </li>
-        ))}
+        {students.map((student, index) => {
+          // Filter students based on search query
+          if (searchParams.get("search")) {
+            const search = searchParams.get("search");
+            const username = student.studentUserName.toLowerCase();
+            const fullName =
+              `${student.mailingFirstName} ${student.mailingLastName}`.toLowerCase();
+            if (!username.includes(search) && !fullName.includes(search))
+              return null;
+          }
+
+          return (
+            <li key={index}>
+              <p>{student.studentUserName}</p>
+              <p>
+                {student.mailingFirstName} {student.mailingLastName}
+              </p>
+              <p
+                className={`${
+                  student.isCourseCompleted
+                    ? "text-custom-green-base bg-custom-green-light"
+                    : "text-custom-gray-dark bg-custom-gray-base"
+                }`}
+              >
+                {student.isCourseCompleted ? "COMPLETED" : "IN PROGRESS"}
+              </p>
+              <div>
+                <p>View Details</p>
+                <RiExternalLinkFill />
+              </div>
+            </li>
+          );
+        })}
       </ul>
     );
   };
 
-  return renderAllExamDetails();
+  return renderAllstudents();
 };
 
-export default AdminStudentsExamDetails;
+export default AdminStudentsstudents;

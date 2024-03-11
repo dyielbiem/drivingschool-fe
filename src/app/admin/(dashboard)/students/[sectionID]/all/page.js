@@ -37,7 +37,13 @@ const AdminAllStudents = () => {
                 {student.mailingFirstName} {student.mailingLastName}
               </p>
               <p>{student.mailingEmail}</p>
-              <p>{student.lessonProgress}</p>
+              <p>
+                {student.isCourseCompleted
+                  ? "Completed"
+                  : student.chapterProgress
+                    ? `Chapter ${student.chapterProgress}`
+                    : "No progress"}
+              </p>
               <p
                 className={`${
                   student.isActive
