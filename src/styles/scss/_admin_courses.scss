@@ -22,41 +22,24 @@
       @apply flex flex-col justify-start relative
       gap-x-8 hover:z-20 gap-2 overflow-hidden
       bg-white rounded-lg cursor-pointer 
-      hover:shadow-md duration-200;
+      hover:shadow-md duration-500 hover:scale-[1.02];
 
       .status {
         @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit
         absolute z-10 top-3 right-3 border-[1.5px];
       }
 
-      .course-img-container {
-        @apply w-full min-h-44 max-h-44 relative hover:before:inline-block
-        hover:z-20;
-
-        &::before {
-          @apply content-[""] absolute left-0 top-0 
-          w-full h-full bg-[rgba(0,0,0,0.6)] hidden;
-        }
-
-        img {
-          @apply object-cover w-full h-full text-center leading-[11rem];
-        }
-
-        button {
-          @apply text-2xl absolute bottom-3.5 left-3.5 text-white hidden;
-        }
-
-        &:hover button {
-          @apply inline-block;
-        }
+      & > img {
+        @apply object-cover w-full max-h-44 text-center leading-[11rem]
+        min-h-44;
       }
 
-      p {
+      & > p {
         @apply text-sm;
       }
 
       .course-details {
-        @apply flex flex-col px-4 flex-grow gap-2;
+        @apply flex flex-col px-4 flex-grow gap-2 my-1;
 
         .course-name {
           @apply relative before:hidden hover:before:block
@@ -74,12 +57,12 @@
         }
 
         .course-desc {
-          @apply text-xs mb-4;
+          @apply text-xs mb-2;
         }
       }
 
       & > .bottom {
-        @apply flex justify-between items-center px-4 pb-4;
+        @apply flex justify-between items-center px-4 pb-4 mt-4;
 
         .course-price {
           @apply font-bold text-xl flex-grow flex items-end;

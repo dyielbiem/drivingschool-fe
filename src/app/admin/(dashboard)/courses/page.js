@@ -2,14 +2,12 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
-import { PiUploadSimpleFill } from "react-icons/pi";
 import adminFetchCourses from "@/services/api/adminFetchCourses";
 import AddCourseForm from "@/components/AddCourseForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteCourse from "@/services/api/adminDeleteCourse";
 import EditCourseForm from "@/components/EditCourseForm";
-import ChangeCourseImageModal from "@/components/ChangeCourseImageModal";
-import NextImage from "next/image";
+import Image from "next/image";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -18,8 +16,7 @@ const ManageCourses = () => {
   const searchParams = useSearchParams();
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [itemToEdit, setItemToEdit] = useState(undefined);
-  const [courseImageToChange, setCourseImageToChange] = useState(undefined);
-  const [imageRefresher, setImageRefresher] = useState(0);
+  const [imageRefresher, setImageRefresher] = useState(new Date().getTime());
 
   useEffect(() => {
     const fetchSections = async () => {
@@ -54,20 +51,6 @@ const ManageCourses = () => {
     setItemToEdit(courseToEdit || undefined);
   }, [courses, searchParams]);
 
-  // Observer for change_course_image query
-  useEffect(() => {
-    if (!courses) return;
-    if (!searchParams.get("change_course_image"))
-      return setCourseImageToChange(undefined);
-    const courseToChange = courses.find(
-      (course) => course.courseID === searchParams.get("change_course_image")
-    );
-
-    if (!courseToChange) return setCourseImageToChange(undefined);
-
-    setCourseImageToChange(courseToChange);
-  }, [courses, searchParams]);
-
   const handleAddCourseClick = () => {
     router.push("/admin/courses?add_course=true");
   };
@@ -93,25 +76,16 @@ const ManageCourses = () => {
     );
   };
 
-  const handleUploadClick = (courseID) => {
-    router.push(`${pathname}?change_course_image=${courseID}`);
-  };
-
   const renderCourseImage = (courseID) => {
     return (
-      <div className="course-img-container">
-        <NextImage
-          alt="course-image"
-          src={`${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/course/${courseID}?image_refresher=${imageRefresher}`}
-          width={1000}
-          height={1000}
-          unoptimized={true}
-          priority
-        />
-        <button onClick={() => handleUploadClick(courseID)}>
-          <PiUploadSimpleFill />
-        </button>
-      </div>
+      <Image
+        alt="course-image"
+        src={`${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/course/${courseID}?image_refresher=${imageRefresher}`}
+        width={350}
+        height={350}
+        unoptimized={true}
+        priority
+      />
     );
   };
 
@@ -192,11 +166,9 @@ const ManageCourses = () => {
         />
       )}
       {itemToEdit && (
-        <EditCourseForm prevCourse={itemToEdit} setCourses={setCourses} />
-      )}
-      {courseImageToChange && (
-        <ChangeCourseImageModal
-          course={courseImageToChange}
+        <EditCourseForm
+          prevCourse={itemToEdit}
+          setCourses={setCourses}
           setImageRefresher={setImageRefresher}
         />
       )}
