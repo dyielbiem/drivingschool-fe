@@ -929,7 +929,7 @@ main {
   @apply p-2 h-10;
 }
 .add-course-form form textarea {
-  @apply p-2 h-20 resize-none;
+  @apply p-2 min-h-20 resize-none;
 }
 .add-course-form form select {
   @apply cursor-pointer;
@@ -991,7 +991,7 @@ main {
       border-custom-gray-base;
 }
 .edit-course-form form > textarea {
-  @apply p-2 h-20 resize-none;
+  @apply p-2 min-h-20 resize-none;
 }
 .edit-course-form form .course-img-box {
   @apply w-full max-h-56 h-fit rounded-md relative;
