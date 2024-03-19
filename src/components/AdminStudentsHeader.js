@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
 import Link from "next/link";
@@ -9,11 +9,19 @@ import adminFetchAllStudents from "@/services/api/adminFetchAllStudents";
 const AdminStudentsHeader = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { setStudents } = useStudentsInSection();
+  const router = useRouter();
+  const { setStudents, setNoOfRows } = useStudentsInSection();
   const sectionID = String(pathname).split("/").at(3);
   const currentTab = String(pathname).split("/").pop();
   const [sectionTitle, setSectionTitle] = useState("");
   const [isSectionActive, setIsSectionActive] = useState(false);
+
+  useEffect(() => {
+    if (Number(searchParams.get("page"))) return;
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("page", "1");
+    router.replace(`${pathname}?${currentParams}`);
+  }, [pathname, router, searchParams]);
 
   useEffect(() => {
     const fetchSectionAndStudents = async () => {
@@ -27,27 +35,28 @@ const AdminStudentsHeader = () => {
       if (!studentResponse?.ok) return;
 
       setStudents(studentResponse.json.allStudents);
+      setNoOfRows(studentResponse.json.noOfRows);
     };
 
     fetchSectionAndStudents();
-  }, [sectionID, setStudents]);
+  }, [sectionID, setNoOfRows, setStudents]);
 
   const navLinks = [
     {
       label: "All Students",
-      link: "all"
+      link: `all?${searchParams.toString()}`
     },
     {
       label: "Exam Details",
-      link: "exams"
+      link: `exams?${searchParams.toString()}`
     },
     {
       label: "Latest Student Registrations",
-      link: "latest-registrations"
+      link: `latest-registrations?${searchParams.toString()}`
     },
     {
       label: "Latest Student Completions",
-      link: "latest-completions"
+      link: `latest-completions?${searchParams.toString()}`
     }
   ];
 
@@ -55,14 +64,10 @@ const AdminStudentsHeader = () => {
     if (!sectionTitle) return;
     return navLinks.map((item, index) => (
       <Link
-        href={`${item.link}${
-          searchParams.get("search")
-            ? "?search=" + searchParams.get("search")
-            : ""
-        }`}
+        href={item.link}
         key={index}
         className={`${
-          currentTab === item.link
+          item.link.includes(currentTab)
             ? "text-black border-b-custom-blue-light border-b-[3px]"
             : ""
         }`}

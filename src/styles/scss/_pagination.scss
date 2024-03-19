@@ -1,0 +1,18 @@
+.pagination {
+  @apply flex gap-3 self-center mb-12 mt-16;
+
+  & > a {
+    @apply rounded-md w-12 h-12 text-lg bg-white text-center
+    leading-[3rem] shadow-lg font-bold hover:bg-custom-white-darker
+    duration-300;
+  }
+
+  & > .arrow {
+    @apply flex items-center justify-center;
+  }
+
+  & > div {
+    @apply rounded-md w-12 h-12 bg-white text-2xl
+    shadow-lg font-bold items-end justify-center flex;
+  }
+}

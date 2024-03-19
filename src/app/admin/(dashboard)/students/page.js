@@ -38,7 +38,7 @@ const AdminStudents = () => {
   }, []);
 
   const handleSectionClick = (id) => {
-    router.push(`/admin/students/${id}/all`);
+    router.push(`/admin/students/${id}/all?page=1`);
   };
 
   const handleAddStudentClick = () => {

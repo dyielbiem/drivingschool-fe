@@ -11,7 +11,9 @@ const TopSearchBar = ({ placeholder }) => {
 
   const handleSearchClick = () => {
     if (!inputRef.current || !inputRef.current.value) return;
-    router.push(`${pathname}?search=${inputRef.current.value}`);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("search", inputRef.current.value);
+    router.push(`${pathname}?${currentParams.toString()}`);
   };
 
   const handleEnterClick = (event) => {
@@ -21,7 +23,9 @@ const TopSearchBar = ({ placeholder }) => {
 
   const handleInputClear = () => {
     if (!inputRef.current || inputRef?.current?.value) return;
-    router.push(pathname);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("search");
+    router.push(`${pathname}?${currentParams}`);
   };
 
   return (

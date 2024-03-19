@@ -2,8 +2,12 @@ import { create } from "zustand";
 
 export const useStudentsInSection = create((set) => ({
   students: [],
+  noOfRows: 0,
   setStudents: (newValue) => {
     set({ students: newValue });
+  },
+  setNoOfRows: (rows) => {
+    set({ noOfRows: rows });
   }
 }));
 
