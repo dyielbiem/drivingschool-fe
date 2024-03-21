@@ -12,14 +12,10 @@ const handleSectionTestQuestionSubmit = async (
     correctAnswer: formData.get("correct-answer")
   };
 
-  const choices = [...otherChoices, formDataObject.correctAnswer].sort(
-    () => Math.random() - 0.5
-  );
-
   const response = await adminAddSectionTestQuestion(
     sectionID,
     formDataObject.question,
-    choices,
+    otherChoices,
     formDataObject.correctAnswer
   );
 

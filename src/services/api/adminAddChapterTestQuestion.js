@@ -3,7 +3,7 @@ import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminAddChapterTestQuestion = async (
   chapterID,
   question,
-  choices,
+  otherChoices,
   correctAnswer
 ) => {
   try {
@@ -15,7 +15,7 @@ const adminAddChapterTestQuestion = async (
           body: JSON.stringify({
             chapterID,
             question,
-            choices,
+            otherChoices,
             correctAnswer
           }),
           headers: {
