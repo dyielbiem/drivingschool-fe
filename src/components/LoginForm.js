@@ -41,6 +41,10 @@ const LoginForm = ({ role, formTitle, redirectPath }) => {
         className="password-input"
         required
       />
+      <div className="remember-me-container">
+        <input type="checkbox" id="remember-me" name="remember-me" />
+        <label htmlFor="remember-me">Remember me on this computer</label>
+      </div>
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>
       )}

@@ -7,7 +7,8 @@ import { redirect } from "next/navigation";
 const handleLoginSubmit = async (role, redirectPath, prevState, formData) => {
   const formDataObject = {
     userName: formData.get(`${role}-username-input`),
-    passWord: formData.get(`${role}-password-input`)
+    passWord: formData.get(`${role}-password-input`),
+    rememberMe: formData.get("remember-me")
   };
 
   let response;
@@ -31,7 +32,8 @@ const handleLoginSubmit = async (role, redirectPath, prevState, formData) => {
     sameSite: "lax"
   });
   cookies().set("refreshToken", response?.json?.refreshToken, {
-    sameSite: "lax"
+    sameSite: "lax",
+    maxAge: formDataObject.rememberMe === "on" ? 86400 * 365 : ""
   });
 
   redirect(redirectPath);

@@ -7,10 +7,12 @@ export const adminRefreshAccessToken = async (fetchMethod) => {
     const accessToken = cookies().get("accessToken");
 
     // Invoke the fetch method
-    const response = await fetchMethod(accessToken.value);
-    const json = await response.json();
-    if (response.ok) return { ok: true, json };
-    if (json.error != "TokenExpiredError") return { ok: false, json };
+    if (accessToken) {
+      const response = await fetchMethod(accessToken.value);
+      const json = await response.json();
+      if (response.ok) return { ok: true, json };
+      if (json.error != "TokenExpiredError") return { ok: false, json };
+    }
 
     // Obtain new access token if the old access token is expired
     const refreshToken = cookies().get("refreshToken");
