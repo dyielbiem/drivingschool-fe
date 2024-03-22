@@ -2,7 +2,7 @@
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
-  .header {
+  & > .header {
     @apply flex justify-between items-center max-w-4xl w-full;
 
     h1 {
@@ -21,11 +21,27 @@
     & > li {
       @apply w-full flex flex-col p-6 bg-white rounded-md;
 
-      h2 {
-        @apply font-bold text-xl max-w-3xl mb-4;
+      .top {
+        @apply flex items-start  mb-4 gap-2 justify-between;
 
-        span {
-          @apply text-[calc(1em-2px)];
+        h2 {
+          @apply font-bold text-xl max-w-3xl flex-grow;
+
+          span {
+            @apply text-[calc(1em-2px)];
+          }
+        }
+
+        .action-btn-container {
+          @apply flex items-center gap-3 text-xl mt-1;
+
+          button:nth-child(1) {
+            @apply text-custom-blue-light;
+          }
+
+          button:nth-child(2) {
+            @apply text-custom-red;
+          }
         }
       }
 

@@ -356,13 +356,13 @@ main {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
-.test-section .header {
+.test-section > .header {
   @apply flex justify-between items-center max-w-4xl w-full;
 }
-.test-section .header h1 {
+.test-section > .header h1 {
   @apply text-3xl font-extrabold;
 }
-.test-section .header button {
+.test-section > .header button {
   @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
@@ -372,11 +372,23 @@ main {
 .test-section .test-question-container > li {
   @apply w-full flex flex-col p-6 bg-white rounded-md;
 }
-.test-section .test-question-container > li h2 {
-  @apply font-bold text-xl max-w-3xl mb-4;
+.test-section .test-question-container > li .top {
+  @apply flex items-start  mb-4 gap-2 justify-between;
 }
-.test-section .test-question-container > li h2 span {
+.test-section .test-question-container > li .top h2 {
+  @apply font-bold text-xl max-w-3xl flex-grow;
+}
+.test-section .test-question-container > li .top h2 span {
   @apply text-[calc(1em-2px)];
+}
+.test-section .test-question-container > li .top .action-btn-container {
+  @apply flex items-center gap-3 text-xl mt-1;
+}
+.test-section .test-question-container > li .top .action-btn-container button:nth-child(1) {
+  @apply text-custom-blue-light;
+}
+.test-section .test-question-container > li .top .action-btn-container button:nth-child(2) {
+  @apply text-custom-red;
 }
 .test-section .test-question-container > li .question-choices {
   @apply list-[lower-alpha] list-inside ml-8 text-base
@@ -1444,7 +1456,7 @@ main {
   @apply text-lg flex-grow;
 }
 .confirm-delete-modal > div .header p span {
-  @apply font-extrabold;
+  @apply font-extrabold italic;
 }
 .confirm-delete-modal > div .header .close-btn {
   @apply w-fit;
