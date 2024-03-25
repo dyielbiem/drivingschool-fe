@@ -76,6 +76,17 @@ export const useSectionTestQuestions = create((set) => ({
         newSectionTestQuestion
       ]
     }));
+  },
+  setUpdateSectionTestQuestion: (updatedQuestion) => {
+    set((state) => ({
+      sectionTestQuestions: state?.sectionTestQuestions.map((question) => {
+        if (updatedQuestion.questionID !== question.questionID) return question;
+        question.question = updatedQuestion.question;
+        question.choices = updatedQuestion.choices;
+        question.correctAnswer = updatedQuestion.correctAnswer;
+        return question;
+      })
+    }));
   }
 }));
 
@@ -90,6 +101,17 @@ export const useChapterTestQuestions = create((set) => ({
         ...state.chapterTestQuestions,
         newChapterTestQuestion
       ]
+    }));
+  },
+  setUpdateChapterTestQuestion: (updatedQuestion) => {
+    set((state) => ({
+      chapterTestQuestions: state?.chapterTestQuestions.map((question) => {
+        if (updatedQuestion.questionID !== question.questionID) return question;
+        question.question = updatedQuestion.question;
+        question.choices = updatedQuestion.choices;
+        question.correctAnswer = updatedQuestion.correctAnswer;
+        return question;
+      })
     }));
   }
 }));

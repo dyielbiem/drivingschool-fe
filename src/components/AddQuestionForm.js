@@ -76,7 +76,7 @@ const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
   };
 
   return (
-    <div className="add-question-form">
+    <div className="question-form">
       <form action={formAction}>
         <button type="button" className="close-btn" onClick={closeForm}>
           <IoCloseCircleSharp />

@@ -11,6 +11,7 @@ import handleChapterTestQuestionSubmit from "@/actions/handleChapterTestQuestion
 import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
+import EditQuestionForm from "@/components/EditQuestionForm";
 
 const ChapterTest = () => {
   const {
@@ -25,6 +26,7 @@ const ChapterTest = () => {
   const { chapterIndex } = useChapterIndex();
   const { subChapters } = useSubChapters();
   const [itemToDelete, setItemToDelete] = useState(undefined);
+  const [itemToEdit, setItemToEdit] = useState(undefined);
 
   // Observe for delete_question query
   useEffect(() => {
@@ -38,6 +40,20 @@ const ChapterTest = () => {
     if (!question) return setItemToDelete(undefined);
 
     setItemToDelete(question);
+  }, [searchParams, chapterTestQuestions]);
+
+  // Observe for edit_question query
+  useEffect(() => {
+    if (!chapterTestQuestions || !searchParams.get("edit_question"))
+      return setItemToEdit(undefined);
+    const question = chapterTestQuestions.find(
+      (eachQuestion) =>
+        eachQuestion.questionID === searchParams.get("edit_question")
+    );
+
+    if (!question) return setItemToEdit(undefined);
+
+    setItemToEdit(question);
   }, [searchParams, chapterTestQuestions]);
 
   const handleAddQuestionClick = () => {
@@ -133,6 +149,7 @@ const ChapterTest = () => {
           confirmAction={deleteAction}
         />
       )}
+      {itemToEdit && <EditQuestionForm item={itemToEdit} />}
     </section>
   );
 };
