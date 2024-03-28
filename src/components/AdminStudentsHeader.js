@@ -83,7 +83,7 @@ const AdminStudentsHeader = () => {
         Manage Students {!sectionTitle ? "" : `- ${sectionTitle}`}{" "}
         {isSectionActive ? "(Latest Version)" : ""}
       </h1>
-      <nav>{renderNavLinks()}</nav>
+      {!searchParams.get("edit_student") && <nav>{renderNavLinks()}</nav>}
     </div>
   );
 };

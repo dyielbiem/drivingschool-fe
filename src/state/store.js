@@ -6,6 +6,23 @@ export const useStudentsInSection = create((set) => ({
   setStudents: (newValue) => {
     set({ students: newValue });
   },
+
+  setUpdateStudent: (updatedStudent) => {
+    set((state) => ({
+      students: state.students.map((eachStudent) => {
+        if (eachStudent.studentUserName !== updatedStudent.studentUserName)
+          return eachStudent;
+        return updatedStudent;
+      })
+    }));
+  },
+  setDeleteStudent: (studentUserName) => {
+    set((state) => ({
+      students: state.students.filter(
+        (eachStudent) => eachStudent.studentUserName !== studentUserName
+      )
+    }));
+  },
   setNoOfRows: (rows) => {
     set({ noOfRows: rows });
   }

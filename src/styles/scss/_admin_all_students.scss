@@ -1,5 +1,5 @@
 .all-students-table {
-  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3;
+  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3 mx-12;
 
   .table-header {
     @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 

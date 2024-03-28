@@ -1,0 +1,70 @@
+.edit-student-form {
+  @apply mx-12 grid grid-cols-2 gap-x-6;
+
+  & > h2 {
+    @apply text-2xl font-extrabold mb-4 col-span-full;
+  }
+
+  & > .username {
+    @apply text-lg font-bold col-span-full;
+  }
+
+  & > .fields {
+    @apply w-full flex flex-col gap-2 mb-4;
+
+    &:nth-of-type(5) {
+      @apply col-span-full;
+    }
+
+    label {
+      @apply mt-2 text-sm font-bold indent-1;
+
+      span {
+        @apply text-custom-red font-bold;
+      }
+    }
+
+    input,
+    select {
+      @apply bg-white rounded-md p-2 h-10 border-[1px]
+      border-custom-gray-base w-full;
+    }
+
+    input {
+      @apply cursor-text;
+    }
+
+    select {
+      @apply cursor-pointer;
+    }
+
+    input:read-only {
+      @apply cursor-not-allowed bg-custom-white-base;
+    }
+  }
+
+  .error-message {
+    @apply text-red-700 font-bold p-2.5 mt-4
+    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+  }
+
+  .btn-container {
+    @apply row-start-10 col-start-2 flex gap-4 w-full justify-end
+    items-center mt-4;
+
+    button[type="submit"] {
+      @apply w-40 bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+      svg {
+        @apply text-2xl animate-spin;
+      }
+    }
+
+    button[type="button"] {
+      @apply w-40 bg-custom-gray-base text-xl font-bold 
+      text-black rounded-lg py-2.5 h-12;
+    }
+  }
+}

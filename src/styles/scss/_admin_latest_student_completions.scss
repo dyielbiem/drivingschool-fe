@@ -1,5 +1,5 @@
 .latest-completions-table {
-  @apply grid grid-cols-5 gap-y-3 gap-x-6;
+  @apply grid grid-cols-5 gap-y-3 gap-x-6 mx-12;
 
   .table-header {
     @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 

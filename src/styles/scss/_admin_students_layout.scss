@@ -2,11 +2,11 @@
   @apply pb-10 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden;
 
-  & > * {
-    @apply mx-12;
-  }
+  // & > * {
+  //   @apply mx-12;
+  // }
 
-  .top-search-bar {
+  & > .top-search-bar {
     @apply w-full flex m-0 gap-1;
 
     & > input {
@@ -18,9 +18,9 @@
     }
   }
 
-  .header {
+  & > .header {
     @apply flex justify-between mb-12 flex-col items-start
-    gap-8 mt-8;
+    gap-8 mt-8 mx-12;
 
     h1 {
       @apply font-extrabold text-3xl;

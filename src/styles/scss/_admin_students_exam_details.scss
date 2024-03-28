@@ -1,5 +1,5 @@
 .exam-details-table {
-  @apply grid grid-cols-4 gap-3;
+  @apply grid grid-cols-4 gap-3 mx-12;
 
   .table-header {
     @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 

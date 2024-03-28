@@ -597,6 +597,65 @@ main {
   @apply font-bold text-lg;
 }
 
+.edit-student-form {
+  @apply mx-12 grid grid-cols-2 gap-x-6;
+}
+.edit-student-form > h2 {
+  @apply text-2xl font-extrabold mb-4 col-span-full;
+}
+.edit-student-form > .username {
+  @apply text-lg font-bold col-span-full;
+}
+.edit-student-form > .fields {
+  @apply w-full flex flex-col gap-2 mb-4;
+}
+.edit-student-form > .fields:nth-of-type(5) {
+  @apply col-span-full;
+}
+.edit-student-form > .fields label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.edit-student-form > .fields label span {
+  @apply text-custom-red font-bold;
+}
+.edit-student-form > .fields input,
+.edit-student-form > .fields select {
+  @apply bg-white rounded-md p-2 h-10 border-[1px]
+      border-custom-gray-base w-full;
+}
+.edit-student-form > .fields input {
+  @apply cursor-text;
+}
+.edit-student-form > .fields select {
+  @apply cursor-pointer;
+}
+.edit-student-form > .fields input:-moz-read-only {
+  @apply cursor-not-allowed bg-custom-white-base;
+}
+.edit-student-form > .fields input:read-only {
+  @apply cursor-not-allowed bg-custom-white-base;
+}
+.edit-student-form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+}
+.edit-student-form .btn-container {
+  @apply row-start-10 col-start-2 flex gap-4 w-full justify-end
+    items-center mt-4;
+}
+.edit-student-form .btn-container button[type=submit] {
+  @apply w-40 bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.edit-student-form .btn-container button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+.edit-student-form .btn-container button[type=button] {
+  @apply w-40 bg-custom-gray-base text-xl font-bold 
+      text-black rounded-lg py-2.5 h-12;
+}
+
 .add-student-form {
   @apply grid grid-cols-2 w-full max-w-5xl gap-4;
 }
@@ -660,34 +719,31 @@ main {
   @apply pb-10 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden;
 }
-.admin-students-layout > * {
-  @apply mx-12;
-}
-.admin-students-layout .top-search-bar {
+.admin-students-layout > .top-search-bar {
   @apply w-full flex m-0 gap-1;
 }
-.admin-students-layout .top-search-bar > input {
+.admin-students-layout > .top-search-bar > input {
   @apply flex-grow py-3 px-12 h-full outline-none;
 }
-.admin-students-layout .top-search-bar > button {
+.admin-students-layout > .top-search-bar > button {
   @apply bg-white text-xl py-4 px-6;
 }
-.admin-students-layout .header {
+.admin-students-layout > .header {
   @apply flex justify-between mb-12 flex-col items-start
-    gap-8 mt-8;
+    gap-8 mt-8 mx-12;
 }
-.admin-students-layout .header h1 {
+.admin-students-layout > .header h1 {
   @apply font-extrabold text-3xl;
 }
-.admin-students-layout .header nav {
+.admin-students-layout > .header nav {
   @apply flex gap-6 font-bold text-lg text-custom-gray-dark;
 }
-.admin-students-layout .header nav a {
+.admin-students-layout > .header nav a {
   @apply py-1.5 px-1;
 }
 
 .all-students-table {
-  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3;
+  @apply grid grid-cols-[1fr_2fr_2fr_repeat(3,1fr)] gap-3 mx-12;
 }
 .all-students-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
@@ -718,7 +774,7 @@ main {
 }
 
 .exam-details-table {
-  @apply grid grid-cols-4 gap-3;
+  @apply grid grid-cols-4 gap-3 mx-12;
 }
 .exam-details-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
@@ -747,7 +803,7 @@ main {
 }
 
 .latest-registrations-table {
-  @apply grid grid-cols-[repeat(6,2fr)_repeat(2,1fr)] gap-y-3 gap-x-6;
+  @apply grid grid-cols-[repeat(6,2fr)_repeat(2,1fr)] gap-y-3 gap-x-6 mx-12;
 }
 .latest-registrations-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
@@ -772,7 +828,7 @@ main {
 }
 
 .latest-completions-table {
-  @apply grid grid-cols-5 gap-y-3 gap-x-6;
+  @apply grid grid-cols-5 gap-y-3 gap-x-6 mx-12;
 }
 .latest-completions-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 

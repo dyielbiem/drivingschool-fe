@@ -2,14 +2,61 @@
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa6";
 import { useStudentsInSection } from "@/state/store";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Pagination from "@/components/Pagination";
+import { useEffect, useState } from "react";
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import adminDeleteStudent from "@/services/api/adminDeleteStudent";
+import EditStudentForm from "@/components/EditStudentForm";
 
 const AdminAllStudents = () => {
-  const { students, noOfRows } = useStudentsInSection();
+  const { students, noOfRows, setDeleteStudent } = useStudentsInSection();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page"));
   const searchKey = searchParams.get("search");
+  const router = useRouter();
+  const pathname = usePathname();
+  const [studentToDelete, setStudentToDelete] = useState(undefined);
+  const [studentToEdit, setStudentToEdit] = useState(undefined);
+
+  // Observe for edit_student query
+  useEffect(() => {
+    if (!searchParams.get("edit_student") || students?.length === 0)
+      return setStudentToEdit(undefined);
+
+    const student = students.find(
+      (eachStudent) =>
+        eachStudent.studentUserName === searchParams.get("edit_student")
+    );
+
+    if (!student) {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.delete("edit_student");
+      setStudentToEdit(undefined);
+      router.replace(`${pathname}?${currentParams}`);
+    }
+
+    setStudentToEdit(student);
+  }, [pathname, router, searchParams, students]);
+
+  // Observe for delete_student query
+  useEffect(() => {
+    if (!searchParams.get("delete_student") || students?.length === 0)
+      return setStudentToDelete(undefined);
+
+    const student = students.find(
+      (eachStudent) =>
+        eachStudent.studentUserName === searchParams.get("delete_student")
+    );
+
+    if (!student) return setStudentToDelete(undefined);
+
+    setStudentToDelete(student);
+  }, [searchParams, students]);
+
+  if (studentToEdit) {
+    return <EditStudentForm student={studentToEdit} />;
+  }
 
   const sortAlphabetical = (a, b) =>
     a.studentUserName.localeCompare(b.studentUserName);
@@ -60,17 +107,16 @@ const AdminAllStudents = () => {
     );
   };
 
-  const renderActionButtons = () => {
-    return (
-      <div>
-        <button>
-          <FaPen />
-        </button>
-        <button>
-          <FaTrashCan />
-        </button>
-      </div>
-    );
+  const editClick = (studentUserName) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("edit_student", studentUserName);
+    router.push(`${pathname}?${currentParams}`);
+  };
+
+  const deleteClick = (studentUserName) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("delete_student", studentUserName);
+    router.push(`${pathname}?${currentParams}`);
   };
 
   const renderStudents = () => {
@@ -102,7 +148,14 @@ const AdminAllStudents = () => {
             >
               {eachStudent.isActive ? "ACTIVE" : "INACTIVE"}
             </p>
-            {renderActionButtons()}
+            <div>
+              <button onClick={() => editClick(eachStudent.studentUserName)}>
+                <FaPen />
+              </button>
+              <button onClick={() => deleteClick(eachStudent.studentUserName)}>
+                <FaTrashCan />
+              </button>
+            </div>
           </li>
         ))}
       </ul>
@@ -116,10 +169,30 @@ const AdminAllStudents = () => {
     );
   };
 
+  const pathWithNoDeleteQuery = () => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("delete_student");
+    return `${pathname}?${currentParams}`;
+  };
+
+  const deleteAction = async () => {
+    const response = await adminDeleteStudent(studentToDelete.studentUserName);
+    if (!response.ok) return;
+    setDeleteStudent(studentToDelete.studentUserName);
+    router.push(pathWithNoDeleteQuery());
+  };
+
   return (
     <>
       {renderStudents()}
       {renderPagination()}
+      {studentToDelete && (
+        <ConfirmDeleteModal
+          itemToDelete={studentToDelete.studentUserName}
+          pathWhenModalIsClosed={pathWithNoDeleteQuery()}
+          confirmAction={deleteAction}
+        />
+      )}
     </>
   );
 };
