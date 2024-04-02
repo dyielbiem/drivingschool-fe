@@ -4,7 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "driving-school-backend-images.s3.amazonaws.com",
+        hostname: "dev-driving-school-backend-images.s3.amazonaws.com",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "staging-driving-school-backend-images.s3.amazonaws.com",
         port: "",
         pathname: "/**"
       },
