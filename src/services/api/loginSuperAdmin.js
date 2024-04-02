@@ -8,7 +8,8 @@ const loginSuperAdmin = async (userName, passWord) => {
           "Content-Type": "application/json",
           "X-API-Key": process.env.NEXT_PUBLIC_API_KEY
         },
-        body: JSON.stringify({ userName, passWord })
+        body: JSON.stringify({ userName, passWord }),
+        cache: "no-cache"
       }
     );
 
