@@ -35,7 +35,7 @@ const AdminStudentsHeader = () => {
       if (!studentResponse?.ok) return;
 
       setStudents(studentResponse.json.allStudents);
-      setNoOfRows(studentResponse.json.noOfRows);
+      setNoOfRows(studentResponse.json.noOfRows || 100);
     };
 
     fetchSectionAndStudents();

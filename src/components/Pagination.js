@@ -10,7 +10,7 @@ const Pagination = ({ itemsLength, noOfRows }) => {
   const page = Number(searchParams.get("page"));
   const router = useRouter();
 
-  if (numberOfPage === 1) return null;
+  if (numberOfPage === 1 || !isFinite(numberOfPage)) return null;
 
   if (numberOfPage < page) {
     const currentParams = new URLSearchParams(searchParams.toString());
