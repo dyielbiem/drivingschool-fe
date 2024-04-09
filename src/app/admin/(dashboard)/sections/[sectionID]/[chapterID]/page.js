@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSubChapters } from "@/state/store";
 import AddSubChapterForm from "@/components/AddSubChapterForm";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import RichTextEditor from "@/components/RichTextEditor";
+import ContentEditor from "@/components/ContentEditor";
 import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
 import { useChapterTestQuestions } from "@/state/store";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
@@ -142,7 +142,7 @@ const ChapterID = ({ params }) => {
   const renderRichTextEditor = () => {
     if (!chapter || searchParams.get("edit_content") !== "true") return <></>;
     return (
-      <RichTextEditor
+      <ContentEditor
         editorAction={updateChapterContent}
         editorContent={chapterContent}
       />

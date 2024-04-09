@@ -1,5 +1,5 @@
 .section-content-container {
-  @apply mx-4 max-w-4xl;
+  @apply mx-4 max-w-4xl w-full;
 
   h2 {
     @apply text-xl font-extrabold;
@@ -13,6 +13,10 @@
   h3,
   p {
     @apply empty:h-4;
+  }
+
+  a {
+    @apply underline text-custom-blue-light font-semibold;
   }
 
   img {

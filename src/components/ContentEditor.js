@@ -13,7 +13,9 @@ import {
   MdFormatAlignJustify,
   MdFormatListNumbered,
   MdFormatIndentIncrease,
-  MdFormatIndentDecrease
+  MdFormatIndentDecrease,
+  MdOutlineLink,
+  MdOutlineFormatUnderlined
 } from "react-icons/md";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import { RiImageAddFill } from "react-icons/ri";
@@ -24,8 +26,11 @@ import Youtube from "@tiptap/extension-youtube";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Extension } from "@tiptap/core";
+import { Link } from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
 import ImageGalleryModal from "./ImageGalleryModal";
 import EmbedYoutubeModal from "./EmbedYoutubeModal";
+import LinkURLForm from "./LinkURLForm";
 
 const Indent = Extension.create({
   name: "indent",
@@ -74,8 +79,9 @@ const Indent = Extension.create({
   }
 });
 
-const RichTextEditor = ({ editorAction, editorContent }) => {
+const ContentEditor = ({ editorAction, editorContent }) => {
   const [isSaveLoading, setIsSaveLoading] = useState(false);
+  const [isLinkURLVisible, setIsLinkURLVisible] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -83,6 +89,7 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     extensions: [
       StarterKit,
       Indent,
+      Underline,
       TextAlign.configure({
         types: ["listItem", "heading", "paragraph"]
       }),
@@ -91,6 +98,10 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
       }),
       Youtube.configure({
         inline: true
+      }),
+      Link.configure({
+        openOnClick: false,
+        autolink: true
       })
     ],
     content: editorContent
@@ -100,23 +111,26 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     return <></>;
   }
 
-  const handleSaveClick = async () => {
-    setIsSaveLoading(true);
-    const tempParentElement = document.createElement("div");
-    tempParentElement.innerHTML = editor.getHTML();
-
-    const iFrameWithNoSRC =
-      tempParentElement.querySelectorAll("iframe:not([src])");
-    if (iFrameWithNoSRC.length > 0) {
-      iFrameWithNoSRC.forEach((iframe) => iframe.parentNode.remove());
-    }
-
-    const result = await editorAction(tempParentElement.innerHTML);
-    if (!result) setIsSaveLoading(false);
+  const handleSetLink = (link) => {
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({
+        href: link
+      })
+      .run();
   };
 
-  const handleCancelClick = () => {
-    router.push(pathname);
+  const handleToggleLink = () => {
+    const { view, state } = editor;
+    const { from, to } = view.state.selection;
+    const text = state.doc.textBetween(from, to, "");
+    if (!editor.isActive("link") && !text) return;
+    if (editor.isActive("link"))
+      return editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+    setIsLinkURLVisible(true);
   };
 
   const handleSubListClick = () => {
@@ -181,8 +195,27 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
     router.push(`${pathname}?edit_content=true`);
   };
 
+  const handleSaveClick = async () => {
+    setIsSaveLoading(true);
+    const tempParentElement = document.createElement("div");
+    tempParentElement.innerHTML = editor.getHTML();
+
+    const iFrameWithNoSRC =
+      tempParentElement.querySelectorAll("iframe:not([src])");
+    if (iFrameWithNoSRC.length > 0) {
+      iFrameWithNoSRC.forEach((iframe) => iframe.parentNode.remove());
+    }
+
+    const result = await editorAction(tempParentElement.innerHTML);
+    if (!result) setIsSaveLoading(false);
+  };
+
+  const handleCancelClick = () => {
+    router.push(pathname);
+  };
+
   return (
-    <div className="rich-text-editor">
+    <div className="content-editor">
       <div className="editor-styling-btn-container">
         <button
           onClick={() =>
@@ -211,6 +244,18 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
           className={editor.isActive("italic") ? "bg-white" : ""}
         >
           <MdOutlineFormatItalic />
+        </button>
+        <button
+          className={editor.isActive("underline") ? "bg-white" : ""}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+        >
+          <MdOutlineFormatUnderlined />
+        </button>
+        <button
+          className={editor.isActive("link") ? "bg-white" : ""}
+          onClick={handleToggleLink}
+        >
+          <MdOutlineLink />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -289,8 +334,14 @@ const RichTextEditor = ({ editorAction, editorContent }) => {
       {searchParams.get("embed_youtube") === "true" && (
         <EmbedYoutubeModal embedYoutube={embedYoutube} />
       )}
+      {isLinkURLVisible && (
+        <LinkURLForm
+          setIsVisible={setIsLinkURLVisible}
+          formAction={handleSetLink}
+        />
+      )}
     </div>
   );
 };
 
-export default RichTextEditor;
+export default ContentEditor;

@@ -3,7 +3,7 @@ import { useChapterIndex, useSubChapterIndex } from "@/state/store";
 import adminFetchSubChapterByID from "@/services/api/adminFetchSubChapterByID";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import RichTextEditor from "@/components/RichTextEditor";
+import ContentEditor from "@/components/ContentEditor";
 import adminUpdateSubChapterContent from "@/services/api/adminUpdateSubChapterContent";
 import EditTitleForm from "@/components/EditTitleForm";
 import { FaPen } from "react-icons/fa6";
@@ -120,7 +120,7 @@ const SubChapterID = ({ params }) => {
     )
       return <></>;
     return (
-      <RichTextEditor
+      <ContentEditor
         editorAction={updateSubChapterContent}
         editorContent={subChapterContent}
       />
