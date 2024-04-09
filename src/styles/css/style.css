@@ -263,17 +263,24 @@ main {
     h-screen max-h-screen bg-custom-blue-dark
     transition-[width] duration-300 items-center min-w-96 max-w-96 justify-start;
 }
-.admin-manage-section-layout .side-nav-container .btn-container {
-  @apply flex flex-col w-full bg-custom-blue-dark gap-2 sticky top-0
-      p-2 z-50;
+.admin-manage-section-layout .side-nav-container .top {
+  @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark;
 }
-.admin-manage-section-layout .side-nav-container .btn-container button,
-.admin-manage-section-layout .side-nav-container .btn-container a {
+.admin-manage-section-layout .side-nav-container .top .home {
+  @apply text-2xl text-white font-bold text-left
+        pt-12 pb-6 px-6;
+}
+.admin-manage-section-layout .side-nav-container .top .btn-container {
+  @apply flex flex-col w-full gap-2
+        p-2;
+}
+.admin-manage-section-layout .side-nav-container .top .btn-container button,
+.admin-manage-section-layout .side-nav-container .top .btn-container a {
   @apply bg-custom-blue-base text-white w-full font-bold text-lg px-4
-        rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light;
+          rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light;
 }
-.admin-manage-section-layout .side-nav-container .btn-container button svg,
-.admin-manage-section-layout .side-nav-container .btn-container a svg {
+.admin-manage-section-layout .side-nav-container .top .btn-container button svg,
+.admin-manage-section-layout .side-nav-container .top .btn-container a svg {
   @apply text-2xl;
 }
 .admin-manage-section-layout .side-nav-container nav {
@@ -305,12 +312,16 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
 .admin-manage-section > .header {
-  @apply flex max-w-4xl w-full items-center min-h-14;
+  @apply flex max-w-4xl w-full items-center min-h-14
+    gap-6;
+}
+.admin-manage-section > .header .back-btn {
+  @apply text-3xl;
 }
 .admin-manage-section > .header h1 {
   @apply text-3xl font-extrabold max-w-4xl w-full flex-grow;
 }
-.admin-manage-section > .header button {
+.admin-manage-section > .header .edit-btn {
   @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3;
 }
@@ -360,12 +371,15 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
 .test-section > .header {
-  @apply flex justify-between items-center max-w-4xl w-full;
+  @apply flex items-center max-w-4xl w-full gap-6;
+}
+.test-section > .header .back-btn {
+  @apply text-3xl;
 }
 .test-section > .header h1 {
-  @apply text-3xl font-extrabold;
+  @apply text-3xl font-extrabold flex-grow;
 }
-.test-section > .header button {
+.test-section > .header .add-btn {
   @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
@@ -456,10 +470,13 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28;
 }
 .admin-chapter-section > .header {
-  @apply flex justify-between items-center max-w-4xl w-full  min-h-14;
+  @apply flex items-center max-w-4xl w-full min-h-14 gap-6;
+}
+.admin-chapter-section > .header .back-btn {
+  @apply text-3xl;
 }
 .admin-chapter-section > .header h1 {
-  @apply text-3xl font-extrabold;
+  @apply text-3xl font-extrabold flex-grow;
 }
 .admin-chapter-section > .header .edit-content-btn {
   @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
@@ -522,11 +539,14 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
 .admin-sub-chapter-section > .header {
-  @apply flex justify-between items-center max-w-4xl
-    w-full min-h-14;
+  @apply flex items-center max-w-4xl
+    w-full min-h-14 gap-6;
+}
+.admin-sub-chapter-section > .header .back-btn {
+  @apply text-3xl;
 }
 .admin-sub-chapter-section > .header h1 {
-  @apply text-3xl font-extrabold;
+  @apply text-3xl font-extrabold text-left flex-grow;
 }
 .admin-sub-chapter-section > .header .edit-content-btn {
   @apply text-xl font-bold bg-custom-blue-base rounded-md text-white

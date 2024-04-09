@@ -15,6 +15,7 @@ import adminDeleteSubChapter from "@/services/api/adminDeleteSubChapter";
 import EditTitleForm from "@/components/EditTitleForm";
 import handleChapterTitleUpdate from "@/actions/handleChapterTitleUpdate";
 import { useChapters } from "@/state/store";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
@@ -89,6 +90,11 @@ const ChapterID = ({ params }) => {
     router.push(pathname + "?edit_content=true&edit_title=true");
   };
 
+  const handleBackClick = () => {
+    const backRoute = pathname.split("/").slice(0, -1).join("/");
+    router.push(backRoute);
+  };
+
   const renderChapter = () => {
     if (
       !chapter ||
@@ -98,6 +104,9 @@ const ChapterID = ({ params }) => {
       return <></>;
     return (
       <div className="header">
+        <button onClick={handleBackClick} className="back-btn">
+          <IoMdArrowRoundBack />
+        </button>
         <h1>
           Chapter {String(chapterIndex + 1).padStart(2, "0")}:{" "}
           {chapter.chapterTitle}

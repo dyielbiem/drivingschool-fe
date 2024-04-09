@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
 import EditQuestionForm from "@/components/EditQuestionForm";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const FinalTest = () => {
   const { chapters } = useChapters();
@@ -55,17 +56,27 @@ const FinalTest = () => {
     router.push(`${pathname}?add_question=true`);
   };
 
+  const handleBackClick = () => {
+    const backRoute = pathname.split("/").slice(0, -1).join("/");
+    router.push(backRoute);
+  };
+
   const renderHeader = () => {
     if (!sectionTestQuestions) return <></>;
     return (
       <div className="header">
+        <button onClick={handleBackClick} className="back-btn">
+          <IoMdArrowRoundBack />
+        </button>
         <h1>
           Chapter{" "}
           {!chapters ? "01" : String(chapters?.length + 1).padStart(2, "0")}:
           Final Test
         </h1>
         {searchParams.get("add_question") !== "true" && (
-          <button onClick={handleAddQuestionClick}>Add question</button>
+          <button onClick={handleAddQuestionClick} className="add-btn">
+            Add question
+          </button>
         )}
       </div>
     );

@@ -3,11 +3,15 @@
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   & > .header {
-    @apply flex justify-between items-center max-w-4xl
-    w-full min-h-14;
+    @apply flex items-center max-w-4xl
+    w-full min-h-14 gap-6;
+
+    .back-btn {
+      @apply text-3xl;
+    }
 
     h1 {
-      @apply text-3xl font-extrabold;
+      @apply text-3xl font-extrabold text-left flex-grow;
     }
 
     .edit-content-btn {

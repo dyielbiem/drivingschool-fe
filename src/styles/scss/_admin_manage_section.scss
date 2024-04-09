@@ -3,13 +3,18 @@
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   & > .header {
-    @apply flex max-w-4xl w-full items-center min-h-14;
+    @apply flex max-w-4xl w-full items-center min-h-14
+    gap-6;
+
+    .back-btn {
+      @apply text-3xl;
+    }
 
     h1 {
       @apply text-3xl font-extrabold max-w-4xl w-full flex-grow;
     }
 
-    button {
+    .edit-btn {
       @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3;
     }

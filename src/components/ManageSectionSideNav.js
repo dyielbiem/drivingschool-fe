@@ -211,7 +211,12 @@ const ManageSectionSideNav = () => {
   return (
     <>
       <div className="side-nav-container">
-        {renderButtons()}
+        <div className="top">
+          <Link href={"/admin/sections"} className="home">
+            Driving Schools Online Courses
+          </Link>
+          {renderButtons()}
+        </div>
         <nav>
           {renderChapters()}
           {renderSectionTest()}

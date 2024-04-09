@@ -9,6 +9,7 @@ import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteChapter from "@/services/api/adminDeleteChapter";
 import EditTitleForm from "@/components/EditTitleForm";
 import handleSectionTitleUpdate from "@/actions/handleSectionTitleUpdate";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SectionID = () => {
   const { chapters, setChapters } = useChapters();
@@ -44,14 +45,21 @@ const SectionID = () => {
     router.push(`${pathname}?edit_title=true`);
   };
 
+  const handleBackClick = () => {
+    router.push("/admin/sections/");
+  };
+
   const renderSection = () => {
     if (!section || searchParams.get("edit_title") === "true") return <></>;
     return (
       <div className="header">
+        <button onClick={handleBackClick} className="back-btn">
+          <IoMdArrowRoundBack />
+        </button>
         <h1>
           {section.sectionTitle} {section.isActive ? "(Latest Version)" : ""}
         </h1>
-        <button onClick={handleEditSectionTitle}>
+        <button onClick={handleEditSectionTitle} className="edit-btn">
           <FaPen />
         </button>
       </div>

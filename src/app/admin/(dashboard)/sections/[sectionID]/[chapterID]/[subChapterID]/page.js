@@ -9,6 +9,7 @@ import EditTitleForm from "@/components/EditTitleForm";
 import { FaPen } from "react-icons/fa6";
 import handleSubChapterTitleUpdate from "@/actions/handleSubChapterTitleUpdate";
 import { useSubChapters } from "@/state/store";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SubChapterID = ({ params }) => {
   const { chapterIndex } = useChapterIndex();
@@ -48,6 +49,11 @@ const SubChapterID = ({ params }) => {
     router.push(pathname + "?edit_content=true&edit_title=true");
   };
 
+  const handleBackClick = () => {
+    const backRoute = pathname.split("/").slice(0, -1).join("/");
+    router.push(backRoute);
+  };
+
   const renderSubChapter = () => {
     if (
       !subChapter ||
@@ -58,6 +64,9 @@ const SubChapterID = ({ params }) => {
       return <></>;
     return (
       <div className="header">
+        <button onClick={handleBackClick} className="back-btn">
+          <IoMdArrowRoundBack />
+        </button>
         <h1>
           Chapter {chapterIndex + 1}.{subChapterIndex + 1}.{" "}
           {subChapter.subChapterTitle}
