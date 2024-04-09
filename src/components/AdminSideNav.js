@@ -53,6 +53,9 @@ const AdminSideNav = () => {
     <div
       className={`side-nav-container ${regex.test(pathName) ? "!hidden" : ""}`}
     >
+      <Link href={"/admin/sections"} className="home">
+        Driving Schools Online Courses
+      </Link>
       <nav className="side-nav">
         <div className="nav-items-container">
           {navItems?.length > 0 &&

@@ -66,10 +66,15 @@ main {
 }
 .admin-dashboard-layout > .side-nav-container {
   @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-start py-16 min-w-80 justify-between;
+    transition-[width] duration-300 items-start py-16 min-w-80
+    max-w-80 overflow-y-auto;
+}
+.admin-dashboard-layout > .side-nav-container .home {
+  @apply text-2xl text-white font-bold text-left
+      mb-9 px-6;
 }
 .admin-dashboard-layout > .side-nav-container .side-nav {
-  @apply text-custom-white-base w-full;
+  @apply text-custom-white-base w-full flex-grow;
 }
 .admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container {
   @apply flex flex-col gap-3;
