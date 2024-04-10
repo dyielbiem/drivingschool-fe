@@ -3,18 +3,23 @@ import adminAddSectionTestQuestion from "@/services/api/adminAddSectionTestQuest
 
 const handleSectionTestQuestionSubmit = async (
   sectionID,
+  question,
   otherChoices,
   prevState,
   formData
 ) => {
   const formDataObject = {
-    question: formData.get("question"),
     correctAnswer: formData.get("correct-answer")
   };
 
+  if (!question)
+    return {
+      message: "Question is required"
+    };
+
   const response = await adminAddSectionTestQuestion(
     sectionID,
-    formDataObject.question,
+    question,
     otherChoices,
     formDataObject.correctAnswer
   );

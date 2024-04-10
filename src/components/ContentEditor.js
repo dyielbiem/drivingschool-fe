@@ -179,7 +179,7 @@ const ContentEditor = ({ editorAction, editorContent }) => {
     router.push(`${pathname}?edit_content=true&embed_youtube=true`);
   };
 
-  const addImage = (imageURL) => {
+  const getImageURL = (imageURL) => {
     editor.chain().focus().setImage({ src: imageURL }).run();
     router.push(`${pathname}?edit_content=true`);
   };
@@ -329,7 +329,7 @@ const ContentEditor = ({ editorAction, editorContent }) => {
       </div>
       {(searchParams.get("select_image") === "true" ||
         searchParams.get("upload_image") === "true") && (
-        <ImageGalleryModal addImage={addImage} />
+        <ImageGalleryModal onAddImage={getImageURL} />
       )}
       {searchParams.get("embed_youtube") === "true" && (
         <EmbedYoutubeModal embedYoutube={embedYoutube} />

@@ -392,16 +392,20 @@ main {
   @apply w-full flex flex-col gap-4 max-w-4xl;
 }
 .test-section .test-question-container > li {
-  @apply w-full flex flex-col p-6 bg-white rounded-md;
+  @apply w-full flex flex-col p-6 pl-[4.5rem] bg-white rounded-md
+      relative;
+}
+.test-section .test-question-container > li .numbering {
+  @apply top-6 left-6 absolute font-bold text-xl;
 }
 .test-section .test-question-container > li .top {
-  @apply flex items-start  mb-4 gap-2 justify-between;
+  @apply flex items-start mb-4 gap-6 justify-between;
 }
-.test-section .test-question-container > li .top h2 {
-  @apply font-bold text-xl max-w-3xl flex-grow;
+.test-section .test-question-container > li .top .question {
+  @apply font-bold text-xl;
 }
-.test-section .test-question-container > li .top h2 span {
-  @apply text-[calc(1em-2px)];
+.test-section .test-question-container > li .top .question .tiptap-image {
+  @apply mt-4;
 }
 .test-section .test-question-container > li .top .action-btn-container {
   @apply flex items-center gap-3 text-xl mt-1;
@@ -419,11 +423,11 @@ main {
 
 .question-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[9999];
 }
 .question-form form {
   @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[90%] overflow-y-auto;
+    max-w-lg z-10 relative max-h-[90%] overflow-y-auto;
 }
 .question-form form .close-btn {
   @apply absolute w-fit right-6 top-6;
@@ -434,11 +438,28 @@ main {
 .question-form form h3 {
   @apply text-2xl font-extrabold mb-4;
 }
-.question-form form label {
+.question-form form > label {
   @apply mt-2 text-sm font-bold indent-1;
 }
-.question-form form label span {
+.question-form form > label span {
   @apply text-custom-red font-bold;
+}
+.question-form form .question-editor {
+  @apply bg-white rounded-md min-h-fit border-custom-gray-base border-[1px]
+      flex gap-2 px-2 items-start;
+}
+.question-form form .question-editor:focus-within {
+  outline: auto;
+}
+.question-form form .question-editor div:nth-child(1) {
+  @apply flex-grow;
+}
+.question-form form .question-editor div:nth-child(1) .tiptap {
+  @apply bg-white rounded-md h-full min-h-10 outline-none cursor-text 
+          flex-grow py-2;
+}
+.question-form form .question-editor > button {
+  @apply text-xl mt-2.5;
 }
 .question-form form input {
   @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
@@ -926,10 +947,11 @@ main {
 
 .admin-courses-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10;
+  bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 }
 .admin-courses-container > .header {
-  @apply flex justify-between items-center mb-12;
+  @apply flex justify-between items-center mb-12 max-w-6xl
+    w-full;
 }
 .admin-courses-container > .header h1 {
   @apply font-extrabold text-3xl;
@@ -939,12 +961,13 @@ main {
       rounded-lg text-lg font-bold;
 }
 .admin-courses-container .course-table {
-  @apply flex-col gap-6 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))];
+  @apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
+    max-w-6xl w-full;
 }
 .admin-courses-container .course-table li {
   @apply flex flex-col justify-start relative
       gap-x-8 hover:z-20 gap-2 overflow-hidden
-      bg-white rounded-lg cursor-pointer 
+      bg-white rounded-lg cursor-pointer max-w-sm
       hover:shadow-md duration-500 hover:scale-[1.02];
 }
 .admin-courses-container .course-table li .status {
@@ -1467,13 +1490,19 @@ main {
     flex flex-col justify-center relative;
 }
 .image-gallery-modal > div h3 {
-  @apply text-2xl font-extrabold mb-8;
+  @apply text-2xl font-extrabold mb-6;
 }
 .image-gallery-modal > div .close-btn {
   @apply absolute w-fit right-6 top-6;
 }
 .image-gallery-modal > div .close-btn svg {
   @apply text-3xl;
+}
+.image-gallery-modal > div .fetching-image {
+  @apply flex text-xl items-center justify-center gap-2 mb-6 font-bold;
+}
+.image-gallery-modal > div .fetching-image span {
+  @apply animate-spin text-2xl;
 }
 .image-gallery-modal > div .uploaded-image-container {
   @apply grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 mb-8 max-h-80 overflow-y-auto justify-center justify-items-center px-2;
@@ -1487,6 +1516,12 @@ main {
 .image-gallery-modal > div .select-btn-container button {
   @apply text-xl font-bold text-white bg-custom-blue-base px-4 py-2
         rounded-lg w-full disabled:bg-custom-gray-dark disabled:cursor-not-allowed;
+}
+.image-gallery-modal > div .select-btn-container .upload-img-btn {
+  @apply bg-custom-blue-dark flex gap-2 items-center justify-center;
+}
+.image-gallery-modal > div .select-btn-container .upload-img-btn span {
+  @apply text-2xl;
 }
 .image-gallery-modal > div .upload-img {
   @apply flex flex-col cursor-pointer w-full px-4 py-8

@@ -2,35 +2,52 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiSolidCloudUpload } from "react-icons/bi";
+import { LuLoader2 } from "react-icons/lu";
+import { MdUpload } from "react-icons/md";
 import adminFetchAllUploadedImageKey from "@/services/api/adminFetchAllUploadedImageKey";
 import Image from "next/image";
 import adminGetS3UploadImageSignedURL from "@/services/api/adminGetS3UploadImageSignedURL";
 import adminPutS3Image from "@/services/api/adminPutS3Image";
 
-const ImageGalleryModal = ({ addImage }) => {
+const ImageGalleryModal = ({ onAddImage }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [imageKeys, setImageKeys] = useState([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(-1);
   const [imageToUpload, setImageToUpload] = useState(undefined);
+  const [isFetchingImage, setIsFetchingImage] = useState(false);
 
   useEffect(() => {
     const fetchImageKeys = async () => {
+      setIsFetchingImage(true);
       const response = await adminFetchAllUploadedImageKey();
-      if (!response.ok) return;
+      if (!response.ok) return setIsFetchingImage(false);
       setImageKeys(response.json.imageKeys);
+      setIsFetchingImage(false);
     };
 
     fetchImageKeys();
   }, []);
 
   const closeModal = () => {
-    router.push(`${pathname}?edit_content=true`);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("upload_image");
+    currentParams.delete("select_image");
+    router.push(`${pathname}?${currentParams}`);
   };
 
   const renderUploadedImages = () => {
-    if (imageKeys.length === 0) return <></>;
+    if (imageKeys.length === 0 && !isFetchingImage) return <></>;
+    if (isFetchingImage)
+      return (
+        <p className="fetching-image">
+          <span>
+            <LuLoader2 />
+          </span>
+          Fetching uploaded image...
+        </p>
+      );
     return (
       <div className="uploaded-image-container">
         {imageKeys.map((imageKey, index) => (
@@ -52,13 +69,15 @@ const ImageGalleryModal = ({ addImage }) => {
   };
 
   const handleConfirmClick = () => {
-    addImage(
+    onAddImage(
       `${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/${imageKeys[selectedImageIndex]}`
     );
   };
 
   const handleUploadImageClick = () => {
-    router.push(`${pathname}?edit_content=true&upload_image=true`);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("select_image");
+    router.push(`${pathname}?${currentParams}&upload_image=true`);
   };
 
   const renderSelectImagePanel = () => {
@@ -71,10 +90,21 @@ const ImageGalleryModal = ({ addImage }) => {
           <button
             disabled={selectedImageIndex === -1 ? true : false}
             onClick={handleConfirmClick}
+            type="button"
           >
             Confirm
           </button>
-          <button onClick={handleUploadImageClick}>Upload Image</button>
+          <button
+            onClick={handleUploadImageClick}
+            type="button"
+            className="upload-img-btn"
+            disabled={isFetchingImage}
+          >
+            <span>
+              <MdUpload />
+            </span>
+            Upload Image
+          </button>
         </div>
       </>
     );
@@ -93,13 +123,15 @@ const ImageGalleryModal = ({ addImage }) => {
 
     if (!isUploadSuccessful.ok) return;
 
-    addImage(
+    onAddImage(
       `${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/${preSignedResponse.json.imageKey}`
     );
   };
 
   const handleCancelClick = () => {
-    router.push(`${pathname}?edit_content=true&select_image=true`);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("upload_image");
+    router.push(`${pathname}?${currentParams}&select_image=true`);
     setImageToUpload(undefined);
   };
 
@@ -148,8 +180,12 @@ const ImageGalleryModal = ({ addImage }) => {
         {renderImageInput()}
         {renderImageToUpload()}
         <div className="upload-btn-container">
-          <button onClick={handleUploadClick}>Upload</button>
-          <button onClick={handleCancelClick}>Cancel</button>
+          <button onClick={handleUploadClick} type="button">
+            Upload
+          </button>
+          <button onClick={handleCancelClick} type="button">
+            Cancel
+          </button>
         </div>
       </>
     );

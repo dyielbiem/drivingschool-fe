@@ -23,16 +23,21 @@
     @apply w-full flex flex-col gap-4 max-w-4xl;
 
     & > li {
-      @apply w-full flex flex-col p-6 bg-white rounded-md;
+      @apply w-full flex flex-col p-6 pl-[4.5rem] bg-white rounded-md
+      relative;
+
+      .numbering {
+        @apply top-6 left-6 absolute font-bold text-xl;
+      }
 
       .top {
-        @apply flex items-start  mb-4 gap-2 justify-between;
+        @apply flex items-start mb-4 gap-6 justify-between;
 
-        h2 {
-          @apply font-bold text-xl max-w-3xl flex-grow;
+        .question {
+          @apply font-bold text-xl;
 
-          span {
-            @apply text-[calc(1em-2px)];
+          .tiptap-image {
+            @apply mt-4;
           }
         }
 

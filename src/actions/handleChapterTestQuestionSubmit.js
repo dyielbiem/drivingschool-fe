@@ -3,18 +3,23 @@ import adminAddChapterTestQuestion from "@/services/api/adminAddChapterTestQuest
 
 const handleChapterTestQuestionSubmit = async (
   parentID,
+  question,
   otherChoices,
   prevState,
   formData
 ) => {
   const formDataObject = {
-    question: formData.get("question"),
     correctAnswer: formData.get("correct-answer")
   };
 
+  if (!question)
+    return {
+      message: "Question is required"
+    };
+
   const response = await adminAddChapterTestQuestion(
     parentID,
-    formDataObject.question,
+    question,
     otherChoices,
     formDataObject.correctAnswer
   );

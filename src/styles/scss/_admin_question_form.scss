@@ -1,10 +1,10 @@
 .question-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[9999];
 
   form {
     @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[90%] overflow-y-auto;
+    max-w-lg z-10 relative max-h-[90%] overflow-y-auto;
 
     .close-btn {
       @apply absolute w-fit right-6 top-6;
@@ -18,11 +18,33 @@
       @apply text-2xl font-extrabold mb-4;
     }
 
-    label {
+    & > label {
       @apply mt-2 text-sm font-bold indent-1;
 
       span {
         @apply text-custom-red font-bold;
+      }
+    }
+
+    .question-editor {
+      @apply bg-white rounded-md min-h-fit border-custom-gray-base border-[1px]
+      flex gap-2 px-2 items-start;
+
+      &:focus-within {
+        outline: auto;
+      }
+
+      div:nth-child(1) {
+        @apply flex-grow;
+
+        .tiptap {
+          @apply bg-white rounded-md h-full min-h-10 outline-none cursor-text 
+          flex-grow py-2;
+        }
+      }
+
+      & > button {
+        @apply text-xl mt-2.5;
       }
     }
 

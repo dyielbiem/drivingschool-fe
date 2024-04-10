@@ -1,9 +1,19 @@
 "use server";
 import adminEditQuestion from "@/services/api/adminEditQuestion";
 
-const handleTestQuestionEdit = async (otherChoices, prevState, formData) => {
+const handleTestQuestionEdit = async (
+  question,
+  otherChoices,
+  prevState,
+  formData
+) => {
+  if (!question)
+    return {
+      message: "Question is required",
+      oldQuestion: prevState.oldQuestion
+    };
+
   const formDataObject = {
-    question: formData.get("question"),
     correctAnswer: formData.get("correct-answer")
   };
 
@@ -12,7 +22,7 @@ const handleTestQuestionEdit = async (otherChoices, prevState, formData) => {
   );
 
   if (
-    formDataObject.question === prevState?.oldQuestion?.question &&
+    question === prevState?.oldQuestion?.question &&
     formDataObject.correctAnswer === prevState?.oldQuestion?.correctAnswer &&
     otherChoices?.length === oldOtherChoices?.length &&
     otherChoices.every((choice) => oldOtherChoices.includes(choice))
@@ -23,7 +33,7 @@ const handleTestQuestionEdit = async (otherChoices, prevState, formData) => {
 
   const response = await adminEditQuestion(
     prevState?.oldQuestion.questionID,
-    formDataObject.question,
+    question,
     formDataObject.correctAnswer,
     otherChoices
   );
@@ -42,7 +52,7 @@ const handleTestQuestionEdit = async (otherChoices, prevState, formData) => {
     newQuestion: {
       ...prevState.oldQuestion,
       choices: newChoices,
-      question: formDataObject.question,
+      question: question,
       correctAnswer: formDataObject.correctAnswer
     }
   };

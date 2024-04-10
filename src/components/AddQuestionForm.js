@@ -4,12 +4,13 @@ import FormButton from "./FormButton";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormErrorMessage from "./FormErrorMessage";
-// import { useSectionTestQuestions } from "@/state/store";
+import QuestionEditor from "./QuestionEditor";
 
 const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [otherChoices, setOtherChoices] = useState([""]);
+  const [question, setQuestion] = useState("");
   const closeForm = () => {
     router.push(pathname);
   };
@@ -19,14 +20,15 @@ const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
     newQuestion: undefined
   };
 
-  const submitActionWithSection = submitAction.bind(parentID, parentID);
-  const submitActionWithSectionAndChoices = submitActionWithSection.bind(
+  const submitActionWithBindings = submitAction.bind(
     null,
+    parentID,
+    question,
     otherChoices
   );
 
   const [formState, formAction] = useFormState(
-    submitActionWithSectionAndChoices,
+    submitActionWithBindings,
     initialState
   );
 
@@ -85,7 +87,7 @@ const AddQuestionForm = ({ submitAction, parentID, setNewTestQuestion }) => {
         <label htmlFor="question">
           Question <span>*</span>
         </label>
-        <input type="text" name="question" id="question" />
+        <QuestionEditor onChange={setQuestion} />
         <label htmlFor="correct-answer">
           Correct Answer <span>*</span>
         </label>

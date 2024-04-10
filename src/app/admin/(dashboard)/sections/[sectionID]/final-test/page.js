@@ -96,11 +96,14 @@ const FinalTest = () => {
       <ul className="test-question-container">
         {sectionTestQuestions?.map((question, index) => (
           <li key={index}>
+            <p className="numbering">{String(index + 1).padStart(2, "0")}.</p>
             <div className="top">
-              <h2>
-                <span>{String(index + 1).padStart(2, "0")}.</span>{" "}
-                {question.question}
-              </h2>
+              <div
+                className="question"
+                dangerouslySetInnerHTML={{
+                  __html: question.question
+                }}
+              />
               <div className="action-btn-container">
                 <button>
                   <FaPen onClick={() => handleEditClick(question.questionID)} />
@@ -151,7 +154,6 @@ const FinalTest = () => {
       )}
       {itemToDelete && (
         <ConfirmDeleteModal
-          itemToDelete={itemToDelete.question}
           pathWhenModalIsClosed={pathname}
           confirmAction={deleteAction}
         />

@@ -9,6 +9,7 @@ import {
   useChapterTestQuestions,
   useSectionTestQuestions
 } from "@/state/store";
+import QuestionEditor from "./QuestionEditor";
 
 const EditQuestionForm = ({ item }) => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const EditQuestionForm = ({ item }) => {
   const [otherChoices, setOtherChoices] = useState(
     item.choices.filter((eachChoices) => eachChoices !== item.correctAnswer)
   );
+  const [question, setQuestion] = useState(item.question);
   const { setUpdateChapterTestQuestion } = useChapterTestQuestions();
   const { setUpdateSectionTestQuestion } = useSectionTestQuestions();
 
@@ -29,13 +31,14 @@ const EditQuestionForm = ({ item }) => {
     oldQuestion: item
   };
 
-  const submitActionWithChoices = handleTestQuestionEdit.bind(
+  const submitActionWithBindings = handleTestQuestionEdit.bind(
     null,
+    question,
     otherChoices
   );
 
   const [formState, formAction] = useFormState(
-    submitActionWithChoices,
+    submitActionWithBindings,
     initialState
   );
 
@@ -94,8 +97,6 @@ const EditQuestionForm = ({ item }) => {
     ));
   };
 
-  // const render
-
   return (
     <div className="question-form">
       <form action={formAction}>
@@ -106,12 +107,7 @@ const EditQuestionForm = ({ item }) => {
         <label htmlFor="question">
           Question <span>*</span>
         </label>
-        <input
-          type="text"
-          name="question"
-          id="question"
-          defaultValue={item.question}
-        />
+        <QuestionEditor onChange={setQuestion} editorContent={item.question} />
         <label htmlFor="correct-answer">
           Correct Answer <span>*</span>
         </label>
