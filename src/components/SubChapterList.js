@@ -49,13 +49,24 @@ const SubChapterList = () => {
 
       if (isSubChaptersOnOrder) return;
       setIsReordering(true);
+      const subChapterIDs = subChapters.map((item) => ({
+        subChapterID: item.subChapterID
+      }));
+
       const response = await adminUpdateSubChaptersOrder(
         chapterID,
-        subChapters
+        subChapterIDs
       );
 
       if (!response.ok) return setIsReordering(false);
-      setSubChapters(response.json.subChapters);
+
+      setSubChapters(
+        subChapters.map((item, index) => ({
+          ...item,
+          orderID: response.json.subChapters[index].orderID
+        }))
+      );
+
       setIsReordering(false);
     };
     window.addEventListener("pointerup", dragEnd);
