@@ -29,10 +29,12 @@ const handleLoginSubmit = async (role, redirectPath, prevState, formData) => {
     };
 
   cookies().set("accessToken", response?.json?.accessToken, {
-    sameSite: "lax"
+    sameSite: "none",
+    secure: true
   });
   cookies().set("refreshToken", response?.json?.refreshToken, {
-    sameSite: "lax",
+    sameSite: "none",
+    secure: true,
     maxAge: formDataObject.rememberMe === "on" ? 86400 * 365 : ""
   });
 

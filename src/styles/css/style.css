@@ -222,7 +222,7 @@ main {
 
 .add-sub-chapter-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[9999];
 }
 .add-sub-chapter-form form {
   @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
@@ -533,24 +533,37 @@ main {
   @apply text-black
         rounded-md bg-custom-white-darker;
 }
-.admin-chapter-section .sub-chapters-container {
-  @apply flex flex-col w-full gap-4 max-w-4xl;
+.admin-chapter-section .nav-links {
+  @apply w-full flex flex-col gap-4 max-w-4xl;
 }
-.admin-chapter-section .sub-chapters-container li {
+.admin-chapter-section .nav-links .sub-chapters-container {
+  @apply flex flex-col w-full gap-4;
+}
+.admin-chapter-section .nav-links .sub-chapters-container li {
   @apply rounded-md px-6 font-bold text-lg
-      bg-white hover:shadow-md flex;
+        bg-white hover:shadow-md flex items-center;
 }
-.admin-chapter-section .sub-chapters-container li a {
+.admin-chapter-section .nav-links .sub-chapters-container li a {
   @apply flex-grow h-full py-5;
 }
-.admin-chapter-section .sub-chapters-container li div {
-  @apply flex gap-5;
+.admin-chapter-section .nav-links .sub-chapters-container li div {
+  @apply flex gap-4 h-fit;
 }
-.admin-chapter-section .sub-chapters-container li div button:nth-child(1) {
+.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(1) {
   @apply text-custom-blue-light;
 }
-.admin-chapter-section .sub-chapters-container li div button:nth-child(2) {
+.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(2) {
   @apply text-custom-red;
+}
+.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(3) {
+  @apply rotate-45;
+}
+.admin-chapter-section .nav-links .chapter-test-item {
+  @apply rounded-md px-6 font-bold text-lg 
+      bg-white hover:shadow-md flex w-full;
+}
+.admin-chapter-section .nav-links .chapter-test-item a {
+  @apply w-full h-full py-5;
 }
 .admin-chapter-section .button-container {
   @apply flex flex-col gap-2 mt-8 w-full max-w-4xl;
@@ -1631,4 +1644,16 @@ main {
 .pagination > div {
   @apply rounded-md w-12 h-12 bg-white text-2xl
     shadow-lg font-bold items-end justify-center flex;
+}
+
+.full-screen-loading {
+  @apply fixed top-0 left-0 w-screen h-screen
+  flex flex-col bg-[rgba(0,0,0,0.55)] z-[9999]
+  items-center justify-center gap-2;
+}
+.full-screen-loading p {
+  @apply text-2xl text-white font-extrabold;
+}
+.full-screen-loading svg {
+  @apply text-7xl text-white animate-spin;
 }

@@ -1,6 +1,6 @@
 .add-sub-chapter-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[9999];
 
   form {
     @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 

@@ -1,21 +1,20 @@
 "use client";
+import Link from "next/link";
+import AddSubChapterForm from "@/components/AddSubChapterForm";
+import ContentEditor from "@/components/ContentEditor";
+import EditTitleForm from "@/components/EditTitleForm";
+import SubChapterList from "@/components/SubChapterList";
+import adminFetchChapterByID from "@/services/api/adminFetchChapterByID";
+import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
+import handleChapterTitleUpdate from "@/actions/handleChapterTitleUpdate";
 import { useChapterIndex } from "@/state/store";
 import { useEffect, useState } from "react";
-import adminFetchChapterByID from "@/services/api/adminFetchChapterByID";
-import Link from "next/link";
 import { useSubChapters } from "@/state/store";
-import AddSubChapterForm from "@/components/AddSubChapterForm";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import ContentEditor from "@/components/ContentEditor";
-import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
 import { useChapterTestQuestions } from "@/state/store";
-import { FaTrashCan, FaPen } from "react-icons/fa6";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
-import adminDeleteSubChapter from "@/services/api/adminDeleteSubChapter";
-import EditTitleForm from "@/components/EditTitleForm";
-import handleChapterTitleUpdate from "@/actions/handleChapterTitleUpdate";
 import { useChapters } from "@/state/store";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { FaPen } from "react-icons/fa6";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
@@ -26,7 +25,6 @@ const ChapterID = ({ params }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const [itemToDelete, setItemToDelete] = useState(undefined);
   const { setUpdatedChapter } = useChapters();
 
   // Fetch the current chapter
@@ -41,21 +39,6 @@ const ChapterID = ({ params }) => {
     fetchChapter();
   }, [params.chapterID, setChapter, setSubChapters]);
 
-  // Validate for delete sub-chapter query in URL
-  useEffect(() => {
-    if (!subChapters) return;
-    if (!searchParams.get("delete_sub_chapter"))
-      return setItemToDelete(undefined);
-    const subChapterToDelete = subChapters?.find(
-      (subChapter) =>
-        subChapter.subChapterID === searchParams.get("delete_sub_chapter")
-    );
-
-    setItemToDelete(
-      subChapterToDelete ? subChapterToDelete.subChapterTitle : undefined
-    );
-  }, [searchParams, subChapters]);
-
   // Update the title of chapter on side nav to reflect
   // the change made by the user
   useEffect(() => {
@@ -63,12 +46,12 @@ const ChapterID = ({ params }) => {
     setUpdatedChapter(chapter);
   }, [chapter, setUpdatedChapter]);
 
-  const handleAddChapterClick = () => {
-    router.push(pathname + "?add_sub_chapter=true");
-  };
-
   const handleEditContentClick = () => {
     router.push(pathname + "?edit_content=true");
+  };
+
+  const handleAddSubChapterClick = () => {
+    router.push(pathname + "?add_sub_chapter=true");
   };
 
   const updateChapterContent = async (chapterContent) => {
@@ -95,13 +78,23 @@ const ChapterID = ({ params }) => {
     router.push(backRoute);
   };
 
-  const renderChapter = () => {
+  const handleChapterTitleUpdateWithChapter = handleChapterTitleUpdate.bind(
+    null,
+    chapter
+  );
+
+  const handleAddChapterTestClick = () => {
+    router.push(`${pathname}/chapter-test`);
+  };
+
+  const renderChapterHeaderBox = () => {
     if (
       !chapter ||
       (searchParams.get("edit_content") === "true" &&
         searchParams.get("edit_title") === "true")
     )
-      return <></>;
+      return null;
+
     return (
       <div className="header">
         <button onClick={handleBackClick} className="back-btn">
@@ -111,12 +104,11 @@ const ChapterID = ({ params }) => {
           Chapter {String(chapterIndex + 1).padStart(2, "0")}:{" "}
           {chapter.chapterTitle}
         </h1>
-        {searchParams.get("edit_content") !== "true" && (
+        {searchParams.get("edit_content") !== "true" ? (
           <button onClick={handleEditContentClick} className="edit-content-btn">
             Edit content
           </button>
-        )}
-        {searchParams.get("edit_content") === "true" && (
+        ) : (
           <button className="edit-title-btn" onClick={handleEditTitleClick}>
             <FaPen />
           </button>
@@ -125,18 +117,13 @@ const ChapterID = ({ params }) => {
     );
   };
 
-  const handleChapterTitleUpdateWithChapter = handleChapterTitleUpdate.bind(
-    null,
-    chapter
-  );
-
   const renderEditTitleInput = () => {
     if (
       !chapter ||
       searchParams.get("edit_content") !== "true" ||
       searchParams.get("edit_title") !== "true"
     )
-      return <></>;
+      return null;
 
     return (
       <EditTitleForm
@@ -145,6 +132,56 @@ const ChapterID = ({ params }) => {
         setItemToEdit={setChapter}
         updateAction={handleChapterTitleUpdateWithChapter}
       />
+    );
+  };
+
+  const renderChapterContent = () => {
+    if (!chapterContent) return null;
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: chapter.chapterContent }}
+        className="section-content-container"
+      />
+    );
+  };
+
+  const renderChapterTest = () => {
+    if (!chapterTestQuestions || chapterTestQuestions.length === 0) return null;
+    return (
+      <div className="chapter-test-item">
+        <Link href={`${pathname}/chapter-test`}>
+          <span>
+            {chapterIndex + 1}.{subChapters.length + 1}
+          </span>{" "}
+          Chapter Test
+        </Link>
+      </div>
+    );
+  };
+
+  const renderActionButtons = () => {
+    return (
+      <div className="button-container">
+        <button onClick={handleAddSubChapterClick}>Add new sub-chapter</button>
+        {chapterTestQuestions?.length === 0 && (
+          <button onClick={handleAddChapterTestClick}>Add chapter test</button>
+        )}
+      </div>
+    );
+  };
+
+  const renderChapterMainSection = () => {
+    if (!chapter || !subChapters || searchParams.get("edit_content") === "true")
+      return null;
+    return (
+      <>
+        {renderChapterContent()}
+        <div className="nav-links">
+          <SubChapterList />
+          {renderChapterTest()}
+        </div>
+        {renderActionButtons()}
+      </>
     );
   };
 
@@ -158,115 +195,16 @@ const ChapterID = ({ params }) => {
     );
   };
 
-  const renderChapterContent = () => {
-    if (!chapterContent || searchParams.get("edit_content")) return <></>;
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: chapter.chapterContent }}
-        className="section-content-container"
-      />
-    );
-  };
-
-  const handleAddChapterTestClick = () => {
-    router.push(`${pathname}/chapter-test`);
-  };
-
-  const handleEditClick = (subChapterID) => {
-    router.push(`${pathname}/${subChapterID}?edit_content=true`);
-  };
-
-  const handleDeleteClick = (subChapterID) => {
-    router.push(`${pathname}?delete_sub_chapter=${subChapterID}`);
-  };
-
-  const renderSubChapters = () => {
-    if (!chapter || !subChapters || searchParams.get("edit_content") === "true")
-      return <></>;
-    return (
-      <>
-        <ul className="sub-chapters-container">
-          {subChapters.length != 0 &&
-            subChapters.map((subChapter, index) => (
-              <li key={index}>
-                <Link href={`${pathname}/${subChapter.subChapterID}`}>
-                  <span>
-                    {chapterIndex + 1}.{index + 1}
-                  </span>{" "}
-                  {subChapter.subChapterTitle}
-                </Link>
-                <div>
-                  <button
-                    onClick={() => handleEditClick(subChapter.subChapterID)}
-                  >
-                    <FaPen />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteClick(subChapter.subChapterID)}
-                  >
-                    <FaTrashCan />
-                  </button>
-                </div>
-              </li>
-            ))}
-          {chapterTestQuestions && chapterTestQuestions.length !== 0 && (
-            <li>
-              <Link href={`${pathname}/chapter-test`}>
-                <span>
-                  {chapterIndex + 1}.{subChapters.length + 1}
-                </span>{" "}
-                Chapter Test
-              </Link>
-            </li>
-          )}
-        </ul>
-        <div className="button-container">
-          <button onClick={handleAddChapterClick}>Add new sub-chapter</button>
-          {chapterTestQuestions?.length === 0 && (
-            <button onClick={handleAddChapterTestClick}>
-              Add chapter test
-            </button>
-          )}
-        </div>
-      </>
-    );
-  };
-
-  const deleteSubChapter = async () => {
-    if (!searchParams.get("delete_sub_chapter")) return;
-    const response = await adminDeleteSubChapter(
-      String(searchParams.get("delete_sub_chapter"))
-    );
-    if (!response.ok) return;
-    setSubChapters(
-      subChapters?.filter(
-        (subChapter) =>
-          subChapter.subChapterID !== searchParams.get("delete_sub_chapter")
-      )
-    );
-    router.push(pathname);
-  };
-
   return (
-    <>
-      <section className="admin-chapter-section">
-        {renderChapter()}
-        {renderEditTitleInput()}
-        {renderChapterContent()}
-        {renderRichTextEditor()}
-        {renderSubChapters()}
-      </section>
+    <section className="admin-chapter-section">
+      {renderChapterHeaderBox()}
+      {renderEditTitleInput()}
+      {renderChapterMainSection()}
+      {renderRichTextEditor()}
       {searchParams.get("add_sub_chapter") === "true" && (
         <AddSubChapterForm chapterID={params.chapterID} />
       )}
-      {itemToDelete && (
-        <ConfirmDeleteModal
-          itemToDelete={itemToDelete}
-          pathWhenModalIsClosed={pathname}
-          confirmAction={deleteSubChapter}
-        />
-      )}
-    </>
+    </section>
   );
 };
 

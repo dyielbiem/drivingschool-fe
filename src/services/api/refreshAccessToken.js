@@ -29,7 +29,10 @@ export const adminRefreshAccessToken = async (fetchMethod) => {
     const refreshJSON = await refreshResponse.json();
 
     if (!refreshResponse.ok) return { ok: false, json: refreshJSON };
-    cookies().set("accessToken", refreshJSON.accessToken, { sameSite: "lax" });
+    cookies().set("accessToken", refreshJSON.accessToken, {
+      sameSite: "none",
+      secure: true
+    });
 
     // Invoke the fetch method again using the new access token
     const refreshedAccessToken = cookies().get("accessToken");

@@ -1,0 +1,13 @@
+.full-screen-loading {
+  @apply fixed top-0 left-0 w-screen h-screen
+  flex flex-col bg-[rgba(0,0,0,0.55)] z-[9999]
+  items-center justify-center gap-2;
+
+  p {
+    @apply text-2xl text-white font-extrabold;
+  }
+
+  svg {
+    @apply text-7xl text-white animate-spin;
+  }
+}
