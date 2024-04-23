@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import adminFetchChapters from "@/services/api/adminFetchChapters";
 import { TbClipboardList, TbEdit } from "react-icons/tb";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -112,18 +113,23 @@ const ManageSectionSideNav = () => {
     setSubChapters(undefined);
   };
 
-  const renderButtons = () => {
+  const renderTop = () => {
     if (!chapters) return <></>;
     return (
-      <div className="btn-container">
-        <button onClick={handleAddChapterClick}>
-          Add new chapter <TbEdit />
-        </button>
-        {sectionTestQuestions?.length === 0 && chapters?.length !== 0 && (
-          <Link href={`/admin/sections/${sectionID}/final-test`}>
-            Add final test <TbClipboardList />
-          </Link>
-        )}
+      <div className="top">
+        <Link href={"/admin/sections"} className="home">
+          <Image src={"/logo.png"} alt="logo-image" width={1734} height={594} />
+        </Link>
+        <div className="btn-container">
+          <button onClick={handleAddChapterClick}>
+            Add new chapter <TbEdit />
+          </button>
+          {sectionTestQuestions?.length === 0 && chapters?.length !== 0 && (
+            <Link href={`/admin/sections/${sectionID}/final-test`}>
+              Add final test <TbClipboardList />
+            </Link>
+          )}
+        </div>
       </div>
     );
   };
@@ -211,12 +217,17 @@ const ManageSectionSideNav = () => {
   return (
     <>
       <div className="side-nav-container">
-        <div className="top">
+        {/* <div className="top">
           <Link href={"/admin/sections"} className="home">
-            Driving Schools Online Courses
+            <Image
+              src={"/logo.png"}
+              alt="logo-image"
+              width={1734}
+              height={594}
+            />
           </Link>
-          {renderButtons()}
-        </div>
+        </div> */}
+        {renderTop()}
         <nav>
           {renderChapters()}
           {renderSectionTest()}

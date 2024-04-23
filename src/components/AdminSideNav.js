@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import adminLogoutClick from "@/actions/adminLogoutClick";
 import { usePathname, useRouter } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
@@ -54,7 +55,7 @@ const AdminSideNav = () => {
       className={`side-nav-container ${regex.test(pathName) ? "!hidden" : ""}`}
     >
       <Link href={"/admin/sections"} className="home">
-        Driving Schools Online Courses
+        <Image src={"/logo.png"} alt="logo-image" width={1734} height={594} />
       </Link>
       <nav className="side-nav">
         <div className="nav-items-container">

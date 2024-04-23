@@ -3,12 +3,12 @@
 
   & > .side-nav-container {
     @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-start py-16 min-w-80
+    transition-[width] duration-300 items-start py-14 min-w-80
     max-w-80 overflow-y-auto;
 
     .home {
       @apply text-2xl text-white font-bold text-left
-      mb-9 px-6;
+      mb-10 w-10/12 self-center px-4;
     }
 
     .side-nav {
