@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import adminFetchBilling from "@/services/api/adminFetchBilling";
-import { RiPrinterFill } from "react-icons/ri";
 
 const AdminBilling = () => {
   const [billing, setBilling] = useState([]);
@@ -22,6 +21,7 @@ const AdminBilling = () => {
       <ul className="billing-table">
         <li className="table-header">
           <p>Transaction ID</p>
+          <p>Username</p>
           <p>Name</p>
           <p>Coupon Code</p>
           <p>Account No.</p>
@@ -30,15 +30,13 @@ const AdminBilling = () => {
         {billing.map((item, index) => (
           <li key={index}>
             <p>{item.transactionID}</p>
+            <p>{item.studentUserName}</p>
             <p>
               {item.billingFirstName} {item.billingLastName}
             </p>
             <p>{item.usedCouponCode}</p>
             <p>{item.accountNumber}</p>
             <p>$ {item.paidAmount}</p>
-            <button>
-              <RiPrinterFill />
-            </button>
           </li>
         ))}
       </ul>
