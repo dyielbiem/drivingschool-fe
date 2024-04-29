@@ -15,6 +15,11 @@ export const middleware = async (request) => {
     return response;
   };
 
+  /*
+    Let any kind of user to access forgot password routes
+  */
+  if (pathName.includes("reset-password")) return;
+
   /* 
     When a user visits super admin login page and a refresh token exists,
     redirect the user to the protected super admin landing route

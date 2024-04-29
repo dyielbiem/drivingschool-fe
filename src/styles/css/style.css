@@ -38,15 +38,21 @@ main {
   @apply border-solid border-neutral-400 border-[1px] 
       rounded-md py-2 px-2;
 }
-.login-page .login-form .remember-me-container {
-  @apply flex gap-2 justify-start items-center text-sm
-      cursor-pointer mt-2;
+.login-page .login-form .extra-actions {
+  @apply flex justify-between gap-2 items-center mt-2;
 }
-.login-page .login-form .remember-me-container > * {
+.login-page .login-form .extra-actions .remember-me-container {
+  @apply flex gap-2 justify-start items-center text-sm
+        cursor-pointer;
+}
+.login-page .login-form .extra-actions .remember-me-container > * {
   @apply cursor-pointer;
 }
-.login-page .login-form .remember-me-container input {
+.login-page .login-form .extra-actions .remember-me-container input {
   @apply h-10;
+}
+.login-page .login-form .extra-actions a {
+  @apply text-sm mt-[2px];
 }
 .login-page .login-form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
@@ -58,6 +64,53 @@ main {
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .login-page .login-form button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+
+.reset-password-page {
+  @apply grid grid-cols-1 md:grid-cols-2 justify-items-center h-screen;
+}
+.reset-password-page .img-container {
+  @apply aspect-square w-full h-full overflow-hidden relative hidden md:block;
+}
+.reset-password-page .img-container img {
+  @apply object-cover;
+}
+.reset-password-page .reset-password-form {
+  @apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-lg
+    w-full justify-start md:justify-center md:px-10 py-16;
+}
+.reset-password-page .reset-password-form h1 {
+  @apply text-custom-blue-base text-2xl font-extrabold;
+}
+.reset-password-page .reset-password-form > label {
+  @apply text-sm mt-4 indent-0.5 font-bold;
+}
+.reset-password-page .reset-password-form > input {
+  @apply border-solid border-neutral-400 border-[1px] 
+      rounded-md py-2 px-2;
+}
+.reset-password-page .reset-password-form .resend-code {
+  @apply text-custom-blue-base font-bold cursor-pointer;
+}
+.reset-password-page .reset-password-form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.reset-password-page .reset-password-form .success-message {
+  @apply text-custom-green-base font-bold p-2.5 mt-4
+      bg-custom-green-light border-2 border-custom-green-base
+      flex items-start gap-2;
+}
+.reset-password-page .reset-password-form .success-message span {
+  @apply text-2xl animate-spin;
+}
+.reset-password-page .reset-password-form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-xl font-bold 
+      text-white rounded-lg py-2.5 mt-10 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.reset-password-page .reset-password-form button[type=submit] svg {
   @apply text-2xl animate-spin;
 }
 

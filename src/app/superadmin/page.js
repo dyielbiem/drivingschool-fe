@@ -1,10 +1,10 @@
 import LoginForm from "@/components/LoginForm";
-import LoginImage from "@/components/LoginImage";
+import LandingImage from "@/components/LandingImage";
 
 const SuperAdminLogin = () => {
   return (
     <main className="login-page">
-      <LoginImage />
+      <LandingImage />
       <LoginForm
         role="superadmin"
         formTitle="Superadmin Login"

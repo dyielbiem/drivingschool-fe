@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import FormButton from "./FormButton";
 import handleLoginSubmit from "../actions/handleLoginSubmit";
 import FormErrorMessage from "./FormErrorMessage";
@@ -41,9 +42,12 @@ const LoginForm = ({ role, formTitle, redirectPath }) => {
         className="password-input"
         required
       />
-      <div className="remember-me-container">
-        <input type="checkbox" id="remember-me" name="remember-me" />
-        <label htmlFor="remember-me">Remember me on this computer</label>
+      <div className="extra-actions">
+        <div className="remember-me-container">
+          <input type="checkbox" id="remember-me" name="remember-me" />
+          <label htmlFor="remember-me">Remember me on this computer</label>
+        </div>
+        <Link href={`/${role}/reset-password`}>Forgot password?</Link>
       </div>
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>

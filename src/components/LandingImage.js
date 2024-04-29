@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const LoginImage = () => {
+const LandingImage = () => {
   return (
     <div className="img-container">
       <Image
@@ -14,4 +14,4 @@ const LoginImage = () => {
   );
 };
 
-export default LoginImage;
+export default LandingImage;
