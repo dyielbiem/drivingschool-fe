@@ -119,12 +119,12 @@ main {
 }
 .admin-dashboard-layout > .side-nav-container {
   @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-start py-14 min-w-80
+    transition-[width] duration-300 items-start py-10 min-w-80
     max-w-80 overflow-y-auto;
 }
 .admin-dashboard-layout > .side-nav-container .home {
-  @apply text-2xl text-white font-bold text-left
-      mb-10 w-10/12 self-center px-4;
+  @apply text-2xl bg-custom-white-base font-bold text-left
+      mb-10 w-10/12 self-center px-4 py-6;
 }
 .admin-dashboard-layout > .side-nav-container .side-nav {
   @apply text-custom-white-base w-full flex-grow;
@@ -325,8 +325,8 @@ main {
   @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark;
 }
 .admin-manage-section-layout .side-nav-container .top .home {
-  @apply text-2xl text-white font-bold text-left
-        pt-10 pb-6 px-6 w-11/12 self-center;
+  @apply text-2xl font-bold text-left bg-custom-white-dark
+        py-6 px-6 w-10/12 self-center my-6;
 }
 .admin-manage-section-layout .side-nav-container .top .btn-container {
   @apply flex flex-col w-full gap-2
