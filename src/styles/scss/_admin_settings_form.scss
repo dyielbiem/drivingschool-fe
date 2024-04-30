@@ -7,7 +7,7 @@
   }
 
   h2 {
-    @apply text-2xl font-extrabold mb-2;
+    @apply text-xl font-extrabold mb-2;
   }
 
   label {
@@ -51,7 +51,7 @@
     @apply flex w-full mt-4 gap-2 justify-end;
 
     & > button {
-      @apply w-28 rounded-lg h-11 text-lg font-bold;
+      @apply w-28 rounded-lg h-11 text-base font-bold;
     }
 
     .edit-btn {

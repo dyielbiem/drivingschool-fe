@@ -2,7 +2,7 @@
   @apply grid grid-cols-2 w-full max-w-5xl gap-4;
 
   h2 {
-    @apply text-2xl font-extrabold mb-4 col-span-full;
+    @apply text-xl font-extrabold mb-4 col-span-full;
   }
 
   .fields {
@@ -56,7 +56,7 @@
     items-center mt-4;
 
     button[type="submit"] {
-      @apply w-40 bg-custom-blue-base text-xl font-bold 
+      @apply w-40 bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
@@ -66,7 +66,7 @@
     }
 
     button[type="button"] {
-      @apply w-40 bg-custom-gray-base text-xl font-bold 
+      @apply w-40 bg-custom-gray-base text-base font-bold 
       text-black rounded-lg py-2.5 h-12;
     }
   }

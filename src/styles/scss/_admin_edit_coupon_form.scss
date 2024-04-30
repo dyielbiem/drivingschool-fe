@@ -46,7 +46,7 @@
     }
 
     button[type="submit"] {
-      @apply w-full bg-custom-blue-base text-xl font-bold 
+      @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 

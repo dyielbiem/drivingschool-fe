@@ -11,11 +11,11 @@
     }
 
     h1 {
-      @apply text-3xl font-extrabold text-left flex-grow;
+      @apply text-2xl font-extrabold text-left flex-grow;
     }
 
     .edit-content-btn {
-      @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      @apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
     }
 
@@ -30,14 +30,14 @@
     rounded-md min-h-14;
 
     input {
-      @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
     }
 
     .btn-container {
       @apply flex gap-2;
 
       button {
-        @apply text-lg px-3 py-1.5 font-bold;
+        @apply text-base px-3 py-1.5 font-bold;
       }
 
       button[type="submit"] {

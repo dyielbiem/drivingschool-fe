@@ -20,7 +20,7 @@
 
         button,
         a {
-          @apply bg-custom-blue-base text-white w-full font-bold text-lg px-4
+          @apply bg-custom-blue-base text-white w-full font-bold text-base px-4
           rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light;
 
           svg {
@@ -37,7 +37,7 @@
         @apply py-5 whitespace-nowrap overflow-hidden flex gap-2
         items-center hover:bg-custom-blue-darker pl-6 pr-7 relative
         after:absolute after:top-0 after:right-0 after:content-[""]
-        after:w-1.5 after:h-full;
+        after:w-1.5 after:h-full text-base;
 
         span {
           @apply overflow-hidden;

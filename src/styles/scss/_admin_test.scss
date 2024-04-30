@@ -10,11 +10,11 @@
     }
 
     h1 {
-      @apply text-3xl font-extrabold flex-grow;
+      @apply text-2xl font-extrabold flex-grow;
     }
 
     .add-btn {
-      @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+      @apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
     }
   }
@@ -27,14 +27,14 @@
       relative;
 
       .numbering {
-        @apply top-6 left-6 absolute font-bold text-xl;
+        @apply top-6 left-6 absolute font-bold text-lg;
       }
 
       .top {
         @apply flex items-start mb-4 gap-6 justify-between;
 
         .question {
-          @apply font-bold text-xl;
+          @apply font-bold text-lg;
 
           .tiptap-image {
             @apply mt-4;

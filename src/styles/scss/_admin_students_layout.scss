@@ -2,10 +2,6 @@
   @apply pb-10 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden;
 
-  // & > * {
-  //   @apply mx-12;
-  // }
-
   & > .top-search-bar {
     @apply w-full flex m-0 gap-1;
 
@@ -23,7 +19,7 @@
     gap-8 mt-8 mx-12;
 
     h1 {
-      @apply font-extrabold text-3xl;
+      @apply font-extrabold text-2xl;
     }
 
     nav {

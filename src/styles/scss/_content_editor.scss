@@ -64,7 +64,7 @@
     justify-end px-6 items-center;
 
     button {
-      @apply text-lg font-bold px-4 py-1 rounded-md;
+      @apply text-base font-bold px-4 py-1 rounded-md;
     }
 
     .save-btn {
@@ -98,7 +98,7 @@
       }
 
       & > button[type="submit"] {
-        @apply w-full bg-custom-blue-base text-xl font-bold 
+        @apply w-full bg-custom-blue-base text-base font-bold 
         text-white rounded-lg py-2.5 mt-2
         flex items-center justify-center h-12 disabled:cursor-not-allowed;
 

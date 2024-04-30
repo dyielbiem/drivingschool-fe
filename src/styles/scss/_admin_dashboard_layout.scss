@@ -15,10 +15,10 @@
       @apply text-custom-white-base w-full flex-grow;
 
       .nav-items-container {
-        @apply flex flex-col gap-3;
+        @apply flex flex-col gap-[0.4rem];
 
         a {
-          @apply text-xl py-4 relative px-10
+          @apply text-base py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
           flex justify-start items-center gap-4 text-custom-white-dark;
@@ -31,7 +31,7 @@
     }
 
     button {
-      @apply text-xl relative px-10 w-full
+      @apply text-base relative px-10 w-full
       flex items-center justify-start gap-4
       text-custom-white-dark font-bold;
 

@@ -1,8 +1,11 @@
 import "../styles/css/style.css";
 
 export const metadata = {
-  title: "Driving School App",
-  description: "Designed and developed by WebAct"
+  title: "Driving School | Admin",
+  description: "Designed and developed by WebAct",
+  icons: {
+    icon: "/favicon.png"
+  }
 };
 
 const RootLayout = ({ children }) => {

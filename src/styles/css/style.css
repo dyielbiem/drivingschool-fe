@@ -52,14 +52,14 @@ main {
   @apply h-10;
 }
 .login-page .login-form .extra-actions a {
-  @apply text-sm mt-[2px];
+  @apply text-sm mt-[2px] hover:text-custom-blue-base;
 }
 .login-page .login-form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;
 }
 .login-page .login-form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -106,7 +106,7 @@ main {
   @apply text-2xl animate-spin;
 }
 .reset-password-page .reset-password-form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-10 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -130,10 +130,10 @@ main {
   @apply text-custom-white-base w-full flex-grow;
 }
 .admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-[0.4rem];
 }
 .admin-dashboard-layout > .side-nav-container .side-nav .nav-items-container a {
-  @apply text-xl py-4 relative px-10
+  @apply text-base py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
           flex justify-start items-center gap-4 text-custom-white-dark;
@@ -142,7 +142,7 @@ main {
   @apply text-2xl text-custom-white-dark;
 }
 .admin-dashboard-layout > .side-nav-container button {
-  @apply text-xl relative px-10 w-full
+  @apply text-base relative px-10 w-full
       flex items-center justify-start gap-4
       text-custom-white-dark font-bold;
 }
@@ -158,11 +158,11 @@ main {
   @apply flex justify-between items-center mb-12;
 }
 .admin-sections-container .header h1 {
-  @apply text-3xl font-extrabold;
+  @apply text-2xl font-extrabold;
 }
 .admin-sections-container .header > button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-lg font-bold;
+      rounded-lg text-base font-bold;
 }
 .admin-sections-container .section-table {
   @apply grid grid-cols-[8fr_1fr] gap-3;
@@ -235,7 +235,7 @@ main {
 
 .add-chapter-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-50;
 }
 .add-chapter-form form {
   @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
@@ -265,7 +265,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .add-chapter-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -305,7 +305,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .add-sub-chapter-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -334,7 +334,7 @@ main {
 }
 .admin-manage-section-layout .side-nav-container .top .btn-container button,
 .admin-manage-section-layout .side-nav-container .top .btn-container a {
-  @apply bg-custom-blue-base text-white w-full font-bold text-lg px-4
+  @apply bg-custom-blue-base text-white w-full font-bold text-base px-4
           rounded-md text-left py-3.5 flex justify-between items-center hover:bg-custom-blue-light;
 }
 .admin-manage-section-layout .side-nav-container .top .btn-container button svg,
@@ -348,7 +348,7 @@ main {
   @apply py-5 whitespace-nowrap overflow-hidden flex gap-2
         items-center hover:bg-custom-blue-darker pl-6 pr-7 relative
         after:absolute after:top-0 after:right-0 after:content-[""]
-        after:w-1.5 after:h-full;
+        after:w-1.5 after:h-full text-base;
 }
 .admin-manage-section-layout .side-nav-container nav > a span {
   @apply overflow-hidden;
@@ -377,7 +377,7 @@ main {
   @apply text-3xl;
 }
 .admin-manage-section > .header h1 {
-  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow;
+  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow;
 }
 .admin-manage-section > .header .edit-btn {
   @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
@@ -388,13 +388,13 @@ main {
     rounded-md min-h-14;
 }
 .admin-manage-section > .edit-title-form input {
-  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
 }
 .admin-manage-section > .edit-title-form .btn-container {
   @apply flex gap-2;
 }
 .admin-manage-section > .edit-title-form .btn-container button {
-  @apply text-lg px-3 py-1.5 font-bold;
+  @apply text-base px-3 py-1.5 font-bold;
 }
 .admin-manage-section > .edit-title-form .btn-container button[type=submit] {
   @apply bg-custom-blue-base 
@@ -435,10 +435,10 @@ main {
   @apply text-3xl;
 }
 .test-section > .header h1 {
-  @apply text-3xl font-extrabold flex-grow;
+  @apply text-2xl font-extrabold flex-grow;
 }
 .test-section > .header .add-btn {
-  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+  @apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
 .test-section .test-question-container {
@@ -449,13 +449,13 @@ main {
       relative;
 }
 .test-section .test-question-container > li .numbering {
-  @apply top-6 left-6 absolute font-bold text-xl;
+  @apply top-6 left-6 absolute font-bold text-lg;
 }
 .test-section .test-question-container > li .top {
   @apply flex items-start mb-4 gap-6 justify-between;
 }
 .test-section .test-question-container > li .top .question {
-  @apply font-bold text-xl;
+  @apply font-bold text-lg;
 }
 .test-section .test-question-container > li .top .question .tiptap-image {
   @apply mt-4;
@@ -536,7 +536,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .question-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -555,10 +555,10 @@ main {
   @apply text-3xl;
 }
 .admin-chapter-section > .header h1 {
-  @apply text-3xl font-extrabold flex-grow;
+  @apply text-2xl font-extrabold flex-grow;
 }
 .admin-chapter-section > .header .edit-content-btn {
-  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+  @apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
 .admin-chapter-section > .header .edit-title-btn {
@@ -570,13 +570,13 @@ main {
     rounded-md min-h-14;
 }
 .admin-chapter-section > .edit-title-form input {
-  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
 }
 .admin-chapter-section > .edit-title-form .btn-container {
   @apply flex gap-2;
 }
 .admin-chapter-section > .edit-title-form .btn-container button {
-  @apply text-lg px-3 py-1.5 font-bold;
+  @apply text-base px-3 py-1.5 font-bold;
 }
 .admin-chapter-section > .edit-title-form .btn-container button[type=submit] {
   @apply bg-custom-blue-base 
@@ -619,11 +619,11 @@ main {
   @apply w-full h-full py-5;
 }
 .admin-chapter-section .button-container {
-  @apply flex flex-col gap-2 mt-8 w-full max-w-4xl;
+  @apply flex gap-2 mt-8 w-full max-w-4xl justify-end;
 }
 .admin-chapter-section .button-container button {
-  @apply font-bold text-white flex-grow text-xl
-      px-3 py-3.5 rounded-lg bg-custom-blue-base;
+  @apply font-bold text-white text-base
+      px-12 py-3.5 rounded-lg bg-custom-blue-base;
 }
 
 .admin-sub-chapter-section {
@@ -638,10 +638,10 @@ main {
   @apply text-3xl;
 }
 .admin-sub-chapter-section > .header h1 {
-  @apply text-3xl font-extrabold text-left flex-grow;
+  @apply text-2xl font-extrabold text-left flex-grow;
 }
 .admin-sub-chapter-section > .header .edit-content-btn {
-  @apply text-xl font-bold bg-custom-blue-base rounded-md text-white
+  @apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2;
 }
 .admin-sub-chapter-section > .header .edit-title-btn {
@@ -653,13 +653,13 @@ main {
     rounded-md min-h-14;
 }
 .admin-sub-chapter-section > .edit-title-form input {
-  @apply text-3xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
 }
 .admin-sub-chapter-section > .edit-title-form .btn-container {
   @apply flex gap-2;
 }
 .admin-sub-chapter-section > .edit-title-form .btn-container button {
-  @apply text-lg px-3 py-1.5 font-bold;
+  @apply text-base px-3 py-1.5 font-bold;
 }
 .admin-sub-chapter-section > .edit-title-form .btn-container button[type=submit] {
   @apply bg-custom-blue-base 
@@ -678,11 +678,11 @@ main {
   @apply flex justify-between items-center mb-12 max-w-5xl w-full;
 }
 .admin-students-container .header h1 {
-  @apply font-extrabold text-3xl;
+  @apply font-extrabold text-2xl;
 }
 .admin-students-container .header > button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-lg font-bold;
+      rounded-lg text-base font-bold;
 }
 .admin-students-container .no-course {
   @apply text-lg;
@@ -716,7 +716,7 @@ main {
   @apply mx-12 grid grid-cols-2 gap-x-6;
 }
 .edit-student-form > h2 {
-  @apply text-2xl font-extrabold mb-4 col-span-full;
+  @apply text-xl font-extrabold mb-4 col-span-full;
 }
 .edit-student-form > .username {
   @apply text-lg font-bold col-span-full;
@@ -759,7 +759,7 @@ main {
     items-center mt-4;
 }
 .edit-student-form .btn-container button[type=submit] {
-  @apply w-40 bg-custom-blue-base text-xl font-bold 
+  @apply w-40 bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -767,7 +767,7 @@ main {
   @apply text-2xl animate-spin;
 }
 .edit-student-form .btn-container button[type=button] {
-  @apply w-40 bg-custom-gray-base text-xl font-bold 
+  @apply w-40 bg-custom-gray-base text-base font-bold 
       text-black rounded-lg py-2.5 h-12;
 }
 
@@ -775,7 +775,7 @@ main {
   @apply grid grid-cols-2 w-full max-w-5xl gap-4;
 }
 .add-student-form h2 {
-  @apply text-2xl font-extrabold mb-4 col-span-full;
+  @apply text-xl font-extrabold mb-4 col-span-full;
 }
 .add-student-form .fields {
   @apply w-full flex flex-col gap-2;
@@ -818,7 +818,7 @@ main {
     items-center mt-4;
 }
 .add-student-form .btn-container button[type=submit] {
-  @apply w-40 bg-custom-blue-base text-xl font-bold 
+  @apply w-40 bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -826,7 +826,7 @@ main {
   @apply text-2xl animate-spin;
 }
 .add-student-form .btn-container button[type=button] {
-  @apply w-40 bg-custom-gray-base text-xl font-bold 
+  @apply w-40 bg-custom-gray-base text-base font-bold 
       text-black rounded-lg py-2.5 h-12;
 }
 
@@ -848,7 +848,7 @@ main {
     gap-8 mt-8 mx-12;
 }
 .admin-students-layout > .header h1 {
-  @apply font-extrabold text-3xl;
+  @apply font-extrabold text-2xl;
 }
 .admin-students-layout > .header nav {
   @apply flex gap-6 font-bold text-lg text-custom-gray-dark;
@@ -1003,7 +1003,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .create-section-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -1020,11 +1020,11 @@ main {
     w-full;
 }
 .admin-courses-container > .header h1 {
-  @apply font-extrabold text-3xl;
+  @apply font-extrabold text-2xl;
 }
 .admin-courses-container > .header button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-lg font-bold;
+      rounded-lg text-base font-bold;
 }
 .admin-courses-container .course-table {
   @apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
@@ -1032,7 +1032,7 @@ main {
 }
 .admin-courses-container .course-table li {
   @apply flex flex-col justify-start relative
-      gap-x-8 hover:z-20 gap-2 overflow-hidden
+      gap-x-8 hover:z-20 gap-2
       bg-white rounded-lg cursor-pointer max-w-sm
       hover:shadow-md duration-500 hover:scale-[1.02];
 }
@@ -1042,7 +1042,7 @@ main {
 }
 .admin-courses-container .course-table li > img {
   @apply object-cover w-full max-h-44 text-center leading-[11rem]
-        min-h-44;
+        min-h-44 rounded-tl-lg rounded-tr-lg;
 }
 .admin-courses-container .course-table li > p {
   @apply text-sm;
@@ -1053,9 +1053,9 @@ main {
 .admin-courses-container .course-table li .course-details .course-name {
   @apply relative before:hidden hover:before:block
           before:content-[attr(hover-text)]
-          before:absolute before:bg-custom-white-dark 
-          before:top-1/2 before:left-0 before:p-2 before:shadow-xl w-fit
-          before:rounded-md before:w-[100%] before:mb-16 
+          before:absolute before:bg-custom-white-dark
+          before:top-full before:left-0 before:p-2 before:shadow-xl w-fit
+          before:rounded-md before:w-fit before:mb-16 
           before:text-sm before:font-bold before:z-20 font-bold text-base;
 }
 .admin-courses-container .course-table li .course-details .course-type span {
@@ -1143,7 +1143,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .add-course-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -1215,7 +1215,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .edit-course-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center min-h-12 disabled:cursor-not-allowed;
 }
@@ -1231,11 +1231,11 @@ main {
   @apply flex justify-between items-center mb-12;
 }
 .admin-coupons-container > .header h1 {
-  @apply font-extrabold text-3xl;
+  @apply font-extrabold text-2xl;
 }
 .admin-coupons-container > .header button {
   @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-lg font-bold;
+      rounded-lg text-base font-bold;
 }
 .admin-coupons-container .coupon-table {
   @apply flex-col gap-3 grid grid-cols-6;
@@ -1305,7 +1305,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .add-coupon-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -1352,7 +1352,7 @@ main {
       bg-red-200 border-2 border-red-700;
 }
 .edit-coupon-form form button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -1368,7 +1368,7 @@ main {
   @apply flex justify-between items-center mb-12;
 }
 .admin-billing-container .header h1 {
-  @apply font-extrabold text-3xl;
+  @apply font-extrabold text-2xl;
 }
 .admin-billing-container .billing-table {
   @apply flex-col gap-3 grid grid-cols-6;
@@ -1396,7 +1396,7 @@ main {
   bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 }
 .admin-settings-section h1 {
-  @apply font-extrabold text-3xl mb-12 w-full;
+  @apply font-extrabold text-2xl mb-12 w-full;
 }
 
 .admin-settings-form {
@@ -1407,7 +1407,7 @@ main {
   @apply max-w-md;
 }
 .admin-settings-form h2 {
-  @apply text-2xl font-extrabold mb-2;
+  @apply text-xl font-extrabold mb-2;
 }
 .admin-settings-form label {
   @apply mt-2 text-sm font-bold indent-1;
@@ -1441,7 +1441,7 @@ main {
   @apply flex w-full mt-4 gap-2 justify-end;
 }
 .admin-settings-form .btn-container > button {
-  @apply w-28 rounded-lg h-11 text-lg font-bold;
+  @apply w-28 rounded-lg h-11 text-base font-bold;
 }
 .admin-settings-form .btn-container .edit-btn {
   @apply bg-custom-blue-base  
@@ -1511,7 +1511,7 @@ main {
     justify-end px-6 items-center;
 }
 .content-editor .editor-primary-btn-container button {
-  @apply text-lg font-bold px-4 py-1 rounded-md;
+  @apply text-base font-bold px-4 py-1 rounded-md;
 }
 .content-editor .editor-primary-btn-container .save-btn {
   @apply bg-custom-blue-base text-white px-6;
@@ -1538,7 +1538,7 @@ main {
   @apply absolute top-8 right-8 text-2xl;
 }
 .content-editor .link-url-form > form > button[type=submit] {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
         text-white rounded-lg py-2.5 mt-2
         flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
@@ -1580,7 +1580,7 @@ main {
   @apply flex gap-2 w-full flex-col;
 }
 .image-gallery-modal > div .select-btn-container button {
-  @apply text-xl font-bold text-white bg-custom-blue-base px-4 py-2
+  @apply text-base font-bold text-white bg-custom-blue-base px-4 py-2
         rounded-lg w-full disabled:bg-custom-gray-dark disabled:cursor-not-allowed;
 }
 .image-gallery-modal > div .select-btn-container .upload-img-btn {
@@ -1612,7 +1612,7 @@ main {
   @apply flex gap-2 w-full flex-col;
 }
 .image-gallery-modal > div .upload-btn-container button {
-  @apply text-xl font-bold text-white px-4 py-2
+  @apply text-base font-bold text-white px-4 py-2
         rounded-lg w-full;
 }
 .image-gallery-modal > div .upload-btn-container button:nth-of-type(1) {
@@ -1651,7 +1651,7 @@ main {
       border-custom-gray-base;
 }
 .embed-youtube-modal > form .confirm-btn {
-  @apply w-full bg-custom-blue-base text-xl font-bold 
+  @apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-8;
 }
 
@@ -1679,7 +1679,7 @@ main {
   @apply text-3xl;
 }
 .confirm-delete-modal > div .confirm-btn {
-  @apply font-bold text-xl w-full mt-8
+  @apply font-bold text-base w-full mt-8
       rounded-md py-2 bg-custom-blue-base text-white;
 }
 

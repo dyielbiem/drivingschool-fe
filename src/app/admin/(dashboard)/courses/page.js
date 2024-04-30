@@ -113,8 +113,8 @@ const ManageCourses = () => {
                 }
               >
                 {course.courseName.length < 50
-                  ? course.courseName.toUpperCase()
-                  : course.courseName.slice(0, 50).toUpperCase() + "..."}
+                  ? course.courseName
+                  : course.courseName.slice(0, 50) + "..."}
               </p>
               <p className="course-type">
                 <span>Course Type:</span> {course.courseType}
