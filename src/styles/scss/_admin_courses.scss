@@ -3,7 +3,7 @@
   bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 
   & > .header {
-    @apply flex justify-between items-center mb-12 max-w-6xl
+    @apply flex justify-between items-center mb-12
     w-full;
 
     h1 {
@@ -18,7 +18,7 @@
 
   .course-table {
     @apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
-    max-w-6xl w-full;
+    w-full;
 
     li {
       @apply flex flex-col justify-start relative

@@ -675,7 +675,7 @@ main {
   bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 }
 .admin-students-container .header {
-  @apply flex justify-between items-center mb-12 max-w-5xl w-full;
+  @apply flex justify-between items-center mb-12 w-full;
 }
 .admin-students-container .header h1 {
   @apply font-extrabold text-2xl;
@@ -688,7 +688,7 @@ main {
   @apply text-lg;
 }
 .admin-students-container .student-table {
-  @apply grid grid-cols-[5fr_1fr] gap-3 max-w-5xl;
+  @apply grid grid-cols-[5fr_1fr] gap-3 w-full;
 }
 .admin-students-container .student-table .table-header {
   @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
@@ -1016,7 +1016,7 @@ main {
   bg-custom-white-dark overflow-x-hidden pb-10 items-center;
 }
 .admin-courses-container > .header {
-  @apply flex justify-between items-center mb-12 max-w-6xl
+  @apply flex justify-between items-center mb-12
     w-full;
 }
 .admin-courses-container > .header h1 {
@@ -1028,7 +1028,7 @@ main {
 }
 .admin-courses-container .course-table {
   @apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
-    max-w-6xl w-full;
+    w-full;
 }
 .admin-courses-container .course-table li {
   @apply flex flex-col justify-start relative
