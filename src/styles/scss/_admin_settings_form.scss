@@ -23,21 +23,36 @@
   }
 
   textarea {
-    &:nth-of-type(1) {
-      @apply min-h-16 h-16;
-    }
+    @apply min-h-16 h-16;
+  }
 
-    &:nth-of-type(2) {
-      @apply min-h-28 h-28;
+  .email-body-editor {
+    @apply min-h-28;
+
+    .tiptap {
+      @apply min-h-28 max-h-96 overflow-y-auto;
+
+      &[contenteditable="false"] {
+        @apply cursor-not-allowed;
+      }
+
+      p {
+        font-size: 1rem !important;
+      }
     }
   }
 
   textarea,
-  input {
+  input,
+  .email-body-editor {
     @apply bg-white rounded-md p-2 cursor-pointer border-[1px]
     border-custom-gray-base ml-0.5;
 
-    &:disabled {
+    & .tiptap {
+      @apply focus:outline-none cursor-text;
+    }
+
+    &[disabled] {
       @apply cursor-not-allowed bg-custom-white-base border-custom-white-darker;
     }
   }

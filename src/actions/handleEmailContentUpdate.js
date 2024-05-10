@@ -3,29 +3,27 @@ import adminUpdateEmailContent from "@/services/api/adminUpdateEmailContent";
 
 const handleEmailContentUpdate = async (
   prevEmailContent,
+  newEmailContent,
+  // eslint-disable-next-line no-unused-vars
   prevState,
+  // eslint-disable-next-line no-unused-vars
   formData
 ) => {
-  const formDataObject = {
-    emailSubject: formData.get("admin-email-subject"),
-    emailBody: formData.get("admin-email-body")
-  };
-
   if (
-    prevEmailContent?.emailSubject === formDataObject.emailSubject &&
-    formDataObject.emailBody === prevEmailContent?.emailBody
+    prevEmailContent?.emailSubject === newEmailContent.emailSubject &&
+    prevEmailContent.emailBody === newEmailContent?.emailBody
   )
     return {
-      message: undefined,
+      message: "",
       updatedEmailContent: {
-        emailSubject: formDataObject.emailSubject,
-        emailBody: formDataObject.emailBody
+        emailSubject: prevEmailContent.emailSubject,
+        emailBody: prevEmailContent.emailBody
       }
     };
 
   const response = await adminUpdateEmailContent(
-    formDataObject.emailSubject,
-    formDataObject.emailBody
+    newEmailContent.emailSubject,
+    newEmailContent.emailBody
   );
 
   if (!response.ok)
