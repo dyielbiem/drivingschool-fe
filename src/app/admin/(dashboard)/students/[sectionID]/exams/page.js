@@ -1,14 +1,31 @@
 "use client";
 import { RiExternalLinkFill } from "react-icons/ri";
 import { useStudentsInSection } from "@/state/store";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Pagination from "@/components/Pagination";
+import StudentExamDetailsTable from "@/components/StudentExamDetailsTable";
 
 const AdminStudentExams = () => {
   const { students, noOfRows } = useStudentsInSection();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page"));
   const searchKey = searchParams.get("search");
+  const router = useRouter();
+  const pathname = usePathname();
+  const [studentToView, setStudentToView] = useState(null);
+
+  // Check if student search param exists and valid
+  useEffect(() => {
+    if (!searchParams.get("student")) return setStudentToView(null);
+    const student = students.find(
+      (item) => item.studentUserName === searchParams.get("student")
+    );
+
+    if (!student) return setStudentToView(null);
+
+    setStudentToView(student);
+  }, [searchParams, students]);
 
   const sortAlphabetical = (a, b) =>
     a.studentUserName.localeCompare(b.studentUserName);
@@ -48,6 +65,7 @@ const AdminStudentExams = () => {
   };
 
   const renderHeaderTitle = () => {
+    if (!students || students?.length === 0) return null;
     return (
       <li className="table-header">
         <p>Username</p>
@@ -57,7 +75,14 @@ const AdminStudentExams = () => {
     );
   };
 
+  const viewDetailsClick = (studentUserName) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("student", studentUserName);
+    router.push(`${pathname}?${currentParams}`);
+  };
+
   const renderExamDetails = () => {
+    if (studentToView) return null;
     const exams = examsToRender();
     return (
       <ul className="exam-details-table">
@@ -77,10 +102,10 @@ const AdminStudentExams = () => {
             >
               {eachExam.isCourseCompleted ? "COMPLETED" : "IN PROGRESS"}
             </p>
-            <div>
+            <button onClick={() => viewDetailsClick(eachExam.studentUserName)}>
               <p>View Details</p>
               <RiExternalLinkFill />
-            </div>
+            </button>
           </li>
         ))}
       </ul>
@@ -88,16 +113,23 @@ const AdminStudentExams = () => {
   };
 
   const renderPagination = () => {
-    if (students?.length === 0 || searchParams.get("search")) return null;
+    if (students?.length === 0 || searchParams.get("search") || studentToView)
+      return null;
     return (
       <Pagination itemsLength={Number(students?.length)} noOfRows={noOfRows} />
     );
+  };
+
+  const renderStudentExamDetails = () => {
+    if (!studentToView) return null;
+    return <StudentExamDetailsTable student={studentToView} />;
   };
 
   return (
     <>
       {renderExamDetails()}
       {renderPagination()}
+      {renderStudentExamDetails()}
     </>
   );
 };
