@@ -1530,6 +1530,10 @@ main {
   @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;
 }
+.admin-settings-form .success-message {
+  @apply text-custom-green-base font-bold p-2.5 mt-4
+    bg-custom-green-light border-2 border-custom-green-base;
+}
 .admin-settings-form .btn-container {
   @apply flex w-full mt-4 gap-2 justify-end;
 }

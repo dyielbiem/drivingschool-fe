@@ -118,7 +118,13 @@ const ManageSectionSideNav = () => {
     return (
       <div className="top">
         <Link href={"/admin/sections"} className="home">
-          <Image src={"/logo.png"} alt="logo-image" width={1734} height={594} />
+          <Image
+            src={"/logo.png"}
+            alt="logo-image"
+            width={1734}
+            height={594}
+            priority
+          />
         </Link>
         <div className="btn-container">
           <button onClick={handleAddChapterClick}>
