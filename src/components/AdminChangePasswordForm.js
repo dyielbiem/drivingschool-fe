@@ -28,6 +28,7 @@ const AdminChangePasswordForm = () => {
       return;
     }
 
+    if (!formState.successKey) return;
     setSuccessMessage("Your password has been changed successfully");
     const clearSuccessMessage = setTimeout(() => {
       setSuccessMessage("");
