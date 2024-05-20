@@ -906,15 +906,55 @@ main {
 .exam-details-table li:nth-child(n+2) p:nth-child(3) {
   @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
 }
-.exam-details-table li:nth-child(n+2) div {
+.exam-details-table li:nth-child(n+2) button {
   @apply flex justify-center items-center gap-3 h-fit 
       text-custom-blue-light font-bold;
 }
-.exam-details-table li:nth-child(n+2) div p {
+.exam-details-table li:nth-child(n+2) button p {
   @apply whitespace-nowrap;
 }
-.exam-details-table li:nth-child(n+2) div svg {
+.exam-details-table li:nth-child(n+2) button svg {
   @apply text-xl;
+}
+
+.student-exam-details-table {
+  @apply gap-3 mx-16 flex flex-col;
+}
+.student-exam-details-table > .header {
+  @apply flex text-xl font-extrabold gap-4;
+}
+.student-exam-details-table > table {
+  @apply text-left mx-4 mt-4;
+}
+.student-exam-details-table > table tr {
+  @apply border-b-2 border-custom-white-darker;
+}
+.student-exam-details-table > table th,
+.student-exam-details-table > table td {
+  @apply py-4;
+}
+.student-exam-details-table > table th:first-child,
+.student-exam-details-table > table td:first-child {
+  @apply pl-6;
+}
+.student-exam-details-table > table th:nth-child(1) {
+  @apply w-[40%];
+}
+.student-exam-details-table > table th:nth-child(2) {
+  @apply w-[25%];
+}
+.student-exam-details-table > table th:nth-child(3) {
+  @apply w-[20%];
+}
+.student-exam-details-table > table th:nth-child(4) {
+  @apply w-[15%];
+}
+.student-exam-details-table > table .title {
+  @apply font-bold;
+}
+.student-exam-details-table > table .status {
+  @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
+      uppercase;
 }
 
 .latest-registrations-table {
@@ -960,15 +1000,52 @@ main {
 .latest-completions-table li:nth-child(n+2) p {
   @apply text-center;
 }
-.latest-completions-table li:nth-child(n+2) div {
+.latest-completions-table li:nth-child(n+2) button {
   @apply flex justify-center items-center gap-3 h-fit 
       text-custom-blue-light font-bold;
 }
-.latest-completions-table li:nth-child(n+2) div p {
+.latest-completions-table li:nth-child(n+2) button p {
   @apply whitespace-nowrap;
 }
-.latest-completions-table li:nth-child(n+2) div svg {
+.latest-completions-table li:nth-child(n+2) button svg {
   @apply text-xl;
+}
+
+.student-completions-table {
+  @apply gap-3 mx-16 flex flex-col;
+}
+.student-completions-table > .header {
+  @apply flex text-xl font-extrabold gap-4;
+}
+.student-completions-table > table {
+  @apply text-left mx-4 mt-4;
+}
+.student-completions-table > table tr {
+  @apply border-b-2 border-custom-white-darker;
+}
+.student-completions-table > table th,
+.student-completions-table > table td {
+  @apply py-4;
+}
+.student-completions-table > table th:first-child,
+.student-completions-table > table td:first-child {
+  @apply pl-6;
+}
+.student-completions-table > table th:nth-child(1) {
+  @apply w-[40%];
+}
+.student-completions-table > table th:nth-child(2) {
+  @apply w-[30%];
+}
+.student-completions-table > table th:nth-child(3) {
+  @apply w-[30%];
+}
+.student-completions-table > table .title {
+  @apply font-bold;
+}
+.student-completions-table > table .status {
+  @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
+      uppercase;
 }
 
 .create-section-form {
@@ -1452,6 +1529,10 @@ main {
 .admin-settings-form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;
+}
+.admin-settings-form .success-message {
+  @apply text-custom-green-base font-bold p-2.5 mt-4
+    bg-custom-green-light border-2 border-custom-green-base;
 }
 .admin-settings-form .btn-container {
   @apply flex w-full mt-4 gap-2 justify-end;

@@ -81,8 +81,6 @@ const AdminEmailSettingsForm = () => {
     );
   };
 
-  if (!newEmailContent) return null;
-
   return (
     <form className="admin-settings-form" action={formAction}>
       <h2>Sign Up Email Content</h2>
@@ -91,7 +89,7 @@ const AdminEmailSettingsForm = () => {
         id="admin-email-subject"
         name="admin-email-subject"
         disabled={!isEditActive}
-        value={newEmailContent.emailSubject || ""}
+        value={newEmailContent?.emailSubject}
         onChange={(event) =>
           setNewEmailContent((prevState) => ({
             ...prevState,
@@ -102,8 +100,8 @@ const AdminEmailSettingsForm = () => {
       <label htmlFor="admin-email-body">Email Content</label>
       <EmailBodyEditor
         isEditable={isEditActive}
-        editorContent={newEmailContent?.emailBody || ""}
-        value={newEmailContent.emailBody}
+        editorContent={newEmailContent?.emailBody}
+        value={newEmailContent?.emailBody}
         onChange={(content) =>
           setNewEmailContent((prevState) => ({
             ...prevState,

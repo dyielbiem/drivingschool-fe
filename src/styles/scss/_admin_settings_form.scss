@@ -62,6 +62,11 @@
       bg-red-200 border-2 border-red-700;
   }
 
+  .success-message {
+    @apply text-custom-green-base font-bold p-2.5 mt-4
+    bg-custom-green-light border-2 border-custom-green-base;
+  }
+
   .btn-container {
     @apply flex w-full mt-4 gap-2 justify-end;
 

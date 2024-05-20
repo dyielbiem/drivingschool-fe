@@ -55,7 +55,13 @@ const AdminSideNav = () => {
       className={`side-nav-container ${regex.test(pathName) ? "!hidden" : ""}`}
     >
       <Link href={"/admin/sections"} className="home">
-        <Image src={"/logo.png"} alt="logo-image" width={1734} height={594} />
+        <Image
+          src={"/logo.png"}
+          alt="logo-image"
+          width={1734}
+          height={594}
+          priority
+        />
       </Link>
       <nav className="side-nav">
         <div className="nav-items-container">

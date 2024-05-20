@@ -8,8 +8,8 @@ import handleSiteSettingsUpdate from "@/actions/handleSiteSettingsUpdate";
 
 const AdminSiteSettingsForm = () => {
   const [isEditActive, setIsEditActive] = useState(false);
-  const [defaultValue, setDefaultValue] = useState(undefined);
-  const formRef = useRef(undefined);
+  const [defaultValue, setDefaultValue] = useState(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
     const fetchSiteSettings = async () => {
@@ -77,8 +77,6 @@ const AdminSiteSettingsForm = () => {
     );
   };
 
-  if (!defaultValue) return null;
-
   return (
     <form className="admin-settings-form" ref={formRef} action={formAction}>
       <h2>Site Settings</h2>
@@ -91,7 +89,7 @@ const AdminSiteSettingsForm = () => {
         name="admin-email-address"
         required
         disabled={!isEditActive}
-        defaultValue={defaultValue?.email || ""}
+        defaultValue={defaultValue?.email}
       />
       <label htmlFor="no-of-rows">No. of Rows</label>
       <input
@@ -101,7 +99,7 @@ const AdminSiteSettingsForm = () => {
         min={0}
         step={1}
         disabled={!isEditActive}
-        defaultValue={defaultValue?.noOfRows || ""}
+        defaultValue={defaultValue?.noOfRows}
       />
       {formState?.message && (
         <FormErrorMessage>{formState?.message}</FormErrorMessage>

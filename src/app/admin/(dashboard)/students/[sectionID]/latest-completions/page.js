@@ -1,14 +1,31 @@
 "use client";
 import { RiExternalLinkFill } from "react-icons/ri";
 import { useStudentsInSection } from "@/state/store";
-import dateFormatter from "@/utils/dateFormatter";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination";
+import StudentCompletionsTable from "@/components/StudentCompletionsTable";
+import dateFormatter from "@/utils/dateFormatter";
 
 const AdminLatestStudentCompletion = () => {
   const { students, noOfRows } = useStudentsInSection();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page"));
+  const router = useRouter();
+  const pathname = usePathname();
+  const [studentToView, setStudentToView] = useState(null);
+
+  // Check if student search param exists and valid
+  useEffect(() => {
+    if (!searchParams.get("student")) return setStudentToView(null);
+    const student = students.find(
+      (item) => item.studentUserName === searchParams.get("student")
+    );
+
+    if (!student) return setStudentToView(null);
+
+    setStudentToView(student);
+  }, [searchParams, students]);
 
   const sortDateLatestToOldestCB = (a, b) => {
     const dateA = new Date(a?.completionDate);
@@ -61,7 +78,14 @@ const AdminLatestStudentCompletion = () => {
     );
   };
 
+  const viewDetailsClick = (studentUserName) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("student", studentUserName);
+    router.push(`${pathname}?${currentParams}`);
+  };
+
   const renderCompletions = () => {
+    if (studentToView) return null;
     const completions = completionsToRender();
     return (
       <ul className="latest-completions-table">
@@ -79,10 +103,12 @@ const AdminLatestStudentCompletion = () => {
                 {dateFormatter(eachCompletion.completionDate) ||
                   "Not completed"}
               </p>
-              <div>
+              <button
+                onClick={() => viewDetailsClick(eachCompletion.studentUserName)}
+              >
                 <p>View Details</p>
                 <RiExternalLinkFill />
-              </div>
+              </button>
             </li>
           );
         })}
@@ -91,16 +117,23 @@ const AdminLatestStudentCompletion = () => {
   };
 
   const renderPagination = () => {
-    if (students?.length === 0 || searchParams.get("search")) return null;
+    if (students?.length === 0 || searchParams.get("search") || studentToView)
+      return null;
     return (
       <Pagination itemsLength={Number(students?.length)} noOfRows={noOfRows} />
     );
+  };
+
+  const renderStudentCompletions = () => {
+    if (!studentToView) return null;
+    return <StudentCompletionsTable student={studentToView} />;
   };
 
   return (
     <>
       {renderCompletions()}
       {renderPagination()}
+      {renderStudentCompletions()}
     </>
   );
 };

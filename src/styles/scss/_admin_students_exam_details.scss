@@ -19,7 +19,7 @@
       @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
     }
 
-    div {
+    button {
       @apply flex justify-center items-center gap-3 h-fit 
       text-custom-blue-light font-bold;
 
@@ -30,6 +30,58 @@
       svg {
         @apply text-xl;
       }
+    }
+  }
+}
+
+.student-exam-details-table {
+  @apply gap-3 mx-16 flex flex-col;
+
+  & > .header {
+    @apply flex text-xl font-extrabold gap-4;
+  }
+
+  & > table {
+    @apply text-left mx-4 mt-4;
+
+    tr {
+      @apply border-b-2 border-custom-white-darker;
+    }
+
+    th,
+    td {
+      @apply py-4;
+
+      &:first-child {
+        @apply pl-6;
+      }
+    }
+
+    th {
+      &:nth-child(1) {
+        @apply w-[40%];
+      }
+
+      &:nth-child(2) {
+        @apply w-[25%];
+      }
+
+      &:nth-child(3) {
+        @apply w-[20%];
+      }
+
+      &:nth-child(4) {
+        @apply w-[15%];
+      }
+    }
+
+    .title {
+      @apply font-bold;
+    }
+
+    .status {
+      @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
+      uppercase;
     }
   }
 }

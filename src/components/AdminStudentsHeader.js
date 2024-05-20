@@ -15,6 +15,8 @@ const AdminStudentsHeader = () => {
   const currentTab = String(pathname).split("/").pop();
   const [sectionTitle, setSectionTitle] = useState("");
   const [isSectionActive, setIsSectionActive] = useState(false);
+  const navigateParams = new URLSearchParams(searchParams.toString());
+  navigateParams.delete("student");
 
   useEffect(() => {
     if (Number(searchParams.get("page"))) return;
@@ -44,19 +46,19 @@ const AdminStudentsHeader = () => {
   const navLinks = [
     {
       label: "All Students",
-      link: `all?${searchParams.toString()}`
+      link: `all?${navigateParams}`
     },
     {
       label: "Exam Details",
-      link: `exams?${searchParams.toString()}`
+      link: `exams?${navigateParams}`
     },
     {
       label: "Latest Student Registrations",
-      link: `latest-registrations?${searchParams.toString()}`
+      link: `latest-registrations?${navigateParams}`
     },
     {
       label: "Latest Student Completions",
-      link: `latest-completions?${searchParams.toString()}`
+      link: `latest-completions?${navigateParams}`
     }
   ];
 
