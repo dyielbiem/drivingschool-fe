@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+export const useAdmin = create((set) => ({
+  admin: null,
+  setAdmin: (newValue) => {
+    set({ admin: newValue });
+  }
+}));
+
 export const useStudentsInSection = create((set) => ({
   students: [],
   noOfRows: 0,

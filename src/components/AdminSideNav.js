@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import adminLogoutClick from "@/actions/adminLogoutClick";
+import adminFetchAdmin from "@/services/api/adminFetchAdmin";
+import { useEffect } from "react";
+import { useAdmin } from "@/state/store";
 import { usePathname, useRouter } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
@@ -14,7 +17,18 @@ import { RiSettings4Fill } from "react-icons/ri";
 const AdminSideNav = () => {
   const pathName = usePathname();
   const router = useRouter();
+  const { setAdmin } = useAdmin();
   const regex = /^\/admin\/sections\/.+/;
+
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      const { ok, json } = await adminFetchAdmin();
+      if (!ok) return;
+      setAdmin(json);
+    };
+
+    fetchAdmin();
+  }, [setAdmin]);
 
   const navItems = [
     {
