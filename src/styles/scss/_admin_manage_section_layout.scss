@@ -4,7 +4,7 @@
   .side-nav-container {
     @apply flex flex-col overflow-x-hidden overflow-y-auto 
     h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center min-w-96 max-w-96 justify-start;
+    transition-[width] duration-300 items-center min-w-[22rem] max-w-[22rem] justify-start;
 
     .top {
       @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark;

@@ -1,26 +1,25 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Fragment } from "react";
-import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import adminFetchChapters from "@/services/api/adminFetchChapters";
+import { Fragment, useEffect } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { TbClipboardList, TbEdit } from "react-icons/tb";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import AddChapterForm from "./AddChapterForm";
+
 import {
   useChapterIndex,
   useSubChapterIndex,
-  useSubChapters
-} from "@/state/store";
-import adminFetchSubChapters from "@/services/api/adminFetchSubChapters";
-import adminFetchSectionTestQuestions from "@/services/api/adminFetchSectionTestQuestions";
-import {
+  useSubChapters,
   useChapters,
   useSectionTestQuestions,
   useChapterTestQuestions
 } from "@/state/store";
+
+import adminFetchChapters from "@/services/api/adminFetchChapters";
+import adminFetchSubChapters from "@/services/api/adminFetchSubChapters";
+import adminFetchSectionTestQuestions from "@/services/api/adminFetchSectionTestQuestions";
 import adminFetchChapterTestQuestions from "@/services/api/adminFetchChapterTestQuestions";
 
 const ManageSectionSideNav = () => {
@@ -34,10 +33,16 @@ const ManageSectionSideNav = () => {
   const subChapterID = pathname.split("/").at(5);
   const { chapters, setChapters, setNewChapter } = useChapters();
   const { subChapters, setSubChapters } = useSubChapters();
-  const { sectionTestQuestions, setSectionTestQuestions } =
-    useSectionTestQuestions();
-  const { chapterTestQuestions, setChapterTestQuestions } =
-    useChapterTestQuestions();
+  const {
+    sectionTestQuestions,
+    setSectionTestQuestions,
+    setSectionQuestionToShowCount
+  } = useSectionTestQuestions();
+  const {
+    chapterTestQuestions,
+    setChapterTestQuestions,
+    setChapterQuestionToShowCount
+  } = useChapterTestQuestions();
 
   // To fetch all the chapters of the section
   useEffect(() => {
@@ -54,15 +59,19 @@ const ManageSectionSideNav = () => {
     const fetchSectionTestQuestions = async () => {
       const response = await adminFetchSectionTestQuestions(sectionID);
       setSectionTestQuestions(response.ok ? response.json.test : []);
+      setSectionQuestionToShowCount(
+        response.ok ? response.json.noOfQuestionsToShow : null
+      );
     };
 
     fetchSectionTestQuestions();
-  }, [sectionID, setSectionTestQuestions]);
+  }, [sectionID, setSectionQuestionToShowCount, setSectionTestQuestions]);
 
   // To fetch all the sub-chapters of a chapter
   useEffect(() => {
     if (!chapterID) return;
-    setChapterTestQuestions(undefined);
+    setChapterTestQuestions(null);
+    setChapterQuestionToShowCount(null);
     const fetchSubChapters = async () => {
       const subChaptersResponse = await adminFetchSubChapters(chapterID);
 
@@ -71,7 +80,12 @@ const ManageSectionSideNav = () => {
     };
 
     fetchSubChapters();
-  }, [chapterID, setChapterTestQuestions, setSubChapters]);
+  }, [
+    chapterID,
+    setChapterQuestionToShowCount,
+    setChapterTestQuestions,
+    setSubChapters
+  ]);
 
   // To fetch all the chapter test questions
   useEffect(() => {
@@ -79,10 +93,13 @@ const ManageSectionSideNav = () => {
     const fetchChapterTest = async () => {
       const response = await adminFetchChapterTestQuestions(chapterID);
       setChapterTestQuestions(response.ok ? response.json.test : []);
+      setChapterQuestionToShowCount(
+        response.ok ? response.json.noOfQuestionsToShow : null
+      );
     };
 
     fetchChapterTest();
-  }, [chapterID, setChapterTestQuestions]);
+  }, [chapterID, setChapterQuestionToShowCount, setChapterTestQuestions]);
 
   // Get the index of selected chapter
   useEffect(() => {
@@ -223,16 +240,6 @@ const ManageSectionSideNav = () => {
   return (
     <>
       <div className="side-nav-container">
-        {/* <div className="top">
-          <Link href={"/admin/sections"} className="home">
-            <Image
-              src={"/logo.png"}
-              alt="logo-image"
-              width={1734}
-              height={594}
-            />
-          </Link>
-        </div> */}
         {renderTop()}
         <nav>
           {renderChapters()}

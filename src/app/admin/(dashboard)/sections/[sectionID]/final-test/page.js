@@ -1,21 +1,29 @@
 "use client";
-import { useChapters, useSectionTestQuestions } from "@/state/store";
+
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
-import AddQuestionForm from "@/components/AddQuestionForm";
-import handleSectionTestQuestionSubmit from "@/actions/handleSectionTestQuestionSubmit";
-import { useEffect, useState } from "react";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
-import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
-import EditQuestionForm from "@/components/EditQuestionForm";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoSettingsSharp } from "react-icons/io5";
+
+import AddQuestionForm from "@/components/AddQuestionForm";
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import EditQuestionForm from "@/components/EditQuestionForm";
+import TestSettingsForm from "@/components/TestSettingsForm";
+
+import { useChapters, useSectionTestQuestions } from "@/state/store";
+
+import handleSectionTestQuestionSubmit from "@/actions/handleSectionTestQuestionSubmit";
+import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
 
 const FinalTest = () => {
   const { chapters } = useChapters();
   const {
     sectionTestQuestions,
     setNewSectionTestQuestion,
-    setSectionTestQuestions
+    setSectionTestQuestions,
+    setSectionQuestionToShowCount,
+    sectionQuestionToShowCount
   } = useSectionTestQuestions();
   const pathname = usePathname();
   const sectionID = pathname.split("/").at(3);
@@ -23,6 +31,7 @@ const FinalTest = () => {
   const router = useRouter();
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [itemToEdit, setItemToEdit] = useState(undefined);
+  const [isSettingsHidden, setIsSettingsHidden] = useState(true);
 
   // Observe for delete_question query
   useEffect(() => {
@@ -73,11 +82,12 @@ const FinalTest = () => {
           {!chapters ? "01" : String(chapters?.length + 1).padStart(2, "0")}:
           Final Test
         </h1>
-        {searchParams.get("add_question") !== "true" && (
-          <button onClick={handleAddQuestionClick} className="add-btn">
-            Add question
-          </button>
-        )}
+        <button
+          className="setting-btn"
+          onClick={() => setIsSettingsHidden(false)}
+        >
+          <IoSettingsSharp />
+        </button>
       </div>
     );
   };
@@ -144,7 +154,12 @@ const FinalTest = () => {
   return (
     <section className="test-section">
       {renderHeader()}
-      {renderTest()}
+      <div className="content">
+        <button onClick={handleAddQuestionClick} className="add-btn">
+          Add question
+        </button>
+        {renderTest()}
+      </div>
       {searchParams.get("add_question") === "true" && (
         <AddQuestionForm
           submitAction={handleSectionTestQuestionSubmit}
@@ -159,6 +174,15 @@ const FinalTest = () => {
         />
       )}
       {itemToEdit && <EditQuestionForm item={itemToEdit} />}
+      {!isSettingsHidden && (
+        <TestSettingsForm
+          type="section"
+          hideForm={setIsSettingsHidden}
+          questionToShowCount={sectionQuestionToShowCount}
+          parentID={sectionID}
+          updateQuestionToShowCount={setSectionQuestionToShowCount}
+        />
+      )}
     </section>
   );
 };

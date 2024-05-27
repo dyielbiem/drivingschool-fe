@@ -3,7 +3,7 @@
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 
   & > .header {
-    @apply flex items-center max-w-4xl w-full gap-6;
+    @apply flex items-center w-full gap-6;
 
     .back-btn {
       @apply text-3xl;
@@ -13,18 +13,26 @@
       @apply text-2xl font-extrabold flex-grow;
     }
 
+    .setting-btn {
+      @apply text-2xl;
+    }
+  }
+
+  .content {
+    @apply flex flex-col w-full;
+
     .add-btn {
       @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      px-4 py-2 w-fit mb-6 self-end;
     }
   }
 
   .test-question-container {
-    @apply w-full flex flex-col gap-4 max-w-4xl;
+    @apply w-full flex flex-col gap-6;
 
     & > li {
       @apply w-full flex flex-col p-6 pl-[4.5rem] bg-white rounded-md
-      relative;
+      relative shadow-md;
 
       .numbering {
         @apply top-6 left-6 absolute font-bold text-lg;

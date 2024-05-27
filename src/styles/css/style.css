@@ -319,7 +319,7 @@ main {
 .admin-manage-section-layout .side-nav-container {
   @apply flex flex-col overflow-x-hidden overflow-y-auto 
     h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center min-w-96 max-w-96 justify-start;
+    transition-[width] duration-300 items-center min-w-[22rem] max-w-[22rem] justify-start;
 }
 .admin-manage-section-layout .side-nav-container .top {
   @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark;
@@ -429,7 +429,7 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
 }
 .test-section > .header {
-  @apply flex items-center max-w-4xl w-full gap-6;
+  @apply flex items-center w-full gap-6;
 }
 .test-section > .header .back-btn {
   @apply text-3xl;
@@ -437,16 +437,22 @@ main {
 .test-section > .header h1 {
   @apply text-2xl font-extrabold flex-grow;
 }
-.test-section > .header .add-btn {
+.test-section > .header .setting-btn {
+  @apply text-2xl;
+}
+.test-section .content {
+  @apply flex flex-col w-full;
+}
+.test-section .content .add-btn {
   @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      px-4 py-2 w-fit mb-6 self-end;
 }
 .test-section .test-question-container {
-  @apply w-full flex flex-col gap-4 max-w-4xl;
+  @apply w-full flex flex-col gap-6;
 }
 .test-section .test-question-container > li {
   @apply w-full flex flex-col p-6 pl-[4.5rem] bg-white rounded-md
-      relative;
+      relative shadow-md;
 }
 .test-section .test-question-container > li .numbering {
   @apply top-6 left-6 absolute font-bold text-lg;
@@ -1555,6 +1561,46 @@ main {
 .admin-settings-form .btn-container .cancel-btn {
   @apply bg-custom-gray-base 
       text-black;
+}
+
+.test-setting-form {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.test-setting-form form {
+  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+}
+.test-setting-form form .close-btn {
+  @apply absolute w-fit right-6 top-6;
+}
+.test-setting-form form .close-btn svg {
+  @apply text-3xl;
+}
+.test-setting-form form h3 {
+  @apply text-2xl font-extrabold mb-4;
+}
+.test-setting-form form label {
+  @apply mt-2 text-sm font-bold indent-1;
+}
+.test-setting-form form label span {
+  @apply text-custom-red font-bold;
+}
+.test-setting-form form input {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+      border-custom-gray-base;
+}
+.test-setting-form form .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.test-setting-form form button[type=submit] {
+  @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-8 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.test-setting-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
 }
 
 .content-editor {

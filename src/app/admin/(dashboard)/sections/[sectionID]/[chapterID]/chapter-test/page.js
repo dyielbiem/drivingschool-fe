@@ -1,24 +1,32 @@
 "use client";
+
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FaTrashCan, FaPen } from "react-icons/fa6";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoSettingsSharp } from "react-icons/io5";
+
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import AddQuestionForm from "@/components/AddQuestionForm";
+import EditQuestionForm from "@/components/EditQuestionForm";
+import TestSettingsForm from "@/components/TestSettingsForm";
+
 import {
   useChapterTestQuestions,
   useChapterIndex,
   useSubChapters
 } from "@/state/store";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FaTrashCan, FaPen } from "react-icons/fa6";
-import AddQuestionForm from "@/components/AddQuestionForm";
+
 import handleChapterTestQuestionSubmit from "@/actions/handleChapterTestQuestionSubmit";
-import { useEffect, useState } from "react";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
-import EditQuestionForm from "@/components/EditQuestionForm";
-import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ChapterTest = () => {
   const {
     chapterTestQuestions,
     setNewChapterTestQuestion,
-    setChapterTestQuestions
+    setChapterTestQuestions,
+    chapterQuestionToShowCount,
+    setChapterQuestionToShowCount
   } = useChapterTestQuestions();
   const pathname = usePathname();
   const chapterID = pathname.split("/").at(4);
@@ -28,6 +36,7 @@ const ChapterTest = () => {
   const { subChapters } = useSubChapters();
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [itemToEdit, setItemToEdit] = useState(undefined);
+  const [isSettingsHidden, setIsSettingsHidden] = useState(true);
 
   // Observe for delete_question query
   useEffect(() => {
@@ -77,11 +86,12 @@ const ChapterTest = () => {
           Chapter {chapterIndex + 1}.
           {subChapters ? subChapters.length + 1 : "1"}. Chapter Test
         </h1>
-        {searchParams.get("add_question") !== "true" && (
-          <button onClick={handleAddQuestionClick} className="add-btn">
-            Add question
-          </button>
-        )}
+        <button
+          className="setting-btn"
+          onClick={() => setIsSettingsHidden(false)}
+        >
+          <IoSettingsSharp />
+        </button>
       </div>
     );
   };
@@ -148,7 +158,12 @@ const ChapterTest = () => {
   return (
     <section className="test-section">
       {renderHeader()}
-      {renderTest()}
+      <div className="content">
+        <button onClick={handleAddQuestionClick} className="add-btn">
+          Add question
+        </button>
+        {renderTest()}
+      </div>
       {searchParams.get("add_question") === "true" && (
         <AddQuestionForm
           submitAction={handleChapterTestQuestionSubmit}
@@ -163,6 +178,15 @@ const ChapterTest = () => {
         />
       )}
       {itemToEdit && <EditQuestionForm item={itemToEdit} />}
+      {!isSettingsHidden && (
+        <TestSettingsForm
+          type="chapter"
+          hideForm={setIsSettingsHidden}
+          parentID={chapterID}
+          questionToShowCount={chapterQuestionToShowCount}
+          updateQuestionToShowCount={setChapterQuestionToShowCount}
+        />
+      )}
     </section>
   );
 };
