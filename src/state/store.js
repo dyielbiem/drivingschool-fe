@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+export const useAdmin = create((set) => ({
+  admin: null,
+  setAdmin: (newValue) => {
+    set({ admin: newValue });
+  }
+}));
+
 export const useStudentsInSection = create((set) => ({
   students: [],
   noOfRows: 0,
@@ -82,7 +89,8 @@ export const useSubChapters = create((set) => ({
 }));
 
 export const useSectionTestQuestions = create((set) => ({
-  sectionTestQuestions: undefined,
+  sectionTestQuestions: null,
+  sectionQuestionToShowCount: null,
   setSectionTestQuestions: (newValue) => {
     set({ sectionTestQuestions: newValue });
   },
@@ -104,11 +112,15 @@ export const useSectionTestQuestions = create((set) => ({
         return question;
       })
     }));
+  },
+  setSectionQuestionToShowCount: (newValue) => {
+    set({ sectionQuestionToShowCount: newValue });
   }
 }));
 
 export const useChapterTestQuestions = create((set) => ({
-  chapterTestQuestions: undefined,
+  chapterTestQuestions: null,
+  chapterQuestionToShowCount: null,
   setChapterTestQuestions: (newValue) => {
     set({ chapterTestQuestions: newValue });
   },
@@ -130,5 +142,8 @@ export const useChapterTestQuestions = create((set) => ({
         return question;
       })
     }));
+  },
+  setChapterQuestionToShowCount: (newValue) => {
+    set({ chapterQuestionToShowCount: newValue });
   }
 }));

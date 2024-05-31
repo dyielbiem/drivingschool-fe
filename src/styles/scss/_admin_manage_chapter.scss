@@ -3,7 +3,7 @@
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28;
 
   & > .header {
-    @apply flex items-center max-w-4xl w-full min-h-14 gap-6;
+    @apply flex items-start max-w-4xl w-full min-h-14 gap-4;
 
     .back-btn {
       @apply text-3xl;
@@ -15,12 +15,23 @@
 
     .edit-content-btn {
       @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      px-4 py-2 lg:whitespace-nowrap;
     }
 
     .edit-title-btn {
       @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
-      rounded-full p-3;
+      rounded-full p-3 lg:whitespace-nowrap relative;
+
+      &:hover:after {
+        @apply content-["Edit_title"] absolute text-sm bg-gray-600 text-white px-2.5 py-1.5
+        font-bold rounded-md top-[calc(100%+0.25rem)] left-1/2 -translate-x-1/2;
+      }
+    }
+
+    .upload-cover-image {
+      @apply text-base font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2 lg:whitespace-nowrap flex items-center
+      flex-nowrap gap-2;
     }
   }
 

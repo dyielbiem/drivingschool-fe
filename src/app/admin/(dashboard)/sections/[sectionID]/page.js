@@ -1,24 +1,28 @@
 "use client";
-import { useChapters, useSectionTestQuestions } from "@/state/store";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
-import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
-import adminDeleteChapter from "@/services/api/adminDeleteChapter";
-import EditTitleForm from "@/components/EditTitleForm";
-import handleSectionTitleUpdate from "@/actions/handleSectionTitleUpdate";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import EditTitleForm from "@/components/EditTitleForm";
+import ImageWithFallback from "@/components/ImageWithFallback";
+
+import { useChapters, useSectionTestQuestions } from "@/state/store";
+
+import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
+import adminDeleteChapter from "@/services/api/adminDeleteChapter";
+import handleSectionTitleUpdate from "@/actions/handleSectionTitleUpdate";
+
 const SectionID = () => {
-  const { chapters, setChapters } = useChapters();
-  const { sectionTestQuestions } = useSectionTestQuestions();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const sectionID = pathname.split("/").at(3);
-  const [section, setSection] = useState(undefined);
   const router = useRouter();
+  const { chapters, setChapters } = useChapters();
+  const { sectionTestQuestions } = useSectionTestQuestions();
+  const [section, setSection] = useState(undefined);
   const [itemToDelete, setItemToDelete] = useState(undefined);
 
   useEffect(() => {
@@ -74,6 +78,11 @@ const SectionID = () => {
     router.push(`${pathname}?delete_chapter=${chapterID}`);
   };
 
+  const getCoverImageURL = (chapterID) =>
+    `${
+      process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL
+    }/image/chapter/${chapterID}?image_refresher=${new Date().getTime()}`;
+
   const renderChapters = () => {
     if (
       !section ||
@@ -81,25 +90,34 @@ const SectionID = () => {
       !chapters ||
       chapters?.length === 0
     )
-      return <></>;
+      return null;
     return (
       <ul className="chapters-container">
-        {chapters.map((chapter, index) => (
-          <li key={index}>
-            <Link href={`${pathname}/${chapter.chapterID}`}>
-              Chapter {String(index + 1).padStart(2, "0")}:{" "}
-              {chapter.chapterTitle}
-            </Link>
-            <div>
-              <button onClick={() => handleEditClick(chapter.chapterID)}>
-                <FaPen />
-              </button>
-              <button onClick={() => handleDeleteClick(chapter.chapterID)}>
-                <FaTrashCan />
-              </button>
-            </div>
-          </li>
-        ))}
+        {chapters.map((chapter, index) => {
+          return (
+            <li key={index}>
+              <Link href={`${pathname}/${chapter.chapterID}`}>
+                <ImageWithFallback
+                  src={`${getCoverImageURL(chapter.chapterID)}`}
+                  alt="chapter-cover-img"
+                  width={128}
+                  height={48}
+                  fallBackSrc={"/logo.png"}
+                />
+                Chapter {String(index + 1).padStart(2, "0")}:{" "}
+                {chapter.chapterTitle}
+              </Link>
+              <div>
+                <button onClick={() => handleEditClick(chapter.chapterID)}>
+                  <FaPen />
+                </button>
+                <button onClick={() => handleDeleteClick(chapter.chapterID)}>
+                  <FaTrashCan />
+                </button>
+              </div>
+            </li>
+          );
+        })}
         {sectionTestQuestions?.length !== 0 && (
           <li>
             <Link href={`${pathname}/final-test`}>

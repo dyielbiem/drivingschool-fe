@@ -1,16 +1,17 @@
 "use client";
+import Pagination from "@/components/Pagination";
+import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
+import EditStudentForm from "@/components/EditStudentForm";
+import adminDeleteStudent from "@/services/api/adminDeleteStudent";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa6";
-import { useStudentsInSection } from "@/state/store";
+import { useStudentsInSection, useAdmin } from "@/state/store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Pagination from "@/components/Pagination";
 import { useEffect, useState } from "react";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
-import adminDeleteStudent from "@/services/api/adminDeleteStudent";
-import EditStudentForm from "@/components/EditStudentForm";
 
 const AdminAllStudents = () => {
   const { students, noOfRows, setDeleteStudent } = useStudentsInSection();
+  const { admin } = useAdmin();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page"));
   const searchKey = searchParams.get("search");
@@ -41,7 +42,11 @@ const AdminAllStudents = () => {
 
   // Observe for delete_student query
   useEffect(() => {
-    if (!searchParams.get("delete_student") || students?.length === 0)
+    if (
+      !searchParams.get("delete_student") ||
+      students?.length === 0 ||
+      admin?.limitedAccess
+    )
       return setStudentToDelete(undefined);
 
     const student = students.find(
@@ -52,7 +57,9 @@ const AdminAllStudents = () => {
     if (!student) return setStudentToDelete(undefined);
 
     setStudentToDelete(student);
-  }, [searchParams, students]);
+  }, [admin, searchParams, students]);
+
+  if (!admin) return null;
 
   if (studentToEdit) {
     return <EditStudentForm student={studentToEdit} />;
@@ -152,9 +159,13 @@ const AdminAllStudents = () => {
               <button onClick={() => editClick(eachStudent.studentUserName)}>
                 <FaPen />
               </button>
-              <button onClick={() => deleteClick(eachStudent.studentUserName)}>
-                <FaTrashCan />
-              </button>
+              {!admin.limitedAccess && (
+                <button
+                  onClick={() => deleteClick(eachStudent.studentUserName)}
+                >
+                  <FaTrashCan />
+                </button>
+              )}
             </div>
           </li>
         ))}
