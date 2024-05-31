@@ -1,20 +1,27 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { FaPen } from "react-icons/fa6";
+import { BiSolidImageAdd } from "react-icons/bi";
+
 import AddSubChapterForm from "@/components/AddSubChapterForm";
 import ContentEditor from "@/components/ContentEditor";
 import EditTitleForm from "@/components/EditTitleForm";
 import SubChapterList from "@/components/SubChapterList";
+import UploadChapterCoverModal from "@/components/UploadChapterCoverModal";
+
+import {
+  useChapterIndex,
+  useSubChapters,
+  useChapterTestQuestions,
+  useChapters
+} from "@/state/store";
+
 import adminFetchChapterByID from "@/services/api/adminFetchChapterByID";
 import adminUpdateChapterContent from "@/services/api/adminUpdateChapterContent";
 import handleChapterTitleUpdate from "@/actions/handleChapterTitleUpdate";
-import { useChapterIndex } from "@/state/store";
-import { useEffect, useState } from "react";
-import { useSubChapters } from "@/state/store";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useChapterTestQuestions } from "@/state/store";
-import { useChapters } from "@/state/store";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { FaPen } from "react-icons/fa6";
 
 const ChapterID = ({ params }) => {
   const [chapter, setChapter] = useState(null);
@@ -87,6 +94,12 @@ const ChapterID = ({ params }) => {
     router.push(`${pathname}/chapter-test`);
   };
 
+  const handleUploadCoverImage = () => {
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("upload_cover_image", "true");
+    router.push(`${pathname}?${currentParams}`);
+  };
+
   const renderChapterHeaderBox = () => {
     if (
       !chapter ||
@@ -109,9 +122,17 @@ const ChapterID = ({ params }) => {
             Edit content
           </button>
         ) : (
-          <button className="edit-title-btn" onClick={handleEditTitleClick}>
-            <FaPen />
-          </button>
+          <>
+            <button className="edit-title-btn" onClick={handleEditTitleClick}>
+              <FaPen />
+            </button>
+            <button
+              className="upload-cover-image"
+              onClick={handleUploadCoverImage}
+            >
+              <BiSolidImageAdd /> Upload chapter image
+            </button>
+          </>
         )}
       </div>
     );
@@ -195,6 +216,15 @@ const ChapterID = ({ params }) => {
     );
   };
 
+  const renderUploadChapterCoverModal = () => {
+    if (
+      searchParams.get("edit_content") !== "true" ||
+      searchParams.get("upload_cover_image") !== "true"
+    )
+      return null;
+    return <UploadChapterCoverModal chapterID={params.chapterID} />;
+  };
+
   return (
     <section className="admin-chapter-section">
       {renderChapterHeaderBox()}
@@ -204,6 +234,7 @@ const ChapterID = ({ params }) => {
       {searchParams.get("add_sub_chapter") === "true" && (
         <AddSubChapterForm chapterID={params.chapterID} />
       )}
+      {renderUploadChapterCoverModal()}
     </section>
   );
 };

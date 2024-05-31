@@ -408,11 +408,14 @@ main {
   @apply flex flex-col w-full gap-4 max-w-4xl;
 }
 .admin-manage-section .chapters-container li {
-  @apply rounded-md px-6 font-bold text-lg
-      bg-white hover:shadow-md flex;
+  @apply rounded-md pl-4 pr-6 font-bold text-lg
+      bg-white hover:shadow-md flex gap-4;
 }
 .admin-manage-section .chapters-container li a {
-  @apply flex-grow h-full py-5;
+  @apply flex items-center flex-grow gap-4 h-16 py-2;
+}
+.admin-manage-section .chapters-container li a img {
+  @apply w-32 h-full self-center object-contain;
 }
 .admin-manage-section .chapters-container li div {
   @apply flex gap-5;
@@ -555,7 +558,7 @@ main {
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28;
 }
 .admin-chapter-section > .header {
-  @apply flex items-center max-w-4xl w-full min-h-14 gap-6;
+  @apply flex items-start max-w-4xl w-full min-h-14 gap-4;
 }
 .admin-chapter-section > .header .back-btn {
   @apply text-3xl;
@@ -565,11 +568,20 @@ main {
 }
 .admin-chapter-section > .header .edit-content-btn {
   @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      px-4 py-2 lg:whitespace-nowrap;
 }
 .admin-chapter-section > .header .edit-title-btn {
   @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
-      rounded-full p-3;
+      rounded-full p-3 lg:whitespace-nowrap relative;
+}
+.admin-chapter-section > .header .edit-title-btn:hover:after {
+  @apply content-["Edit_title"] absolute text-sm bg-gray-600 text-white px-2.5 py-1.5
+        font-bold rounded-md top-[calc(100%+0.25rem)] left-1/2 -translate-x-1/2;
+}
+.admin-chapter-section > .header .upload-cover-image {
+  @apply text-base font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2 lg:whitespace-nowrap flex items-center
+      flex-nowrap gap-2;
 }
 .admin-chapter-section > .edit-title-form {
   @apply flex max-w-4xl w-full items-center bg-white p-2
@@ -1600,6 +1612,67 @@ main {
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .test-setting-form form button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+
+.upload-chapter-cover-modal {
+  @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
+  justify-center items-center top-0 left-0 z-50;
+}
+.upload-chapter-cover-modal > div {
+  @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+}
+.upload-chapter-cover-modal > div .header {
+  @apply flex gap-6 items-start max-w-full;
+}
+.upload-chapter-cover-modal > div .header h3 {
+  @apply text-xl font-extrabold flex-grow;
+}
+.upload-chapter-cover-modal > div .header .close-btn {
+  @apply w-fit;
+}
+.upload-chapter-cover-modal > div .header .close-btn svg {
+  @apply text-3xl;
+}
+.upload-chapter-cover-modal > div .upload-image-box {
+  @apply relative bg-center bg-no-repeat bg-cover mt-3 rounded-md
+      w-full h-64 overflow-hidden;
+}
+.upload-chapter-cover-modal > div .upload-image-box > img {
+  @apply h-full w-full object-cover absolute top-0 left-0;
+}
+.upload-chapter-cover-modal > div .upload-image-box > label {
+  @apply flex flex-col cursor-pointer w-full h-full rounded-md text-white
+        items-center justify-center gap-2 bg-[rgba(0,0,0,0.8)] duration-150
+        absolute top-0 left-0;
+}
+.upload-chapter-cover-modal > div .upload-image-box > label:hover {
+  @apply bg-[rgba(0,0,0,0.7)];
+}
+.upload-chapter-cover-modal > div .upload-image-box > label svg {
+  @apply text-4xl;
+}
+.upload-chapter-cover-modal > div .upload-image-box > label span {
+  @apply font-bold text-lg;
+}
+.upload-chapter-cover-modal > div .upload-image-box > input {
+  @apply hidden;
+}
+.upload-chapter-cover-modal > div .error-message {
+  @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+}
+.upload-chapter-cover-modal > div .success-message {
+  @apply text-custom-green-base font-bold p-2.5 mt-4
+      bg-custom-green-light border-2 border-custom-green-base;
+}
+.upload-chapter-cover-modal > div .upload-btn {
+  @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-8 gap-2
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.upload-chapter-cover-modal > div .upload-btn svg {
   @apply text-2xl animate-spin;
 }
 

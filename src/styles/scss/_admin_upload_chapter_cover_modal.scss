@@ -1,0 +1,76 @@
+.upload-chapter-cover-modal {
+  @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
+  justify-center items-center top-0 left-0 z-50;
+
+  & > div {
+    @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+
+    .header {
+      @apply flex gap-6 items-start max-w-full;
+
+      h3 {
+        @apply text-xl font-extrabold flex-grow;
+      }
+
+      .close-btn {
+        @apply w-fit;
+
+        svg {
+          @apply text-3xl;
+        }
+      }
+    }
+
+    .upload-image-box {
+      @apply relative bg-center bg-no-repeat bg-cover mt-3 rounded-md
+      w-full h-64 overflow-hidden;
+
+      & > img {
+        @apply h-full w-full object-cover absolute top-0 left-0;
+      }
+
+      & > label {
+        @apply flex flex-col cursor-pointer w-full h-full rounded-md text-white
+        items-center justify-center gap-2 bg-[rgba(0,0,0,0.8)] duration-150
+        absolute top-0 left-0;
+
+        &:hover {
+          @apply bg-[rgba(0,0,0,0.7)];
+        }
+
+        svg {
+          @apply text-4xl;
+        }
+
+        span {
+          @apply font-bold text-lg;
+        }
+      }
+
+      & > input {
+        @apply hidden;
+      }
+    }
+
+    .error-message {
+      @apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700;
+    }
+
+    .success-message {
+      @apply text-custom-green-base font-bold p-2.5 mt-4
+      bg-custom-green-light border-2 border-custom-green-base;
+    }
+
+    .upload-btn {
+      @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-8 gap-2
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+      svg {
+        @apply text-2xl animate-spin;
+      }
+    }
+  }
+}
