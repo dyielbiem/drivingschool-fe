@@ -371,17 +371,24 @@ main {
 }
 .admin-manage-section > .header {
   @apply flex max-w-4xl w-full items-center min-h-14
-    gap-6;
+    gap-4;
 }
 .admin-manage-section > .header .back-btn {
   @apply text-3xl;
 }
 .admin-manage-section > .header h1 {
-  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow;
+  @apply text-2xl font-extrabold max-w-4xl w-full flex-grow flex gap-4 items-center;
+}
+.admin-manage-section > .header h1 span {
+  @apply text-xs py-1 px-2 rounded-md uppercase h-fit;
 }
 .admin-manage-section > .header .edit-btn {
   @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3;
+}
+.admin-manage-section > .header .activate-btn {
+  @apply text-base font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
 }
 .admin-manage-section > .edit-title-form {
   @apply flex max-w-4xl w-full items-center bg-white p-2
@@ -1106,6 +1113,27 @@ main {
   @apply text-2xl animate-spin;
 }
 
+.created-section-modal {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.created-section-modal > div {
+  @apply flex flex-col p-8 rounded-lg bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto
+    justify-center;
+}
+.created-section-modal > div h3 {
+  @apply text-xl font-extrabold mb-2;
+}
+.created-section-modal > div p {
+  @apply text-sm;
+}
+.created-section-modal > div button {
+  @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-10
+      flex items-center justify-center h-12;
+}
+
 .admin-courses-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
   bg-custom-white-dark overflow-x-hidden pb-10 items-center;
@@ -1673,6 +1701,36 @@ main {
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .upload-chapter-cover-modal > div .upload-btn svg {
+  @apply text-2xl animate-spin;
+}
+
+.activate-section-modal {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+}
+.activate-section-modal > div {
+  @apply flex flex-col p-8 rounded-lg bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto
+    justify-center;
+}
+.activate-section-modal > div .top {
+  @apply flex items-start gap-2;
+}
+.activate-section-modal > div .top h3 {
+  @apply text-xl font-extrabold mb-2 flex-grow mt-1;
+}
+.activate-section-modal > div .top button {
+  @apply text-3xl;
+}
+.activate-section-modal > div p {
+  @apply text-base max-w-xs;
+}
+.activate-section-modal > div > button {
+  @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.activate-section-modal > div > button svg {
   @apply text-2xl animate-spin;
 }
 

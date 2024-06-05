@@ -4,19 +4,28 @@
 
   & > .header {
     @apply flex max-w-4xl w-full items-center min-h-14
-    gap-6;
+    gap-4;
 
     .back-btn {
       @apply text-3xl;
     }
 
     h1 {
-      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow;
+      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow flex gap-4 items-center;
+
+      span {
+        @apply text-xs py-1 px-2 rounded-md uppercase h-fit;
+      }
     }
 
     .edit-btn {
       @apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3;
+    }
+
+    .activate-btn {
+      @apply text-base font-bold bg-custom-blue-base rounded-md text-white
+      px-4 py-2;
     }
   }
 

@@ -8,6 +8,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import EditTitleForm from "@/components/EditTitleForm";
 import ImageWithFallback from "@/components/ImageWithFallback";
+import ActivateSectionModal from "@/components/ActivateSectionModal";
 
 import { useChapters, useSectionTestQuestions } from "@/state/store";
 
@@ -15,15 +16,16 @@ import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
 import adminDeleteChapter from "@/services/api/adminDeleteChapter";
 import handleSectionTitleUpdate from "@/actions/handleSectionTitleUpdate";
 
-const SectionID = () => {
+const SectionID = ({ params }) => {
+  const sectionID = params.sectionID;
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const sectionID = pathname.split("/").at(3);
   const router = useRouter();
   const { chapters, setChapters } = useChapters();
   const { sectionTestQuestions } = useSectionTestQuestions();
   const [section, setSection] = useState(undefined);
   const [itemToDelete, setItemToDelete] = useState(undefined);
+  const [isActivateModalVisible, setIsActivateModalVisible] = useState(false);
 
   useEffect(() => {
     if (!sectionID) return;
@@ -61,11 +63,28 @@ const SectionID = () => {
           <IoMdArrowRoundBack />
         </button>
         <h1>
-          {section.sectionTitle} {section.isActive ? "(Latest Version)" : ""}
+          {section.sectionTitle}
+          <span
+            className={`${
+              section.isActive
+                ? "bg-custom-green-light text-custom-green-base"
+                : "bg-custom-gray-base text-custom-gray-dark"
+            }`}
+          >
+            {section.isActive ? "Active" : "Inactive"}
+          </span>
         </h1>
         <button onClick={handleEditSectionTitle} className="edit-btn">
           <FaPen />
         </button>
+        {!section.isActive && (
+          <button
+            className="activate-btn"
+            onClick={() => setIsActivateModalVisible(true)}
+          >
+            Activate
+          </button>
+        )}
       </div>
     );
   };
@@ -149,20 +168,30 @@ const SectionID = () => {
     section
   );
 
+  const onSuccessActivate = () => {
+    setIsActivateModalVisible(false);
+    setSection((prevState) => ({ ...prevState, isActive: true }));
+  };
+
   return (
-    <>
-      <section className="admin-manage-section">
-        {renderSection()}
-        {searchParams.get("edit_title") === "true" && (
-          <EditTitleForm
-            prevTitle={section?.sectionTitle}
-            pathWhenCancelled={pathname}
-            updateAction={handleSectionTitleUpdateWithSection}
-            setItemToEdit={setSection}
-          />
-        )}
-        {renderChapters()}
-      </section>
+    <section className="admin-manage-section">
+      {renderSection()}
+      {searchParams.get("edit_title") === "true" && (
+        <EditTitleForm
+          prevTitle={section?.sectionTitle}
+          pathWhenCancelled={pathname}
+          updateAction={handleSectionTitleUpdateWithSection}
+          setItemToEdit={setSection}
+        />
+      )}
+      {renderChapters()}
+      {isActivateModalVisible && (
+        <ActivateSectionModal
+          closeModalClick={() => setIsActivateModalVisible(false)}
+          onSuccessActivate={onSuccessActivate}
+          sectionID={sectionID}
+        />
+      )}
       {itemToDelete && (
         <ConfirmDeleteModal
           itemToDelete={itemToDelete}
@@ -170,7 +199,7 @@ const SectionID = () => {
           confirmAction={deleteChapter}
         />
       )}
-    </>
+    </section>
   );
 };
 
