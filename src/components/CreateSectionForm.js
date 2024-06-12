@@ -1,13 +1,17 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { IoCloseCircleSharp } from "react-icons/io5";
-import FormErrorMessage from "./FormErrorMessage";
 import { useFormState } from "react-dom";
+import { IoCloseCircleSharp } from "react-icons/io5";
+
+import FormErrorMessage from "./FormErrorMessage";
 import FormButton from "./FormButton";
+import CreatedSectionModal from "./CreatedSectionModal";
+
 import handleSectionSubmit from "@/actions/handleSectionSubmit";
-import { useEffect } from "react";
 
 const CreateSectionForm = ({ setSections }) => {
   const router = useRouter();
+  const [isNewSectionCreated, setIsNewSectionCreated] = useState(false);
 
   const initialState = {
     message: "",
@@ -22,21 +26,17 @@ const CreateSectionForm = ({ setSections }) => {
   useEffect(() => {
     if (!formState.newSection) return;
     setSections((prevState) => {
-      if (!prevState) return prevState;
-
-      const newState = prevState.map((item) => {
-        return { ...item, isActive: false };
-      });
-
-      return [{ ...formState.newSection, isActive: true }, ...newState];
+      return [{ ...formState.newSection, isActive: false }, ...prevState];
     });
 
-    router.push("/admin/sections");
+    setIsNewSectionCreated(true);
   }, [formState.newSection, setSections, router]);
 
   const closeForm = () => {
     router.push("/admin/sections");
   };
+
+  if (isNewSectionCreated) return <CreatedSectionModal />;
 
   return (
     <div className="create-section-form">

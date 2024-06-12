@@ -1,0 +1,36 @@
+.activate-section-modal {
+  @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+  items-center bg-[#00000044];
+
+  & > div {
+    @apply flex flex-col p-8 rounded-lg bg-white w-full 
+    max-w-md z-10 relative max-h-[95%] overflow-y-auto
+    justify-center;
+
+    .top {
+      @apply flex items-start gap-2;
+
+      h3 {
+        @apply text-xl font-extrabold mb-2 flex-grow mt-1;
+      }
+
+      button {
+        @apply text-3xl;
+      }
+    }
+
+    p {
+      @apply text-base max-w-xs;
+    }
+
+    & > button {
+      @apply w-full bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+      svg {
+        @apply text-2xl animate-spin;
+      }
+    }
+  }
+}

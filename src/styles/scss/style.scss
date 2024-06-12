@@ -38,6 +38,7 @@ main {
 @import "admin_latest_student_registrations";
 @import "admin_latest_student_completions";
 @import "admin_create_section_form";
+@import "admin_created_section_modal";
 @import "admin_courses";
 @import "admin_add_course_form";
 @import "admin_edit_course_form";
@@ -49,9 +50,11 @@ main {
 @import "admin_settings_form";
 @import "admin_test_setting_form";
 @import "admin_upload_chapter_cover_modal";
+@import "admin_activate_section_modal";
 @import "content_editor";
 @import "image_gallery_modal";
 @import "embed_youtube_modal";
 @import "confirm_delete_modal";
+@import "sub_chapters_progress_modal";
 @import "pagination";
 @import "full_screen_loading";

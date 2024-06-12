@@ -42,7 +42,7 @@
   }
 
   & > table {
-    @apply text-left mx-4 mt-4;
+    @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
 
     tr {
       @apply border-b-2 border-custom-white-darker;
@@ -50,7 +50,7 @@
 
     th,
     td {
-      @apply py-4;
+      @apply py-4 px-4;
 
       &:first-child {
         @apply pl-6;
