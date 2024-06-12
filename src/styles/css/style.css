@@ -949,14 +949,14 @@ main {
   @apply flex text-xl font-extrabold gap-4;
 }
 .student-exam-details-table > table {
-  @apply text-left mx-4 mt-4;
+  @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
 }
 .student-exam-details-table > table tr {
   @apply border-b-2 border-custom-white-darker;
 }
 .student-exam-details-table > table th,
 .student-exam-details-table > table td {
-  @apply py-4;
+  @apply py-4 px-4;
 }
 .student-exam-details-table > table th:first-child,
 .student-exam-details-table > table td:first-child {
@@ -1042,33 +1042,71 @@ main {
 .student-completions-table > .header {
   @apply flex text-xl font-extrabold gap-4;
 }
+.student-completions-table > .progress {
+  @apply ml-4 mt-4 p-6 bg-white rounded-md w-fit shadow-md;
+}
+.student-completions-table > .progress h3 {
+  @apply font-bold text-base mb-2;
+}
+.student-completions-table > .progress .progress-bar {
+  @apply flex items-center gap-2;
+}
+.student-completions-table > .progress .progress-bar .progress-graph {
+  @apply bg-custom-white-darker h-4 w-64 rounded-full overflow-hidden relative;
+}
+.student-completions-table > .progress .progress-bar .progress-graph .progress-percentage {
+  @apply bg-custom-blue-light absolute left-0 top-0 rounded-full
+          h-full;
+}
+.student-completions-table > .progress .progress-bar .percentage-text {
+  @apply text-sm font-bold;
+}
+.student-completions-table > .progress .progress-fraction {
+  @apply text-xs mt-1 ml-1;
+}
 .student-completions-table > table {
-  @apply text-left mx-4 mt-4;
+  @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
 }
 .student-completions-table > table tr {
   @apply border-b-2 border-custom-white-darker;
 }
 .student-completions-table > table th,
 .student-completions-table > table td {
-  @apply py-4;
+  @apply py-4 px-4;
 }
 .student-completions-table > table th:first-child,
 .student-completions-table > table td:first-child {
-  @apply pl-6;
+  @apply px-6;
+}
+.student-completions-table > table th:last-child,
+.student-completions-table > table td:last-child {
+  @apply text-custom-blue-light font-bold;
+}
+.student-completions-table > table th:last-child button,
+.student-completions-table > table td:last-child button {
+  @apply flex flex-nowrap whitespace-nowrap items-center
+          gap-2;
+}
+.student-completions-table > table th:last-child button svg,
+.student-completions-table > table td:last-child button svg {
+  @apply text-xl;
+}
+.student-completions-table > table th {
+  @apply whitespace-nowrap;
 }
 .student-completions-table > table th:nth-child(1) {
-  @apply w-[40%];
-}
-.student-completions-table > table th:nth-child(2) {
   @apply w-[30%];
 }
 .student-completions-table > table th:nth-child(3) {
-  @apply w-[30%];
+  @apply w-[10%];
+}
+.student-completions-table > table th:nth-child(5) {
+  @apply w-[20%];
 }
 .student-completions-table > table .title {
   @apply font-bold;
 }
-.student-completions-table > table .status {
+.student-completions-table > table .progress {
   @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
       uppercase;
 }
@@ -1955,6 +1993,59 @@ main {
 .confirm-delete-modal > div .confirm-btn {
   @apply font-bold text-base w-full mt-8
       rounded-md py-2 bg-custom-blue-base text-white;
+}
+
+.sub-chapters-progress-modal {
+  @apply fixed top-0 left-0 w-screen h-screen
+  bg-[rgba(0,0,0,0.3)] flex justify-center items-center
+  z-50;
+}
+.sub-chapters-progress-modal > div {
+  @apply bg-white p-6 pb-8 rounded-md w-full max-w-2xl 
+    flex flex-col justify-start items-center relative max-h-[85%]
+    h-fit overflow-y-auto overflow-x-hidden;
+}
+.sub-chapters-progress-modal > div .close-btn {
+  @apply self-end mb-1;
+}
+.sub-chapters-progress-modal > div .close-btn svg {
+  @apply text-3xl;
+}
+.sub-chapters-progress-modal > div h3 {
+  @apply font-bold text-xl mb-4 text-center w-11/12;
+}
+.sub-chapters-progress-modal > div > table {
+  @apply text-left mx-4 w-full;
+}
+.sub-chapters-progress-modal > div > table tr {
+  @apply border-b-2 border-custom-white-darker;
+}
+.sub-chapters-progress-modal > div > table th,
+.sub-chapters-progress-modal > div > table td {
+  @apply py-4 px-4 w-[30%];
+}
+.sub-chapters-progress-modal > div > table th:first-child,
+.sub-chapters-progress-modal > div > table td:first-child {
+  @apply pl-6 w-[40%];
+}
+.sub-chapters-progress-modal > div > table th:nth-child(3) {
+  @apply whitespace-nowrap;
+}
+.sub-chapters-progress-modal > div > table .title {
+  @apply font-bold;
+}
+.sub-chapters-progress-modal > div > table .progress {
+  @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
+        uppercase;
+}
+.sub-chapters-progress-modal > div .fetching-msg {
+  @apply flex text-lg gap-3 items-center justify-center;
+}
+.sub-chapters-progress-modal > div .fetching-msg svg {
+  @apply text-2xl animate-spin text-black;
+}
+.sub-chapters-progress-modal > div .no-sub-chapter-msg {
+  @apply text-lg;
 }
 
 .pagination {

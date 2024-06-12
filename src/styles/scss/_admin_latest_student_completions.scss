@@ -41,8 +41,37 @@
     @apply flex text-xl font-extrabold gap-4;
   }
 
+  & > .progress {
+    @apply ml-4 mt-4 p-6 bg-white rounded-md w-fit shadow-md;
+
+    h3 {
+      @apply font-bold text-base mb-2;
+    }
+
+    .progress-bar {
+      @apply flex items-center gap-2;
+
+      .progress-graph {
+        @apply bg-custom-white-darker h-4 w-64 rounded-full overflow-hidden relative;
+
+        .progress-percentage {
+          @apply bg-custom-blue-light absolute left-0 top-0 rounded-full
+          h-full;
+        }
+      }
+
+      .percentage-text {
+        @apply text-sm font-bold;
+      }
+    }
+
+    .progress-fraction {
+      @apply text-xs mt-1 ml-1;
+    }
+  }
+
   & > table {
-    @apply text-left mx-4 mt-4;
+    @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
 
     tr {
       @apply border-b-2 border-custom-white-darker;
@@ -50,24 +79,39 @@
 
     th,
     td {
-      @apply py-4;
+      @apply py-4 px-4;
 
       &:first-child {
-        @apply pl-6;
+        @apply px-6;
+      }
+
+      &:last-child {
+        @apply text-custom-blue-light font-bold;
+
+        button {
+          @apply flex flex-nowrap whitespace-nowrap items-center
+          gap-2;
+
+          svg {
+            @apply text-xl;
+          }
+        }
       }
     }
 
     th {
-      &:nth-child(1) {
-        @apply w-[40%];
-      }
+      @apply whitespace-nowrap;
 
-      &:nth-child(2) {
+      &:nth-child(1) {
         @apply w-[30%];
       }
 
       &:nth-child(3) {
-        @apply w-[30%];
+        @apply w-[10%];
+      }
+
+      &:nth-child(5) {
+        @apply w-[20%];
       }
     }
 
@@ -75,7 +119,7 @@
       @apply font-bold;
     }
 
-    .status {
+    .progress {
       @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
       uppercase;
     }

@@ -1,0 +1,65 @@
+.sub-chapters-progress-modal {
+  @apply fixed top-0 left-0 w-screen h-screen
+  bg-[rgba(0,0,0,0.3)] flex justify-center items-center
+  z-50;
+
+  & > div {
+    @apply bg-white p-6 pb-8 rounded-md w-full max-w-2xl 
+    flex flex-col justify-start items-center relative max-h-[85%]
+    h-fit overflow-y-auto overflow-x-hidden;
+
+    .close-btn {
+      @apply self-end mb-1;
+
+      svg {
+        @apply text-3xl;
+      }
+    }
+
+    h3 {
+      @apply font-bold text-xl mb-4 text-center w-11/12;
+    }
+
+    & > table {
+      @apply text-left mx-4 w-full;
+
+      tr {
+        @apply border-b-2 border-custom-white-darker;
+      }
+
+      th,
+      td {
+        @apply py-4 px-4 w-[30%];
+
+        &:first-child {
+          @apply pl-6 w-[40%];
+        }
+      }
+
+      th:nth-child(3) {
+        @apply whitespace-nowrap;
+      }
+
+      .title {
+        @apply font-bold;
+      }
+
+      .progress {
+        @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
+        uppercase;
+      }
+    }
+
+    .fetching-msg {
+      @apply flex text-lg gap-3 items-center justify-center;
+
+      svg {
+        @apply text-2xl animate-spin text-black;
+      }
+    }
+
+    .no-sub-chapter-msg {
+      @apply text-lg;
+    }
+  }
+}

@@ -1,10 +1,13 @@
 "use client";
-import { RiExternalLinkFill } from "react-icons/ri";
-import { useStudentsInSection } from "@/state/store";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { RiExternalLinkFill } from "react-icons/ri";
+
 import Pagination from "@/components/Pagination";
 import StudentCompletionsTable from "@/components/StudentCompletionsTable";
+
+import { useStudentsInSection } from "@/state/store";
+
 import dateFormatter from "@/utils/dateFormatter";
 
 const AdminLatestStudentCompletion = () => {
@@ -85,7 +88,7 @@ const AdminLatestStudentCompletion = () => {
   };
 
   const renderCompletions = () => {
-    if (studentToView) return null;
+    if (studentToView || !students || students.length === 0) return null;
     const completions = completionsToRender();
     return (
       <ul className="latest-completions-table">

@@ -1,8 +1,11 @@
 "use client";
-import { useStudentsInSection } from "@/state/store";
 import { useSearchParams } from "next/navigation";
-import dateFormatter from "@/utils/dateFormatter";
+
 import Pagination from "@/components/Pagination";
+
+import { useStudentsInSection } from "@/state/store";
+
+import dateFormatter from "@/utils/dateFormatter";
 
 const AdminLatestStudentRegistration = () => {
   const { students, noOfRows } = useStudentsInSection();
@@ -65,6 +68,7 @@ const AdminLatestStudentRegistration = () => {
   };
 
   const renderRegistrations = () => {
+    if (!students || students.length === 0) return null;
     const registrations = registrationsToRender();
     return (
       <ul className="latest-registrations-table">
