@@ -524,14 +524,14 @@ main {
   @apply flex-grow;
 }
 .question-form form .question-editor div:nth-child(1) .tiptap {
-  @apply bg-white rounded-md h-full min-h-10 outline-none cursor-text 
-          flex-grow py-2;
+  @apply bg-white rounded-md h-full min-h-6 outline-none cursor-text 
+          flex-grow py-2 my-[1px];
 }
 .question-form form .question-editor > button {
   @apply text-xl mt-2.5;
 }
 .question-form form input {
-  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+  @apply bg-white rounded-md p-2 min-h-6 cursor-text border-[1px]
       border-custom-gray-base;
 }
 .question-form form .other-answer-container {
