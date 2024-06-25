@@ -5,7 +5,7 @@ const LandingImage = () => {
     <div className="img-container">
       <Image
         fill
-        src={"https://source.unsplash.com/D5FI8jv6ndU"}
+        src="/login-image.jpg"
         alt="welcome-diplay-image"
         sizes={"(min-width: 768px) 100vw"}
         priority

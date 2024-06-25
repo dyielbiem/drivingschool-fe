@@ -22,7 +22,7 @@ main {
   @apply aspect-square w-full h-full overflow-hidden relative hidden md:block;
 }
 .login-page .img-container img {
-  @apply object-cover;
+  @apply object-cover opacity-85;
 }
 .login-page .login-form {
   @apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-lg
@@ -74,7 +74,7 @@ main {
   @apply aspect-square w-full h-full overflow-hidden relative hidden md:block;
 }
 .reset-password-page .img-container img {
-  @apply object-cover;
+  @apply object-cover opacity-85;
 }
 .reset-password-page .reset-password-form {
   @apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-lg

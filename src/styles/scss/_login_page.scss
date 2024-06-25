@@ -5,7 +5,7 @@
     @apply aspect-square w-full h-full overflow-hidden relative hidden md:block;
 
     img {
-      @apply object-cover;
+      @apply object-cover opacity-85;
     }
   }
 
