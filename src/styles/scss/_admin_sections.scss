@@ -1,17 +1,29 @@
 .admin-sections-container {
-  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12;
+  @apply flex flex-col flex-grow pb-10 max-h-screen h-screen 
+  bg-custom-white-dark overflow-y-auto overflow-x-hidden 
+  pt-32 py-10 lg:py-12 
+  px-6 sm:px-8 md:px-12;
 
   .header {
-    @apply flex justify-between items-center mb-12;
+    @apply flex justify-between items-center mb-8 sm:mb-12
+    gap-2;
 
     h1 {
       @apply text-2xl font-extrabold;
     }
 
     & > button {
-      @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-base font-bold;
+      @apply bg-custom-blue-base text-white
+      rounded-xl sm:rounded-lg text-base font-bold
+      pl-2.5 pb-2.5 pr-2 pt-2 sm:px-4 sm:py-2.5;
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
     }
   }
 
@@ -19,8 +31,9 @@
     @apply grid grid-cols-[8fr_1fr] gap-3;
 
     .table-header {
-      @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+      @apply grid-cols-subgrid col-span-full justify-items-center 
+      px-10 rounded-md font-semibold mb-4
+      hidden sm:grid;
 
       p {
         @apply font-extrabold text-lg;
@@ -32,16 +45,20 @@
     }
 
     li:nth-child(n + 2) {
-      @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-      py-5 px-10 rounded-md cursor-pointer 
-      hover:shadow-md duration-200;
+      @apply grid-cols-subgrid col-span-full
+      justify-items-center bg-white
+      rounded-md cursor-pointer 
+      hover:shadow-md duration-200 gap-2
+      flex sm:grid flex-col-reverse
+      px-4 py-6 sm:py-5 sm:px-10;
 
       p:nth-child(1) {
-        @apply justify-self-start;
+        @apply justify-self-start font-semibold sm:font-normal;
       }
 
       p:nth-child(2) {
-        @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+        @apply rounded-md text-xs font-bold py-1 px-2
+        h-fit w-fit;
       }
     }
   }

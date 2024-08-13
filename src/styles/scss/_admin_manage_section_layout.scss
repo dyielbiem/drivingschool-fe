@@ -1,17 +1,44 @@
 .admin-manage-section-layout {
-  @apply flex w-full;
+  @apply flex w-full flex-col lg:flex-row;
+
+  & > .top-nav-container {
+    @apply flex lg:hidden justify-between items-center
+    w-screen overflow-hidden py-2 px-4 h-20 fixed top-0 left-0
+    bg-white z-[99999];
+
+    & > .nav-logo {
+      @apply w-32 justify-center items-center;
+    }
+
+    & > .hamburger-btn {
+      @apply text-3xl;
+    }
+  }
+
+  & > .mobile-nav-back-drop {
+    @apply fixed h-screen w-screen top-0 left-0 backdrop-blur-sm bg-[#11111177]
+    lg:hidden z-[99999];
+  }
 
   .side-nav-container {
-    @apply flex flex-col overflow-x-hidden overflow-y-auto 
+    @apply flex-col overflow-x-hidden overflow-y-auto 
     h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-center min-w-[22rem] max-w-[22rem] justify-start;
+    transition-[width] duration-300 items-center w-full max-w-[20rem]
+    justify-start top-0 right-0 z-[999999]
+    fixed lg:static lg:flex;
+
+    & > .close-nav-btn {
+      @apply mb-4 self-end w-fit lg:hidden mr-4
+      text-2xl text-custom-white-base mt-6;
+    }
 
     .top {
-      @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark;
+      @apply flex flex-col sticky top-0 z-50 bg-custom-blue-dark
+      w-full;
 
-      .home {
+      .nav-logo {
         @apply text-2xl font-bold text-left bg-custom-white-dark
-        py-6 px-6 w-10/12 self-center my-6;
+        py-6 px-6 w-10/12 self-center my-6 hidden lg:block;
       }
 
       .btn-container {

@@ -1,10 +1,13 @@
 "use client";
 
-import adminFetchSections from "@/services/api/adminFetchSections";
-import { useRouter, useSearchParams } from "next/navigation";
-import CreateSectionForm from "@/components/CreateSectionForm";
 import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+
 import { useChapters } from "@/state/store";
+import adminFetchSections from "@/services/api/adminFetchSections";
+
+import CreateSectionForm from "@/components/CreateSectionForm";
 
 const AdminSections = () => {
   const [sections, setSections] = useState([]);
@@ -63,7 +66,8 @@ const AdminSections = () => {
       <div className="header">
         <h1>Manage Sections</h1>
         <button type="button" onClick={handleCreateSectionClick}>
-          Create new section
+          <HiOutlinePencilAlt />
+          <span>Create new section</span>
         </button>
       </div>
       {renderSection()}

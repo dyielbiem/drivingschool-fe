@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { TbClipboardList, TbEdit } from "react-icons/tb";
+import { RiMenu3Line } from "react-icons/ri";
+import { MdClose } from "react-icons/md";
 
 import AddChapterForm from "./AddChapterForm";
 
@@ -25,6 +27,7 @@ import adminFetchChapterTestQuestions from "@/services/api/adminFetchChapterTest
 const ManageSectionSideNav = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   const { chapterIndex, setChapterIndex } = useChapterIndex();
   const { subChapterIndex, setSubChapterIndex } = useSubChapterIndex();
   const searchParams = useSearchParams();
@@ -130,19 +133,37 @@ const ManageSectionSideNav = () => {
     setSubChapters(undefined);
   };
 
+  const renderLogo = () => (
+    <Link href={"/admin/sections"} className="nav-logo">
+      <Image
+        src={"/logo.png"}
+        alt="logo-image"
+        width={1734}
+        height={594}
+        priority
+      />
+    </Link>
+  );
+
+  const renderTopNav = () => {
+    return (
+      <div className="top-nav-container">
+        {renderLogo()}
+        <button
+          className="hamburger-btn"
+          onClick={() => setIsMobileNavVisible(true)}
+        >
+          <RiMenu3Line />
+        </button>
+      </div>
+    );
+  };
+
   const renderTop = () => {
     if (!chapters) return <></>;
     return (
       <div className="top">
-        <Link href={"/admin/sections"} className="home">
-          <Image
-            src={"/logo.png"}
-            alt="logo-image"
-            width={1734}
-            height={594}
-            priority
-          />
-        </Link>
+        {renderLogo()}
         <div className="btn-container">
           <button onClick={handleAddChapterClick}>
             Add new chapter <TbEdit />
@@ -239,7 +260,24 @@ const ManageSectionSideNav = () => {
 
   return (
     <>
-      <div className="side-nav-container">
+      {renderTopNav()}
+      <div
+        className={`mobile-nav-back-drop ${
+          isMobileNavVisible ? "flex" : "hidden"
+        }`}
+        onClick={() => setIsMobileNavVisible(false)}
+      />
+      <div
+        className={`side-nav-container ${
+          isMobileNavVisible ? "flex" : "hidden"
+        }`}
+      >
+        <button
+          className="close-nav-btn"
+          onClick={() => setIsMobileNavVisible(false)}
+        >
+          <MdClose />
+        </button>
         {renderTop()}
         <nav>
           {renderChapters()}
