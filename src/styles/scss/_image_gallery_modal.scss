@@ -4,8 +4,11 @@
   z-50;
 
   & > div {
-    @apply bg-white p-6 rounded-md w-full max-w-lg 
-    flex flex-col justify-center relative;
+    @apply bg-white p-6 rounded-md w-full 
+    flex flex-col justify-start sm:justify-center 
+    sm:max-h-[90%] sm:max-w-xl sm:rounded-lg 
+    fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 
     h3 {
       @apply text-2xl font-extrabold mb-6;
@@ -28,15 +31,19 @@
     }
 
     .uploaded-image-container {
-      @apply grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 mb-8 max-h-80 overflow-y-auto justify-center justify-items-center px-2;
+      @apply grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] mb-8
+      overflow-y-auto justify-center justify-items-center px-2 h-fit
+      sm:max-h-80 gap-2 sm:gap-4;
 
       img {
-        @apply aspect-square object-center object-cover flex-grow-0 w-36 border-2 hover:border-custom-blue-light cursor-pointer rounded-md;
+        @apply aspect-square object-center object-cover flex-grow-0
+        border-2 hover:border-custom-blue-light cursor-pointer
+        rounded-md w-28 sm:w-36;
       }
     }
 
     .select-btn-container {
-      @apply flex gap-2 w-full flex-col;
+      @apply flex gap-2 w-full flex-col mt-auto;
 
       button {
         @apply text-base font-bold text-white bg-custom-blue-base px-4 py-2
@@ -63,7 +70,7 @@
       }
 
       span {
-        @apply font-bold text-lg;
+        @apply font-bold text-lg text-center;
       }
     }
 
@@ -77,7 +84,7 @@
     }
 
     .upload-btn-container {
-      @apply flex gap-2 w-full flex-col;
+      @apply flex gap-2 w-full flex-col mt-auto;
 
       button {
         @apply text-base font-bold text-white px-4 py-2

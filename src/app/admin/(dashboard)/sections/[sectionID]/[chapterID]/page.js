@@ -5,6 +5,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaPen } from "react-icons/fa6";
 import { BiSolidImageAdd } from "react-icons/bi";
+import { FiEdit3 } from "react-icons/fi";
 
 import AddSubChapterForm from "@/components/AddSubChapterForm";
 import ContentEditor from "@/components/ContentEditor";
@@ -119,7 +120,8 @@ const ChapterID = ({ params }) => {
         </h1>
         {searchParams.get("edit_content") !== "true" ? (
           <button onClick={handleEditContentClick} className="edit-content-btn">
-            Edit content
+            <FiEdit3 />
+            <span>Edit content</span>
           </button>
         ) : (
           <>
@@ -130,7 +132,7 @@ const ChapterID = ({ params }) => {
               className="upload-cover-image"
               onClick={handleUploadCoverImage}
             >
-              <BiSolidImageAdd /> Upload chapter image
+              <BiSolidImageAdd /> <span>Upload chapter image</span>
             </button>
           </>
         )}

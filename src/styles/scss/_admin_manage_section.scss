@@ -28,14 +28,13 @@
 
     .activate-btn {
       @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      px-4 py-2 my-3;
     }
   }
 
   & > .edit-title-form {
     @apply flex max-w-4xl w-full items-center bg-white p-2
-    rounded-md gap-2
-    flex-col sm:flex-row;
+    rounded-md gap-2 flex-col sm:flex-row;
 
     input {
       @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
@@ -81,7 +80,7 @@
       }
 
       div {
-        @apply flex mb-2 sm:mb-0 gap-4 self-end sm:self-auto;
+        @apply flex mb-2 sm:mb-0 gap-4 self-end sm:self-auto z-50;
 
         button:nth-child(1) {
           @apply text-custom-blue-light;

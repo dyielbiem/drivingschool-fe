@@ -1,10 +1,12 @@
 .test-setting-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 
   form {
-    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+    @apply flex flex-col p-8 gap-2 bg-white w-full 
+    overflow-y-auto sm:max-h-[90%] sm:max-w-lg
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 
     .close-btn {
       @apply absolute w-fit right-6 top-6;
@@ -15,7 +17,7 @@
     }
 
     h3 {
-      @apply text-2xl font-extrabold mb-4;
+      @apply text-2xl font-extrabold mb-4 mr-16;
     }
 
     label {
@@ -38,7 +40,7 @@
 
     button[type="submit"] {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
       svg {

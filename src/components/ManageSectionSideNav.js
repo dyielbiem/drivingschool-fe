@@ -47,6 +47,11 @@ const ManageSectionSideNav = () => {
     setChapterQuestionToShowCount
   } = useChapterTestQuestions();
 
+  // Close mobile side nav when pathname or params change
+  useEffect(() => {
+    setIsMobileNavVisible(false);
+  }, [searchParams, pathname]);
+
   // To fetch all the chapters of the section
   useEffect(() => {
     const fetchChapters = async () => {

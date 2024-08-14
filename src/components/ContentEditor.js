@@ -265,7 +265,12 @@ const ContentEditor = ({ editorAction, editorContent }) => {
         </button>
         <button
           onClick={handleSubListClick}
-          className={!editor.can().sinkListItem("listItem") ? "bg-white" : ""}
+          className={
+            !editor.can().sinkListItem("listItem") &&
+            editor.isActive("bulletList")
+              ? "bg-white"
+              : ""
+          }
         >
           <CiCircleList />
         </button>

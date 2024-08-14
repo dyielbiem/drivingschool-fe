@@ -10,6 +10,7 @@ import { FaPen } from "react-icons/fa6";
 import handleSubChapterTitleUpdate from "@/actions/handleSubChapterTitleUpdate";
 import { useSubChapters } from "@/state/store";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { FiEdit3 } from "react-icons/fi";
 
 const SubChapterID = ({ params }) => {
   const { chapterIndex } = useChapterIndex();
@@ -73,7 +74,8 @@ const SubChapterID = ({ params }) => {
         </h1>
         {searchParams.get("edit_content") !== "true" && (
           <button onClick={handleEditContentClick} className="edit-content-btn">
-            Edit Content
+            <FiEdit3 />
+            <span>Edit content</span>
           </button>
         )}
         {searchParams.get("edit_content") === "true" && (

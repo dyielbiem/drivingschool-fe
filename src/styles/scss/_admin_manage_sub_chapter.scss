@@ -1,9 +1,11 @@
 .admin-sub-chapter-section {
   @apply flex flex-col flex-grow pb-28 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center
+  pt-32 py-10 lg:py-12 
+  px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex items-center max-w-4xl
+    @apply flex items-start max-w-4xl
     w-full min-h-14 gap-6;
 
     .back-btn {
@@ -15,8 +17,17 @@
     }
 
     .edit-content-btn {
-      @apply text-base font-bold bg-custom-blue-base rounded-md text-white
-      px-4 py-2;
+      @apply text-base font-bold bg-custom-blue-base text-white
+      p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
     }
 
     .edit-title-btn {
@@ -27,14 +38,14 @@
 
   & > .edit-title-form {
     @apply flex max-w-4xl w-full items-center bg-white p-2
-    rounded-md min-h-14;
+    rounded-md min-h-14 flex-col sm:flex-row;
 
     input {
       @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
     }
 
     .btn-container {
-      @apply flex gap-2;
+      @apply flex gap-2 self-end;
 
       button {
         @apply text-base px-3 py-1.5 font-bold;
