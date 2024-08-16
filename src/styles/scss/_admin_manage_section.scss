@@ -66,10 +66,10 @@
       @apply rounded-md pl-4 pr-6 font-bold text-lg overflow-hidden
       bg-white hover:shadow-md flex relative flex-col 
       sm:flex-row py-4 sm:py-0 border-2 border-custom-gray-base
-      gap-2 sm:gap-4 h-fit sm:h-auto min-h-16;
+      gap-2 sm:gap-4 h-fit sm:h-auto min-h-[4.5rem];
 
       a {
-        @apply flex items-center flex-grow gap-4 py-2 z-10;
+        @apply flex items-center flex-grow gap-4 py-2 sm:py-3 z-10;
 
         img {
           @apply min-w-32 self-center

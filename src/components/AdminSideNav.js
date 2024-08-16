@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
 import { MdGroups2 } from "react-icons/md";
 import { HiCreditCard, HiBookOpen } from "react-icons/hi2";
@@ -18,6 +18,7 @@ import { useAdmin } from "@/state/store";
 const AdminSideNav = () => {
   const pathName = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { setAdmin } = useAdmin();
   const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   const regex = /^\/admin\/sections\/.+/;
@@ -34,7 +35,7 @@ const AdminSideNav = () => {
 
   useEffect(() => {
     setIsMobileNavVisible(false);
-  }, [pathName]);
+  }, [pathName, searchParams]);
 
   const navItems = [
     {

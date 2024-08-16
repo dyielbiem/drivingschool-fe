@@ -134,12 +134,20 @@ const AdminAllStudents = () => {
         {renderHeaderTitle()}
         {students.map((eachStudent, index) => (
           <li key={index}>
-            <p>{eachStudent.studentUserName}</p>
             <p>
+              <span>Username: </span>
+              {eachStudent.studentUserName}
+            </p>
+            <p>
+              <span>Name: </span>
               {eachStudent.mailingFirstName} {eachStudent.mailingLastName}
             </p>
-            <p>{eachStudent.mailingEmail}</p>
             <p>
+              <span>Email: </span>
+              {eachStudent.mailingEmail}
+            </p>
+            <p>
+              <span>Lesson progress: </span>
               {eachStudent.isCourseCompleted
                 ? "Completed"
                 : eachStudent.chapterProgress

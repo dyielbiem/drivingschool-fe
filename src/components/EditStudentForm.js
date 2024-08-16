@@ -1,10 +1,13 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import FormButton from "./FormButton";
-import { useFormState } from "react-dom";
-import handleStudentUpdate from "@/actions/handleStudentUpdate";
-import FormErrorMessage from "./FormErrorMessage";
 import { useEffect } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useFormState } from "react-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 import { useStudentsInSection } from "@/state/store";
+import handleStudentUpdate from "@/actions/handleStudentUpdate";
+
+import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
 
 const EditStudentForm = ({ student }) => {
   const pathname = usePathname();
@@ -49,9 +52,18 @@ const EditStudentForm = ({ student }) => {
     router.push(`${pathname}?${currentParams}`);
   };
 
+  const goBack = () => {
+    router.push(pathname);
+  };
+
   return (
     <form className="edit-student-form" action={formAction}>
-      <h2>Edit student</h2>
+      <div className="header">
+        <button type="button" onClick={goBack}>
+          <IoMdArrowRoundBack />
+        </button>
+        <h1>Edit student</h1>
+      </div>
       <div className="fields">
         <label htmlFor="username">Username</label>
         <input
