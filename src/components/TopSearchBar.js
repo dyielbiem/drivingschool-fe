@@ -28,7 +28,7 @@ const TopSearchBar = ({ placeholder }) => {
     router.push(`${pathname}?${currentParams}`);
   };
 
-  if (searchParams.get("edit_student")) {
+  if (searchParams.get("edit_student") || searchParams.get("student")) {
     return null;
   }
 

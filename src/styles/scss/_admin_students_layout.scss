@@ -50,8 +50,8 @@
       @apply flex lg:hidden flex-col h-fit w-fit relative self-end;
 
       button {
-        @apply p-2 bg-white h-10 rounded-md flex justify-between items-center
-        text-sm min-w-60;
+        @apply p-2 bg-white h-12 rounded-md flex justify-between items-center
+        text-sm min-w-60 border-[1px] border-custom-gray-base;
 
         svg {
           pointer-events: none;
@@ -64,15 +64,16 @@
 
       ul {
         @apply hidden flex-col bg-white p-1 rounded-sm gap-1
-        absolute top-full left-0 w-full mt-0.5 text-sm sm:text-base;
+        absolute top-full left-0 w-full mt-0.5 text-sm sm:text-base
+        shadow-md;
 
         &::before {
           @apply content-[''] w-full bg-transparent
-          absolute top-0 left-0 h-10 -translate-y-full;
+          absolute top-0 left-0 h-12 -translate-y-full;
         }
 
         li {
-          @apply p-2 rounded-sm w-full font-normal cursor-pointer;
+          @apply p-2 rounded-sm w-full font-normal cursor-pointer text-sm;
         }
 
         li:hover {

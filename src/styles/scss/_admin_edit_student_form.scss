@@ -19,7 +19,7 @@
   }
 
   & > .fields {
-    @apply w-full flex flex-col gap-2 mb-4;
+    @apply w-full flex flex-col gap-2;
 
     &:nth-of-type(5) {
       @apply col-span-full;

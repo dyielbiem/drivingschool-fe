@@ -870,7 +870,7 @@ main {
   @apply text-lg font-bold col-span-full;
 }
 .edit-student-form > .fields {
-  @apply w-full flex flex-col gap-2 mb-4;
+  @apply w-full flex flex-col gap-2;
 }
 .edit-student-form > .fields:nth-of-type(5) {
   @apply col-span-full;
@@ -1028,8 +1028,8 @@ main {
   @apply flex lg:hidden flex-col h-fit w-fit relative self-end;
 }
 .admin-students-layout > .header .mobile-nav button {
-  @apply p-2 bg-white h-10 rounded-md flex justify-between items-center
-        text-sm min-w-60;
+  @apply p-2 bg-white h-12 rounded-md flex justify-between items-center
+        text-sm min-w-60 border-[1px] border-custom-gray-base;
 }
 .admin-students-layout > .header .mobile-nav button svg {
   pointer-events: none;
@@ -1039,14 +1039,15 @@ main {
 }
 .admin-students-layout > .header .mobile-nav ul {
   @apply hidden flex-col bg-white p-1 rounded-sm gap-1
-        absolute top-full left-0 w-full mt-0.5 text-sm sm:text-base;
+        absolute top-full left-0 w-full mt-0.5 text-sm sm:text-base
+        shadow-md;
 }
 .admin-students-layout > .header .mobile-nav ul::before {
   @apply content-[""] w-full bg-transparent
-          absolute top-0 left-0 h-10 -translate-y-full;
+          absolute top-0 left-0 h-12 -translate-y-full;
 }
 .admin-students-layout > .header .mobile-nav ul li {
-  @apply p-2 rounded-sm w-full font-normal cursor-pointer;
+  @apply p-2 rounded-sm w-full font-normal cursor-pointer text-sm;
 }
 .admin-students-layout > .header .mobile-nav ul li:hover {
   @apply bg-custom-gray-base;
@@ -1066,7 +1067,11 @@ main {
 .all-students-table li:nth-child(n+2) {
   @apply justify-items-center bg-white rounded-md cursor-pointer 
     hover:shadow-md duration-200 p-5 xl:py-5 xl:px-10 gap-2
-    flex flex-col xl:grid xl:grid-cols-subgrid xl:col-span-full;
+    flex flex-col xl:grid xl:grid-cols-subgrid xl:col-span-full
+    border-2 border-custom-gray-base items-start xl:items-center;
+}
+.all-students-table li:nth-child(n+2) p {
+  @apply text-center;
 }
 .all-students-table li:nth-child(n+2) p span {
   @apply font-bold text-sm xl:hidden;
@@ -1076,7 +1081,7 @@ main {
       -order-1 xl:order-none;
 }
 .all-students-table li:nth-child(n+2) div {
-  @apply flex self-end justify-center items-center gap-4 h-fit;
+  @apply flex self-end xl:self-center justify-center items-center gap-4 h-fit;
 }
 .all-students-table li:nth-child(n+2) div button svg {
   @apply text-xl;
@@ -1089,26 +1094,36 @@ main {
 }
 
 .exam-details-table {
-  @apply grid grid-cols-4 gap-3 mx-12;
+  @apply grid gap-3 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] lg:grid-cols-4;
 }
 .exam-details-table .table-header {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+  @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden lg:grid;
 }
 .exam-details-table .table-header p {
   @apply font-extrabold text-lg text-center;
 }
 .exam-details-table li:nth-child(n+2) {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-    py-5 px-10 rounded-md cursor-pointer 
-    hover:shadow-md duration-200;
+  @apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
+    rounded-md cursor-pointer border-2 border-custom-gray-base
+    hover:shadow-md duration-200 items-start lg:items-center
+    lg:col-span-full flex flex-col lg:grid p-5 xl:py-5 xl:px-10;
+}
+.exam-details-table li:nth-child(n+2) p {
+  @apply text-center;
+}
+.exam-details-table li:nth-child(n+2) p span {
+  @apply font-bold text-sm lg:hidden;
 }
 .exam-details-table li:nth-child(n+2) p:nth-child(3) {
-  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit
+      -order-1 lg:order-none mb-1 lg:mb-0;
 }
 .exam-details-table li:nth-child(n+2) button {
   @apply flex justify-center items-center gap-3 h-fit 
-      text-custom-blue-light font-bold;
+      text-custom-blue-light font-bold self-end lg:self-center
+      mt-2 lg:mt-0;
 }
 .exam-details-table li:nth-child(n+2) button p {
   @apply whitespace-nowrap;
@@ -1118,39 +1133,46 @@ main {
 }
 
 .student-exam-details-table {
-  @apply gap-3 mx-16 flex flex-col;
+  @apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col;
 }
 .student-exam-details-table > .header {
-  @apply flex text-xl font-extrabold gap-4;
+  @apply flex text-2xl font-extrabold gap-4;
 }
 .student-exam-details-table > table {
-  @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
+  @apply text-left mt-4 bg-white shadow-md rounded-lg;
+}
+.student-exam-details-table > table thead {
+  @apply hidden md:table-header-group;
 }
 .student-exam-details-table > table tr {
-  @apply border-b-2 border-custom-white-darker;
+  @apply border-b-2 border-custom-white-darker
+      flex flex-col md:table-row p-4 py-6 md:p-0;
 }
 .student-exam-details-table > table th,
 .student-exam-details-table > table td {
-  @apply py-4 px-4;
+  @apply md:px-4 md:py-4;
 }
-.student-exam-details-table > table th:first-child,
-.student-exam-details-table > table td:first-child {
-  @apply pl-6;
+.student-exam-details-table > table th:nth-child(1),
+.student-exam-details-table > table td:nth-child(1) {
+  @apply md:w-[40%] md:pl-6;
 }
-.student-exam-details-table > table th:nth-child(1) {
-  @apply w-[40%];
+.student-exam-details-table > table th:nth-child(2),
+.student-exam-details-table > table td:nth-child(2) {
+  @apply md:w-[25%] flex flex-wrap lg:table-cell gap-1;
 }
-.student-exam-details-table > table th:nth-child(2) {
-  @apply w-[25%];
+.student-exam-details-table > table th:nth-child(3),
+.student-exam-details-table > table td:nth-child(3) {
+  @apply md:w-[20%];
 }
-.student-exam-details-table > table th:nth-child(3) {
-  @apply w-[20%];
+.student-exam-details-table > table th:nth-child(4),
+.student-exam-details-table > table td:nth-child(4) {
+  @apply md:w-[15%];
 }
-.student-exam-details-table > table th:nth-child(4) {
-  @apply w-[15%];
+.student-exam-details-table > table td::before {
+  @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize;
 }
 .student-exam-details-table > table .title {
-  @apply font-bold;
+  @apply md:font-bold;
 }
 .student-exam-details-table > table .status {
   @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
@@ -1158,51 +1180,70 @@ main {
 }
 
 .latest-registrations-table {
-  @apply grid grid-cols-[repeat(6,2fr)_repeat(2,1fr)] gap-y-3 gap-x-6 mx-12;
+  @apply grid gap-3 2xl:gap-x-6 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
+  2xl:grid-cols-[repeat(6,2fr)_repeat(2,1fr)];
 }
 .latest-registrations-table .table-header {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+  @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden 2xl:grid;
 }
 .latest-registrations-table .table-header p {
   @apply font-extrabold text-lg text-center;
 }
 .latest-registrations-table li:nth-child(n+2) {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-    py-5 px-10 rounded-md cursor-pointer 
-    hover:shadow-md duration-200;
+  @apply grid-cols-subgrid justify-items-center bg-white
+    rounded-md cursor-pointer hover:shadow-md duration-200
+    border-2 border-custom-gray-base flex flex-col 
+    2xl:grid 2xl:col-span-full items-start gap-1 2xl:gap-0
+    p-6 2xl:py-5 2xl:px-10;
 }
 .latest-registrations-table li:nth-child(n+2) p {
-  @apply text-center;
+  @apply 2xl:text-center;
+}
+.latest-registrations-table li:nth-child(n+2) p::before {
+  @apply 2xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
+      text-sm;
 }
 .latest-registrations-table li:nth-child(n+2) p:nth-child(5) {
   @apply break-all;
 }
 .latest-registrations-table li:nth-child(n+2) p:nth-child(8) {
-  @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+  @apply rounded-md text-xs font-bold py-1 px-2 h-fit
+      -order-1 2xl:order-none mb-1 2xl:mb-0;
+}
+.latest-registrations-table li:nth-child(n+2) p:nth-child(8)::before {
+  @apply hidden;
 }
 
 .latest-completions-table {
-  @apply grid grid-cols-5 gap-y-3 gap-x-6 mx-12;
+  @apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] xl:grid-cols-5;
 }
 .latest-completions-table .table-header {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+  @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden xl:grid;
 }
 .latest-completions-table .table-header p {
   @apply font-extrabold text-lg text-center;
 }
 .latest-completions-table li:nth-child(n+2) {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-    py-5 px-10 rounded-md cursor-pointer 
-    hover:shadow-md duration-200;
+  @apply grid-cols-subgrid justify-items-center bg-white duration-200
+    p-6 xl:py-5 xl:px-10 rounded-md cursor-pointer hover:shadow-md
+    flex flex-col xl:grid items-start xl:items-center xl:col-span-full
+    border-2 border-custom-gray-base gap-1;
 }
 .latest-completions-table li:nth-child(n+2) p {
-  @apply text-center;
+  @apply xl:text-center;
+}
+.latest-completions-table li:nth-child(n+2) > p::before {
+  @apply xl:hidden content-[attr(col-title)_":_"] font-bold capitalize
+      text-sm;
 }
 .latest-completions-table li:nth-child(n+2) button {
   @apply flex justify-center items-center gap-3 h-fit 
-      text-custom-blue-light font-bold;
+      text-custom-blue-light font-bold self-end xl:self-center
+      mt-4 xl:mt-0;
 }
 .latest-completions-table li:nth-child(n+2) button p {
   @apply whitespace-nowrap;

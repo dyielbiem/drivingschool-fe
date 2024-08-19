@@ -76,17 +76,22 @@ const AdminLatestStudentRegistration = () => {
         {registrations.map((eachRegistation, index) => {
           return (
             <li key={index}>
-              <p>{eachRegistation.studentUserName}</p>
-              <p>{dateFormatter(eachRegistation.enrollmentDate)}</p>
-              <p>
+              <p col-title="username">{eachRegistation.studentUserName}</p>
+              <p col-title="registration date">
+                {dateFormatter(eachRegistation.enrollmentDate)}
+              </p>
+              <p col-title="name">
                 {eachRegistation.mailingFirstName}{" "}
                 {eachRegistation.mailingLastName}
               </p>
-              <p>{eachRegistation.mailingEmail}</p>
-              <p>{eachRegistation.mailingPhoneNumber}</p>
-              <p>{eachRegistation.mailingAddress}</p>
-              <p>{eachRegistation.courseType}</p>
+              <p col-title="email">{eachRegistation.mailingEmail}</p>
+              <p col-title="phone number">
+                {eachRegistation.mailingPhoneNumber}
+              </p>
+              <p col-title="address">{eachRegistation.mailingAddress}</p>
+              <p col-title="course type">{eachRegistation.courseType}</p>
               <p
+                col-title="status"
                 className={`${
                   eachRegistation.isActive
                     ? "bg-custom-green-light text-custom-green-base"

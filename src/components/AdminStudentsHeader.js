@@ -50,12 +50,26 @@ const AdminStudentsHeader = () => {
   const navLinkMap = {
     all: "All Students",
     exams: "Exam Details",
-    "latest-registrations": "Latest Student Registration",
-    "latest-completions": "Latest Student Registrations"
+    "latest-registrations": "Latest Student Registrations",
+    "latest-completions": "Latest Student Completions"
   };
 
   const onTabSelect = (newTab) => {
     router.push(newTab);
+  };
+
+  const renderTitle = () => {
+    return (
+      <div className="title">
+        <button type="button" onClick={goBack}>
+          <IoMdArrowRoundBack />
+        </button>
+        <h1>
+          Manage Students {!sectionTitle ? "" : `- ${sectionTitle}`}{" "}
+          {isSectionActive ? "(Latest Version)" : ""}
+        </h1>
+      </div>
+    );
   };
 
   const renderMobileNav = () => {
@@ -104,7 +118,7 @@ const AdminStudentsHeader = () => {
     );
   };
 
-  if (searchParams.get("edit_student")) {
+  if (searchParams.get("edit_student") || searchParams.get("student")) {
     return null;
   }
 
@@ -114,15 +128,7 @@ const AdminStudentsHeader = () => {
 
   return (
     <div className="header">
-      <div className="title">
-        <button type="button" onClick={goBack}>
-          <IoMdArrowRoundBack />
-        </button>
-        <h1>
-          Manage Students {!sectionTitle ? "" : `- ${sectionTitle}`}{" "}
-          {isSectionActive ? "(Latest Version)" : ""}
-        </h1>
-      </div>
+      {renderTitle()}
       {renderMobileNav()}
       {renderWideScreenNav()}
     </div>

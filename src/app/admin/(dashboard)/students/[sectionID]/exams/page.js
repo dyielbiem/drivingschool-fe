@@ -89,8 +89,12 @@ const AdminStudentExams = () => {
         {renderHeaderTitle()}
         {exams.map((eachExam, index) => (
           <li key={index}>
-            <p>{eachExam.studentUserName}</p>
             <p>
+              <span>Username: </span>
+              {eachExam.studentUserName}
+            </p>
+            <p>
+              <span>Name: </span>
               {eachExam.mailingFirstName} {eachExam.mailingLastName}
             </p>
             <p
