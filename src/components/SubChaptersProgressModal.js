@@ -69,8 +69,10 @@ const SubChaptersProgressModal = ({
 
             return (
               <tr key={index}>
-                <td className="title">{subChapter.subChapterTitle}</td>
-                <td>
+                <td className="title" data-cell="sub-chapter">
+                  {subChapter.subChapterTitle}
+                </td>
+                <td data-cell="sub-progress">
                   <p
                     className={`progress ${
                       subChapter.isViewed
@@ -81,7 +83,7 @@ const SubChaptersProgressModal = ({
                     {subChapter.isViewed ? "Completed" : "Not completed"}
                   </p>
                 </td>
-                <td>{formattedDateCompleted}</td>
+                <td data-cell="completion date">{formattedDateCompleted}</td>
               </tr>
             );
           })}

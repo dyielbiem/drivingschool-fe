@@ -1,52 +1,74 @@
 .admin-coupons-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden
+  pt-32 py-10 lg:py-12 px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex justify-between items-center mb-12;
+    @apply justify-between items-center mb-12 flex gap-4;
 
     h1 {
       @apply font-extrabold text-2xl;
     }
 
-    button {
-      @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-base font-bold;
+    & > button {
+      @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
     }
   }
 
   .coupon-table {
-    @apply flex-col gap-3 grid grid-cols-6;
+    @apply gap-3 grid lg:grid-cols-6
+    grid-cols-[repeat(auto-fill,minmax(275px,1fr))];
 
     li {
-      @apply grid grid-cols-subgrid col-span-full justify-items-center;
+      @apply justify-items-center lg:grid-cols-subgrid lg:col-span-full;
 
       p {
-        @apply text-center;
+        @apply lg:text-center;
       }
     }
 
     .table-header {
-      @apply text-lg font-extrabold gap-x-8
-        mb-4 px-4 justify-items-center;
+      @apply text-lg font-extrabold gap-x-8 mb-4 px-4 
+      justify-items-center hidden lg:grid;
     }
 
     li:nth-child(n + 2) {
-      @apply bg-white py-5 px-3 rounded-md
-      hover:shadow-md;
+      @apply bg-white p-4 lg:py-5 lg:px-3 rounded-md hover:shadow-md
+      flex flex-col gap-1 lg:grid items-start min-h-[4.5rem]
+      border-2 border-custom-gray-base;
 
       p:nth-child(1) {
-        @apply font-extrabold;
+        @apply lg:font-extrabold;
       }
 
       p:nth-child(5) {
-        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit;
+        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit
+        -order-1 lg:order-none;
+      }
+
+      p::before {
+        @apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
+        text-sm;
+      }
+
+      p:nth-child(5)::before {
+        @apply hidden;
       }
     }
 
     div {
-      @apply flex justify-center items-center gap-4 h-fit;
+      @apply flex justify-center items-center gap-4 h-fit
+      self-end lg:self-center mt-4 lg:mt-0;
 
       button {
         svg {

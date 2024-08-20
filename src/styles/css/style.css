@@ -1136,7 +1136,10 @@ main {
   @apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col;
 }
 .student-exam-details-table > .header {
-  @apply flex text-2xl font-extrabold gap-4;
+  @apply flex text-2xl font-extrabold gap-4 items-start;
+}
+.student-exam-details-table > .header button {
+  @apply my-1;
 }
 .student-exam-details-table > table {
   @apply text-left mt-4 bg-white shadow-md rounded-lg;
@@ -1146,7 +1149,8 @@ main {
 }
 .student-exam-details-table > table tr {
   @apply border-b-2 border-custom-white-darker
-      flex flex-col md:table-row p-4 py-6 md:p-0;
+      flex flex-col md:table-row p-4 py-6 md:p-0
+      gap-1 md:gap-0;
 }
 .student-exam-details-table > table th,
 .student-exam-details-table > table td {
@@ -1169,7 +1173,8 @@ main {
   @apply md:w-[15%];
 }
 .student-exam-details-table > table td::before {
-  @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize;
+  @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+      text-sm;
 }
 .student-exam-details-table > table .title {
   @apply md:font-bold;
@@ -1253,13 +1258,17 @@ main {
 }
 
 .student-completions-table {
-  @apply gap-3 mx-16 flex flex-col;
+  @apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col;
 }
 .student-completions-table > .header {
-  @apply flex text-xl font-extrabold gap-4;
+  @apply flex text-2xl font-extrabold gap-4 items-start;
+}
+.student-completions-table > .header button {
+  @apply my-1;
 }
 .student-completions-table > .progress {
-  @apply ml-4 mt-4 p-6 bg-white rounded-md w-fit shadow-md;
+  @apply mt-4 p-6 bg-white rounded-md w-full shadow-md
+    max-w-96;
 }
 .student-completions-table > .progress h3 {
   @apply font-bold text-base mb-2;
@@ -1268,7 +1277,8 @@ main {
   @apply flex items-center gap-2;
 }
 .student-completions-table > .progress .progress-bar .progress-graph {
-  @apply bg-custom-white-darker h-4 w-64 rounded-full overflow-hidden relative;
+  @apply bg-custom-white-darker h-4 rounded-full overflow-hidden relative
+        w-full max-w-sm;
 }
 .student-completions-table > .progress .progress-bar .progress-graph .progress-percentage {
   @apply bg-custom-blue-light absolute left-0 top-0 rounded-full
@@ -1281,46 +1291,63 @@ main {
   @apply text-xs mt-1 ml-1;
 }
 .student-completions-table > table {
-  @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
+  @apply text-left mt-4 bg-white shadow-md rounded-lg;
+}
+.student-completions-table > table thead {
+  @apply hidden md:table-header-group;
 }
 .student-completions-table > table tr {
-  @apply border-b-2 border-custom-white-darker;
+  @apply border-b-2 border-custom-white-darker
+      flex flex-col md:table-row p-4 py-6 md:p-0
+      gap-1 md:gap-0;
 }
 .student-completions-table > table th,
 .student-completions-table > table td {
-  @apply py-4 px-4;
+  @apply md:py-4 md:px-4 gap-1;
 }
 .student-completions-table > table th:first-child,
 .student-completions-table > table td:first-child {
-  @apply px-6;
+  @apply md:px-6;
 }
-.student-completions-table > table th:last-child,
-.student-completions-table > table td:last-child {
-  @apply text-custom-blue-light font-bold;
+.student-completions-table > table th:nth-child(5),
+.student-completions-table > table td:nth-child(5) {
+  @apply text-custom-blue-light font-bold
+        self-end md:self-center mt-4 lg:mt-0;
 }
-.student-completions-table > table th:last-child button,
-.student-completions-table > table td:last-child button {
+.student-completions-table > table th:nth-child(5) button,
+.student-completions-table > table td:nth-child(5) button {
   @apply flex flex-nowrap whitespace-nowrap items-center
           gap-2;
 }
-.student-completions-table > table th:last-child button svg,
-.student-completions-table > table td:last-child button svg {
+.student-completions-table > table th:nth-child(5) button svg,
+.student-completions-table > table td:nth-child(5) button svg {
   @apply text-xl;
+}
+.student-completions-table > table th:nth-child(5)::before,
+.student-completions-table > table td:nth-child(5)::before {
+  @apply hidden;
 }
 .student-completions-table > table th {
   @apply whitespace-nowrap;
 }
 .student-completions-table > table th:nth-child(1) {
-  @apply w-[30%];
+  @apply md:w-[30%];
 }
 .student-completions-table > table th:nth-child(3) {
-  @apply w-[10%];
+  @apply md:w-[10%];
 }
 .student-completions-table > table th:nth-child(5) {
-  @apply w-[20%];
+  @apply md:w-[20%];
+}
+.student-completions-table > table td::before {
+  @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+      text-sm;
+}
+.student-completions-table > table td:nth-child(2) {
+  @apply flex items-center md:table-cell flex-wrap;
 }
 .student-completions-table > table .title {
-  @apply font-bold;
+  @apply md:font-bold;
 }
 .student-completions-table > table .progress {
   @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
@@ -1607,44 +1634,62 @@ main {
 
 .admin-coupons-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden
+  pt-32 py-10 lg:py-12 px-6 sm:px-8 md:px-12;
 }
 .admin-coupons-container > .header {
-  @apply flex justify-between items-center mb-12;
+  @apply justify-between items-center mb-12 flex gap-4;
 }
 .admin-coupons-container > .header h1 {
   @apply font-extrabold text-2xl;
 }
-.admin-coupons-container > .header button {
-  @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-base font-bold;
+.admin-coupons-container > .header > button {
+  @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+}
+.admin-coupons-container > .header > button svg {
+  @apply block sm:hidden text-xl;
+}
+.admin-coupons-container > .header > button span {
+  @apply hidden sm:block;
 }
 .admin-coupons-container .coupon-table {
-  @apply flex-col gap-3 grid grid-cols-6;
+  @apply gap-3 grid lg:grid-cols-6
+    grid-cols-[repeat(auto-fill,minmax(275px,1fr))];
 }
 .admin-coupons-container .coupon-table li {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center;
+  @apply justify-items-center lg:grid-cols-subgrid lg:col-span-full;
 }
 .admin-coupons-container .coupon-table li p {
-  @apply text-center;
+  @apply lg:text-center;
 }
 .admin-coupons-container .coupon-table .table-header {
-  @apply text-lg font-extrabold gap-x-8
-        mb-4 px-4 justify-items-center;
+  @apply text-lg font-extrabold gap-x-8 mb-4 px-4 
+      justify-items-center hidden lg:grid;
 }
 .admin-coupons-container .coupon-table li:nth-child(n+2) {
-  @apply bg-white py-5 px-3 rounded-md
-      hover:shadow-md;
+  @apply bg-white p-4 lg:py-5 lg:px-3 rounded-md hover:shadow-md
+      flex flex-col gap-1 lg:grid items-start min-h-[4.5rem]
+      border-2 border-custom-gray-base;
 }
 .admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(1) {
-  @apply font-extrabold;
+  @apply lg:font-extrabold;
 }
 .admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5) {
-  @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit;
+  @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit
+        -order-1 lg:order-none;
+}
+.admin-coupons-container .coupon-table li:nth-child(n+2) p::before {
+  @apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
+        text-sm;
+}
+.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5)::before {
+  @apply hidden;
 }
 .admin-coupons-container .coupon-table div {
-  @apply flex justify-center items-center gap-4 h-fit;
+  @apply flex justify-center items-center gap-4 h-fit
+      self-end lg:self-center mt-4 lg:mt-0;
 }
 .admin-coupons-container .coupon-table div button svg {
   @apply text-xl;
@@ -1658,11 +1703,12 @@ main {
 
 .add-coupon-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 }
 .add-coupon-form form {
-  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+  @apply flex flex-col gap-2 bg-white w-full overflow-y-auto 
+    fixed h-screen top-0 left-0 sm:max-w-md sm:relative
+    sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8;
 }
 .add-coupon-form form .close-btn {
   @apply absolute w-fit right-6 top-6;
@@ -1689,7 +1735,7 @@ main {
 }
 .add-coupon-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .add-coupon-form form button[type=submit] svg {
@@ -1698,11 +1744,12 @@ main {
 
 .edit-coupon-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 }
 .edit-coupon-form form {
-  @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+  @apply flex flex-col rounded-lg gap-2 bg-white w-full
+    overflow-y-auto fixed h-screen top-0 left-0 sm:max-w-md sm:relative
+    sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8;
 }
 .edit-coupon-form form .close-btn {
   @apply absolute w-fit right-6 top-6;
@@ -1736,7 +1783,7 @@ main {
 }
 .edit-coupon-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .edit-coupon-form form button[type=submit] svg {
@@ -2235,54 +2282,67 @@ main {
 .sub-chapters-progress-modal {
   @apply fixed top-0 left-0 w-screen h-screen
   bg-[rgba(0,0,0,0.3)] flex justify-center items-center
-  z-50;
+  z-[999999];
 }
 .sub-chapters-progress-modal > div {
-  @apply bg-white p-6 pb-8 rounded-md w-full max-w-2xl 
-    flex flex-col justify-start items-center relative max-h-[85%]
-    h-fit overflow-y-auto overflow-x-hidden;
+  @apply bg-white p-4 sm:p-6 sm:pb-8 w-full justify-start items-center 
+    flex flex-col overflow-y-auto overflow-x-hidden h-screen md:h-fit
+    md:max-w-2xl md:max-h-[85%] top-0 left-0 fixed md:relative
+    md:rounded-md;
 }
 .sub-chapters-progress-modal > div .close-btn {
-  @apply self-end mb-1;
+  @apply self-end mb-2 sm:mb-1;
 }
 .sub-chapters-progress-modal > div .close-btn svg {
   @apply text-3xl;
 }
 .sub-chapters-progress-modal > div h3 {
-  @apply font-bold text-xl mb-4 text-center w-11/12;
+  @apply font-bold text-xl mb-4 sm:text-center w-11/12;
 }
 .sub-chapters-progress-modal > div > table {
   @apply text-left mx-4 w-full;
 }
+.sub-chapters-progress-modal > div > table thead {
+  @apply hidden sm:table-header-group;
+}
 .sub-chapters-progress-modal > div > table tr {
-  @apply border-b-2 border-custom-white-darker;
+  @apply border-b-2 border-custom-white-darker
+        flex flex-col gap-1 sm:table-row p-4 sm:p-0;
 }
 .sub-chapters-progress-modal > div > table th,
 .sub-chapters-progress-modal > div > table td {
-  @apply py-4 px-4 w-[30%];
+  @apply sm:py-4 sm:px-4 sm:w-[30%];
 }
 .sub-chapters-progress-modal > div > table th:first-child,
 .sub-chapters-progress-modal > div > table td:first-child {
-  @apply pl-6 w-[40%];
+  @apply sm:pl-6 sm:w-[40%];
+}
+.sub-chapters-progress-modal > div > table td::before {
+  @apply sm:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+        text-sm;
+}
+.sub-chapters-progress-modal > div > table td:nth-child(2) {
+  @apply flex gap-1 sm:table-cell flex-wrap;
 }
 .sub-chapters-progress-modal > div > table th:nth-child(3) {
   @apply whitespace-nowrap;
 }
 .sub-chapters-progress-modal > div > table .title {
-  @apply font-bold;
+  @apply sm:font-bold;
 }
 .sub-chapters-progress-modal > div > table .progress {
   @apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
         uppercase;
 }
 .sub-chapters-progress-modal > div .fetching-msg {
-  @apply flex text-lg gap-3 items-center justify-center;
+  @apply flex text-base sm:text-lg gap-2 sm:gap-3 justify-center
+      items-start sm:items-center self-center;
 }
 .sub-chapters-progress-modal > div .fetching-msg svg {
-  @apply text-2xl animate-spin text-black;
+  @apply text-2xl animate-spin text-black mt-0.5 sm:mt-0;
 }
 .sub-chapters-progress-modal > div .no-sub-chapter-msg {
-  @apply text-lg;
+  @apply text-lg text-center;
 }
 
 .pagination {
