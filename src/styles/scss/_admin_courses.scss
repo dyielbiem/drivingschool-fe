@@ -1,19 +1,28 @@
 .admin-courses-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10 items-center
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden items-center
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex justify-between items-center mb-12
-    w-full;
+    @apply flex justify-between items-center mb-6 sm:mb-12
+    w-full gap-4;
 
     h1 {
       @apply font-extrabold text-2xl;
     }
 
-    button {
-      @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-base font-bold;
+    & > button {
+      @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
     }
   }
 
@@ -23,9 +32,9 @@
 
     li {
       @apply flex flex-col justify-start relative
-      gap-x-8 hover:z-20 gap-2
-      bg-white rounded-lg cursor-pointer max-w-sm
-      hover:shadow-md duration-500 hover:scale-[1.02];
+      gap-x-8 hover:z-20 gap-2 bg-white rounded-lg cursor-pointer
+      hover:shadow-md duration-500 hover:scale-[1.02]
+      border-2 border-custom-gray-base;
 
       .status {
         @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit

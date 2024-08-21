@@ -1059,10 +1059,10 @@ main {
 }
 .all-students-table .table-header {
   @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4 hidden xl:grid;
+    font-semibold mb-4 hidden xl:grid;
 }
 .all-students-table .table-header p {
-  @apply font-extrabold text-lg text-center;
+  @apply font-extrabold text-base text-center;
 }
 .all-students-table li:nth-child(n+2) {
   @apply justify-items-center bg-white rounded-md cursor-pointer 
@@ -1102,7 +1102,7 @@ main {
       font-semibold mb-4 hidden lg:grid;
 }
 .exam-details-table .table-header p {
-  @apply font-extrabold text-lg text-center;
+  @apply font-extrabold text-base text-center;
 }
 .exam-details-table li:nth-child(n+2) {
   @apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
@@ -1187,6 +1187,7 @@ main {
 .latest-registrations-table {
   @apply grid gap-3 2xl:gap-x-6 mx-6 md:mx-12
   grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
+  xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
   2xl:grid-cols-[repeat(6,2fr)_repeat(2,1fr)];
 }
 .latest-registrations-table .table-header {
@@ -1194,7 +1195,7 @@ main {
       font-semibold mb-4 hidden 2xl:grid;
 }
 .latest-registrations-table .table-header p {
-  @apply font-extrabold text-lg text-center;
+  @apply font-extrabold text-base text-center;
 }
 .latest-registrations-table li:nth-child(n+2) {
   @apply grid-cols-subgrid justify-items-center bg-white
@@ -1223,14 +1224,16 @@ main {
 
 .latest-completions-table {
   @apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
-  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] xl:grid-cols-5;
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
+  lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+  xl:grid-cols-5;
 }
 .latest-completions-table .table-header {
   @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
       font-semibold mb-4 hidden xl:grid;
 }
 .latest-completions-table .table-header p {
-  @apply font-extrabold text-lg text-center;
+  @apply font-extrabold text-base text-center;
 }
 .latest-completions-table li:nth-child(n+2) {
   @apply grid-cols-subgrid justify-items-center bg-white duration-200
@@ -1421,19 +1424,26 @@ main {
 
 .admin-courses-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10 items-center
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden items-center
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
 }
 .admin-courses-container > .header {
-  @apply flex justify-between items-center mb-12
-    w-full;
+  @apply flex justify-between items-center mb-6 sm:mb-12
+    w-full gap-4;
 }
 .admin-courses-container > .header h1 {
   @apply font-extrabold text-2xl;
 }
-.admin-courses-container > .header button {
-  @apply bg-custom-blue-base text-white px-4 py-2.5 
-      rounded-lg text-base font-bold;
+.admin-courses-container > .header > button {
+  @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+}
+.admin-courses-container > .header > button svg {
+  @apply block sm:hidden text-xl;
+}
+.admin-courses-container > .header > button span {
+  @apply hidden sm:block;
 }
 .admin-courses-container .course-table {
   @apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
@@ -1441,9 +1451,9 @@ main {
 }
 .admin-courses-container .course-table li {
   @apply flex flex-col justify-start relative
-      gap-x-8 hover:z-20 gap-2
-      bg-white rounded-lg cursor-pointer max-w-sm
-      hover:shadow-md duration-500 hover:scale-[1.02];
+      gap-x-8 hover:z-20 gap-2 bg-white rounded-lg cursor-pointer
+      hover:shadow-md duration-500 hover:scale-[1.02]
+      border-2 border-custom-gray-base;
 }
 .admin-courses-container .course-table li .status {
   @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit
@@ -1494,14 +1504,16 @@ main {
 
 .add-course-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 }
 .add-course-form form {
   @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-xl z-10 relative max-h-[90%] overflow-y-auto;
+    max-w-xl overflow-y-auto sm:max-h-[95%]
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 }
 .add-course-form form .close-btn {
-  @apply absolute w-fit right-6 top-6;
+  @apply absolute w-fit right-4 sm:right-6 top-6;
 }
 .add-course-form form .close-btn svg {
   @apply text-3xl;
@@ -1517,7 +1529,7 @@ main {
 }
 .add-course-form form .upload-img-box {
   @apply flex flex-col cursor-pointer text-base items-center py-8 px-3 rounded-md
-      bg-custom-white-dark border-[1px] border-custom-gray-base m-0;
+      bg-custom-white-dark border-[1px] border-custom-gray-base m-0 mb-4;
 }
 .add-course-form form .upload-img-box span {
   @apply text-black font-bold text-3xl;
@@ -1542,7 +1554,7 @@ main {
 }
 .add-course-form form .img-to-upload-container > button {
   @apply absolute top-0 right-0 text-3xl translate-x-1/2
-        -translate-y-1/2 bg-white rounded-full;
+        -translate-y-1/2 bg-white rounded-full mb-4;
 }
 .add-course-form form .img-to-upload-container > img {
   @apply object-contain max-h-64;
@@ -1553,7 +1565,7 @@ main {
 }
 .add-course-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 }
 .add-course-form form button[type=submit] svg {
@@ -1562,14 +1574,16 @@ main {
 
 .edit-course-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-30;
+  items-center bg-[#00000044] z-[999999];
 }
 .edit-course-form form {
   @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-xl relative max-h-[95%] overflow-y-auto;
+    max-w-xl overflow-y-auto sm:max-h-[95%]
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 }
 .edit-course-form form .close-btn {
-  @apply absolute w-fit right-6 top-6;
+  @apply absolute w-fit right-4 sm:right-6 top-6;
 }
 .edit-course-form form .close-btn svg {
   @apply text-3xl;
@@ -1597,11 +1611,11 @@ main {
   @apply p-2 min-h-20 resize-none;
 }
 .edit-course-form form .course-img-box {
-  @apply w-full max-h-56 h-fit rounded-md relative;
+  @apply w-full max-h-56 h-fit rounded-md relative mb-4;
 }
 .edit-course-form form .course-img-box > label {
-  @apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] rounded-md 
-        opacity-0 flex flex-col text-white cursor-pointer 
+  @apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] 
+        opacity-0 flex flex-col text-white cursor-pointer rounded-md
         items-center justify-center gap-1;
 }
 .edit-course-form form .course-img-box > label svg {
@@ -1625,7 +1639,7 @@ main {
 }
 .edit-course-form form button[type=submit] {
   @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center min-h-12 disabled:cursor-not-allowed;
 }
 .edit-course-form form button[type=submit] svg {
@@ -1792,31 +1806,44 @@ main {
 
 .admin-billing-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
 }
 .admin-billing-container .header {
-  @apply flex justify-between items-center mb-12;
+  @apply flex justify-between items-center mb-6 lg:mb-12;
 }
 .admin-billing-container .header h1 {
   @apply font-extrabold text-2xl;
 }
 .admin-billing-container .billing-table {
-  @apply flex-col gap-3 grid grid-cols-6;
+  @apply flex-col gap-3 grid lg:grid-cols-6 
+    md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+    grid-cols-[repeat(auto-fill,minmax(275px,1fr))];
 }
 .admin-billing-container .billing-table li {
-  @apply grid grid-cols-subgrid col-span-full justify-items-center;
+  @apply place-items-start;
 }
 .admin-billing-container .billing-table li p {
   @apply text-center;
 }
 .admin-billing-container .billing-table .table-header {
-  @apply text-lg font-extrabold gap-x-8
-        mb-4 px-4 justify-items-center;
+  @apply text-base font-extrabold gap-x-8 grid-cols-subgrid
+      mb-4 px-4 justify-items-center hidden lg:grid lg:col-span-full;
 }
 .admin-billing-container .billing-table li:nth-child(n+2) {
-  @apply bg-white py-5 px-3 rounded-md
-      hover:shadow-md;
+  @apply bg-white py-5 px-6 rounded-md items-start lg:place-items-center
+      hover:shadow-md border-2 lg:grid lg:grid-cols-subgrid flex flex-col
+      lg:col-span-full border-custom-gray-base min-h-[4.5rem];
+}
+.admin-billing-container .billing-table li:nth-child(n+2) p {
+  @apply text-left lg:text-center;
+}
+.admin-billing-container .billing-table li:nth-child(n+2) p:first-child {
+  @apply lg:break-all;
+}
+.admin-billing-container .billing-table li:nth-child(n+2) p::before {
+  @apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
+        text-sm;
 }
 .admin-billing-container .billing-table button svg {
   @apply text-xl text-custom-blue-light;
@@ -1824,8 +1851,8 @@ main {
 
 .admin-settings-section {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen
-  bg-custom-white-dark overflow-x-hidden pb-10 items-center
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden items-center
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
 }
 .admin-settings-section h1 {
   @apply font-extrabold text-2xl mb-12 w-full;
@@ -2252,12 +2279,12 @@ main {
 
 .confirm-delete-modal {
   @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center top-0 left-0 z-[999999];
+  justify-center items-end sm:items-center top-0 left-0 z-[999999];
 }
 .confirm-delete-modal > div {
   @apply flex flex-col p-8 rounded-xl gap-2 bg-white
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto
-    w-11/12 sm:w-full;
+    sm:max-w-md z-10 relative sm:max-h-[95%] overflow-y-auto
+    w-full m-4 sm:m-0;
 }
 .confirm-delete-modal > div .header {
   @apply flex gap-6 items-start max-w-full;

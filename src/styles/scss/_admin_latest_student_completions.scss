@@ -1,13 +1,15 @@
 .latest-completions-table {
   @apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
-  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] xl:grid-cols-5;
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
+  lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+  xl:grid-cols-5;
 
   .table-header {
     @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
       font-semibold mb-4 hidden xl:grid;
 
     p {
-      @apply font-extrabold text-lg text-center;
+      @apply font-extrabold text-base text-center;
     }
   }
 

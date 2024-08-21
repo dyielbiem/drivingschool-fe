@@ -1,11 +1,11 @@
 .confirm-delete-modal {
   @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center top-0 left-0 z-[999999];
+  justify-center items-end sm:items-center top-0 left-0 z-[999999];
 
   & > div {
     @apply flex flex-col p-8 rounded-xl gap-2 bg-white
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto
-    w-11/12 sm:w-full;
+    sm:max-w-md z-10 relative sm:max-h-[95%] overflow-y-auto
+    w-full m-4 sm:m-0;
 
     .header {
       @apply flex gap-6 items-start max-w-full;

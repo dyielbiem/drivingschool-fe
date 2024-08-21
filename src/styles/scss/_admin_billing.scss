@@ -1,10 +1,10 @@
 .admin-billing-container {
   @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
-  bg-custom-white-dark overflow-x-hidden pb-10
-  mt-20 lg:mt-0;
+  bg-custom-white-dark overflow-x-hidden
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
 
   .header {
-    @apply flex justify-between items-center mb-12;
+    @apply flex justify-between items-center mb-6 lg:mb-12;
 
     h1 {
       @apply font-extrabold text-2xl;
@@ -12,10 +12,12 @@
   }
 
   .billing-table {
-    @apply flex-col gap-3 grid grid-cols-6;
+    @apply flex-col gap-3 grid lg:grid-cols-6 
+    md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+    grid-cols-[repeat(auto-fill,minmax(275px,1fr))];
 
     li {
-      @apply grid grid-cols-subgrid col-span-full justify-items-center;
+      @apply place-items-start;
 
       p {
         @apply text-center;
@@ -23,13 +25,27 @@
     }
 
     .table-header {
-      @apply text-lg font-extrabold gap-x-8
-        mb-4 px-4 justify-items-center;
+      @apply text-base font-extrabold gap-x-8 grid-cols-subgrid
+      mb-4 px-4 justify-items-center hidden lg:grid lg:col-span-full;
     }
 
     li:nth-child(n + 2) {
-      @apply bg-white py-5 px-3 rounded-md
-      hover:shadow-md;
+      @apply bg-white py-5 px-6 rounded-md items-start lg:place-items-center
+      hover:shadow-md border-2 lg:grid lg:grid-cols-subgrid flex flex-col
+      lg:col-span-full border-custom-gray-base min-h-[4.5rem];
+
+      p {
+        @apply text-left lg:text-center;
+      }
+
+      p:first-child {
+        @apply lg:break-all;
+      }
+
+      p::before {
+        @apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
+        text-sm;
+      }
     }
 
     button {

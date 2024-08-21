@@ -4,10 +4,10 @@
 
   .table-header {
     @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4 hidden xl:grid;
+    font-semibold mb-4 hidden xl:grid;
 
     p {
-      @apply font-extrabold text-lg text-center;
+      @apply font-extrabold text-base text-center;
     }
   }
 

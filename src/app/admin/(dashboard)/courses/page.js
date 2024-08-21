@@ -1,13 +1,16 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
+import { IoAddSharp } from "react-icons/io5";
+
 import adminFetchCourses from "@/services/api/adminFetchCourses";
+import adminDeleteCourse from "@/services/api/adminDeleteCourse";
+
 import AddCourseForm from "@/components/AddCourseForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
-import adminDeleteCourse from "@/services/api/adminDeleteCourse";
 import EditCourseForm from "@/components/EditCourseForm";
-import Image from "next/image";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -152,7 +155,10 @@ const ManageCourses = () => {
     <section className="admin-courses-container">
       <div className="header">
         <h1>Manage Courses</h1>
-        <button onClick={handleAddCourseClick}>Add new course</button>
+        <button onClick={handleAddCourseClick}>
+          <IoAddSharp />
+          <span>Add new course</span>
+        </button>
       </div>
       {renderCourses()}
       {searchParams.get("add_course") && (
