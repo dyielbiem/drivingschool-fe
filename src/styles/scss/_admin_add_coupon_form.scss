@@ -29,7 +29,7 @@
 
     input {
       @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base;
+      border-custom-gray-base w-full;
     }
 
     .error-message {

@@ -1741,7 +1741,7 @@ main {
 }
 .add-coupon-form form input {
   @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base;
+      border-custom-gray-base w-full;
 }
 .add-coupon-form form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
