@@ -1,13 +1,15 @@
 .edit-course-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-30;
+  items-center bg-[#00000044] z-[999999];
 
   form {
     @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-xl relative max-h-[95%] overflow-y-auto;
+    max-w-xl overflow-y-auto sm:max-h-[95%]
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 
     .close-btn {
-      @apply absolute w-fit right-6 top-6;
+      @apply absolute w-fit right-4 sm:right-6 top-6;
 
       svg {
         @apply text-3xl;
@@ -46,11 +48,11 @@
     }
 
     .course-img-box {
-      @apply w-full max-h-56 h-fit rounded-md relative;
+      @apply w-full max-h-56 h-fit rounded-md relative mb-4;
 
       & > label {
-        @apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] rounded-md 
-        opacity-0 flex flex-col text-white cursor-pointer 
+        @apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] 
+        opacity-0 flex flex-col text-white cursor-pointer rounded-md
         items-center justify-center gap-1;
 
         svg {
@@ -82,7 +84,7 @@
 
     button[type="submit"] {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center min-h-12 disabled:cursor-not-allowed;
 
       svg {

@@ -1,10 +1,11 @@
 .add-coupon-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 
   form {
-    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+    @apply flex flex-col gap-2 bg-white w-full overflow-y-auto 
+    fixed h-screen top-0 left-0 sm:max-w-md sm:relative
+    sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8;
 
     .close-btn {
       @apply absolute w-fit right-6 top-6;
@@ -28,7 +29,7 @@
 
     input {
       @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base;
+      border-custom-gray-base w-full;
     }
 
     .error-message {
@@ -38,7 +39,7 @@
 
     button[type="submit"] {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
       svg {

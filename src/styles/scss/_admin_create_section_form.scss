@@ -1,13 +1,16 @@
 .create-section-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 
   form {
-    @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+    @apply flex flex-col gap-2 bg-white
+    relative overflow-y-auto
+    h-screen w-screen sm:h-auto sm:w-full
+    sm:max-h-[95%] sm:max-w-md rounded-none sm:rounded-lg
+    px-4 py-6 sm:p-8;
 
     .close-btn {
-      @apply absolute w-fit right-6 top-6;
+      @apply absolute w-fit right-4 top-6 sm:right-6;
 
       svg {
         @apply text-3xl;
@@ -15,7 +18,7 @@
     }
 
     h3 {
-      @apply text-2xl font-extrabold mb-4;
+      @apply text-2xl font-extrabold mb-4 mr-16;
     }
 
     label {
@@ -38,8 +41,9 @@
 
     button[type="submit"] {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
-      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+      text-white rounded-lg py-2.5
+      flex items-center justify-center h-12 disabled:cursor-not-allowed
+      mt-auto sm:mt-8;
 
       svg {
         @apply text-2xl animate-spin;

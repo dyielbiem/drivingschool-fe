@@ -1,12 +1,14 @@
 .test-section {
   @apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
-  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center;
+  overflow-y-auto overflow-x-hidden p-12 gap-10 items-center
+  pt-32 py-10 lg:py-12 
+  px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex items-center w-full gap-6;
+    @apply flex items-start w-full gap-6;
 
     .back-btn {
-      @apply text-3xl;
+      @apply text-3xl py-0.5;
     }
 
     h1 {
@@ -14,7 +16,7 @@
     }
 
     .setting-btn {
-      @apply text-2xl;
+      @apply text-2xl py-0.5;
     }
   }
 
@@ -31,11 +33,11 @@
     @apply w-full flex flex-col gap-6;
 
     & > li {
-      @apply w-full flex flex-col p-6 pl-[4.5rem] bg-white rounded-md
-      relative shadow-md;
+      @apply w-full flex flex-col bg-white rounded-md
+      relative shadow-md pl-14 sm:pl-[4.5rem] p-4 py-6 sm:p-6;
 
       .numbering {
-        @apply top-6 left-6 absolute font-bold text-lg;
+        @apply top-6 left-4 sm:left-6 absolute font-bold text-lg;
       }
 
       .top {
@@ -50,7 +52,7 @@
         }
 
         .action-btn-container {
-          @apply flex items-center gap-3 text-xl mt-1;
+          @apply flex items-center gap-3 text-lg sm:text-xl mt-1;
 
           button:nth-child(1) {
             @apply text-custom-blue-light;
@@ -63,8 +65,9 @@
       }
 
       .question-choices {
-        @apply list-[lower-alpha] list-inside ml-8 text-base
-        grid grid-cols-2 gap-y-1;
+        @apply list-[lower-alpha] list-inside text-base
+        grid gap-y-1 grid-cols-1 sm:grid-cols-2
+        ml-0 sm:ml-8;
       }
     }
   }

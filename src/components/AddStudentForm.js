@@ -1,9 +1,12 @@
-import FormButton from "./FormButton";
-import { useFormState } from "react-dom";
-import FormErrorMessage from "./FormErrorMessage";
-import handleStudentSubmit from "@/actions/handleStudentSubmit";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
+import handleStudentSubmit from "@/actions/handleStudentSubmit";
+
+import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
 
 const AddStudentForm = ({ courses, setStudentSections }) => {
   const router = useRouter();
@@ -75,13 +78,18 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     );
   };
 
-  const handleCancelClick = () => {
+  const goBack = () => {
     router.push(pathname);
   };
 
   return (
     <form action={formAction} className="add-student-form">
-      <h2>Add student</h2>
+      <div className="header">
+        <button type="button" onClick={goBack}>
+          <IoMdArrowRoundBack />
+        </button>
+        <h1>Add student</h1>
+      </div>
       <div className="fields">
         <label htmlFor="student-username">
           Username <span>*</span>
@@ -210,7 +218,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       )}
       <div className="btn-container">
         <FormButton>Submit</FormButton>
-        <button type="button" onClick={handleCancelClick}>
+        <button type="button" onClick={goBack}>
           Cancel
         </button>
       </div>

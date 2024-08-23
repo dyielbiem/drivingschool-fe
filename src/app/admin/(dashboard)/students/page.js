@@ -1,8 +1,11 @@
 "use client";
-import adminFetchStudentSections from "@/services/api/adminFetchStudentSections";
 import { useState, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { MdOutlinePersonAddAlt1 } from "react-icons/md";
+
 import { useStudentsInSection } from "@/state/store";
+import adminFetchStudentSections from "@/services/api/adminFetchStudentSections";
+
 import AddStudentForm from "@/components/AddStudentForm";
 import adminFetchCourses from "@/services/api/adminFetchCourses";
 
@@ -46,12 +49,14 @@ const AdminStudents = () => {
   };
 
   const renderHeader = () => {
+    if (searchParams.get("add_student") === "true") return null;
     return (
       <div className="header">
         <h1>Manage Students</h1>
-        {searchParams.get("add_student") !== "true" && (
-          <button onClick={handleAddStudentClick}>Add student</button>
-        )}
+        <button onClick={handleAddStudentClick}>
+          <MdOutlinePersonAddAlt1 />
+          <span>Add student</span>
+        </button>
       </div>
     );
   };
@@ -71,7 +76,10 @@ const AdminStudents = () => {
         {studentSections.map((item, index) => (
           <li key={index} onClick={() => handleSectionClick(item.sectionID)}>
             <p>{item.sectionTitle}</p>
-            <p>{item.NoOfStudents}</p>
+            <p>
+              <span>No of students: </span>
+              {item.NoOfStudents}
+            </p>
           </li>
         ))}
       </ul>

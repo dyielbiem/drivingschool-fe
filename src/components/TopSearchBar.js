@@ -1,7 +1,7 @@
 "use client";
-import { FiSearch } from "react-icons/fi";
 import { useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FiSearch } from "react-icons/fi";
 
 const TopSearchBar = ({ placeholder }) => {
   const inputRef = useRef(undefined);
@@ -27,6 +27,10 @@ const TopSearchBar = ({ placeholder }) => {
     currentParams.delete("search");
     router.push(`${pathname}?${currentParams}`);
   };
+
+  if (searchParams.get("edit_student") || searchParams.get("student")) {
+    return null;
+  }
 
   return (
     <div className="top-search-bar">

@@ -96,13 +96,15 @@ const AdminLatestStudentCompletion = () => {
         {completions.map((eachCompletion, index) => {
           return (
             <li key={index}>
-              <p>{eachCompletion.studentUserName}</p>
-              <p>
+              <p col-title="username">{eachCompletion.studentUserName}</p>
+              <p col-title="name">
                 {eachCompletion.mailingFirstName}{" "}
                 {eachCompletion.mailingLastName}
               </p>
-              <p>{dateFormatter(eachCompletion.enrollmentDate)}</p>
-              <p>
+              <p col-title="registration date">
+                {dateFormatter(eachCompletion.enrollmentDate)}
+              </p>
+              <p col-title="completion date">
                 {dateFormatter(eachCompletion.completionDate) ||
                   "Not completed"}
               </p>

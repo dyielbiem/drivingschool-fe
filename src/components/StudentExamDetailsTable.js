@@ -54,8 +54,10 @@ const StudentExamDetailsTable = ({ student }) => {
 
             return (
               <tr key={index}>
-                <td className="title">{test.chapterTitle || "Final Test"}</td>
-                <td>
+                <td className="title" data-cell="test">
+                  {test.chapterTitle || "Final Test"}
+                </td>
+                <td data-cell="status">
                   <p
                     className={`status ${
                       status === "Passed"
@@ -68,12 +70,12 @@ const StudentExamDetailsTable = ({ student }) => {
                     {status}
                   </p>
                 </td>
-                <td>
+                <td data-cell="score">
                   {status !== "No test" && status !== "Not completed"
                     ? `${test.score}/${test.numberOfQuestions} `
                     : ""}
                 </td>
-                <td>
+                <td data-cell="percentage">
                   {test.scorePercentage}{" "}
                   {test.isPassed !== undefined ? "%" : ""}
                 </td>
@@ -91,10 +93,10 @@ const StudentExamDetailsTable = ({ student }) => {
         <button onClick={handleBackClick}>
           <IoMdArrowRoundBack />
         </button>
-        <h2>
+        <h1>
           {`${student.billingFirstName} ${student.billingLastName} 
           (${student.studentUserName})`}
-        </h2>
+        </h1>
       </div>
       {renderTestResults()}
     </div>

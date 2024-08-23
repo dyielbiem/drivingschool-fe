@@ -89,10 +89,10 @@ const StudentCompletionsTable = ({ student }) => {
 
             return (
               <tr key={index}>
-                <td className="title">
+                <td className="title" data-cell="chapter">
                   {completion.chapterTitle || "Final Test"}
                 </td>
-                <td>
+                <td data-cell="progress">
                   <p
                     className={`progress ${
                       completion.progressStatus === "Completed"
@@ -105,12 +105,12 @@ const StudentCompletionsTable = ({ student }) => {
                     {completion.progressStatus}
                   </p>
                 </td>
-                <td>
+                <td data-cell="score">
                   {completion.numberOfQuestions
                     ? `${completion.score}/${completion.numberOfQuestions}`
                     : ""}
                 </td>
-                <td>{formattedDateCompleted}</td>
+                <td data-cell="completion date">{formattedDateCompleted}</td>
                 {completion.chapterTitle && (
                   <td>
                     <button onClick={() => setSelectedChapter(completion)}>
@@ -145,10 +145,10 @@ const StudentCompletionsTable = ({ student }) => {
         <button onClick={handleBackClick}>
           <IoMdArrowRoundBack />
         </button>
-        <h2>
+        <h1>
           {`${student.billingFirstName} ${student.billingLastName} 
           (${student.studentUserName})`}
-        </h2>
+        </h1>
       </div>
       {renderProgress()}
       {renderCompletions()}

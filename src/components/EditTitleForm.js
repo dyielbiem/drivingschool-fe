@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const EditTitleForm = ({
   prevTitle,
@@ -8,6 +8,7 @@ const EditTitleForm = ({
   updateAction,
   pathWhenCancelled
 }) => {
+  const inputRef = useRef(null);
   const router = useRouter();
 
   const initialState = {
@@ -15,6 +16,14 @@ const EditTitleForm = ({
   };
 
   const [formState, formAction] = useFormState(updateAction, initialState);
+
+  useEffect(() => {
+    const input = inputRef.current;
+    if (input) {
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  }, []);
 
   useEffect(() => {
     if (!formState.updatedTitle) return;
@@ -45,6 +54,7 @@ const EditTitleForm = ({
         defaultValue={prevTitle}
         name="new-title"
         id="new-title"
+        ref={inputRef}
       />
       <div className="btn-container">
         <button type="submit">Update</button>

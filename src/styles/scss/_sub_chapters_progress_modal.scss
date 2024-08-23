@@ -1,15 +1,16 @@
 .sub-chapters-progress-modal {
   @apply fixed top-0 left-0 w-screen h-screen
   bg-[rgba(0,0,0,0.3)] flex justify-center items-center
-  z-50;
+  z-[999999];
 
   & > div {
-    @apply bg-white p-6 pb-8 rounded-md w-full max-w-2xl 
-    flex flex-col justify-start items-center relative max-h-[85%]
-    h-fit overflow-y-auto overflow-x-hidden;
+    @apply bg-white p-4 sm:p-6 sm:pb-8 w-full justify-start items-center 
+    flex flex-col overflow-y-auto overflow-x-hidden h-screen md:h-fit
+    md:max-w-2xl md:max-h-[85%] top-0 left-0 fixed md:relative
+    md:rounded-md;
 
     .close-btn {
-      @apply self-end mb-1;
+      @apply self-end mb-2 sm:mb-1;
 
       svg {
         @apply text-3xl;
@@ -17,23 +18,37 @@
     }
 
     h3 {
-      @apply font-bold text-xl mb-4 text-center w-11/12;
+      @apply font-bold text-xl mb-4 sm:text-center w-11/12;
     }
 
     & > table {
       @apply text-left mx-4 w-full;
 
+      thead {
+        @apply hidden sm:table-header-group;
+      }
+
       tr {
-        @apply border-b-2 border-custom-white-darker;
+        @apply border-b-2 border-custom-white-darker
+        flex flex-col gap-1 sm:table-row p-4 sm:p-0;
       }
 
       th,
       td {
-        @apply py-4 px-4 w-[30%];
+        @apply sm:py-4 sm:px-4 sm:w-[30%];
 
         &:first-child {
-          @apply pl-6 w-[40%];
+          @apply sm:pl-6 sm:w-[40%];
         }
+      }
+
+      td::before {
+        @apply sm:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+        text-sm;
+      }
+
+      td:nth-child(2) {
+        @apply flex gap-1 sm:table-cell flex-wrap;
       }
 
       th:nth-child(3) {
@@ -41,7 +56,7 @@
       }
 
       .title {
-        @apply font-bold;
+        @apply sm:font-bold;
       }
 
       .progress {
@@ -51,15 +66,16 @@
     }
 
     .fetching-msg {
-      @apply flex text-lg gap-3 items-center justify-center;
+      @apply flex text-base sm:text-lg gap-2 sm:gap-3 justify-center
+      items-start sm:items-center self-center;
 
       svg {
-        @apply text-2xl animate-spin text-black;
+        @apply text-2xl animate-spin text-black mt-0.5 sm:mt-0;
       }
     }
 
     .no-sub-chapter-msg {
-      @apply text-lg;
+      @apply text-lg text-center;
     }
   }
 }

@@ -1,27 +1,39 @@
 .exam-details-table {
-  @apply grid grid-cols-4 gap-3 mx-12;
+  @apply grid gap-3 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] lg:grid-cols-4;
 
   .table-header {
-    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+    @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden lg:grid;
 
     p {
-      @apply font-extrabold text-lg text-center;
+      @apply font-extrabold text-base text-center;
     }
   }
 
   li:nth-child(n + 2) {
-    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-    py-5 px-10 rounded-md cursor-pointer 
-    hover:shadow-md duration-200;
+    @apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
+    rounded-md cursor-pointer border-2 border-custom-gray-base
+    hover:shadow-md duration-200 items-start lg:items-center
+    lg:col-span-full flex flex-col lg:grid p-5 xl:py-5 xl:px-10;
+
+    p {
+      @apply text-center;
+    }
+
+    p span {
+      @apply font-bold text-sm lg:hidden;
+    }
 
     p:nth-child(3) {
-      @apply rounded-md text-xs font-bold py-1 px-2 h-fit;
+      @apply rounded-md text-xs font-bold py-1 px-2 h-fit
+      -order-1 lg:order-none mb-1 lg:mb-0;
     }
 
     button {
       @apply flex justify-center items-center gap-3 h-fit 
-      text-custom-blue-light font-bold;
+      text-custom-blue-light font-bold self-end lg:self-center
+      mt-2 lg:mt-0;
 
       p {
         @apply whitespace-nowrap;
@@ -35,48 +47,57 @@
 }
 
 .student-exam-details-table {
-  @apply gap-3 mx-16 flex flex-col;
+  @apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col;
 
   & > .header {
-    @apply flex text-xl font-extrabold gap-4;
+    @apply flex text-2xl font-extrabold gap-4 items-start;
+
+    button {
+      @apply my-1;
+    }
   }
 
   & > table {
-    @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
+    @apply text-left mt-4 bg-white shadow-md rounded-lg;
+
+    thead {
+      @apply hidden md:table-header-group;
+    }
 
     tr {
-      @apply border-b-2 border-custom-white-darker;
+      @apply border-b-2 border-custom-white-darker
+      flex flex-col md:table-row p-4 py-6 md:p-0
+      gap-1 md:gap-0;
     }
 
     th,
     td {
-      @apply py-4 px-4;
+      @apply md:px-4 md:py-4;
 
-      &:first-child {
-        @apply pl-6;
-      }
-    }
-
-    th {
       &:nth-child(1) {
-        @apply w-[40%];
+        @apply md:w-[40%] md:pl-6;
       }
 
       &:nth-child(2) {
-        @apply w-[25%];
+        @apply md:w-[25%] flex flex-wrap lg:table-cell gap-1;
       }
 
       &:nth-child(3) {
-        @apply w-[20%];
+        @apply md:w-[20%];
       }
 
       &:nth-child(4) {
-        @apply w-[15%];
+        @apply md:w-[15%];
       }
     }
 
+    td::before {
+      @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+      text-sm;
+    }
+
     .title {
-      @apply font-bold;
+      @apply md:font-bold;
     }
 
     .status {

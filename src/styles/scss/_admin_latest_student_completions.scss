@@ -1,27 +1,37 @@
 .latest-completions-table {
-  @apply grid grid-cols-5 gap-y-3 gap-x-6 mx-12;
+  @apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
+  lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+  xl:grid-cols-5;
 
   .table-header {
-    @apply grid grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4;
+    @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden xl:grid;
 
     p {
-      @apply font-extrabold text-lg text-center;
+      @apply font-extrabold text-base text-center;
     }
   }
 
   li:nth-child(n + 2) {
-    @apply grid grid-cols-subgrid col-span-full justify-items-center bg-white
-    py-5 px-10 rounded-md cursor-pointer 
-    hover:shadow-md duration-200;
+    @apply grid-cols-subgrid justify-items-center bg-white duration-200
+    p-6 xl:py-5 xl:px-10 rounded-md cursor-pointer hover:shadow-md
+    flex flex-col xl:grid items-start xl:items-center xl:col-span-full
+    border-2 border-custom-gray-base gap-1;
 
     p {
-      @apply text-center;
+      @apply xl:text-center;
+    }
+
+    & > p::before {
+      @apply xl:hidden content-[attr(col-title)_":_"] font-bold capitalize
+      text-sm;
     }
 
     button {
       @apply flex justify-center items-center gap-3 h-fit 
-      text-custom-blue-light font-bold;
+      text-custom-blue-light font-bold self-end xl:self-center
+      mt-4 xl:mt-0;
 
       p {
         @apply whitespace-nowrap;
@@ -35,14 +45,19 @@
 }
 
 .student-completions-table {
-  @apply gap-3 mx-16 flex flex-col;
+  @apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col;
 
   & > .header {
-    @apply flex text-xl font-extrabold gap-4;
+    @apply flex text-2xl font-extrabold gap-4 items-start;
+
+    button {
+      @apply my-1;
+    }
   }
 
   & > .progress {
-    @apply ml-4 mt-4 p-6 bg-white rounded-md w-fit shadow-md;
+    @apply mt-4 p-6 bg-white rounded-md w-full shadow-md
+    max-w-96;
 
     h3 {
       @apply font-bold text-base mb-2;
@@ -52,7 +67,8 @@
       @apply flex items-center gap-2;
 
       .progress-graph {
-        @apply bg-custom-white-darker h-4 w-64 rounded-full overflow-hidden relative;
+        @apply bg-custom-white-darker h-4 rounded-full overflow-hidden relative
+        w-full max-w-sm;
 
         .progress-percentage {
           @apply bg-custom-blue-light absolute left-0 top-0 rounded-full
@@ -71,22 +87,29 @@
   }
 
   & > table {
-    @apply text-left mx-4 mt-4 bg-white shadow-md rounded-lg;
+    @apply text-left mt-4 bg-white shadow-md rounded-lg;
+
+    thead {
+      @apply hidden md:table-header-group;
+    }
 
     tr {
-      @apply border-b-2 border-custom-white-darker;
+      @apply border-b-2 border-custom-white-darker
+      flex flex-col md:table-row p-4 py-6 md:p-0
+      gap-1 md:gap-0;
     }
 
     th,
     td {
-      @apply py-4 px-4;
+      @apply md:py-4 md:px-4 gap-1;
 
       &:first-child {
-        @apply px-6;
+        @apply md:px-6;
       }
 
-      &:last-child {
-        @apply text-custom-blue-light font-bold;
+      &:nth-child(5) {
+        @apply text-custom-blue-light font-bold
+        self-end md:self-center mt-4 lg:mt-0;
 
         button {
           @apply flex flex-nowrap whitespace-nowrap items-center
@@ -96,6 +119,10 @@
             @apply text-xl;
           }
         }
+
+        &::before {
+          @apply hidden;
+        }
       }
     }
 
@@ -103,20 +130,29 @@
       @apply whitespace-nowrap;
 
       &:nth-child(1) {
-        @apply w-[30%];
+        @apply md:w-[30%];
       }
 
       &:nth-child(3) {
-        @apply w-[10%];
+        @apply md:w-[10%];
       }
 
       &:nth-child(5) {
-        @apply w-[20%];
+        @apply md:w-[20%];
       }
     }
 
+    td::before {
+      @apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
+      text-sm;
+    }
+
+    td:nth-child(2) {
+      @apply flex items-center md:table-cell flex-wrap;
+    }
+
     .title {
-      @apply font-bold;
+      @apply md:font-bold;
     }
 
     .progress {

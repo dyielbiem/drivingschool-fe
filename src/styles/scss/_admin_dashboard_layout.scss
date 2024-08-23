@@ -1,14 +1,35 @@
 .admin-dashboard-layout {
-  @apply flex w-full;
+  @apply flex w-full flex-col lg:flex-row;
+
+  & > .top-nav-container {
+    @apply flex lg:hidden justify-between items-center
+    w-screen overflow-hidden py-2 px-4 h-20 fixed top-0 left-0
+    bg-white z-[99999];
+
+    & > .nav-logo {
+      @apply w-32 justify-center items-center;
+    }
+
+    & > .hamburger-btn {
+      @apply text-3xl;
+    }
+  }
+
+  & > .mobile-nav-back-drop {
+    @apply fixed h-screen w-screen top-0 left-0 backdrop-blur-sm bg-[#11111177]
+    lg:hidden z-[99999];
+  }
 
   & > .side-nav-container {
-    @apply flex flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
-    transition-[width] duration-300 items-start py-10 min-w-80
-    max-w-80 overflow-y-auto;
+    @apply flex-col overflow-hidden h-screen max-h-screen bg-custom-blue-dark
+    transition-[width] duration-300 items-start py-10
+    overflow-y-auto top-0 right-0 z-[999999]
+    fixed lg:static lg:flex w-full max-w-80;
 
-    .home {
+    & > .nav-logo {
       @apply text-2xl bg-custom-white-base font-bold text-left
-      mb-10 w-10/12 self-center px-4 py-6;
+      mb-10 w-10/12 self-center px-4 py-6
+      hidden lg:block;
     }
 
     .side-nav {
@@ -16,6 +37,11 @@
 
       .nav-items-container {
         @apply flex flex-col gap-[0.4rem];
+
+        & > .close-nav-btn {
+          @apply mb-6 self-end w-fit lg:hidden mr-8
+          text-xl;
+        }
 
         a {
           @apply text-base py-4 relative px-10
@@ -30,10 +56,10 @@
       }
     }
 
-    button {
+    .logout-btn {
       @apply text-base relative px-10 w-full
       flex items-center justify-start gap-4
-      text-custom-white-dark font-bold;
+      text-custom-white-dark font-bold mt-16;
 
       svg {
         @apply text-2xl text-custom-white-dark;

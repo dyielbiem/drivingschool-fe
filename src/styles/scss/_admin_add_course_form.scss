@@ -1,13 +1,15 @@
 .add-course-form {
   @apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044];
+  items-center bg-[#00000044] z-[999999];
 
   form {
     @apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
-    max-w-xl z-10 relative max-h-[90%] overflow-y-auto;
+    max-w-xl overflow-y-auto sm:max-h-[95%]
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 
     .close-btn {
-      @apply absolute w-fit right-6 top-6;
+      @apply absolute w-fit right-4 sm:right-6 top-6;
 
       svg {
         @apply text-3xl;
@@ -28,7 +30,7 @@
 
     .upload-img-box {
       @apply flex flex-col cursor-pointer text-base items-center py-8 px-3 rounded-md
-      bg-custom-white-dark border-[1px] border-custom-gray-base m-0;
+      bg-custom-white-dark border-[1px] border-custom-gray-base m-0 mb-4;
 
       span {
         @apply text-black font-bold text-3xl;
@@ -59,7 +61,7 @@
 
       & > button {
         @apply absolute top-0 right-0 text-3xl translate-x-1/2
-        -translate-y-1/2 bg-white rounded-full;
+        -translate-y-1/2 bg-white rounded-full mb-4;
       }
 
       & > img {
@@ -74,7 +76,7 @@
 
     button[type="submit"] {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
       svg {

@@ -27,11 +27,14 @@
     }
 
     .extra-actions {
-      @apply flex justify-between gap-2 items-center mt-2;
+      @apply flex justify-between items-center mt-2
+      gap-2 sm:gap-2
+      flex-col sm:flex-row;
 
       .remember-me-container {
-        @apply flex gap-2 justify-start items-center text-sm
-        cursor-pointer;
+        @apply flex gap-2 text-sm cursor-pointer
+        justify-start items-center
+        w-full sm:w-auto;
 
         & > * {
           @apply cursor-pointer;
@@ -43,7 +46,8 @@
       }
 
       a {
-        @apply text-sm mt-[2px] hover:text-custom-blue-base;
+        @apply text-sm mt-[2px] hover:text-custom-blue-base
+        self-start sm:self-center;
       }
     }
 

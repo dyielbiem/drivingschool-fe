@@ -1,10 +1,12 @@
 .upload-chapter-cover-modal {
   @apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center top-0 left-0 z-50;
+  justify-center items-center top-0 left-0 z-[999999];
 
   & > div {
     @apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 
-    max-w-md z-10 relative max-h-[95%] overflow-y-auto;
+    z-10 overflow-y-auto sm:max-h-[90%] sm:max-w-lg
+    sm:rounded-lg fixed sm:relative top-0 left-0
+    h-screen sm:h-fit px-4 py-6 sm:p-8;
 
     .header {
       @apply flex gap-6 items-start max-w-full;
@@ -65,7 +67,7 @@
 
     .upload-btn {
       @apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 gap-2
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8 gap-2
       flex items-center justify-center h-12 disabled:cursor-not-allowed;
 
       svg {
