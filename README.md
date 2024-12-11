@@ -1,7 +1,7 @@
 ### Minimum Requirements
 
-- Node 18.18.2
-- NPM 9.8.1
+- Node v18.18.2
+- NPM v9.8.1
 
 ### Getting Started
 
