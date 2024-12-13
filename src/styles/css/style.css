@@ -931,6 +931,12 @@ main {
 .add-student-form .header h1 {
   @apply text-2xl font-extrabold;
 }
+.add-student-form h2 {
+  @apply col-span-full text-lg font-bold;
+}
+.add-student-form h2:nth-of-type(2) {
+  @apply mt-6;
+}
 .add-student-form .fields {
   @apply w-full flex flex-col gap-2
     col-span-1;
@@ -966,10 +972,10 @@ main {
 }
 .add-student-form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
-    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+    bg-red-200 border-2 border-red-700 h-fit;
 }
 .add-student-form .btn-container {
-  @apply sm:row-start-10 sm:col-start-2 flex w-full justify-end
+  @apply sm:col-start-2 flex w-full justify-end
     items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4;
 }
 .add-student-form .btn-container button[type=submit] {
