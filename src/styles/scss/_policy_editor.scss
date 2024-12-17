@@ -1,0 +1,112 @@
+.policy-editor {
+  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+  w-full;
+
+  .editor-styling-btn-container {
+    @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
+    z-50 flex-wrap;
+
+    button {
+      @apply p-1 rounded font-bold text-xl;
+    }
+  }
+
+  .tiptap {
+    @apply focus:outline-none px-4 py-4 sm:py-4 sm:px-12;
+
+    h2 {
+      @apply text-xl font-extrabold;
+    }
+
+    h3 {
+      @apply text-lg;
+    }
+
+    a {
+      @apply underline text-custom-blue-light font-semibold;
+    }
+
+    img {
+      @apply inline-block max-h-72 object-contain
+      max-w-full sm:max-w-screen-md;
+    }
+
+    iframe {
+      @apply w-full max-w-4xl inline-block;
+    }
+
+    & > ul {
+      @apply px-8 list-none;
+
+      & > li {
+        & > p {
+          @apply relative before:absolute before:content-["•"] 
+          before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+        }
+
+        ul {
+          @apply list-none px-8;
+
+          & > li > p {
+            @apply relative before:absolute before:content-["◦"] 
+            before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+          }
+        }
+      }
+    }
+
+    ol {
+      @apply px-8 list-decimal;
+    }
+  }
+
+  .editor-primary-btn-container {
+    @apply flex mt-8 py-4 w-full bg-custom-white-darker
+    justify-end px-6 items-center gap-2 sm:gap-3;
+
+    button {
+      @apply text-base font-bold px-4 py-1 rounded-md;
+    }
+
+    .save-btn {
+      @apply bg-custom-blue-base text-white px-6;
+    }
+
+    .cancel-btn {
+      @apply bg-white;
+    }
+  }
+
+  .link-url-form {
+    @apply h-screen w-screen top-0 left-0 fixed bg-[rgba(0,0,0,0.5)]
+    z-[9999] flex items-center justify-center;
+
+    & > form {
+      @apply flex flex-col bg-white w-full max-w-lg
+      rounded-lg p-8 gap-4 relative;
+
+      & > h3 {
+        @apply text-2xl font-bold;
+      }
+
+      & > input {
+        @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+        border-custom-gray-base;
+      }
+
+      & > .close-btn {
+        @apply absolute top-8 right-8 text-2xl;
+      }
+
+      & > button[type="submit"] {
+        @apply w-full bg-custom-blue-base text-base font-bold 
+        text-white rounded-lg py-2.5 mt-2
+        flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+        svg {
+          @apply text-2xl animate-spin;
+        }
+      }
+    }
+  }
+}
