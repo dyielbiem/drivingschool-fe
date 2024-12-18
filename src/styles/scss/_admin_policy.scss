@@ -1,0 +1,22 @@
+.admin-policy {
+  @apply w-full mb-20 flex flex-col;
+
+  .header {
+    @apply flex mb-4 gap-4 items-center;
+
+    & > h2 {
+      @apply text-xl font-extrabold;
+    }
+
+    & > .edit-btn {
+      @apply text-custom-blue-light text-lg p-3;
+
+      &:hover {
+        @apply rounded-full bg-custom-white-darker;
+      }
+    }
+  }
+
+  @import "policy_content";
+  @import "policy_editor";
+}

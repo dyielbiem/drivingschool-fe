@@ -13,10 +13,13 @@ const handleStudentSubmit = async (prevState, formData) => {
     city: formData.get("student-city"),
     state: formData.get("student-state"),
     zip: formData.get("student-zip"),
-    country: formData.get("student-country"),
     email: formData.get("student-email"),
     phoneNumber: formData.get("student-phone"),
-    company: formData.get("student-company").trim() || "Not applicable"
+    highSchool: formData.get("student-high-school").trim() || "Not applicable",
+    parentFirstName: formData.get("parent-first-name"),
+    parentLastName: formData.get("parent-last-name"),
+    parentEmail: formData.get("parent-email"),
+    parentPhoneNumber: formData.get("parent-phone")
   };
 
   const zipRegex = /^[0-9]{1,20}$/;
@@ -47,14 +50,18 @@ const handleStudentSubmit = async (prevState, formData) => {
     formDataObject.courseID,
     formDataObject.firstName,
     formDataObject.lastName,
-    formDataObject.company,
+    formDataObject.highSchool,
     formDataObject.address,
     formDataObject.city,
     formDataObject.state,
     formDataObject.zip,
     formDataObject.country,
     formDataObject.email,
-    formDataObject.phoneNumber
+    formDataObject.phoneNumber,
+    formDataObject.parentFirstName,
+    formDataObject.parentLastName,
+    formDataObject.parentEmail,
+    formDataObject.parentPhoneNumber
   );
 
   if (!response.ok)

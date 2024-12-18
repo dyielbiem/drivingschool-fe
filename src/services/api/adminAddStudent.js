@@ -6,14 +6,18 @@ const adminAddStudent = async (
   courseID,
   firstName,
   lastName,
-  company,
+  highSchool,
   address,
   city,
   state,
   zip,
   country,
   email,
-  phoneNumber
+  phoneNumber,
+  parentFirstName,
+  parentLastName,
+  parentEmail,
+  parentPhoneNumber
 ) => {
   try {
     const fetchMethod = async (accessToken) => {
@@ -32,14 +36,18 @@ const adminAddStudent = async (
             courseID,
             firstName,
             lastName,
-            company,
+            highSchool,
             address,
             city,
             state,
             zip,
             country,
             email,
-            phoneNumber
+            phoneNumber,
+            parentFirstName,
+            parentLastName,
+            parentEmail,
+            parentPhoneNumber
           })
         }
       );

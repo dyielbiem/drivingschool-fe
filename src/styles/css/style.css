@@ -931,6 +931,12 @@ main {
 .add-student-form .header h1 {
   @apply text-2xl font-extrabold;
 }
+.add-student-form h2 {
+  @apply col-span-full text-lg font-bold;
+}
+.add-student-form h2:nth-of-type(2) {
+  @apply mt-6;
+}
 .add-student-form .fields {
   @apply w-full flex flex-col gap-2
     col-span-1;
@@ -966,10 +972,10 @@ main {
 }
 .add-student-form .error-message {
   @apply text-red-700 font-bold p-2.5 mt-4
-    bg-red-200 border-2 border-red-700 row-start-10 h-fit;
+    bg-red-200 border-2 border-red-700 h-fit;
 }
 .add-student-form .btn-container {
-  @apply sm:row-start-10 sm:col-start-2 flex w-full justify-end
+  @apply sm:col-start-2 flex w-full justify-end
     items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4;
 }
 .add-student-form .btn-container button[type=submit] {
@@ -2073,6 +2079,191 @@ main {
 }
 .activate-section-modal > div > button svg {
   @apply text-2xl animate-spin;
+}
+
+.admin-policy {
+  @apply w-full mb-20 flex flex-col;
+}
+.admin-policy .header {
+  @apply flex mb-4 gap-4 items-center;
+}
+.admin-policy .header > h2 {
+  @apply text-xl font-extrabold;
+}
+.admin-policy .header > .edit-btn {
+  @apply text-custom-blue-light text-lg p-3;
+}
+.admin-policy .header > .edit-btn:hover {
+  @apply rounded-full bg-custom-white-darker;
+}
+.admin-policy .policy-content {
+  @apply focus:outline-none sm:py-4 sm:px-4 max-w-6xl self-center;
+}
+.admin-policy .policy-content h2 {
+  @apply text-xl font-extrabold;
+}
+.admin-policy .policy-content h3 {
+  @apply text-lg;
+}
+.admin-policy .policy-content a {
+  @apply underline text-custom-blue-light font-semibold;
+}
+.admin-policy .policy-content img {
+  @apply inline-block max-h-72 object-contain
+    max-w-full sm:max-w-screen-md;
+}
+.admin-policy .policy-content iframe {
+  @apply w-full max-w-4xl inline-block;
+}
+.admin-policy .policy-content p {
+  @apply min-h-5;
+}
+.admin-policy .policy-content > ul {
+  @apply px-8 list-none;
+}
+.admin-policy .policy-content > ul > li > p {
+  @apply relative before:absolute before:content-["•"] 
+        before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.admin-policy .policy-content > ul > li ul {
+  @apply list-none px-8;
+}
+.admin-policy .policy-content > ul > li ul > li > p {
+  @apply relative before:absolute before:content-["◦"] 
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.admin-policy .policy-content ol {
+  @apply px-8 list-decimal;
+}
+.admin-policy .policy-editor {
+  @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+  w-full;
+}
+.admin-policy .policy-editor .editor-styling-btn-container {
+  @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
+    z-50 flex-wrap;
+}
+.admin-policy .policy-editor .editor-styling-btn-container button {
+  @apply p-1 rounded font-bold text-xl;
+}
+.admin-policy .policy-editor .tiptap {
+  @apply focus:outline-none px-4 py-4 sm:py-4 sm:px-12;
+}
+.admin-policy .policy-editor .tiptap h2 {
+  @apply text-xl font-extrabold;
+}
+.admin-policy .policy-editor .tiptap h3 {
+  @apply text-lg;
+}
+.admin-policy .policy-editor .tiptap a {
+  @apply underline text-custom-blue-light font-semibold;
+}
+.admin-policy .policy-editor .tiptap img {
+  @apply inline-block max-h-72 object-contain
+      max-w-full sm:max-w-screen-md;
+}
+.admin-policy .policy-editor .tiptap iframe {
+  @apply w-full max-w-4xl inline-block;
+}
+.admin-policy .policy-editor .tiptap > ul {
+  @apply px-8 list-none;
+}
+.admin-policy .policy-editor .tiptap > ul > li > p {
+  @apply relative before:absolute before:content-["•"] 
+          before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.admin-policy .policy-editor .tiptap > ul > li ul {
+  @apply list-none px-8;
+}
+.admin-policy .policy-editor .tiptap > ul > li ul > li > p {
+  @apply relative before:absolute before:content-["◦"] 
+            before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.admin-policy .policy-editor .tiptap ol {
+  @apply px-8 list-decimal;
+}
+.admin-policy .policy-editor .editor-primary-btn-container {
+  @apply flex mt-8 py-4 w-full bg-custom-white-darker
+    justify-end px-6 items-center gap-2 sm:gap-3;
+}
+.admin-policy .policy-editor .editor-primary-btn-container button {
+  @apply text-base font-bold px-4 py-1 rounded-md;
+}
+.admin-policy .policy-editor .editor-primary-btn-container .save-btn {
+  @apply bg-custom-blue-base text-white px-6;
+}
+.admin-policy .policy-editor .editor-primary-btn-container .cancel-btn {
+  @apply bg-white;
+}
+.admin-policy .policy-editor .link-url-form {
+  @apply h-screen w-screen top-0 left-0 fixed bg-[rgba(0,0,0,0.5)]
+    z-[9999] flex items-center justify-center;
+}
+.admin-policy .policy-editor .link-url-form > form {
+  @apply flex flex-col bg-white w-full max-w-lg
+      rounded-lg p-8 gap-4 relative;
+}
+.admin-policy .policy-editor .link-url-form > form > h3 {
+  @apply text-2xl font-bold;
+}
+.admin-policy .policy-editor .link-url-form > form > input {
+  @apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
+        border-custom-gray-base;
+}
+.admin-policy .policy-editor .link-url-form > form > .close-btn {
+  @apply absolute top-8 right-8 text-2xl;
+}
+.admin-policy .policy-editor .link-url-form > form > button[type=submit] {
+  @apply w-full bg-custom-blue-base text-base font-bold 
+        text-white rounded-lg py-2.5 mt-2
+        flex items-center justify-center h-12 disabled:cursor-not-allowed;
+}
+.admin-policy .policy-editor .link-url-form > form > button[type=submit] svg {
+  @apply text-2xl animate-spin;
+}
+
+.public-policy {
+  @apply w-full py-12 px-5 sm:px-6
+  flex flex-col items-center;
+}
+.public-policy .policy-content {
+  @apply focus:outline-none sm:py-4 sm:px-4 max-w-6xl self-center;
+}
+.public-policy .policy-content h2 {
+  @apply text-xl font-extrabold;
+}
+.public-policy .policy-content h3 {
+  @apply text-lg;
+}
+.public-policy .policy-content a {
+  @apply underline text-custom-blue-light font-semibold;
+}
+.public-policy .policy-content img {
+  @apply inline-block max-h-72 object-contain
+    max-w-full sm:max-w-screen-md;
+}
+.public-policy .policy-content iframe {
+  @apply w-full max-w-4xl inline-block;
+}
+.public-policy .policy-content p {
+  @apply min-h-5;
+}
+.public-policy .policy-content > ul {
+  @apply px-8 list-none;
+}
+.public-policy .policy-content > ul > li > p {
+  @apply relative before:absolute before:content-["•"] 
+        before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.public-policy .policy-content > ul > li ul {
+  @apply list-none px-8;
+}
+.public-policy .policy-content > ul > li ul > li > p {
+  @apply relative before:absolute before:content-["◦"] 
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.public-policy .policy-content ol {
+  @apply px-8 list-decimal;
 }
 
 .content-editor {

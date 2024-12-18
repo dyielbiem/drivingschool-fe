@@ -83,13 +83,14 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
   };
 
   return (
-    <form action={formAction} className="add-student-form">
+    <form action={formAction} className="add-student-form" autoComplete="off">
       <div className="header">
         <button type="button" onClick={goBack}>
           <IoMdArrowRoundBack />
         </button>
         <h1>Add student</h1>
       </div>
+      <h2>Student</h2>
       <div className="fields">
         <label htmlFor="student-username">
           Username <span>*</span>
@@ -98,6 +99,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
           type="text"
           name="student-username"
           id="student-username"
+          autoComplete="off"
           required
         />
       </div>
@@ -115,6 +117,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
           type="password"
           name="student-password"
           id="student-password"
+          autoComplete="off"
           required
         />
       </div>
@@ -181,17 +184,6 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         <input type="text" name="student-zip" id="student-zip" required />
       </div>
       <div className="fields">
-        <label htmlFor="student-country">
-          Country <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="student-country"
-          id="student-country"
-          required
-        />
-      </div>
-      <div className="fields">
         <label htmlFor="student-email">
           Email <span>*</span>
         </label>
@@ -210,8 +202,34 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         />
       </div>
       <div className="fields">
-        <label htmlFor="student-company">Company name</label>
-        <input type="text" name="student-company" id="student-company" />
+        <label htmlFor="student-high-school">High school name</label>
+        <input
+          type="text"
+          name="student-high-school"
+          id="student-high-school"
+        />
+      </div>
+      <h2>Parent</h2>
+      <div className="fields">
+        <label htmlFor="parent-first-name">First Name</label>
+        <input type="text" name="parent-first-name" id="parent-first-name" />
+      </div>
+      <div className="fields">
+        <label htmlFor="parent-last-name">Last name</label>
+        <input type="text" name="parent-last-name" id="parent-last-name" />
+      </div>
+      <div className="fields">
+        <label htmlFor="parent-phone">Phone number (XXX-XXX-XXXX)</label>
+        <input
+          type="text"
+          name="parent-phone"
+          id="parent-phone"
+          pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+        />
+      </div>
+      <div className="fields">
+        <label htmlFor="parent-email">Email</label>
+        <input type="email" name="parent-email" id="parent-email" />
       </div>
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>

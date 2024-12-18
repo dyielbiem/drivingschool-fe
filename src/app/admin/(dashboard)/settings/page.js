@@ -1,6 +1,7 @@
 import AdminSiteSettingsForm from "@/components/AdminSiteSettingsForm";
 import AdminEmailSettingsForm from "@/components/AdminEmailSettingsForm";
 import AdminChangePasswordForm from "@/components/AdminChangePasswordForm";
+import AdminPolicy from "@/components/AdminPolicy";
 
 const AdminSettings = () => {
   return (
@@ -9,6 +10,7 @@ const AdminSettings = () => {
       <AdminSiteSettingsForm />
       <AdminEmailSettingsForm />
       <AdminChangePasswordForm />
+      <AdminPolicy />
     </section>
   );
 };
