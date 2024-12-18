@@ -2222,6 +2222,50 @@ main {
   @apply text-2xl animate-spin;
 }
 
+.public-policy {
+  @apply w-full py-12 px-5 sm:px-6
+  flex flex-col items-center;
+}
+.public-policy .policy-content {
+  @apply focus:outline-none sm:py-4 sm:px-4 max-w-6xl self-center;
+}
+.public-policy .policy-content h2 {
+  @apply text-xl font-extrabold;
+}
+.public-policy .policy-content h3 {
+  @apply text-lg;
+}
+.public-policy .policy-content a {
+  @apply underline text-custom-blue-light font-semibold;
+}
+.public-policy .policy-content img {
+  @apply inline-block max-h-72 object-contain
+    max-w-full sm:max-w-screen-md;
+}
+.public-policy .policy-content iframe {
+  @apply w-full max-w-4xl inline-block;
+}
+.public-policy .policy-content p {
+  @apply min-h-5;
+}
+.public-policy .policy-content > ul {
+  @apply px-8 list-none;
+}
+.public-policy .policy-content > ul > li > p {
+  @apply relative before:absolute before:content-["•"] 
+        before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.public-policy .policy-content > ul > li ul {
+  @apply list-none px-8;
+}
+.public-policy .policy-content > ul > li ul > li > p {
+  @apply relative before:absolute before:content-["◦"] 
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)];
+}
+.public-policy .policy-content ol {
+  @apply px-8 list-decimal;
+}
+
 .content-editor {
   @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
   max-w-4xl w-full;
