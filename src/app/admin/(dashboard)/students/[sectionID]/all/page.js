@@ -71,7 +71,7 @@ const AdminAllStudents = () => {
   const filterStudents = () => {
     if (students.length === 0) return [];
     const searchKeyLowerCase = searchKey.toLowerCase();
-    return students
+    return [...students]
       .filter((eachStudent) => {
         const username = eachStudent.studentUserName.toLowerCase();
         const fullName =
@@ -90,7 +90,7 @@ const AdminAllStudents = () => {
     if (students.length === 0) return [];
     const firstStudentToShow = (page - 1) * noOfRows;
     const lastStudentToShow = (page - 1) * noOfRows + noOfRows;
-    return students
+    return [...students]
       .sort(sortAlphabetical)
       .slice(firstStudentToShow, lastStudentToShow);
   };
