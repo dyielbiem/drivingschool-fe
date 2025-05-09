@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -7,15 +7,64 @@ import handleStudentSubmit from "@/actions/handleStudentSubmit";
 
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";
+import CustomSelect from "./CustomSelect";
+
+const stateOptions = [
+  { label: "Alabama", value: "AL" },
+  { label: "Alaska", value: "AK" },
+  { label: "Arizona", value: "AZ" },
+  { label: "Arkansas", value: "AR" },
+  { label: "California", value: "CA" },
+  { label: "Colorado", value: "CO" },
+  { label: "Connecticut", value: "CT" },
+  { label: "Delaware", value: "DE" },
+  { label: "Florida", value: "FL" },
+  { label: "Georgia", value: "GA" },
+  { label: "Hawaii", value: "HI" },
+  { label: "Idaho", value: "ID" },
+  { label: "Illinois", value: "IL" },
+  { label: "Indiana", value: "IN" },
+  { label: "Iowa", value: "IA" },
+  { label: "Kansas", value: "KS" },
+  { label: "Kentucky", value: "KY" },
+  { label: "Louisiana", value: "LA" },
+  { label: "Maine", value: "ME" },
+  { label: "Maryland", value: "MD" },
+  { label: "Massachusetts", value: "MA" },
+  { label: "Michigan", value: "MI" },
+  { label: "Minnesota", value: "MN" },
+  { label: "Mississippi", value: "MS" },
+  { label: "Missouri", value: "MO" },
+  { label: "Montana", value: "MT" },
+  { label: "Nebraska", value: "NE" },
+  { label: "Nevada", value: "NV" },
+  { label: "New Hampshire", value: "NH" },
+  { label: "New Jersey", value: "NJ" },
+  { label: "New Mexico", value: "NM" },
+  { label: "New York", value: "NY" },
+  { label: "North Carolina", value: "NC" },
+  { label: "North Dakota", value: "ND" },
+  { label: "Ohio", value: "OH" },
+  { label: "Oklahoma", value: "OK" },
+  { label: "Oregon", value: "OR" },
+  { label: "Pennsylvania", value: "PA" },
+  { label: "Rhode Island", value: "RI" },
+  { label: "South Carolina", value: "SC" },
+  { label: "South Dakota", value: "SD" },
+  { label: "Tennessee", value: "TN" },
+  { label: "Texas", value: "TX" },
+  { label: "Utah", value: "UT" },
+  { label: "Vermont", value: "VT" },
+  { label: "Virginia", value: "VA" },
+  { label: "Washington", value: "WA" },
+  { label: "West Virginia", value: "WV" },
+  { label: "Wisconsin", value: "WI" },
+  { label: "Wyoming", value: "WY" }
+];
 
 const AddStudentForm = ({ courses, setStudentSections }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [selectedCourse, setSelectedCourse] = useState({
-    courseID: "",
-    courseName: ""
-  });
-  const [isCourseSelectOnFocus, setIsCourseSelectOnFocus] = useState(false);
   const initialState = {
     message: undefined,
     ok: false
@@ -25,11 +74,6 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     handleStudentSubmit,
     initialState
   );
-
-  const handleOptionClick = (courseID, courseName) => {
-    setSelectedCourse({ courseID, courseName });
-    setIsCourseSelectOnFocus(false);
-  };
 
   useEffect(() => {
     if (!formState?.ok) return;
@@ -41,42 +85,6 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     );
     router.push(pathname);
   }, [formState?.ok, pathname, router, setStudentSections]);
-
-  const renderCourseSelect = () => {
-    return (
-      <div
-        course-name={selectedCourse.courseName}
-        className={`course-select ${
-          selectedCourse.courseName ? "" : "before:!hidden"
-        }`}
-        onClick={() => setIsCourseSelectOnFocus(true)}
-        onBlur={() => setIsCourseSelectOnFocus(false)}
-      >
-        <input
-          name="student-course"
-          id="student-course"
-          value={selectedCourse.courseID}
-          required
-          readOnly
-          placeholder={selectedCourse.courseID ? "" : "Select a course"}
-        />
-        {isCourseSelectOnFocus && (
-          <ul className="custom-option">
-            {courses.map((course, index) => (
-              <li
-                key={index}
-                onMouseDown={() =>
-                  handleOptionClick(course.courseID, course.courseName)
-                }
-              >
-                {course.courseName}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  };
 
   const goBack = () => {
     router.push(pathname);
@@ -107,7 +115,16 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         <label htmlFor="student-course">
           Course <span>*</span>
         </label>
-        {renderCourseSelect()}
+        {/* {renderCourseSelect()} */}
+        <CustomSelect
+          options={courses}
+          required={true}
+          placeholder="Select course"
+          name="student-course"
+          id="student-course"
+          labelKey="courseName"
+          valueKey="courseID"
+        />
       </div>
       <div className="fields">
         <label htmlFor="student-password">
@@ -175,11 +192,17 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         <label htmlFor="student-state">
           State <span>*</span>
         </label>
-        <input type="text" name="student-state" id="student-state" required />
+        <CustomSelect
+          options={stateOptions}
+          required={true}
+          placeholder="Select a state"
+          name="student-state"
+          id="student-state"
+        />
       </div>
       <div className="fields">
         <label htmlFor="student-zip">
-          Zip code<span>*</span>
+          Zip value<span>*</span>
         </label>
         <input type="text" name="student-zip" id="student-zip" required />
       </div>

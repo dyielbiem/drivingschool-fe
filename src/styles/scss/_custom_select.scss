@@ -1,0 +1,33 @@
+.custom-select {
+  @apply bg-white rounded-md h-10 border-[1px]
+  border-custom-gray-base w-full relative cursor-pointer;
+
+  p {
+    @apply h-full w-full p-2 text-ellipsis whitespace-nowrap overflow-hidden pr-8;
+  }
+
+  p.as-placeholder {
+    @apply text-custom-gray-dark;
+  }
+
+  svg {
+    @apply absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none;
+  }
+
+  input {
+    @apply opacity-0 -z-20 absolute top-0 left-0 h-full w-full;
+  }
+
+  ul {
+    @apply absolute bg-white w-full max-h-52 overflow-y-auto left-0 top-[calc(100%_+_4px)] z-20
+    border-custom-gray-base border-[1px] rounded-md p-1 gap-1 flex flex-col;
+
+    li {
+      @apply hover:bg-custom-gray-base p-1.5 cursor-pointer rounded;
+    }
+  }
+
+  &:has(ul)::after {
+    @apply content-[""] h-60 absolute top-full w-full pointer-events-none;
+  }
+}
