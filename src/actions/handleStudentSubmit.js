@@ -7,19 +7,28 @@ const handleStudentSubmit = async (prevState, formData) => {
     courseID: formData.get("student-course"),
     passWord: formData.get("student-password"),
     confirmPassWord: formData.get("student-confirm-password"),
-    firstName: formData.get("student-firstname"),
-    lastName: formData.get("student-lastname"),
+    firstName: formData.get("student-first-name"),
+    lastName: formData.get("student-last-name"),
     address: formData.get("student-address"),
     city: formData.get("student-city"),
     state: formData.get("student-state"),
     zip: formData.get("student-zip"),
     email: formData.get("student-email"),
     phoneNumber: formData.get("student-phone"),
-    highSchool: formData.get("student-high-school").trim() || "Not applicable",
+    birthDate: formData.get("student-birthdate"),
+    highSchool: formData.get("student-high-school").trim() || "",
     parentFirstName: formData.get("parent-first-name"),
     parentLastName: formData.get("parent-last-name"),
     parentEmail: formData.get("parent-email"),
-    parentPhoneNumber: formData.get("parent-phone")
+    parentPhoneNumber: formData.get("parent-phone"),
+    billingInformation: {
+      address: formData.get("student-billing-address") || "",
+      city: formData.get("student-billing-city") || "",
+      state: formData.get("student-billing-state") || "",
+      zip: formData.get("student-billing-zip") || "",
+      email: formData.get("student-billing-email") || "",
+      phoneNumber: formData.get("student-billing-phone") || ""
+    }
   };
 
   const zipRegex = /^[0-9]{1,20}$/;
@@ -56,12 +65,14 @@ const handleStudentSubmit = async (prevState, formData) => {
     formDataObject.state,
     formDataObject.zip,
     formDataObject.country,
+    formDataObject.birthDate,
     formDataObject.email,
     formDataObject.phoneNumber,
     formDataObject.parentFirstName,
     formDataObject.parentLastName,
     formDataObject.parentEmail,
-    formDataObject.parentPhoneNumber
+    formDataObject.parentPhoneNumber,
+    formDataObject.billingInformation
   );
 
   if (!response.ok)

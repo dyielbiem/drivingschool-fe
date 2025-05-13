@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
 const CustomSelect = ({
-  name = "",
   id = "",
   className = "",
   options = [],
@@ -50,7 +49,7 @@ const CustomSelect = ({
         type="text"
         value={selected[valueKey]}
         required={required}
-        name={name}
+        name={id}
         onChange={() => {}}
         id={id}
         onClick={() => setIsDropDownOpen(true)}
@@ -58,7 +57,7 @@ const CustomSelect = ({
       <input
         type="text"
         value={selected[labelKey]}
-        name={`${name}-label`}
+        name={`${id}-label`}
         id={`${id}-label`}
         onChange={() => {}}
       />
