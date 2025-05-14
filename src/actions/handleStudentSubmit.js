@@ -22,6 +22,8 @@ const handleStudentSubmit = async (prevState, formData) => {
     parentEmail: formData.get("parent-email"),
     parentPhoneNumber: formData.get("parent-phone"),
     billingInformation: {
+      firstName: formData.get("student-billing-first-name") || "",
+      lastName: formData.get("student-billing-last-name") || "",
       address: formData.get("student-billing-address") || "",
       city: formData.get("student-billing-city") || "",
       state: formData.get("student-billing-state") || "",

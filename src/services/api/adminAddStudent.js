@@ -18,7 +18,8 @@ const adminAddStudent = async (
   parentFirstName,
   parentLastName,
   parentEmail,
-  parentPhoneNumber
+  parentPhoneNumber,
+  billingInformation
 ) => {
   try {
     const fetchMethod = async (accessToken) => {
@@ -49,7 +50,8 @@ const adminAddStudent = async (
             parentFirstName,
             parentLastName,
             parentEmail,
-            parentPhoneNumber
+            parentPhoneNumber,
+            billingInformation
           })
         }
       );

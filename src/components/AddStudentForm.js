@@ -180,6 +180,18 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
 
   const billingInfoFields = [
     {
+      id: "student-billing-first-name",
+      type: "text",
+      label: "First name",
+      required: false
+    },
+    {
+      id: "student-billing-last-name",
+      type: "text",
+      label: "Last name",
+      required: false
+    },
+    {
       id: "student-billing-address",
       type: "text",
       label: "Address",
