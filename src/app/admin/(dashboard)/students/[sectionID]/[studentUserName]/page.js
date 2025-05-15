@@ -1,0 +1,212 @@
+"use client";
+
+import moment from "moment";
+import { parseDate } from "chrono-node";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
+import adminFetchStudent from "@/services/api/adminFetchSections copy";
+
+import FormField from "@/components/FormField";
+
+const MultiFields = ({ fields, student }) => {
+  return fields.map((field, idx) => {
+    let defaultValue = student?.[field.attrKey] || "--";
+
+    if (field.isDateString) {
+      const parsedDate = parseDate(defaultValue);
+      defaultValue = parsedDate
+        ? moment(parsedDate).format("MM/DD/YYYY")
+        : "--";
+    }
+
+    return (
+      <FormField
+        key={idx}
+        {...field}
+        type="text"
+        otherInputProps={{
+          disabled: true,
+          defaultValue
+        }}
+      />
+    );
+  });
+};
+
+const studentInfoFields = [
+  {
+    id: "student-username",
+    label: "Username",
+    attrKey: "studentUserName"
+  },
+  {
+    id: "student-course",
+    label: "Course",
+    attrKey: "courseName"
+  },
+  {
+    id: "student-first-name",
+    label: "First name",
+    attrKey: "mailingFirstName"
+  },
+  {
+    id: "student-last-name",
+    label: "Last name",
+    attrKey: "mailingLastName"
+  },
+  {
+    id: "student-address",
+    label: "Address",
+    className: "!col-span-2",
+    attrKey: "mailingAddress"
+  },
+  {
+    id: "student-city",
+    label: "City",
+    attrKey: "mailingCity"
+  },
+  {
+    id: "student-state",
+    label: "State",
+    attrKey: "mailingState"
+  },
+  {
+    id: "student-zip",
+    label: "Zip Code",
+    attrKey: "mailingZip"
+  },
+  {
+    id: "student-email",
+    label: "Email",
+    attrKey: "mailingEmail"
+  },
+  {
+    id: "student-phone",
+    label: "Phone Number",
+    attrKey: "mailingPhoneNumber"
+  },
+  {
+    id: "student-birthdate",
+    label: "Birth date",
+    attrKey: "birthDate",
+    isDateString: true
+  },
+  {
+    id: "student-high-school",
+    label: "High school name",
+    attrKey: "highSchool"
+  }
+];
+
+const billingInfoFields = [
+  {
+    id: "student-billing-first-name",
+    label: "First name",
+    attrKey: "billingFirstName"
+  },
+  {
+    id: "student-billing-last-name",
+    label: "Last name",
+    attrKey: "billingLastName"
+  },
+  {
+    id: "student-billing-address",
+    label: "Address",
+    className: "!col-span-2",
+    attrKey: "billingAddress"
+  },
+  {
+    id: "student-billing-city",
+    label: "City",
+    attrKey: "billingCity"
+  },
+  {
+    id: "student-billing-state",
+    label: "State",
+    attrKey: "billingState"
+  },
+  {
+    id: "student-billing-zip",
+    label: "Zip code",
+    attrKey: "billingZip"
+  },
+  {
+    id: "student-billing-email",
+    label: "Email",
+    attrKey: "billingEmail"
+  },
+  {
+    id: "student-billing-phone",
+    label: "Phone Number",
+    attrKey: "billingPhoneNumber"
+  }
+];
+
+const parentInfoFields = [
+  {
+    id: "parent-first-name",
+    label: "First name",
+    attrKey: "parentFirstName"
+  },
+  {
+    id: "parent-last-name",
+    label: "Last name",
+    attrKey: "parentLastName"
+  },
+  {
+    id: "parent-email",
+    label: "Email",
+    attrKey: "parentEmail"
+  },
+  {
+    id: "parent-phone",
+    label: "Phone Number",
+    attrKey: "parentPhoneNumber"
+  }
+];
+
+const StudentProfile = ({ params }) => {
+  const router = useRouter();
+  const [student, setStudent] = useState(null);
+
+  const redirectPath = `/admin/students/${params.sectionID}/all?page=1`;
+
+  useEffect(() => {
+    const fetchStudent = async () => {
+      const { ok, json } = await adminFetchStudent(params.studentUserName);
+      if (!ok) {
+        router.replace(redirectPath);
+        return;
+      }
+
+      setStudent(json);
+    };
+
+    fetchStudent();
+  }, [params, router, redirectPath]);
+
+  if (!student) return null;
+
+  return (
+    <div className="admin-students-container">
+      <div className="student-profile">
+        <div className="header">
+          <button type="button" onClick={() => router.push(redirectPath)}>
+            <IoMdArrowRoundBack />
+          </button>
+          <h1>Student Profile</h1>
+        </div>
+        <h2>Student Information</h2>
+        <MultiFields fields={studentInfoFields} student={student} />
+        <h2>Billing Information</h2>
+        <MultiFields fields={billingInfoFields} student={student} />
+        <h2>Parent Information</h2>
+        <MultiFields fields={parentInfoFields} student={student} />
+      </div>
+    </div>
+  );
+};
+
+export default StudentProfile;
