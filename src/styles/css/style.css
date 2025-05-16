@@ -27,7 +27,7 @@
           text-xl}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a{@apply text-base py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
-          flex justify-start items-center gap-4 text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a .nav-icon{@apply text-2xl text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .logout-btn{@apply text-base relative px-10 w-full
+          flex justify-start items-center gap-4 text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a:hover{@apply bg-custom-blue-darker}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a:hover::after{@apply bg-custom-blue-darker}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a .nav-icon{@apply text-2xl text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .logout-btn{@apply text-base relative px-10 w-full
       flex items-center justify-start gap-4
       text-custom-white-dark font-bold mt-16}.admin-dashboard-layout>.side-nav-container .logout-btn svg{@apply text-2xl text-custom-white-dark}.admin-sections-container{@apply flex flex-col flex-grow pb-10 max-h-screen h-screen 
   bg-custom-white-dark overflow-y-auto overflow-x-hidden 
@@ -288,7 +288,7 @@
   items-center bg-[#00000044] z-[999999]}.add-coupon-form form{@apply flex flex-col gap-2 bg-white w-full overflow-y-auto 
     fixed h-screen top-0 left-0 sm:max-w-md sm:relative
     sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8}.add-coupon-form form .close-btn{@apply absolute w-fit right-6 top-6}.add-coupon-form form .close-btn svg{@apply text-3xl}.add-coupon-form form h3{@apply text-2xl font-extrabold mb-4}.add-coupon-form form label{@apply mt-2 text-sm font-bold indent-1}.add-coupon-form form label span{@apply text-custom-red font-bold}.add-coupon-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base w-full}.add-coupon-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
+      border-custom-gray-base w-full}.add-coupon-form form input#coupon-code{@apply lowercase}.add-coupon-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700}.add-coupon-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
       text-white rounded-lg py-2.5 mt-auto sm:mt-8 
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-coupon-form form button[type=submit] svg{@apply text-2xl animate-spin}.edit-coupon-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  

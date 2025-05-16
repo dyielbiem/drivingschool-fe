@@ -3,7 +3,7 @@ import adminAddCoupon from "@/services/api/adminAddCoupon";
 
 const handleCouponSubmit = async (prevState, formData) => {
   const formDataObject = {
-    couponCode: formData.get("coupon-code").trim(),
+    couponCode: formData.get("coupon-code").trim().toLowerCase(),
     couponAmount: formData.get("coupon-amount"),
     fromDate: formData.get("from-date"),
     toDate: formData.get("to-date")
