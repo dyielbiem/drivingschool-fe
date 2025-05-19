@@ -1,12 +1,11 @@
 "use client";
 
-import moment from "moment";
-import { parseDate } from "chrono-node";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-import adminFetchStudent from "@/services/api/adminFetchSections copy";
+import adminFetchStudent from "@/services/api/adminFetchStudent";
+import { formatDate } from "@/utils";
 
 import FormField from "@/components/FormField";
 
@@ -15,10 +14,7 @@ const MultiFields = ({ fields, student }) => {
     let defaultValue = student?.[field.attrKey] || "--";
 
     if (field.isDateString) {
-      const parsedDate = parseDate(defaultValue);
-      defaultValue = parsedDate
-        ? moment(parsedDate).format("MM/DD/YYYY")
-        : "--";
+      defaultValue = formatDate(defaultValue) || "--";
     }
 
     return (
@@ -84,7 +80,7 @@ const studentInfoFields = [
   },
   {
     id: "student-phone",
-    label: "Phone Number",
+    label: "Phone number",
     attrKey: "mailingPhoneNumber"
   },
   {
@@ -139,7 +135,7 @@ const billingInfoFields = [
   },
   {
     id: "student-billing-phone",
-    label: "Phone Number",
+    label: "Phone number",
     attrKey: "billingPhoneNumber"
   }
 ];
@@ -162,7 +158,7 @@ const parentInfoFields = [
   },
   {
     id: "parent-phone",
-    label: "Phone Number",
+    label: "Phone number",
     attrKey: "parentPhoneNumber"
   }
 ];

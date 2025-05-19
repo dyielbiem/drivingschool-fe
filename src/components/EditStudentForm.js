@@ -3,11 +3,162 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useFormState } from "react-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-import { useStudentsInSection } from "@/state/store";
 import handleStudentUpdate from "@/actions/handleStudentUpdate";
+import { useStudentsInSection } from "@/state/store";
+import { stateOptions } from "@/constants";
+import { formatDate } from "@/utils";
 
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";
+import FormField from "./FormField";
+
+const studentInfoFields = (student) => {
+  const {
+    studentUserName,
+    isActive,
+    mailingFirstName,
+    mailingLastName,
+    mailingAddress,
+    mailingCity,
+    mailingState,
+    mailingZip,
+    mailingEmail,
+    mailingPhoneNumber,
+    birthDate,
+    highSchool
+  } = student;
+  const mailingStateObj = stateOptions.find(
+    (item) => item.value === mailingState
+  );
+
+  return [
+    {
+      id: "username",
+      type: "text",
+      label: "Username",
+      required: true,
+      otherInputProps: {
+        readOnly: true,
+        value: studentUserName
+      }
+    },
+    {
+      id: "is-active",
+      type: "select",
+      label: "Status",
+      required: true,
+      selectProps: {
+        options: [
+          { label: "Active", value: "true" },
+          { label: "Inactive", value: "false" }
+        ],
+        placeholder: "Select status",
+        defaultValue: {
+          label: isActive ? "Active" : "Inactive",
+          value: isActive
+        }
+      }
+    },
+    {
+      id: "first-name",
+      type: "text",
+      label: "First name",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingFirstName
+      }
+    },
+    {
+      id: "last-name",
+      type: "text",
+      label: "Last name",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingLastName
+      }
+    },
+    {
+      id: "address",
+      type: "text",
+      label: "Address",
+      className: "col-span-full",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingAddress
+      }
+    },
+    {
+      id: "city",
+      type: "text",
+      label: "City",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingCity
+      }
+    },
+    {
+      id: "state",
+      type: "select",
+      label: "State",
+      required: true,
+      selectProps: {
+        options: stateOptions,
+        placeholder: "Select state",
+        defaultValue: {
+          label: mailingStateObj?.label || "",
+          value: mailingStateObj?.value || null
+        },
+        fallBackValue: mailingState
+      }
+    },
+    {
+      id: "zip",
+      type: "text",
+      label: "Zip Code",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingZip
+      }
+    },
+    {
+      id: "email",
+      type: "email",
+      label: "Email",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingEmail
+      }
+    },
+    {
+      id: "phone-number",
+      type: "text",
+      label: "Phone number",
+      format: "XXX-XXX-XXXX",
+      required: true,
+      otherInputProps: {
+        defaultValue: mailingPhoneNumber,
+        pattern: "^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+      }
+    },
+    {
+      id: "birth-date",
+      type: "date",
+      required: true,
+      label: "Birth date",
+      otherInputProps: {
+        defaultValue: formatDate(birthDate, "YYYY-MM-DD")
+      }
+    },
+    {
+      id: "high-school",
+      type: "text",
+      label: "High school name",
+      otherInputProps: {
+        defaultValue: highSchool
+      }
+    }
+  ];
+};
 
 const EditStudentForm = ({ student }) => {
   const pathname = usePathname();
@@ -64,149 +215,9 @@ const EditStudentForm = ({ student }) => {
         </button>
         <h1>Edit student</h1>
       </div>
-      <div className="fields">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          required
-          readOnly
-          value={student.studentUserName}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="is-active">
-          Status <span>*</span>
-        </label>
-        <select
-          required
-          id="is-active"
-          name="is-active"
-          defaultValue={student.isActive}
-        >
-          <option value={true}>Active</option>
-          <option value={false}>Inactive</option>
-        </select>
-      </div>
-      <div className="fields">
-        <label htmlFor="first-name">
-          First name <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="first-name"
-          id="first-name"
-          required
-          defaultValue={student.mailingFirstName}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="last-name">
-          Last name <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="last-name"
-          id="last-name"
-          required
-          defaultValue={student.mailingLastName}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="address">
-          Address <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          required
-          defaultValue={student.mailingAddress}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="city">
-          City <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="city"
-          id="city"
-          required
-          defaultValue={student.mailingCity}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="state">
-          State <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="state"
-          id="state"
-          required
-          defaultValue={student.mailingState}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="zip">
-          Zip Code <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="zip"
-          id="zip"
-          required
-          defaultValue={student.mailingZip}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="country">
-          Country <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="country"
-          id="country"
-          required
-          defaultValue={student.mailingCountry}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="email">
-          Email <span>*</span>
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          defaultValue={student.mailingEmail}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="phone-number">
-          Phone Number <span>*</span> (XXX-XXX-XXXX)
-        </label>
-        <input
-          type="text"
-          name="phone-number"
-          id="phone-number"
-          required
-          pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
-          defaultValue={student.mailingPhoneNumber}
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="company">Company name</label>
-        <input
-          type="text"
-          name="company"
-          id="comppany"
-          defaultValue={student.mailingCompany}
-        />
-      </div>
+      {studentInfoFields(student).map((field, idx) => (
+        <FormField key={idx} {...field} />
+      ))}
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>
       )}

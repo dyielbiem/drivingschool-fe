@@ -8,8 +8,9 @@ const CustomSelect = ({
   placeholder = "Select an item",
   valueKey = "value",
   labelKey = "label",
-  defaultValue = { [valueKey]: "", [labelKey]: "" },
-  required = false
+  defaultValue = { [valueKey]: null, [labelKey]: null },
+  required = false,
+  fallBackValue = ""
 }) => {
   const [selected, setSelected] = useState(defaultValue);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -39,15 +40,20 @@ const CustomSelect = ({
   return (
     <div className={`custom-select ${className}`} ref={containerRef}>
       <p
-        className={`${!selected[valueKey] ? "as-placeholder" : ""}`}
+        className={`${
+          !fallBackValue &&
+          (selected[valueKey] === null || selected[valueKey] === undefined)
+            ? "as-placeholder"
+            : ""
+        }`}
         onClick={() => setIsDropDownOpen((prevState) => !prevState)}
       >
-        {selected[labelKey] || placeholder}
+        {selected[labelKey] || fallBackValue || placeholder}
       </p>
       <IoIosArrowDown />
       <input
         type="text"
-        value={selected[valueKey]}
+        value={selected[valueKey] || fallBackValue || ""}
         required={required}
         name={id}
         onChange={() => {}}
@@ -56,7 +62,7 @@ const CustomSelect = ({
       />
       <input
         type="text"
-        value={selected[labelKey]}
+        value={selected[labelKey] || fallBackValue || ""}
         name={`${id}-label`}
         id={`${id}-label`}
         onChange={() => {}}
