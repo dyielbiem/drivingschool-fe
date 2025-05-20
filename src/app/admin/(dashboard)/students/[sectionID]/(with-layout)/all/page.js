@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen, FaEye } from "react-icons/fa6";
 import { Tooltip } from "react-tooltip";
@@ -90,48 +90,50 @@ const Student = ({ student, onEdit, onDelete, onView }) => {
   );
 };
 
-const AllStudentsTable = ({ students }) => {
+const TableData = ({ students, sectionID }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleEdit = (studentUserName) => {
-    const currentParams = new URLSearchParams(searchParams.toString());
-    currentParams.set("edit_student", studentUserName);
-    router.push(`${pathname}?${currentParams}`);
-  };
+  const handleEdit = useCallback(
+    (studentUserName) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.set("edit_student", studentUserName);
+      router.push(`${pathname}?${currentParams}`);
+    },
+    [pathname, router, searchParams]
+  );
 
-  const handleDelete = (studentUserName) => {
-    const currentParams = new URLSearchParams(searchParams.toString());
-    currentParams.set("delete_student", studentUserName);
-    router.push(`${pathname}?${currentParams}`);
-  };
+  const handleDelete = useCallback(
+    (studentUserName) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.set("delete_student", studentUserName);
+      router.push(`${pathname}?${currentParams}`);
+    },
+    [pathname, router, searchParams]
+  );
 
-  const handleView = (studentUserName) => {
-    const redirectPath =
-      pathname.split("/").slice(0, -1).join("/") + `/${studentUserName}`;
-    router.push(redirectPath);
-  };
+  const handleView = useCallback(
+    (studentUserName) => {
+      router.push(`/admin/students/${sectionID}/${studentUserName}?prev=all`);
+    },
+    [router, sectionID]
+  );
 
   if (students.length === 0) return null;
 
-  return (
-    <ul className="all-students-table">
-      <TableHeader />
-      {students.map((student, index) => (
-        <Student
-          key={index}
-          student={student}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onView={handleView}
-        />
-      ))}
-    </ul>
-  );
+  return students.map((student, idx) => (
+    <Student
+      key={idx}
+      student={student}
+      onEdit={handleEdit}
+      onDelete={handleDelete}
+      onView={handleView}
+    />
+  ));
 };
 
-const AdminAllStudents = () => {
+const AdminAllStudents = ({ params: { sectionID } }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -235,7 +237,10 @@ const AdminAllStudents = () => {
 
   return (
     <>
-      <AllStudentsTable students={studentsToRender} />
+      <ul className="all-students-table">
+        <TableHeader />
+        <TableData students={studentsToRender} sectionID={sectionID} />
+      </ul>
       <Pagination
         isVisible={students?.length !== 0 && !searchParams.get("search")}
         itemsLength={Number(students?.length)}
