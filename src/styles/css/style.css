@@ -194,17 +194,16 @@
       flex flex-col md:table-row p-4 py-6 md:p-0
       gap-1 md:gap-0}.student-exam-details-table>table th,.student-exam-details-table>table td{@apply md:px-4 md:py-4}.student-exam-details-table>table th:nth-child(1),.student-exam-details-table>table td:nth-child(1){@apply md:w-[40%] md:pl-6}.student-exam-details-table>table th:nth-child(2),.student-exam-details-table>table td:nth-child(2){@apply md:w-[25%] flex flex-wrap lg:table-cell gap-1}.student-exam-details-table>table th:nth-child(3),.student-exam-details-table>table td:nth-child(3){@apply md:w-[20%]}.student-exam-details-table>table th:nth-child(4),.student-exam-details-table>table td:nth-child(4){@apply md:w-[15%]}.student-exam-details-table>table td::before{@apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
       text-sm}.student-exam-details-table>table .title{@apply md:font-bold}.student-exam-details-table>table .status{@apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
-      uppercase}.latest-registrations-table{@apply grid gap-3 2xl:gap-x-6 mx-6 md:mx-12
-  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
-  xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
-  2xl:grid-cols-[repeat(6,2fr)_repeat(2,1fr)]}.latest-registrations-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4 hidden 2xl:grid}.latest-registrations-table .table-header p{@apply font-extrabold text-base text-center}.latest-registrations-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white
+      uppercase}.latest-registrations-table{@apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fit,minmax(275px,1fr))]
+  xl:grid-cols-[15%,10%,20%,20%,10%,auto,5%]}.latest-registrations-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+      font-semibold mb-4 hidden xl:grid}.latest-registrations-table .table-header p{@apply font-extrabold text-base text-center}.latest-registrations-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white
     rounded-md cursor-pointer hover:shadow-md duration-200
     border-2 border-custom-gray-base flex flex-col 
-    2xl:grid 2xl:col-span-full items-start gap-1 2xl:gap-0
-    p-6 2xl:py-5 2xl:px-10}.latest-registrations-table li:nth-child(n+2) p{@apply 2xl:text-center}.latest-registrations-table li:nth-child(n+2) p::before{@apply 2xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
-      text-sm}.latest-registrations-table li:nth-child(n+2) p:nth-child(5){@apply break-all}.latest-registrations-table li:nth-child(n+2) p:nth-child(8){@apply rounded-md text-xs font-bold py-1 px-2 h-fit
-      -order-1 2xl:order-none mb-1 2xl:mb-0}.latest-registrations-table li:nth-child(n+2) p:nth-child(8)::before{@apply hidden}.latest-completions-table{@apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
+    xl:grid xl:col-span-full items-start gap-1 xl:gap-0
+    p-6 xl:py-5 2xl:px-10}.latest-registrations-table li:nth-child(n+2) p{@apply xl:text-center}.latest-registrations-table li:nth-child(n+2) p::before{@apply xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
+      text-sm}.latest-registrations-table li:nth-child(n+2) p:nth-child(4){@apply break-all}.latest-registrations-table li:nth-child(n+2) p:nth-child(6){@apply rounded-md text-xs font-bold py-1 px-2 h-fit
+      -order-1 xl:order-none mb-1 xl:mb-0}.latest-registrations-table li:nth-child(n+2) p:nth-child(6)::before{@apply hidden}.latest-registrations-table li:nth-child(n+2) button:last-child{@apply text-custom-green-base text-xl self-end xl:self-center}.latest-completions-table{@apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
   grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
   lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
   xl:grid-cols-5}.latest-completions-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 

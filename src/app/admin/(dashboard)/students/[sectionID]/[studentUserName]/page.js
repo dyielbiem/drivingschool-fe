@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 import adminFetchStudent from "@/services/api/adminFetchStudent";
@@ -163,15 +163,19 @@ const parentInfoFields = [
   }
 ];
 
-const StudentProfile = ({ params }) => {
+const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [student, setStudent] = useState(null);
 
-  const redirectPath = `/admin/students/${params.sectionID}/all?page=1`;
+  const redirectPath = useMemo(() => {
+    const endPath = searchParams.get("prev") || "all";
+    return `/admin/students/${sectionID}/${endPath}?page=1`;
+  }, [sectionID, searchParams]);
 
   useEffect(() => {
     const fetchStudent = async () => {
-      const { ok, json } = await adminFetchStudent(params.studentUserName);
+      const { ok, json } = await adminFetchStudent(studentUserName);
       if (!ok) {
         router.replace(redirectPath);
         return;
@@ -181,7 +185,7 @@ const StudentProfile = ({ params }) => {
     };
 
     fetchStudent();
-  }, [params, router, redirectPath]);
+  }, [redirectPath, router, studentUserName]);
 
   if (!student) return null;
 

@@ -1,12 +1,11 @@
 .latest-registrations-table {
-  @apply grid gap-3 2xl:gap-x-6 mx-6 md:mx-12
-  grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
-  xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
-  2xl:grid-cols-[repeat(6,2fr)_repeat(2,1fr)];
+  @apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
+  grid-cols-[repeat(auto-fit,minmax(275px,1fr))]
+  xl:grid-cols-[15%,10%,20%,20%,10%,auto,5%];
 
   .table-header {
     @apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4 hidden 2xl:grid;
+      font-semibold mb-4 hidden xl:grid;
 
     p {
       @apply font-extrabold text-base text-center;
@@ -17,29 +16,33 @@
     @apply grid-cols-subgrid justify-items-center bg-white
     rounded-md cursor-pointer hover:shadow-md duration-200
     border-2 border-custom-gray-base flex flex-col 
-    2xl:grid 2xl:col-span-full items-start gap-1 2xl:gap-0
-    p-6 2xl:py-5 2xl:px-10;
+    xl:grid xl:col-span-full items-start gap-1 xl:gap-0
+    p-6 xl:py-5 2xl:px-10;
 
     p {
-      @apply 2xl:text-center;
+      @apply xl:text-center;
     }
 
     p::before {
-      @apply 2xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
+      @apply xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
       text-sm;
     }
 
-    p:nth-child(5) {
+    p:nth-child(4) {
       @apply break-all;
     }
 
-    p:nth-child(8) {
+    p:nth-child(6) {
       @apply rounded-md text-xs font-bold py-1 px-2 h-fit
-      -order-1 2xl:order-none mb-1 2xl:mb-0;
+      -order-1 xl:order-none mb-1 xl:mb-0;
 
       &::before {
         @apply hidden;
       }
+    }
+
+    button:last-child {
+      @apply text-custom-green-base text-xl self-end xl:self-center;
     }
   }
 }

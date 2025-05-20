@@ -1,123 +1,140 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useMemo, useCallback } from "react";
+import { parseDate } from "chrono-node";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Tooltip } from "react-tooltip";
+import { FaEye } from "react-icons/fa6";
+
+import dateFormatter from "@/utils/dateFormatter";
+import { useStudentsInSection } from "@/state/store";
 
 import Pagination from "@/components/Pagination";
 
-import { useStudentsInSection } from "@/state/store";
+const sortLatestToOldest = (a, b) => {
+  const dateA = parseDate(a?.enrollmentDate);
+  const dateB = parseDate(b?.enrollmentDate);
+  if (dateA && !dateB) return -1;
+  if (!dateA && dateB) return 1;
+  if (dateA && dateB) return dateB - dateA;
+  return 0;
+};
 
-import dateFormatter from "@/utils/dateFormatter";
+const TableHeader = () => (
+  <li className="table-header">
+    <p>Username</p>
+    <p>Registration Date</p>
+    <p>Name</p>
+    <p>Email Address</p>
+    <p>Course Type</p>
+    <p>Status</p>
+  </li>
+);
 
-const AdminLatestStudentRegistration = () => {
-  const { students, noOfRows } = useStudentsInSection();
-  const searchParams = useSearchParams();
-  const page = Number(searchParams.get("page"));
+const TableData = ({ students, onView }) => {
+  if (students.length === 0) return null;
 
-  const sortDateLatestToOldestCB = (a, b) => {
-    const dateA = new Date(a?.enrollmentDate);
-    const dateB = new Date(b?.enrollmentDate);
-    if (dateA && dateB == "Invalid Date") return -1;
-    if (dateA == "Invalid Date" && dateB) return 1;
-    if (dateA && dateB) return dateB - dateA;
-    return 0;
-  };
+  return students.map((student, index) => {
+    const {
+      studentUserName,
+      enrollmentDate,
+      mailingFirstName,
+      mailingLastName,
+      mailingEmail,
+      courseType,
+      isActive
+    } = student;
 
-  const filteredRegistrations = () => {
-    if (students.length === 0) return [];
-    const searchKey = searchParams.get("search").toLowerCase();
-    return [...students]
-      .filter((eachStudent) => {
-        const username = eachStudent.studentUserName.toLowerCase();
-        const fullName =
-          `${eachStudent.mailingFirstName} ${eachStudent.mailingLastName}`.toLowerCase();
-
-        if (username.includes(searchKey) || fullName.includes(searchKey))
-          return eachStudent;
-      })
-      .sort(sortDateLatestToOldestCB);
-  };
-
-  const registrationsPerPage = () => {
-    if (students.length === 0) return [];
-    const firstStudentToShow = (page - 1) * noOfRows;
-    const lastStudentToShow = (page - 1) * noOfRows + noOfRows;
-    return [...students]
-      .sort(sortDateLatestToOldestCB)
-      .slice(firstStudentToShow, lastStudentToShow);
-  };
-
-  const registrationsToRender = () => {
-    if (searchParams.get("search")) {
-      return filteredRegistrations();
-    }
-    return registrationsPerPage();
-  };
-
-  const renderHeaderTitle = () => {
     return (
-      <li className="table-header">
-        <p>Username</p>
-        <p>Registration Date</p>
-        <p>Name</p>
-        <p>Email Address</p>
-        <p>Phone No.</p>
-        <p>Address</p>
-        <p>Course Type</p>
-        <p>Status</p>
+      <li key={index}>
+        <p col-title="username">{studentUserName}</p>
+        <p col-title="registration date">{dateFormatter(enrollmentDate)}</p>
+        <p col-title="name">
+          {mailingFirstName} {mailingLastName}
+        </p>
+        <p col-title="email">{mailingEmail}</p>
+        <p col-title="course type">{courseType}</p>
+        <p
+          col-title="status"
+          className={`${
+            isActive
+              ? "bg-custom-green-light text-custom-green-base"
+              : "bg-custom-gray-base text-custom-gray-dark"
+          }`}
+        >
+          {isActive ? "ACTIVE" : "INACTIVE"}
+        </p>
+        <button
+          onClick={() => onView(studentUserName)}
+          data-tooltip-id="latest-registrations-table-tooltip"
+          data-tooltip-content="View Student"
+        >
+          <FaEye />
+        </button>
       </li>
     );
-  };
+  });
+};
 
-  const renderRegistrations = () => {
-    if (!students || students.length === 0) return null;
-    const registrations = registrationsToRender();
-    return (
-      <ul className="latest-registrations-table">
-        {renderHeaderTitle()}
-        {registrations.map((eachRegistation, index) => {
-          return (
-            <li key={index}>
-              <p col-title="username">{eachRegistation.studentUserName}</p>
-              <p col-title="registration date">
-                {dateFormatter(eachRegistation.enrollmentDate)}
-              </p>
-              <p col-title="name">
-                {eachRegistation.mailingFirstName}{" "}
-                {eachRegistation.mailingLastName}
-              </p>
-              <p col-title="email">{eachRegistation.mailingEmail}</p>
-              <p col-title="phone number">
-                {eachRegistation.mailingPhoneNumber}
-              </p>
-              <p col-title="address">{eachRegistation.mailingAddress}</p>
-              <p col-title="course type">{eachRegistation.courseType}</p>
-              <p
-                col-title="status"
-                className={`${
-                  eachRegistation.isActive
-                    ? "bg-custom-green-light text-custom-green-base"
-                    : "bg-custom-gray-base text-custom-gray-dark"
-                }`}
-              >
-                {eachRegistation.isActive ? "ACTIVE" : "INACTIVE"}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  };
+const AdminLatestStudentRegistration = ({ params: { sectionID } }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const renderPagination = () => {
-    if (students?.length === 0 || searchParams.get("search")) return null;
-    return (
-      <Pagination itemsLength={Number(students?.length)} noOfRows={noOfRows} />
-    );
-  };
+  const { students, noOfRows } = useStudentsInSection();
+
+  const searchKey = searchParams.get("search")?.toLocaleLowerCase?.();
+  const page = Number(searchParams.get("page"));
+
+  const studentsToRender = useMemo(() => {
+    if (students.length === 0) return [];
+
+    const sortedStudents = [...students].sort(sortLatestToOldest);
+    const firstStudentInPageIdx = (page - 1) * noOfRows;
+    const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
+
+    if (!searchKey)
+      return sortedStudents.slice(firstStudentInPageIdx, lastStudentInPageIdx);
+
+    return sortedStudents.filter((eachStudent) => {
+      const {
+        studentUserName,
+        mailingFirstName,
+        mailingLastName,
+        mailingEmail
+      } = eachStudent;
+
+      const searchableFields = {
+        username: studentUserName?.toLowerCase() || "",
+        email: mailingEmail?.toLowerCase() || "",
+        fullName: `${mailingFirstName} ${mailingLastName}`.toLowerCase()
+      };
+
+      return Object.values(searchableFields).some((field) =>
+        field.includes(searchKey)
+      );
+    });
+  }, [noOfRows, page, students, searchKey]);
+
+  const handleView = useCallback(
+    (studentUserName) => {
+      router.push(
+        `/admin/students/${sectionID}/${studentUserName}?prev=latest-registrations`
+      );
+    },
+    [router, sectionID]
+  );
 
   return (
     <>
-      {renderRegistrations()}
-      {renderPagination()}
+      <ul className="latest-registrations-table">
+        <TableHeader />
+        <TableData students={studentsToRender} onView={handleView} />
+      </ul>
+      <Pagination
+        isVisible={students?.length !== 0 && !searchKey}
+        itemsLength={Number(students?.length)}
+        noOfRows={noOfRows}
+      />
+      <Tooltip id="latest-registrations-table-tooltip" />
     </>
   );
 };
