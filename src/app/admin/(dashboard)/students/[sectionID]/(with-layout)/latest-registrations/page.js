@@ -85,8 +85,6 @@ const AdminLatestStudentRegistration = ({ params: { sectionID } }) => {
   const page = Number(searchParams.get("page"));
 
   const studentsToRender = useMemo(() => {
-    if (students.length === 0) return [];
-
     const sortedStudents = [...students].sort(sortLatestToOldest);
     const firstStudentInPageIdx = (page - 1) * noOfRows;
     const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
@@ -122,6 +120,8 @@ const AdminLatestStudentRegistration = ({ params: { sectionID } }) => {
     },
     [router, sectionID]
   );
+
+  if (students.length === 0) return null;
 
   return (
     <>

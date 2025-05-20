@@ -189,8 +189,6 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
     a.studentUserName.localeCompare(b.studentUserName);
 
   const studentsToRender = useMemo(() => {
-    if (students?.length === 0) return [];
-
     const sortedStudents = [...students].sort(sortAlphabetical);
     const firstStudentInPageIdx = (page - 1) * noOfRows;
     const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
@@ -218,22 +216,24 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
     });
   }, [students, searchKey, noOfRows, page]);
 
-  if (studentToEdit) {
-    return <EditStudentForm student={studentToEdit} />;
-  }
-
-  const pathWithNoDeleteQuery = () => {
+  const pathWithNoDeleteQuery = useCallback(() => {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.delete("delete_student");
     return `${pathname}?${currentParams}`;
-  };
+  }, [pathname, searchParams]);
 
-  const deleteAction = async () => {
+  const deleteAction = useCallback(async () => {
     const response = await adminDeleteStudent(studentToDelete.studentUserName);
     if (!response.ok) return;
     setDeleteStudent(studentToDelete.studentUserName);
     router.push(pathWithNoDeleteQuery());
-  };
+  }, [pathWithNoDeleteQuery, router, setDeleteStudent, studentToDelete]);
+
+  if (students.length === 0) return null;
+
+  if (studentToEdit) {
+    return <EditStudentForm student={studentToEdit} />;
+  }
 
   return (
     <>
