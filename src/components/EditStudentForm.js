@@ -160,6 +160,144 @@ const studentInfoFields = (student) => {
   ];
 };
 
+const billingInfoFields = (student) => {
+  const {
+    billingFirstName,
+    billingLastName,
+    billingAddress,
+    billingCity,
+    billingState,
+    billingZip,
+    billingEmail,
+    billingPhoneNumber
+  } = student;
+  const billingStateObj = stateOptions.find(
+    (item) => item.value === billingState
+  );
+
+  return [
+    {
+      id: "student-billing-first-name",
+      type: "text",
+      label: "First name",
+      otherInputProps: {
+        defaultValue: billingFirstName ?? ""
+      }
+    },
+    {
+      id: "student-billing-last-name",
+      type: "text",
+      label: "Last name",
+      otherInputProps: {
+        defaultValue: billingLastName ?? ""
+      }
+    },
+    {
+      id: "student-billing-address",
+      type: "text",
+      label: "Address",
+      className: "col-span-full",
+      otherInputProps: {
+        defaultValue: billingAddress ?? ""
+      }
+    },
+    {
+      id: "student-billing-city",
+      type: "text",
+      label: "City",
+      otherInputProps: {
+        defaultValue: billingCity ?? ""
+      }
+    },
+    {
+      id: "student-billing-state",
+      type: "select",
+      label: "State",
+      selectProps: {
+        options: stateOptions,
+        placeholder: "Select state",
+        defaultValue: {
+          label: billingStateObj?.label || "",
+          value: billingStateObj?.value || null
+        },
+        fallBackValue: billingState
+      }
+    },
+    {
+      id: "student-billing-zip",
+      type: "text",
+      label: "Zip Code",
+      otherInputProps: {
+        defaultValue: billingZip
+      }
+    },
+    {
+      id: "student-billing-email",
+      type: "email",
+      label: "Email",
+      otherInputProps: {
+        defaultValue: billingEmail
+      }
+    },
+    {
+      id: "student-billing-phone",
+      type: "text",
+      label: "Phone number",
+      format: "XXX-XXX-XXXX",
+      otherInputProps: {
+        defaultValue: billingPhoneNumber,
+        pattern: "^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+      }
+    }
+  ];
+};
+
+const parentInfoFields = (student) => {
+  const { parentFirstName, parentLastName, parentEmail, parentPhoneNumber } =
+    student;
+
+  return [
+    {
+      id: "parent-first-name",
+      type: "text",
+      label: "First name",
+      otherInputProps: {
+        defaultValue: parentFirstName ?? ""
+      }
+    },
+    {
+      id: "parent-last-name",
+      type: "text",
+      label: "Last name",
+      otherInputProps: {
+        defaultValue: parentLastName ?? ""
+      }
+    },
+    {
+      id: "parent-email",
+      type: "email",
+      label: "Email",
+      otherInputProps: {
+        defaultValue: parentEmail
+      }
+    },
+    {
+      id: "parent-phone",
+      type: "text",
+      label: "Phone number",
+      format: "XXX-XXX-XXXX",
+      otherInputProps: {
+        defaultValue: parentPhoneNumber,
+        pattern: "^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+      }
+    }
+  ];
+};
+
+const MultiFields = ({ section }) => {
+  return section.map((field, idx) => <FormField key={idx} {...field} />);
+};
+
 const EditStudentForm = ({ student }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -215,9 +353,15 @@ const EditStudentForm = ({ student }) => {
         </button>
         <h1>Edit student</h1>
       </div>
-      {studentInfoFields(student).map((field, idx) => (
-        <FormField key={idx} {...field} />
-      ))}
+      <h2>Student Information</h2>
+      <MultiFields section={studentInfoFields(student)} />
+
+      <h2>Billing Information</h2>
+      <MultiFields section={billingInfoFields(student)} />
+
+      <h2>Parent Information</h2>
+      <MultiFields section={parentInfoFields(student)} />
+
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>
       )}

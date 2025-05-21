@@ -15,25 +15,27 @@ const handleStudentUpdate = async (prevState, formData) => {
     mailingEmail: formData.get("email"),
     mailingPhoneNumber: formData.get("phone-number"),
     birthDate: formData.get("birth-date"),
-    highSchool: formData.get("high-school") || ""
+    highSchool: formData.get("high-school") || "",
+    parentFirstName: formData.get("parent-first-name"),
+    parentLastName: formData.get("parent-last-name"),
+    parentEmail: formData.get("parent-email"),
+    parentPhoneNumber: formData.get("parent-phone"),
+    billingFirstName: formData.get("student-billing-first-name") || "",
+    billingLastName: formData.get("student-billing-last-name") || "",
+    billingAddress: formData.get("student-billing-address") || "",
+    billingCity: formData.get("student-billing-city") || "",
+    billingState: formData.get("student-billing-state") || "",
+    billingZip: formData.get("student-billing-zip") || "",
+    billingEmail: formData.get("student-billing-email") || "",
+    billingPhoneNumber: formData.get("student-billing-phone") || ""
   };
 
   const oldStudent = prevState?.oldStudent;
 
   if (
-    formDataObject.studentUserName === oldStudent.studentUserName &&
-    formDataObject.isActive === oldStudent.isActive &&
-    formDataObject.mailingFirstName === oldStudent.mailingFirstName &&
-    formDataObject.mailingLastName === oldStudent.mailingLastName &&
-    formDataObject.mailingAddress === oldStudent.mailingAddress &&
-    formDataObject.mailingCity === oldStudent.mailingCity &&
-    formDataObject.mailingState === oldStudent.mailingState &&
-    formDataObject.mailingZip === oldStudent.mailingZip &&
-    formDataObject.mailingCountry === oldStudent.mailingCountry &&
-    formDataObject.mailingEmail === oldStudent.mailingEmail &&
-    formDataObject.mailingPhoneNumber === oldStudent.mailingPhoneNumber &&
-    formDataObject.birthDate === oldStudent.birthDate &&
-    formDataObject.highSchool === oldStudent.highSchool
+    Object.keys(formDataObject).every(
+      (key) => formDataObject[key] === oldStudent[key]
+    )
   ) {
     return {
       updatedStudent: oldStudent,
@@ -49,33 +51,23 @@ const handleStudentUpdate = async (prevState, formData) => {
       oldStudent
     };
 
-  const response = await adminUpdateStudent(
-    formDataObject.studentUserName,
-    formDataObject.isActive,
-    formDataObject.mailingFirstName,
-    formDataObject.mailingLastName,
-    formDataObject.mailingAddress,
-    formDataObject.mailingCity,
-    formDataObject.mailingState,
-    formDataObject.mailingZip,
-    formDataObject.mailingCountry,
-    formDataObject.mailingEmail,
-    formDataObject.mailingPhoneNumber,
-    formDataObject.birthDate,
-    formDataObject.highSchool
-  );
-
-  if (!response.ok)
+  if (formDataObject.billingZip && !zipRegex.test(formDataObject.billingZip))
     return {
-      message: response?.json?.error
-        ? response?.json?.error
-        : "An error occured",
+      message: "Please enter a valid billing zip code",
+      oldStudent
+    };
+
+  const { ok, json } = await adminUpdateStudent(formDataObject);
+
+  if (!ok)
+    return {
+      message: json?.error ? json?.error : "An error occured",
       oldStudent
     };
 
   return {
     message: undefined,
-    updatedStudent: { ...oldStudent, ...response.json },
+    updatedStudent: json,
     isUpdated: true
   };
 };

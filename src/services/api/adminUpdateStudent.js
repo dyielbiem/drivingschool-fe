@@ -1,41 +1,13 @@
 "use server";
 import { adminRefreshAccessToken } from "./refreshAccessToken";
-const adminUpdateStudent = async (
-  studentUserName,
-  isActive,
-  mailingFirstName,
-  mailingLastName,
-  mailingAddress,
-  mailingCity,
-  mailingState,
-  mailingZip,
-  mailingCountry,
-  mailingEmail,
-  mailingPhoneNumber,
-  birthDate,
-  highSchool
-) => {
+const adminUpdateStudent = async (data) => {
   try {
     const fetchMethod = async (accessToken) => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/admin/student`,
         {
           method: "PATCH",
-          body: JSON.stringify({
-            studentUserName,
-            isActive,
-            mailingFirstName,
-            mailingLastName,
-            mailingAddress,
-            mailingCity,
-            mailingState,
-            mailingZip,
-            mailingCountry,
-            mailingEmail,
-            mailingPhoneNumber,
-            birthDate,
-            highSchool
-          }),
+          body: JSON.stringify(data),
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`

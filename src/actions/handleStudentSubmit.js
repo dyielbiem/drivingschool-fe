@@ -54,6 +54,15 @@ const handleStudentSubmit = async (prevState, formData) => {
       ok: false
     };
 
+  if (
+    formDataObject.billingInformation.zip &&
+    !zipRegex.test(formDataObject.billingInformation.zip)
+  )
+    return {
+      message: "Please enter a valid billing zip code",
+      ok: false
+    };
+
   const response = await adminAddStudent(
     formDataObject.userName,
     formDataObject.passWord,
