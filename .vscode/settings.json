@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.scss": "tailwindcss"
+  },
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".css",
+      "savePath": "/src/styles/css",
+      "savePathReplacementPairs": null,
+      "generateMap": false
+    }
+  ]
+}

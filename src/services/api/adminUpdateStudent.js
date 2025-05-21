@@ -12,7 +12,8 @@ const adminUpdateStudent = async (
   mailingCountry,
   mailingEmail,
   mailingPhoneNumber,
-  mailingCompany
+  birthDate,
+  highSchool
 ) => {
   try {
     const fetchMethod = async (accessToken) => {
@@ -32,7 +33,8 @@ const adminUpdateStudent = async (
             mailingCountry,
             mailingEmail,
             mailingPhoneNumber,
-            mailingCompany
+            birthDate,
+            highSchool
           }),
           headers: {
             "Content-Type": "application/json",

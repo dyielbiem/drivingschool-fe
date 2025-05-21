@@ -11,10 +11,11 @@ const handleStudentUpdate = async (prevState, formData) => {
     mailingCity: formData.get("city"),
     mailingState: formData.get("state"),
     mailingZip: formData.get("zip"),
-    mailingCountry: formData.get("country"),
+    mailingCountry: formData.get("country") || "United States",
     mailingEmail: formData.get("email"),
     mailingPhoneNumber: formData.get("phone-number"),
-    mailingCompany: formData.get("company")
+    birthDate: formData.get("birth-date"),
+    highSchool: formData.get("high-school") || ""
   };
 
   const oldStudent = prevState?.oldStudent;
@@ -31,7 +32,8 @@ const handleStudentUpdate = async (prevState, formData) => {
     formDataObject.mailingCountry === oldStudent.mailingCountry &&
     formDataObject.mailingEmail === oldStudent.mailingEmail &&
     formDataObject.mailingPhoneNumber === oldStudent.mailingPhoneNumber &&
-    formDataObject.mailingCompany === oldStudent.mailingCompany
+    formDataObject.birthDate === oldStudent.birthDate &&
+    formDataObject.highSchool === oldStudent.highSchool
   ) {
     return {
       updatedStudent: oldStudent,
@@ -59,7 +61,8 @@ const handleStudentUpdate = async (prevState, formData) => {
     formDataObject.mailingCountry,
     formDataObject.mailingEmail,
     formDataObject.mailingPhoneNumber,
-    formDataObject.mailingCompany
+    formDataObject.birthDate,
+    formDataObject.highSchool
   );
 
   if (!response.ok)

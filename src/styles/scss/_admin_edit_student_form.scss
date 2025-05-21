@@ -1,5 +1,5 @@
 .edit-student-form {
-  @apply grid gap-x-6 max-w-5xl gap-4 grid-cols-1 sm:grid-cols-2
+  @apply grid gap-x-6 gap-4 grid-cols-1 sm:grid-cols-2
   sm:pb-10 lg:pt-12 mx-6 md:mx-12;
 
   & > .header {
@@ -20,10 +20,6 @@
 
   & > .fields {
     @apply w-full flex flex-col gap-2;
-
-    &:nth-of-type(5) {
-      @apply col-span-full;
-    }
 
     label {
       @apply mt-2 text-sm font-bold indent-1;

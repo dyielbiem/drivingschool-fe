@@ -32,6 +32,10 @@
       border-custom-gray-base w-full;
     }
 
+    input#coupon-code {
+      @apply lowercase;
+    }
+
     .error-message {
       @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;

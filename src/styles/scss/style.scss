@@ -34,6 +34,7 @@ main {
 @import "admin_add_student_form";
 @import "admin_students_layout";
 @import "admin_all_students";
+@import "admin_student_profile";
 @import "admin_students_exam_details";
 @import "admin_latest_student_registrations";
 @import "admin_latest_student_completions";
@@ -60,3 +61,4 @@ main {
 @import "sub_chapters_progress_modal";
 @import "pagination";
 @import "full_screen_loading";
+@import "custom_select";

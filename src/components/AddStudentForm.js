@@ -1,21 +1,220 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 import handleStudentSubmit from "@/actions/handleStudentSubmit";
+import { stateOptions } from "@/constants";
 
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";
+import FormField from "./FormField";
+
+const MultiFields = ({ section }) => {
+  return section.map((field, idx) => <FormField key={idx} {...field} />);
+};
 
 const AddStudentForm = ({ courses, setStudentSections }) => {
+  const studentInfoFields = [
+    {
+      id: "student-username",
+      type: "text",
+      label: "Username",
+      required: true,
+      otherInputProps: {
+        autoComplete: "off"
+      }
+    },
+    {
+      id: "student-course",
+      type: "select",
+      label: "Course",
+      required: true,
+      selectProps: {
+        options: courses,
+        placeholder: "Select course",
+        labelKey: "courseName",
+        valueKey: "courseID"
+      }
+    },
+    {
+      id: "student-password",
+      type: "password",
+      label: "Password",
+      required: true,
+      otherInputProps: {
+        autoComplete: "off"
+      }
+    },
+    {
+      id: "student-confirm-password",
+      type: "password",
+      label: "Confirm password",
+      required: true,
+      otherInputProps: {
+        autoComplete: "off"
+      }
+    },
+    {
+      id: "student-first-name",
+      type: "text",
+      label: "First name",
+      required: true
+    },
+    {
+      id: "student-last-name",
+      type: "text",
+      label: "Last name",
+      required: true
+    },
+    {
+      id: "student-address",
+      type: "text",
+      label: "Address",
+      required: true,
+      className: "!col-span-2"
+    },
+    {
+      id: "student-city",
+      type: "text",
+      label: "City",
+      required: true
+    },
+    {
+      id: "student-state",
+      type: "select",
+      label: "State",
+      required: true,
+      selectProps: {
+        options: stateOptions,
+        placeholder: "Select a state"
+      }
+    },
+    {
+      id: "student-zip",
+      type: "text",
+      label: "Zip Code",
+      required: true
+    },
+    {
+      id: "student-email",
+      type: "email",
+      label: "Email",
+      required: true
+    },
+    {
+      id: "student-phone",
+      type: "text",
+      label: "Phone number",
+      required: false,
+      format: "XXX-XXX-XXXX",
+      required: true,
+      otherInputProps: {
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+      }
+    },
+    {
+      id: "student-birthdate",
+      type: "date",
+      label: "Birth date",
+      required: true
+    },
+    {
+      id: "student-high-school",
+      type: "text",
+      label: "High school name"
+    }
+  ];
+
+  const billingInfoFields = [
+    {
+      id: "student-billing-first-name",
+      type: "text",
+      label: "First name",
+      required: false
+    },
+    {
+      id: "student-billing-last-name",
+      type: "text",
+      label: "Last name",
+      required: false
+    },
+    {
+      id: "student-billing-address",
+      type: "text",
+      label: "Address",
+      className: "!col-span-2",
+      required: false
+    },
+    {
+      id: "student-billing-city",
+      type: "text",
+      label: "City",
+      required: false
+    },
+    {
+      id: "student-billing-state",
+      type: "select",
+      label: "State",
+      selectProps: {
+        options: stateOptions,
+        placeholder: "Select a state"
+      }
+    },
+    {
+      id: "student-billing-zip",
+      type: "text",
+      label: "Zip code",
+      required: false
+    },
+    {
+      id: "student-billing-email",
+      type: "email",
+      label: "Email",
+      required: false
+    },
+    {
+      id: "student-billing-phone",
+      type: "text",
+      label: "Phone number",
+      required: false,
+      format: "XXX-XXX-XXXX",
+      otherInputProps: {
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+      }
+    }
+  ];
+
+  const parentInfoFields = [
+    {
+      id: "parent-first-name",
+      type: "text",
+      label: "First name"
+    },
+    {
+      id: "parent-last-name",
+      type: "text",
+      label: "Last name"
+    },
+    {
+      id: "parent-email",
+      type: "email",
+      label: "Email"
+    },
+    {
+      id: "parent-phone",
+      type: "text",
+      label: "Phone number",
+      required: false,
+      format: "XXX-XXX-XXXX",
+      otherInputProps: {
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+      }
+    }
+  ];
+
   const router = useRouter();
   const pathname = usePathname();
-  const [selectedCourse, setSelectedCourse] = useState({
-    courseID: "",
-    courseName: ""
-  });
-  const [isCourseSelectOnFocus, setIsCourseSelectOnFocus] = useState(false);
   const initialState = {
     message: undefined,
     ok: false
@@ -25,11 +224,6 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     handleStudentSubmit,
     initialState
   );
-
-  const handleOptionClick = (courseID, courseName) => {
-    setSelectedCourse({ courseID, courseName });
-    setIsCourseSelectOnFocus(false);
-  };
 
   useEffect(() => {
     if (!formState?.ok) return;
@@ -41,42 +235,6 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     );
     router.push(pathname);
   }, [formState?.ok, pathname, router, setStudentSections]);
-
-  const renderCourseSelect = () => {
-    return (
-      <div
-        course-name={selectedCourse.courseName}
-        className={`course-select ${
-          selectedCourse.courseName ? "" : "before:!hidden"
-        }`}
-        onClick={() => setIsCourseSelectOnFocus(true)}
-        onBlur={() => setIsCourseSelectOnFocus(false)}
-      >
-        <input
-          name="student-course"
-          id="student-course"
-          value={selectedCourse.courseID}
-          required
-          readOnly
-          placeholder={selectedCourse.courseID ? "" : "Select a course"}
-        />
-        {isCourseSelectOnFocus && (
-          <ul className="custom-option">
-            {courses.map((course, index) => (
-              <li
-                key={index}
-                onMouseDown={() =>
-                  handleOptionClick(course.courseID, course.courseName)
-                }
-              >
-                {course.courseName}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  };
 
   const goBack = () => {
     router.push(pathname);
@@ -90,147 +248,19 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         </button>
         <h1>Add student</h1>
       </div>
-      <h2>Student</h2>
-      <div className="fields">
-        <label htmlFor="student-username">
-          Username <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="student-username"
-          id="student-username"
-          autoComplete="off"
-          required
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-course">
-          Course <span>*</span>
-        </label>
-        {renderCourseSelect()}
-      </div>
-      <div className="fields">
-        <label htmlFor="student-password">
-          Password <span>*</span>
-        </label>
-        <input
-          type="password"
-          name="student-password"
-          id="student-password"
-          autoComplete="off"
-          required
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-confirm-password">
-          Confirm password <span>*</span>
-        </label>
-        <input
-          type="password"
-          name="student-confirm-password"
-          id="student-confirm-password"
-          required
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-firstname">
-          First name <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="student-firstname"
-          id="student-firstname"
-          required
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-lastname">
-          Last name <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="student-lastname"
-          id="student-lastname"
-          required
-        />
-      </div>
-      <div className="fields student-address">
-        <label htmlFor="student-address">
-          Address <span>*</span>
-        </label>
-        <input
-          type="text"
-          name="student-address"
-          id="student-address"
-          required
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-city">
-          City <span>*</span>
-        </label>
-        <input type="text" name="student-city" id="student-city" required />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-state">
-          State <span>*</span>
-        </label>
-        <input type="text" name="student-state" id="student-state" required />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-zip">
-          Zip code<span>*</span>
-        </label>
-        <input type="text" name="student-zip" id="student-zip" required />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-email">
-          Email <span>*</span>
-        </label>
-        <input type="email" name="student-email" id="student-email" required />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-phone">
-          Phone number <span>*</span> (XXX-XXX-XXXX)
-        </label>
-        <input
-          type="text"
-          name="student-phone"
-          id="student-phone"
-          required
-          pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="student-high-school">High school name</label>
-        <input
-          type="text"
-          name="student-high-school"
-          id="student-high-school"
-        />
-      </div>
-      <h2>Parent</h2>
-      <div className="fields">
-        <label htmlFor="parent-first-name">First Name</label>
-        <input type="text" name="parent-first-name" id="parent-first-name" />
-      </div>
-      <div className="fields">
-        <label htmlFor="parent-last-name">Last name</label>
-        <input type="text" name="parent-last-name" id="parent-last-name" />
-      </div>
-      <div className="fields">
-        <label htmlFor="parent-phone">Phone number (XXX-XXX-XXXX)</label>
-        <input
-          type="text"
-          name="parent-phone"
-          id="parent-phone"
-          pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
-        />
-      </div>
-      <div className="fields">
-        <label htmlFor="parent-email">Email</label>
-        <input type="email" name="parent-email" id="parent-email" />
-      </div>
+
+      {/* Student Information */}
+      <h2>Student Information</h2>
+      <MultiFields section={studentInfoFields} />
+
+      {/* Billing Information */}
+      <h2>Billing Information</h2>
+      <MultiFields section={billingInfoFields} />
+
+      {/* Parent Information */}
+      <h2>Parent Information</h2>
+      <MultiFields section={parentInfoFields} />
+
       {formState?.message && (
         <FormErrorMessage>{formState.message}</FormErrorMessage>
       )}

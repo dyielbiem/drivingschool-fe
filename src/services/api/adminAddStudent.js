@@ -12,12 +12,14 @@ const adminAddStudent = async (
   state,
   zip,
   country,
+  birthDate,
   email,
   phoneNumber,
   parentFirstName,
   parentLastName,
   parentEmail,
-  parentPhoneNumber
+  parentPhoneNumber,
+  billingInformation
 ) => {
   try {
     const fetchMethod = async (accessToken) => {
@@ -42,12 +44,14 @@ const adminAddStudent = async (
             state,
             zip,
             country,
+            birthDate,
             email,
             phoneNumber,
             parentFirstName,
             parentLastName,
             parentEmail,
-            parentPhoneNumber
+            parentPhoneNumber,
+            billingInformation
           })
         }
       );

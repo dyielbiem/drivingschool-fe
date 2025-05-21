@@ -49,6 +49,14 @@
           after:w-[6px] after:h-full after:bg-custom-blue-dark 
           flex justify-start items-center gap-4 text-custom-white-dark;
 
+          &:hover {
+            @apply bg-custom-blue-darker;
+
+            &::after {
+              @apply bg-custom-blue-darker;
+            }
+          }
+
           .nav-icon {
             @apply text-2xl text-custom-white-dark;
           }
