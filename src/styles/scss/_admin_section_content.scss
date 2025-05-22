@@ -1,5 +1,5 @@
 .section-content-container {
-  @apply mx-4 max-w-4xl w-full;
+  @apply mx-4 max-w-7xl w-full;
 
   h2 {
     @apply text-xl font-extrabold;
@@ -24,7 +24,7 @@
   }
 
   iframe {
-    @apply w-full max-w-4xl inline-block;
+    @apply w-full max-w-7xl inline-block;
   }
 
   ul {

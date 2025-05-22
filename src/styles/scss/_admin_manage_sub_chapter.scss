@@ -5,7 +5,7 @@
   px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex items-start max-w-4xl
+    @apply flex items-start max-w-7xl
     w-full min-h-14 gap-6;
 
     .back-btn {
@@ -37,11 +37,11 @@
   }
 
   & > .edit-title-form {
-    @apply flex max-w-4xl w-full items-center bg-white p-2
+    @apply flex max-w-7xl w-full items-center bg-white p-2
     rounded-md min-h-14 flex-col sm:flex-row;
 
     input {
-      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+      @apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none;
     }
 
     .btn-container {

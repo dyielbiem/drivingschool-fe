@@ -1,5 +1,6 @@
 .policy-content {
-  @apply focus:outline-none sm:py-4 sm:px-4 max-w-6xl self-center;
+  @apply focus:outline-none sm:py-10 sm:px-8 max-w-7xl bg-custom-white-base
+  rounded-xl border-custom-white-darker border-2;
 
   h2 {
     @apply text-xl font-extrabold;
@@ -19,7 +20,7 @@
   }
 
   iframe {
-    @apply w-full max-w-4xl inline-block;
+    @apply w-full max-w-7xl inline-block;
   }
 
   p {
