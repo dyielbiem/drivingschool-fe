@@ -45,7 +45,7 @@ const AdminStudentsLayout = ({ children, params: { sectionID } }) => {
 
   return (
     <section className="admin-students-layout">
-      <TopSearchBar placeholder="Search Students" />
+      <TopSearchBar placeholder="Search by username, name, or email" />
       <AdminStudentsHeader section={section} />
       {children}
     </section>
