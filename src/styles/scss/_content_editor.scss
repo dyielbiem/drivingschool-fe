@@ -1,6 +1,6 @@
 .content-editor {
   @apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
-  max-w-4xl w-full;
+  max-w-7xl w-full;
 
   .editor-styling-btn-container {
     @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
@@ -31,7 +31,7 @@
     }
 
     iframe {
-      @apply w-full max-w-4xl inline-block;
+      @apply w-full max-w-7xl inline-block;
     }
 
     & > ul {
