@@ -5,7 +5,7 @@
   px-6 sm:px-8 md:px-12;
 
   & > .header {
-    @apply flex max-w-4xl w-full items-start h-auto
+    @apply flex max-w-7xl w-full items-start h-auto
     gap-4;
 
     .back-btn {
@@ -13,7 +13,7 @@
     }
 
     h1 {
-      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow flex
+      @apply text-2xl font-extrabold max-w-7xl w-full flex-grow flex
       items-start py-3 flex-col sm:flex-row gap-0 sm:gap-4;
 
       span {
@@ -33,11 +33,11 @@
   }
 
   & > .edit-title-form {
-    @apply flex max-w-4xl w-full items-center bg-white p-2
+    @apply flex max-w-7xl w-full items-center bg-white p-2
     rounded-md gap-2 flex-col sm:flex-row;
 
     input {
-      @apply text-2xl font-extrabold max-w-4xl w-full flex-grow outline-none;
+      @apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none;
     }
 
     .btn-container {
@@ -60,7 +60,7 @@
   }
 
   .chapters-container {
-    @apply flex flex-col w-full gap-4 max-w-4xl;
+    @apply flex flex-col w-full gap-4 max-w-7xl;
 
     li {
       @apply rounded-md pl-4 pr-6 font-bold text-lg overflow-hidden
