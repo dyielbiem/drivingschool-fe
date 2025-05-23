@@ -1,0 +1,23 @@
+.Toastify {
+  @apply z-[9999999];
+
+  .Toastify__toast-container--bottom-left {
+    @apply left-8 bottom-8;
+  }
+
+  .Toastify__toast {
+    @apply border-2 border-solid border-custom-gray-base w-fit font-[inherit] mb-0;
+  }
+
+  .Toastify__toast-icon {
+    @apply mr-4 w-8;
+
+    svg {
+      @apply fill-custom-blue-base;
+    }
+  }
+
+  .toastify-message {
+    @apply text-black max-w-72 leading-[1.2];
+  }
+}

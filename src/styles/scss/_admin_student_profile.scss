@@ -9,7 +9,25 @@
     }
 
     h1 {
-      @apply text-2xl font-extrabold;
+      @apply text-2xl font-extrabold flex-grow;
+    }
+
+    button:last-child {
+      @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+
+      &:disabled {
+        @apply opacity-80 brightness-90;
+      }
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
     }
   }
 
