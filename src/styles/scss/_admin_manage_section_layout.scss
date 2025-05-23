@@ -7,7 +7,11 @@
     bg-white z-[99999];
 
     & > .nav-logo {
-      @apply w-32 justify-center items-center;
+      @apply w-fit justify-center items-center bg-transparent max-h-[90%] h-full;
+
+      img {
+        @apply max-h-full object-contain w-24;
+      }
     }
 
     & > .hamburger-btn {
@@ -37,8 +41,8 @@
       w-full;
 
       .nav-logo {
-        @apply text-2xl font-bold text-left bg-custom-white-dark
-        py-4 px-6 w-10/12 self-center my-6 hidden lg:block;
+        @apply text-2xl font-bold text-left bg-transparent
+        px-6 py-2 w-8/12 self-center my-6 hidden lg:block;
       }
 
       .btn-container {

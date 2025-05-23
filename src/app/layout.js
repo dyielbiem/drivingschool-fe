@@ -4,7 +4,7 @@ export const metadata = {
   title: "Driving School | Admin",
   description: "Designed and developed by WebAct",
   icons: {
-    icon: "/favicon.png"
+    icon: "/logo.png"
   }
 };
 

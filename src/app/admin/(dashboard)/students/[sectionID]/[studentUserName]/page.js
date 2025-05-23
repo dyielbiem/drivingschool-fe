@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundBack, IoIosMail } from "react-icons/io";
+import { ToastContainer, toast, Slide } from "react-toastify";
 
 import adminFetchStudent from "@/services/api/adminFetchStudent";
+import adminEmailStudentAccountInfo from "@/services/api/adminEmailStudentAccountInfo";
 import { formatDate } from "@/utils";
 
 import FormField from "@/components/FormField";
@@ -167,6 +169,7 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [student, setStudent] = useState(null);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
 
   const redirectPath = useMemo(() => {
     const endPath = searchParams.get("prev") || "all";
@@ -187,6 +190,19 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
     fetchStudent();
   }, [redirectPath, router, studentUserName]);
 
+  const handleEmailAccountInfo = async () => {
+    setIsSendingEmail(true);
+    await adminEmailStudentAccountInfo(studentUserName);
+    toast.success(
+      <p className="toastify-message">
+        Account information has been emailed to the student
+      </p>,
+      {
+        onClose: () => setIsSendingEmail(false)
+      }
+    );
+  };
+
   if (!student) return null;
 
   return (
@@ -197,6 +213,10 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
             <IoMdArrowRoundBack />
           </button>
           <h1>Student Profile</h1>
+          <button onClick={handleEmailAccountInfo} disabled={isSendingEmail}>
+            <IoIosMail />
+            Email Account Information
+          </button>
         </div>
         <h2>Student Information</h2>
         <MultiFields fields={studentInfoFields} student={student} />
@@ -205,6 +225,19 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
         <h2>Parent Information</h2>
         <MultiFields fields={parentInfoFields} student={student} />
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={false}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+        draggable={false}
+        theme="light"
+        transition={Slide}
+        closeButton={false}
+      />
     </div>
   );
 };
