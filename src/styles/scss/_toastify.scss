@@ -1,8 +1,13 @@
 .Toastify {
   @apply z-[9999999];
 
+  /* .Toastify__toast-container {
+    @apply left-1/2 -translate-x-1/2;
+  } */
+
   .Toastify__toast-container--bottom-left {
-    @apply left-8 bottom-8;
+    @apply left-1/2 -translate-x-1/2 bottom-8 justify-center items-center max-w-[95%]
+    md:left-8 md:translate-x-0 md:max-w-none;
   }
 
   .Toastify__toast {

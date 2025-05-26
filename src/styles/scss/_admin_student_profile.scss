@@ -1,8 +1,8 @@
 .student-profile {
-  @apply grid w-full gap-4 grid-cols-1 sm:grid-cols-2;
+  @apply grid w-full gap-4 grid-cols-1 md:grid-cols-2;
 
   .header {
-    @apply mb-4 sm:col-span-full flex items-center gap-4;
+    @apply mb-4 col-span-full flex items-center gap-4;
 
     button {
       @apply text-2xl;
@@ -40,8 +40,7 @@
   }
 
   .fields {
-    @apply w-full flex flex-col gap-2
-    col-span-1;
+    @apply w-full flex flex-col gap-2 col-span-1;
 
     label {
       @apply mt-2 text-sm font-bold indent-1 w-fit;

@@ -81,7 +81,7 @@ const studentInfoFields = (student) => {
       id: "address",
       type: "text",
       label: "Address",
-      className: "col-span-full",
+      className: "md:!col-span-full",
       required: true,
       otherInputProps: {
         defaultValue: mailingAddress

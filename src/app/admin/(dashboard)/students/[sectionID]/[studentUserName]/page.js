@@ -57,7 +57,7 @@ const studentInfoFields = [
   {
     id: "student-address",
     label: "Address",
-    className: "!col-span-2",
+    className: "md:!col-span-2",
     attrKey: "mailingAddress"
   },
   {
@@ -112,7 +112,7 @@ const billingInfoFields = [
   {
     id: "student-billing-address",
     label: "Address",
-    className: "!col-span-2",
+    className: "md:!col-span-2",
     attrKey: "billingAddress"
   },
   {
@@ -215,7 +215,7 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
           <h1>Student Profile</h1>
           <button onClick={handleEmailAccountInfo} disabled={isSendingEmail}>
             <IoIosMail />
-            Email Account Information
+            <span>Email Account Information</span>
           </button>
         </div>
         <h2>Student Information</h2>
