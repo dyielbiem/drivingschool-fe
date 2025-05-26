@@ -72,7 +72,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       type: "text",
       label: "Address",
       required: true,
-      className: "!col-span-2"
+      className: "md:!col-span-2"
     },
     {
       id: "student-city",
@@ -143,7 +143,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       id: "student-billing-address",
       type: "text",
       label: "Address",
-      className: "!col-span-2",
+      className: "md:!col-span-2",
       required: false
     },
     {
