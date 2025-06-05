@@ -130,9 +130,6 @@ const AdminCoupons = () => {
             onEditClick={handleCouponEditClick}
             onDeleteClick={handleCouponDeleteClick}
           />
-          {searchParams.get("add_coupon") === "true" && (
-            <AddCouponForm setCoupons={setCoupons} />
-          )}
           {itemToDelete && (
             <ConfirmDeleteModal
               itemToDelete={itemToDelete}
@@ -147,6 +144,9 @@ const AdminCoupons = () => {
             />
           )}
         </>
+      )}
+      {searchParams.get("add_coupon") === "true" && (
+        <AddCouponForm setCoupons={setCoupons} />
       )}
     </section>
   );
