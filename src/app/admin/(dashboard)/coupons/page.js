@@ -114,8 +114,6 @@ const AdminCoupons = () => {
     router.replace(pathname);
   };
 
-  if (coupons.length === 0) return null;
-
   return (
     <section className="admin-coupons-container">
       <div className="header">
@@ -125,26 +123,30 @@ const AdminCoupons = () => {
           <IoAddSharp />
         </button>
       </div>
-      <TableData
-        coupons={coupons}
-        onEditClick={handleCouponEditClick}
-        onDeleteClick={handleCouponDeleteClick}
-      />
-      {searchParams.get("add_coupon") === "true" && (
-        <AddCouponForm setCoupons={setCoupons} />
-      )}
-      {itemToDelete && (
-        <ConfirmDeleteModal
-          itemToDelete={itemToDelete}
-          pathWhenModalIsClosed={pathname}
-          confirmAction={handleCouponDeletion}
-        />
-      )}
-      {itemToEdit && (
-        <EditCouponForm
-          coupon={itemToEdit}
-          onCouponUpdated={handleUpdatedCoupon}
-        />
+      {coupons.length !== 0 && (
+        <>
+          <TableData
+            coupons={coupons}
+            onEditClick={handleCouponEditClick}
+            onDeleteClick={handleCouponDeleteClick}
+          />
+          {searchParams.get("add_coupon") === "true" && (
+            <AddCouponForm setCoupons={setCoupons} />
+          )}
+          {itemToDelete && (
+            <ConfirmDeleteModal
+              itemToDelete={itemToDelete}
+              pathWhenModalIsClosed={pathname}
+              confirmAction={handleCouponDeletion}
+            />
+          )}
+          {itemToEdit && (
+            <EditCouponForm
+              coupon={itemToEdit}
+              onCouponUpdated={handleUpdatedCoupon}
+            />
+          )}
+        </>
       )}
     </section>
   );
