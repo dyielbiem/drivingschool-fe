@@ -1,121 +1,120 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaPen, FaTrashCan } from "react-icons/fa6";
 import { IoAddSharp } from "react-icons/io5";
 
 import adminFetchCoupons from "@/services/api/adminFetchCoupons";
 import adminDeleteCoupon from "@/services/api/adminDeleteCoupon";
-import dateFormatter from "@/utils/dateFormatter";
+import { formatDate } from "@/utils";
 
 import AddCouponForm from "@/components/AddCouponForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import EditCouponForm from "@/components/EditCouponForm";
 
+const TableData = ({ coupons, onEditClick, onDeleteClick }) => {
+  return (
+    <ul className="coupon-table">
+      <li className="table-header">
+        <p>Coupon Code</p>
+        <p>Coupon Amount</p>
+        <p>From Date</p>
+        <p>To Date</p>
+        <p>Status</p>
+      </li>
+      {coupons.map((coupon, index) => (
+        <li key={index}>
+          <p col-title="coupon code">{coupon.couponCode}</p>
+          <p col-title="coupon amount">$ {coupon.couponAmount}</p>
+          <p col-title="from date">{formatDate(coupon.fromDate) || "--"}</p>
+          <p col-title="to date">{formatDate(coupon.toDate) || "--"}</p>
+          <p
+            className={`${
+              coupon.isActive
+                ? "bg-custom-green-light text-custom-green-base"
+                : "bg-custom-gray-base text-custom-gray-dark"
+            }`}
+            col-title="status"
+          >
+            {coupon.isActive ? "ACTIVE" : "INACTIVE"}
+          </p>
+          <div>
+            <button onClick={() => onEditClick(coupon.couponCode)}>
+              <FaPen />
+            </button>
+            <button onClick={() => onDeleteClick(coupon.couponCode)}>
+              <FaTrashCan />
+            </button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const AdminCoupons = () => {
-  const [coupons, setCoupons] = useState([]);
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [itemToDelete, setItemDelete] = useState(undefined);
-  const [itemToEdit, setItemToEdit] = useState(undefined);
+  const [coupons, setCoupons] = useState([]);
+
+  const itemToEdit = useMemo(() => {
+    const couponCode = searchParams.get("edit_coupon");
+    return couponCode
+      ? coupons.find((item) => item.couponCode === couponCode)
+      : null;
+  }, [coupons, searchParams]);
+
+  const itemToDelete = useMemo(() => {
+    const couponCode = searchParams.get("delete_coupon");
+    return couponCode && coupons.some((item) => item.couponCode === couponCode)
+      ? couponCode
+      : null;
+  }, [coupons, searchParams]);
 
   useEffect(() => {
     const fetchCoupons = async () => {
       const response = await adminFetchCoupons();
-      setCoupons(response.ok ? response.json.coupons : []);
+      setCoupons(response.ok ? response.json.coupons || [] : []);
     };
 
     fetchCoupons();
   }, []);
 
-  useEffect(() => {
-    if (!coupons) return;
-    if (!searchParams.get("delete_coupon")) return setItemDelete(undefined);
-    const couponToDelete = coupons.find(
-      (coupon) => coupon.couponCode === searchParams.get("delete_coupon")
-    );
-
-    setItemDelete(
-      couponToDelete?.couponCode ? couponToDelete?.couponCode : undefined
-    );
-  }, [coupons, searchParams]);
-
-  useEffect(() => {
-    if (!coupons) return;
-    if (!searchParams.get("edit_coupon")) return setItemToEdit(undefined);
-    const couponToEdit = coupons.find(
-      (coupon) => coupon.couponCode === searchParams.get("edit_coupon")
-    );
-
-    setItemToEdit(couponToEdit ? couponToEdit : undefined);
-  }, [coupons, searchParams]);
+  const handleAddCouponClick = () => {
+    router.push(`${pathname}?add_coupon=true`);
+  };
 
   const handleCouponEditClick = (couponCode) => {
     router.push(`${pathname}?edit_coupon=${couponCode}`);
   };
 
+  const handleUpdatedCoupon = useCallback(
+    (updatedCoupon) => {
+      setCoupons((prev) =>
+        prev.map((item) =>
+          item.couponCode === updatedCoupon.couponCode ? updatedCoupon : item
+        )
+      );
+      router.replace(pathname);
+    },
+    [router, pathname]
+  );
+
   const handleCouponDeleteClick = (couponCode) => {
     router.push(`${pathname}?delete_coupon=${couponCode}`);
   };
 
-  const renderCoupons = () => {
-    if (!coupons || coupons.length === 0) return <></>;
-    return (
-      <ul className="coupon-table">
-        <li className="table-header">
-          <p>Coupon Code</p>
-          <p>Coupon Amount</p>
-          <p>From Date</p>
-          <p>To Date</p>
-          <p>Status</p>
-        </li>
-        {coupons.map((coupon, index) => (
-          <li key={index}>
-            <p col-title="coupon code">{coupon.couponCode}</p>
-            <p col-title="coupon amount">$ {coupon.couponAmount}</p>
-            <p col-title="from date">{dateFormatter(coupon.fromDate)}</p>
-            <p col-title="to date">{dateFormatter(coupon.toDate)}</p>
-            <p
-              className={`${
-                coupon.isActive
-                  ? "bg-custom-green-light text-custom-green-base"
-                  : "bg-custom-gray-base text-custom-gray-dark"
-              }`}
-              col-title="status"
-            >
-              {coupon.isActive ? "ACTIVE" : "INACTIVE"}
-            </p>
-            <div>
-              <button onClick={() => handleCouponEditClick(coupon.couponCode)}>
-                <FaPen />
-              </button>
-              <button
-                onClick={() => handleCouponDeleteClick(coupon.couponCode)}
-              >
-                <FaTrashCan />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    );
-  };
-
-  const handleAddCouponClick = () => {
-    router.push(`${pathname}?add_coupon=true`);
-  };
-
-  const deleteCouponAction = async () => {
+  const handleCouponDeletion = async () => {
     const response = await adminDeleteCoupon(itemToDelete);
     if (!response.ok) return;
-
-    setCoupons((prevState) =>
-      [...prevState].filter((coupon) => coupon.couponCode !== itemToDelete)
+    setCoupons((prev) =>
+      prev.filter((coupon) => coupon.couponCode !== itemToDelete)
     );
-
-    router.push(pathname);
+    router.replace(pathname);
   };
+
+  if (coupons.length === 0) return null;
 
   return (
     <section className="admin-coupons-container">
@@ -126,7 +125,11 @@ const AdminCoupons = () => {
           <IoAddSharp />
         </button>
       </div>
-      {renderCoupons()}
+      <TableData
+        coupons={coupons}
+        onEditClick={handleCouponEditClick}
+        onDeleteClick={handleCouponDeleteClick}
+      />
       {searchParams.get("add_coupon") === "true" && (
         <AddCouponForm setCoupons={setCoupons} />
       )}
@@ -134,11 +137,14 @@ const AdminCoupons = () => {
         <ConfirmDeleteModal
           itemToDelete={itemToDelete}
           pathWhenModalIsClosed={pathname}
-          confirmAction={deleteCouponAction}
+          confirmAction={handleCouponDeletion}
         />
       )}
       {itemToEdit && (
-        <EditCouponForm prevCoupon={itemToEdit} setCoupons={setCoupons} />
+        <EditCouponForm
+          coupon={itemToEdit}
+          onCouponUpdated={handleUpdatedCoupon}
+        />
       )}
     </section>
   );

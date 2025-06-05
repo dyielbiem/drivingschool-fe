@@ -1,40 +1,54 @@
 "use server";
+import moment from "moment";
+import { parseDate } from "chrono-node";
+
 import adminUpdateCoupon from "@/services/api/adminUpdateCoupon";
 
-const handleCouponUpdate = async (prevCoupon, prevState, formData) => {
-  const formDataObject = {
+const handleCouponUpdate = async (coupon, prevState, formData) => {
+  const { couponCode, couponAmount, isActive, fromDate, toDate } = coupon;
+  const data = {
     couponAmount: Number(formData.get("coupon-amount")),
-    isActive: formData.get("is-active") === "true" ? true : false
+    isActive: formData.get("is-active") === "true" ? true : false,
+    fromDate: formData.get("from-date"),
+    toDate: formData.get("to-date")
   };
 
+  if (moment(parseDate(data.fromDate)).isAfter(moment(parseDate(data.toDate))))
+    return {
+      errorMessage: "'To date' must be the same or after 'From date'"
+    };
+
   if (
-    formDataObject.couponAmount === prevCoupon.couponAmount &&
-    formDataObject.isActive === prevCoupon.isActive
+    data.couponAmount === couponAmount &&
+    data.isActive === isActive &&
+    data.fromDate === fromDate &&
+    data.toDate === toDate
   )
     return {
-      updatedCoupon: {
-        couponAmount: prevCoupon.couponAmount,
-        isActive: prevCoupon.isActive,
-        couponCode: prevCoupon.couponCode
-      }
+      updatedCoupon: coupon
     };
 
   const response = await adminUpdateCoupon(
-    prevCoupon.couponCode,
-    formDataObject.couponAmount,
-    formDataObject.isActive
+    couponCode,
+    data.couponAmount,
+    data.isActive,
+    data.fromDate,
+    data.toDate
   );
 
   if (!response.ok)
     return {
-      message: response?.json?.error
+      errorMessage: response?.json?.error
         ? response?.json?.error
         : "An error occured"
     };
 
   return {
-    message: undefined,
-    updatedCoupon: response?.json
+    errorMessage: "",
+    updatedCoupon: {
+      ...coupon,
+      ...data
+    }
   };
 };
 

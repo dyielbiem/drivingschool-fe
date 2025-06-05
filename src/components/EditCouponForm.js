@@ -1,45 +1,30 @@
-import { IoCloseCircleSharp } from "react-icons/io5";
-import FormButton from "./FormButton";
-import handleCouponUpdate from "@/actions/handleCouponUpdate";
-import { useFormState } from "react-dom";
-import FormErrorMessage from "./FormErrorMessage";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
-const EditCouponForm = ({ prevCoupon, setCoupons }) => {
+import handleCouponUpdate from "@/actions/handleCouponUpdate";
+import { formatDate } from "@/utils";
+
+import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
+
+const initialState = {
+  updatedCoupon: null,
+  errorMessage: ""
+};
+
+const EditCouponForm = ({ coupon, onCouponUpdated }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const initialState = {
-    updatedCoupon: undefined,
-    message: undefined
-  };
-
-  const handleCouponUpdateWithPrevCoupon = handleCouponUpdate.bind(
-    null,
-    prevCoupon
-  );
-
-  const [formState, formAction] = useFormState(
-    handleCouponUpdateWithPrevCoupon,
-    initialState
-  );
+  const formActionHandler = handleCouponUpdate.bind(null, coupon);
+  const [formState, formAction] = useFormState(formActionHandler, initialState);
 
   useEffect(() => {
     if (!formState?.updatedCoupon) return;
-    setCoupons((prevState) =>
-      prevState.map((coupon) => {
-        if (coupon.couponCode !== formState.updatedCoupon.couponCode)
-          return coupon;
-        return {
-          ...coupon,
-          couponAmount: formState.updatedCoupon.couponAmount,
-          isActive: formState.updatedCoupon.isActive
-        };
-      })
-    );
-    router.push(pathname);
-  }, [formState?.updatedCoupon, pathname, router, setCoupons]);
+    onCouponUpdated(formState.updatedCoupon);
+  }, [formState.updatedCoupon, onCouponUpdated]);
 
   const closeForm = () => {
     router.push(pathname);
@@ -53,7 +38,7 @@ const EditCouponForm = ({ prevCoupon, setCoupons }) => {
         </button>
         <h3>Edit coupon</h3>
         <p className="coupon-code">
-          Coupon code: <span>{prevCoupon.couponCode}</span>
+          Coupon code: <span>{coupon.couponCode}</span>
         </p>
         <label htmlFor="coupon-amount">
           Coupon amount ($) <span>*</span>
@@ -64,7 +49,7 @@ const EditCouponForm = ({ prevCoupon, setCoupons }) => {
           id="coupon-amount"
           min={0.01}
           step={0.01}
-          defaultValue={prevCoupon.couponAmount}
+          defaultValue={coupon.couponAmount}
           required
         />
         <label htmlFor="is-active">
@@ -74,13 +59,33 @@ const EditCouponForm = ({ prevCoupon, setCoupons }) => {
           name="is-active"
           id="is-active"
           required
-          defaultValue={prevCoupon.isActive}
+          defaultValue={coupon.isActive}
         >
           <option value={true}>Active</option>
           <option value={false}>Inactive</option>
         </select>
-        {formState?.message && (
-          <FormErrorMessage>{formState.message}</FormErrorMessage>
+        <label htmlFor="from-date">
+          From date <span>*</span>
+        </label>
+        <input
+          type="date"
+          name="from-date"
+          id="from-date"
+          defaultValue={formatDate(coupon.fromDate, "YYYY-MM-DD")}
+          required
+        />
+        <label htmlFor="to-date">
+          To date <span>*</span>
+        </label>
+        <input
+          type="date"
+          name="to-date"
+          id="to-date"
+          defaultValue={formatDate(coupon.toDate, "YYYY-MM-DD")}
+          required
+        />
+        {formState?.errorMessage && (
+          <FormErrorMessage>{formState.errorMessage}</FormErrorMessage>
         )}
         <FormButton>Update</FormButton>
       </form>

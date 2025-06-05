@@ -1,6 +1,12 @@
 "use server";
 import { adminRefreshAccessToken } from "./refreshAccessToken";
-const adminUpdateCoupon = async (couponCode, couponAmount, isActive) => {
+const adminUpdateCoupon = async (
+  couponCode,
+  couponAmount,
+  isActive,
+  fromDate,
+  toDate
+) => {
   try {
     const fetchMethod = async (accessToken) => {
       const response = await fetch(
@@ -10,7 +16,9 @@ const adminUpdateCoupon = async (couponCode, couponAmount, isActive) => {
           body: JSON.stringify({
             couponCode,
             couponAmount,
-            isActive
+            isActive,
+            fromDate,
+            toDate
           }),
           headers: {
             "Content-Type": "application/json",
