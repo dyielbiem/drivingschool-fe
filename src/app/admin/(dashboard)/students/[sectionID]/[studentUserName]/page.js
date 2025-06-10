@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IoMdArrowRoundBack, IoIosMail } from "react-icons/io";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { toast } from "react-toastify";
 
 import adminFetchStudent from "@/services/api/adminFetchStudent";
 import adminEmailStudentAccountInfo from "@/services/api/adminEmailStudentAccountInfo";
@@ -197,9 +197,7 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
       <p className="toastify-message">
         Account information has been emailed to the student
       </p>,
-      {
-        onClose: () => setIsSendingEmail(false)
-      }
+      { onClose: () => setIsSendingEmail(false) }
     );
   };
 
@@ -225,19 +223,6 @@ const StudentProfile = ({ params: { sectionID, studentUserName } }) => {
         <h2>Parent Information</h2>
         <MultiFields fields={parentInfoFields} student={student} />
       </div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick={false}
-        pauseOnFocusLoss={false}
-        pauseOnHover={false}
-        draggable={false}
-        theme="light"
-        transition={Slide}
-        closeButton={false}
-      />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { Tooltip } from "react-tooltip";
 import Pagination from "@/components/Pagination";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import EditStudentForm from "@/components/EditStudentForm";
+import ResetStudentPassword from "@/components/ResetStudentPassword";
 
 import adminDeleteStudent from "@/services/api/adminDeleteStudent";
 import { useStudentsInSection, useAdmin } from "@/state/store";
@@ -232,7 +233,12 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
   if (students.length === 0) return null;
 
   if (studentToEdit) {
-    return <EditStudentForm student={studentToEdit} />;
+    return (
+      <>
+        <EditStudentForm student={studentToEdit} />
+        <ResetStudentPassword />
+      </>
+    );
   }
 
   return (
