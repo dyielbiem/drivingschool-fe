@@ -51,7 +51,7 @@ const TestQuestions = ({ questions, onEditClick, onDeleteClick }) => {
     <ul className="test-question-container">
       {questions.map?.((question, index) => {
         const { questionID, choices = [], correctAnswer } = question;
-        const reorderedChoices = choices?.sort?.(
+        const reorderedChoices = [...(choices || [])].sort?.(
           (a, b) => allOrNoneRegex.test(a) - allOrNoneRegex.test(b)
         );
 
