@@ -1,3 +1,5 @@
+export const allOrNoneRegex = /(?:all|none) of the/i;
+
 export const stateOptions = [
   { label: "Alabama", value: "AL" },
   { label: "Alaska", value: "AK" },

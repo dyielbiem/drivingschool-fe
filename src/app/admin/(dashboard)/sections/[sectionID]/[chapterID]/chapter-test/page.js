@@ -16,9 +16,78 @@ import {
   useChapterIndex,
   useSubChapters
 } from "@/state/store";
+import { allOrNoneRegex } from "@/constants";
 
 import handleChapterTestQuestionSubmit from "@/actions/handleChapterTestQuestionSubmit";
 import adminDeleteQuestion from "@/services/api/adminDeleteQuestion";
+
+const Header = ({
+  chapterNumber,
+  subChapters,
+  onBackClick,
+  onSettingsClick
+}) => {
+  if (!chapterNumber || !subChapters) return null;
+  return (
+    <div className="header">
+      <button onClick={onBackClick} className="back-btn">
+        <IoMdArrowRoundBack />
+      </button>
+      <h1>
+        Chapter {chapterNumber}.{subChapters ? subChapters.length + 1 : "1"}.
+        Chapter Test
+      </h1>
+      <button className="setting-btn" onClick={() => onSettingsClick(false)}>
+        <IoSettingsSharp />
+      </button>
+    </div>
+  );
+};
+
+const TestQuestions = ({ questions, onEditClick, onDeleteClick }) => {
+  if (!questions || questions.length === 0) return null;
+
+  return (
+    <ul className="test-question-container">
+      {questions.map?.((question, index) => {
+        const { questionID, choices = [], correctAnswer } = question;
+        const reorderedChoices = choices?.sort?.(
+          (a, b) => allOrNoneRegex.test(a) - allOrNoneRegex.test(b)
+        );
+
+        return (
+          <li key={index}>
+            <p className="numbering">{String(index + 1).padStart(2, "0")}.</p>
+            <div className="top">
+              <div
+                className="question"
+                dangerouslySetInnerHTML={{ __html: question.question }}
+              />
+              <div className="action-btn-container">
+                <button>
+                  <FaPen onClick={() => onEditClick(questionID)} />
+                </button>
+                <button onClick={() => onDeleteClick(questionID)}>
+                  <FaTrashCan />
+                </button>
+              </div>
+            </div>
+            <ul className="question-choices">
+              {reorderedChoices?.map((choice, subIndex) => (
+                <li
+                  key={subIndex}
+                  className={`${correctAnswer === choice ? "font-bold" : ""}`}
+                >
+                  {choice}
+                </li>
+              ))}
+            </ul>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
 const ChapterTest = () => {
   const {
@@ -37,6 +106,7 @@ const ChapterTest = () => {
   const [itemToDelete, setItemToDelete] = useState(undefined);
   const [itemToEdit, setItemToEdit] = useState(undefined);
   const [isSettingsHidden, setIsSettingsHidden] = useState(true);
+  const chapterNumber = chapterIndex + 1;
 
   // Observe for delete_question query
   useEffect(() => {
@@ -75,74 +145,12 @@ const ChapterTest = () => {
     router.push(backRoute);
   };
 
-  const renderHeader = () => {
-    if (!chapterTestQuestions) return <></>;
-    return (
-      <div className="header">
-        <button onClick={handleBackClick} className="back-btn">
-          <IoMdArrowRoundBack />
-        </button>
-        <h1>
-          Chapter {chapterIndex + 1}.
-          {subChapters ? subChapters.length + 1 : "1"}. Chapter Test
-        </h1>
-        <button
-          className="setting-btn"
-          onClick={() => setIsSettingsHidden(false)}
-        >
-          <IoSettingsSharp />
-        </button>
-      </div>
-    );
-  };
-
   const handleDeleteClick = (id) => {
     router.push(`${pathname}?delete_question=${id}`);
   };
 
   const handleEditClick = (id) => {
     router.push(`${pathname}?edit_question=${id}`);
-  };
-
-  const renderTest = () => {
-    if (chapterTestQuestions?.length === 0) return <></>;
-    return (
-      <ul className="test-question-container">
-        {chapterTestQuestions?.map((question, index) => (
-          <li key={index}>
-            <p className="numbering">{String(index + 1).padStart(2, "0")}.</p>
-            <div className="top">
-              <div
-                className="question"
-                dangerouslySetInnerHTML={{
-                  __html: question.question
-                }}
-              />
-              <div className="action-btn-container">
-                <button>
-                  <FaPen onClick={() => handleEditClick(question.questionID)} />
-                </button>
-                <button onClick={() => handleDeleteClick(question.questionID)}>
-                  <FaTrashCan />
-                </button>
-              </div>
-            </div>
-            <ul className="question-choices">
-              {question?.choices?.map((choice, subIndex) => (
-                <li
-                  key={subIndex}
-                  className={`${
-                    question.correctAnswer === choice ? "font-bold" : ""
-                  }`}
-                >
-                  {choice}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    );
   };
 
   const deleteAction = async () => {
@@ -155,14 +163,25 @@ const ChapterTest = () => {
     router.push(pathname);
   };
 
+  if (!chapterNumber || !subChapters) return null;
+
   return (
     <section className="test-section">
-      {renderHeader()}
+      <Header
+        chapterNumber={chapterNumber}
+        subChapters={subChapters}
+        onBackClick={handleBackClick}
+        onSettingsClick={setIsSettingsHidden}
+      />
       <div className="content">
         <button onClick={handleAddQuestionClick} className="add-btn">
           Add question
         </button>
-        {renderTest()}
+        <TestQuestions
+          questions={chapterTestQuestions}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+        />
       </div>
       {searchParams.get("add_question") === "true" && (
         <AddQuestionForm
