@@ -32,9 +32,8 @@
 
     li {
       @apply flex flex-col justify-start relative
-      gap-x-8 hover:z-20 gap-2 bg-white rounded-lg cursor-pointer
-      hover:shadow-md duration-500 hover:scale-[1.02]
-      border-2 border-custom-gray-base;
+      gap-x-8 gap-2 bg-white rounded-lg cursor-pointer
+      duration-500 border-2 border-custom-gray-base;
 
       .status {
         @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit
@@ -53,13 +52,17 @@
       .course-details {
         @apply flex flex-col px-4 flex-grow gap-2 my-1;
 
-        .course-name {
+        /* .course-name {
           @apply relative before:hidden hover:before:block
           before:content-[attr(hover-text)]
           before:absolute before:bg-custom-white-dark
           before:top-full before:left-0 before:p-2 before:shadow-xl w-fit
           before:rounded-md before:w-fit before:mb-16 
           before:text-sm before:font-bold before:z-20 font-bold text-base;
+        } */
+
+        .course-name {
+          @apply w-fit;
         }
 
         .course-type {
@@ -99,5 +102,9 @@
         }
       }
     }
+  }
+
+  .course-name-tooltip {
+    @apply max-w-72;
   }
 }

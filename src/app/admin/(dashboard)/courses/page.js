@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Tooltip } from "react-tooltip";
 import { FaTrashCan, FaPen } from "react-icons/fa6";
 import { IoAddSharp } from "react-icons/io5";
 
@@ -12,13 +13,102 @@ import AddCourseForm from "@/components/AddCourseForm";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import EditCourseForm from "@/components/EditCourseForm";
 
+const BUCKET_URL = process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL;
+
+const ActionBtns = ({ courseID }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleEditCourseClick = (courseID) => {
+    router.push(`${pathname}?edit_course=${courseID}`);
+  };
+
+  const handleDeleteCourseClick = (courseID) => {
+    router.push(`${pathname}?delete_course=${courseID}`);
+  };
+
+  return (
+    <div className="btn-container">
+      <button onClick={() => handleEditCourseClick(courseID)}>
+        <FaPen />
+      </button>
+      <button onClick={() => handleDeleteCourseClick(courseID)}>
+        <FaTrashCan />
+      </button>
+    </div>
+  );
+};
+
+const Courses = ({ courses, imageRefresher }) => {
+  if (!courses || courses.length === 0) return null;
+  return (
+    <ul className="course-table">
+      {courses.map((course, index) => {
+        const {
+          courseID,
+          courseName,
+          coursePrice,
+          courseDesc,
+          courseType,
+          isActive
+        } = course;
+
+        return (
+          <li key={index}>
+            <p
+              className={`${
+                isActive
+                  ? "bg-custom-green-light text-custom-green-base border-custom-green-base"
+                  : "bg-custom-gray-base text-custom-gray-dark border-custom-gray-dark"
+              } status`}
+            >
+              {isActive ? "ACTIVE" : "INACTIVE"}
+            </p>
+            <Image
+              alt="course-image"
+              src={`${BUCKET_URL}/image/course/${courseID}?image_refresher=${imageRefresher}`}
+              width={350}
+              height={350}
+              priority
+            />
+            <div className="course-details">
+              <p
+                className="course-name"
+                data-tooltip-id="course-name-tooltip"
+                data-tooltip-content={courseName}
+                data-tooltip-place="bottom-start"
+              >
+                {courseName.length < 50
+                  ? courseName
+                  : courseName.slice(0, 50) + "..."}
+              </p>
+              <p className="course-type">
+                <span>Course Type:</span> {courseType}
+              </p>
+              <p
+                className={`course-desc ${course?.courseDesc ? "" : "hidden"}`}
+              >
+                {courseDesc}
+              </p>
+            </div>
+            <div className="bottom">
+              <p className="course-price">
+                $ {parseFloat(coursePrice).toFixed(2)}
+              </p>
+              <ActionBtns courseID={courseID} />
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
 const ManageCourses = () => {
-  const [courses, setCourses] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [itemToDelete, setItemToDelete] = useState(undefined);
-  const [itemToEdit, setItemToEdit] = useState(undefined);
+  const [courses, setCourses] = useState([]);
   const [imageRefresher, setImageRefresher] = useState(new Date().getTime());
 
   useEffect(() => {
@@ -30,117 +120,24 @@ const ManageCourses = () => {
     fetchSections();
   }, []);
 
-  // Observer for delete_course query
-  useEffect(() => {
-    if (!courses) return;
-    if (!searchParams.get("delete_course")) return setItemToDelete(undefined);
-    const courseToDelete = courses.find(
-      (course) => course.courseID === searchParams.get("delete_course")
-    );
+  const itemToEdit = useMemo(() => {
+    const courseToEditID = searchParams.get("edit_course");
+    if (!courseToEditID) return null;
+    return courses?.find((course) => course.courseID === courseToEditID);
+  }, [searchParams, courses]);
 
-    setItemToDelete(
-      courseToDelete?.courseName ? courseToDelete?.courseName : undefined
-    );
-  }, [courses, searchParams]);
-
-  // Observer for edit_course query
-  useEffect(() => {
-    if (!courses) return;
-    if (!searchParams.get("edit_course")) return setItemToEdit(undefined);
-    const courseToEdit = courses.find(
-      (course) => course.courseID === searchParams.get("edit_course")
-    );
-
-    setItemToEdit(courseToEdit || undefined);
-  }, [courses, searchParams]);
+  const itemToDelete = useMemo(() => {
+    const courseToDeleteID = searchParams.get("delete_course");
+    if (!courseToDeleteID) return null;
+    return courses?.find((course) => course.courseID === courseToDeleteID)
+      ?.courseName;
+  }, [searchParams, courses]);
 
   const handleAddCourseClick = () => {
     router.push("/admin/courses?add_course=true");
   };
 
-  const handleEditCourseClick = (courseID) => {
-    router.push(`${pathname}?edit_course=${courseID}`);
-  };
-
-  const handleDeleteCourseClick = (courseID) => {
-    router.push(`${pathname}?delete_course=${courseID}`);
-  };
-
-  const renderButtons = (course) => {
-    return (
-      <div className="btn-container">
-        <button onClick={() => handleEditCourseClick(course.courseID)}>
-          <FaPen />
-        </button>
-        <button onClick={() => handleDeleteCourseClick(course.courseID)}>
-          <FaTrashCan />
-        </button>
-      </div>
-    );
-  };
-
-  const renderCourseImage = (courseID) => {
-    return (
-      <Image
-        alt="course-image"
-        src={`${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/course/${courseID}?image_refresher=${imageRefresher}`}
-        width={350}
-        height={350}
-        unoptimized={true}
-        priority
-      />
-    );
-  };
-
-  const renderCourses = () => {
-    if (!courses || courses.length === 0) return <></>;
-    return (
-      <ul className="course-table">
-        {courses.map((course, index) => (
-          <li key={index}>
-            <p
-              className={`${
-                course.isActive
-                  ? "bg-custom-green-light text-custom-green-base border-custom-green-base"
-                  : "bg-custom-gray-base text-custom-gray-dark border-custom-gray-dark"
-              } status`}
-            >
-              {course.isActive ? "ACTIVE" : "INACTIVE"}
-            </p>
-            {renderCourseImage(course.courseID)}
-            <div className="course-details">
-              <p
-                className={`course-name`}
-                onMouseOver={(event) =>
-                  event.target.setAttribute("hover-text", course.courseName)
-                }
-              >
-                {course.courseName.length < 50
-                  ? course.courseName
-                  : course.courseName.slice(0, 50) + "..."}
-              </p>
-              <p className="course-type">
-                <span>Course Type:</span> {course.courseType}
-              </p>
-              <p
-                className={`course-desc ${course?.courseDesc ? "" : "hidden"}`}
-              >
-                {course.courseDesc}
-              </p>
-            </div>
-            <div className="bottom">
-              <p className="course-price">
-                $ {parseFloat(course.coursePrice).toFixed(2)}
-              </p>
-              {renderButtons(course)}
-            </div>
-          </li>
-        ))}
-      </ul>
-    );
-  };
-
-  const deleteCourseAction = async () => {
+  const handleCourseDelete = async () => {
     const response = await adminDeleteCourse(searchParams.get("delete_course"));
     if (!response.ok) return;
     setCourses((prevState) =>
@@ -151,6 +148,29 @@ const ManageCourses = () => {
     router.push(pathname);
   };
 
+  const handleCourseUpdate = useCallback(
+    (updatedCourse) => {
+      setCourses((prevState) =>
+        prevState.map((course) => {
+          const { courseID, courseName, coursePrice, courseDesc, isActive } =
+            updatedCourse;
+
+          if (course.courseID !== courseID) return course;
+          return {
+            ...course,
+            courseName,
+            coursePrice,
+            courseDesc,
+            isActive
+          };
+        })
+      );
+      setImageRefresher(new Date().getTime());
+      router.push(pathname);
+    },
+    [pathname, router]
+  );
+
   return (
     <section className="admin-courses-container">
       <div className="header">
@@ -160,7 +180,7 @@ const ManageCourses = () => {
           <span>Add new course</span>
         </button>
       </div>
-      {renderCourses()}
+      <Courses courses={courses} imageRefresher={imageRefresher} />
       {searchParams.get("add_course") && (
         <AddCourseForm setCourses={setCourses} />
       )}
@@ -168,16 +188,16 @@ const ManageCourses = () => {
         <ConfirmDeleteModal
           pathWhenModalIsClosed={pathname}
           itemToDelete={itemToDelete}
-          confirmAction={deleteCourseAction}
+          confirmAction={handleCourseDelete}
         />
       )}
       {itemToEdit && (
         <EditCourseForm
           prevCourse={itemToEdit}
-          setCourses={setCourses}
-          setImageRefresher={setImageRefresher}
+          onCourseUpdate={handleCourseUpdate}
         />
       )}
+      <Tooltip id="course-name-tooltip" className="course-name-tooltip" />
     </section>
   );
 };

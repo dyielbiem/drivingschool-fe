@@ -2,6 +2,7 @@
 import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminUpdateCourse = async (
   courseID,
+  courseName,
   coursePrice,
   courseDesc,
   isActive
@@ -14,6 +15,7 @@ const adminUpdateCourse = async (
           method: "PATCH",
           body: JSON.stringify({
             courseID,
+            courseName,
             coursePrice,
             courseDesc,
             isActive

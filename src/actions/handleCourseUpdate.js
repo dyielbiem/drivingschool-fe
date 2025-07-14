@@ -5,30 +5,26 @@ import adminPutS3Image from "@/services/api/adminPutS3Image";
 
 const handleCourseUpdate = async (prevCourse, prevState, formData) => {
   const formDataObject = {
+    courseName: (formData.get("course-name") || "").trim(),
     coursePrice: Number(formData.get("course-price")),
-    courseDesc: String(formData.get("course-desc")).trim(),
+    courseDesc: (formData.get("course-desc") || "").trim(),
     isActive: formData.get("is-active") === "true" ? true : false,
     img: formData.get("upload-img")
   };
 
-  if (String(formDataObject?.img?.type).includes("image")) {
-    const signedURLResponse = await adminGetS3UploadCourseImageSignedURL(
+  if (formDataObject?.img?.type?.includes?.("image")) {
+    const { ok, json } = await adminGetS3UploadCourseImageSignedURL(
       prevCourse.courseID
     );
 
-    if (!signedURLResponse.ok)
+    if (!ok)
       return {
-        message:
-          signedURLResponse?.json?.error ||
-          "An error occured while uploading the image"
+        message: json?.error || "An error occured while uploading the image"
       };
 
     const formData = new FormData();
     formData.append("image", formDataObject.img);
-    const uploadResponse = await adminPutS3Image(
-      signedURLResponse?.json?.preSignedURL,
-      formData
-    );
+    const uploadResponse = await adminPutS3Image(json?.preSignedURL, formData);
 
     if (!uploadResponse.ok)
       return {
@@ -36,19 +32,21 @@ const handleCourseUpdate = async (prevCourse, prevState, formData) => {
       };
   }
 
-  if (
-    formDataObject.coursePrice === prevCourse?.coursePrice &&
-    formDataObject.courseDesc === prevCourse?.courseDesc &&
-    formDataObject.isActive === prevCourse?.isActive
-  )
+  const fieldsToUpdate = [
+    "courseName",
+    "coursePrice",
+    "courseDesc",
+    "isActive"
+  ];
+
+  if (fieldsToUpdate.every((key) => formDataObject[key] === prevCourse[key]))
     return {
-      updatedCourse: {
-        ...prevState
-      }
+      updatedCourse: prevCourse
     };
 
   const response = await adminUpdateCourse(
     prevCourse.courseID,
+    formDataObject.courseName,
     formDataObject.coursePrice,
     formDataObject.courseDesc,
     formDataObject.isActive
