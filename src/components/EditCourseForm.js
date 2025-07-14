@@ -1,95 +1,72 @@
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BiSolidCloudUpload } from "react-icons/bi";
-import FormButton from "./FormButton";
-import handleCourseUpdate from "@/actions/handleCourseUpdate";
-import { useFormState } from "react-dom";
-import FormErrorMessage from "./FormErrorMessage";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Image from "next/image";
 
-const EditCourseForm = ({ prevCourse, setCourses, setImageRefresher }) => {
+import FormButton from "./FormButton";
+import FormErrorMessage from "./FormErrorMessage";
+
+import handleCourseUpdate from "@/actions/handleCourseUpdate";
+
+const BUCKET_URL = process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL;
+
+const CourseImage = ({ courseID, imageToUpload, onImgUpload }) => {
+  return (
+    <div className="course-img-box">
+      <label htmlFor="upload-img">
+        <BiSolidCloudUpload />
+        <span>Upload image from your system</span>
+      </label>
+      <input
+        type="file"
+        accept="image/*"
+        id="upload-img"
+        name="upload-img"
+        onChange={onImgUpload}
+      />
+      <Image
+        priority
+        height={500}
+        width={500}
+        alt="course-image"
+        src={
+          imageToUpload ||
+          `${BUCKET_URL}/image/course/${courseID}?time_stamp=${new Date().getTime()}`
+        }
+      />
+    </div>
+  );
+};
+
+const EditCourseForm = ({ prevCourse, onCourseUpdate }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [imageToUpload, setImageToUpload] = useState(undefined);
+  const [imageToUpload, setImageToUpload] = useState(null);
 
   const initialState = {
-    updatedCourse: undefined,
-    message: undefined
+    updatedCourse: null,
+    message: null
   };
 
-  const handlecourseUpdateWithPrevCourse = handleCourseUpdate.bind(
-    prevCourse,
-    prevCourse
-  );
-
-  const [formState, formAction] = useFormState(
-    handlecourseUpdateWithPrevCourse,
-    initialState
-  );
+  const formHandler = handleCourseUpdate.bind(null, prevCourse);
+  const [formState, formAction] = useFormState(formHandler, initialState);
 
   useEffect(() => {
     if (!formState?.updatedCourse) return;
-    setCourses((prevState) =>
-      prevState.map((course) => {
-        if (course.courseID !== formState.updatedCourse.courseID) return course;
-        return {
-          ...course,
-          coursePrice: formState?.updatedCourse?.coursePrice,
-          courseDesc: formState?.updatedCourse?.courseDesc,
-          isActive: formState?.updatedCourse?.isActive
-        };
-      })
-    );
-    setImageRefresher(new Date().getTime());
-    router.push(pathname);
-  }, [
-    formState.updatedCourse,
-    pathname,
-    router,
-    setCourses,
-    setImageRefresher
-  ]);
+    onCourseUpdate(formState.updatedCourse);
+  }, [formState.updatedCourse, onCourseUpdate]);
 
   const handleImgUpload = (event) => {
-    if (!event?.target?.files[0]) return;
-    const file = event.target.files[0];
-    if (!String(file.type).includes("image")) {
-      event.target.value = "";
-      return setImageToUpload(undefined);
+    const file = event?.target?.files[0];
+    if (file && file.type.includes("image")) {
+      setImageToUpload(URL.createObjectURL(file));
+      return;
     }
-    setImageToUpload(URL.createObjectURL(file));
-  };
 
-  const renderCourseImage = () => {
-    return (
-      <div className="course-img-box">
-        <label htmlFor="upload-img">
-          <BiSolidCloudUpload />
-          <span>Upload image from your system</span>
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          id="upload-img"
-          name="upload-img"
-          onChange={(event) => handleImgUpload(event)}
-        />
-        <Image
-          priority
-          height={500}
-          width={500}
-          alt="course-image"
-          src={
-            imageToUpload ||
-            `${process.env.NEXT_PUBLIC_S3_IMAGE_BUCKET_URL}/image/course/${
-              prevCourse.courseID
-            }?time_stamp=${new Date().getTime()}`
-          }
-          unoptimized={true}
-        />
-      </div>
-    );
+    event.target.value = "";
+    return setImageToUpload(null);
   };
 
   const closeForm = () => {
@@ -103,9 +80,16 @@ const EditCourseForm = ({ prevCourse, setCourses, setImageRefresher }) => {
           <IoCloseCircleSharp />
         </button>
         <h3>Edit course</h3>
-        <p className="course-name">
-          Course name: <span>{prevCourse.courseName}</span>
-        </p>
+        <label htmlFor="course-name">
+          Course name <span>*</span>
+        </label>
+        <textarea
+          type="text"
+          name="course-name"
+          id="course-name"
+          defaultValue={prevCourse?.courseName || ""}
+          required
+        />
         <label htmlFor="course-price">
           Course price ($) <span>*</span>
         </label>
@@ -140,7 +124,11 @@ const EditCourseForm = ({ prevCourse, setCourses, setImageRefresher }) => {
         <label htmlFor="course-image">
           Course image <span>*</span>
         </label>
-        {renderCourseImage()}
+        <CourseImage
+          courseID={prevCourse.courseID}
+          imageToUpload={imageToUpload}
+          onImgUpload={handleImgUpload}
+        />
         {formState?.message && (
           <FormErrorMessage>{formState.message}</FormErrorMessage>
         )}
