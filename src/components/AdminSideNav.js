@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PiClipboardTextFill } from "react-icons/pi";
-import { MdGroups2 } from "react-icons/md";
+import { MdGroups2, MdClose } from "react-icons/md";
 import { HiCreditCard, HiBookOpen } from "react-icons/hi2";
 import { BiLogOut } from "react-icons/bi";
 import { RiSettings4Fill, RiCoupon3Fill, RiMenu3Line } from "react-icons/ri";
-import { MdClose } from "react-icons/md";
+import { TbAffiliateFilled } from "react-icons/tb";
 
 import adminLogoutClick from "@/actions/adminLogoutClick";
 import adminFetchAdmin from "@/services/api/adminFetchAdmin";
@@ -58,6 +58,11 @@ const AdminSideNav = () => {
       title: "Manage Courses",
       path: "/admin/courses",
       icon: HiBookOpen
+    },
+    {
+      title: "Manage Affiliations",
+      path: "/admin/affiliations",
+      icon: TbAffiliateFilled
     },
     {
       title: "Settings",

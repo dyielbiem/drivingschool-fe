@@ -1,0 +1,47 @@
+.admin-affiliations-container {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden items-center
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
+
+  & > .header {
+    @apply flex justify-between items-center mb-12 w-full gap-4;
+
+    h1 {
+      @apply font-extrabold text-2xl;
+    }
+
+    & > button {
+      @apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      rounded-lg sm:rounded-md;
+
+      svg {
+        @apply block sm:hidden text-xl;
+      }
+
+      span {
+        @apply hidden sm:block;
+      }
+    }
+  }
+
+  .affiliation-table {
+    @apply w-full grid grid-cols-4 gap-3;
+
+    li {
+      @apply grid grid-cols-subgrid col-span-full px-6;
+
+      p {
+        @apply text-left lg:text-center;
+      }
+    }
+
+    li:first-child {
+      @apply font-bold;
+    }
+
+    li:nth-child(n + 2) {
+      @apply bg-white py-5 rounded-md items-start lg:place-items-center border-2;
+    }
+  }
+}

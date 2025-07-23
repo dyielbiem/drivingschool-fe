@@ -1,20 +1,20 @@
 @import"https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap";@tailwind base;@tailwind components;@tailwind utilities;*{@apply m-0 p-0 box-border font-custom-font}body{@apply min-h-screen flex items-center justify-center}main{@apply w-10/12 sm:w-full}.login-page{@apply grid grid-cols-1 md:grid-cols-2 justify-items-center h-screen}.login-page .img-container{@apply aspect-square w-full h-full overflow-hidden relative hidden md:block}.login-page .img-container img{@apply object-cover opacity-85}.login-page .login-form{@apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-lg
-    w-full justify-start md:justify-center md:px-10 py-16}.login-page .login-form h1{@apply text-custom-blue-base text-2xl font-extrabold mb-4}.login-page .login-form>label{@apply text-sm mt-2 indent-0.5 font-bold}.login-page .login-form>input{@apply border-solid border-neutral-400 border-[1px] 
+    w-full justify-start md:justify-center md:px-10 py-16}.login-page .login-form h1{@apply text-custom-blue-base text-2xl font-extrabold mb-4}.login-page .login-form>label{@apply text-sm mt-2 indent-0.5 font-bold}.login-page .login-form>input{@apply border-solid border-neutral-400 border-[1px]
       rounded-md py-2 px-2}.login-page .login-form .extra-actions{@apply flex justify-between items-center mt-2
       gap-2 sm:gap-2
       flex-col sm:flex-row}.login-page .login-form .extra-actions .remember-me-container{@apply flex gap-2 text-sm cursor-pointer
         justify-start items-center
         w-full sm:w-auto}.login-page .login-form .extra-actions .remember-me-container>*{@apply cursor-pointer}.login-page .login-form .extra-actions .remember-me-container input{@apply h-10}.login-page .login-form .extra-actions a{@apply text-sm mt-[2px] hover:text-custom-blue-base
         self-start sm:self-center}.login-page .login-form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.login-page .login-form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      bg-red-200 border-2 border-red-700}.login-page .login-form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-8
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.login-page .login-form button[type=submit] svg{@apply text-2xl animate-spin}.reset-password-page{@apply grid grid-cols-1 md:grid-cols-2 justify-items-center h-screen}.reset-password-page .img-container{@apply aspect-square w-full h-full overflow-hidden relative hidden md:block}.reset-password-page .img-container img{@apply object-cover opacity-85}.reset-password-page .reset-password-form{@apply flex flex-col col-span-1 md:col-start-2 gap-2.5 max-w-lg
-    w-full justify-start md:justify-center md:px-10 py-16}.reset-password-page .reset-password-form h1{@apply text-custom-blue-base text-2xl font-extrabold}.reset-password-page .reset-password-form>label{@apply text-sm mt-4 indent-0.5 font-bold}.reset-password-page .reset-password-form>input{@apply border-solid border-neutral-400 border-[1px] 
+    w-full justify-start md:justify-center md:px-10 py-16}.reset-password-page .reset-password-form h1{@apply text-custom-blue-base text-2xl font-extrabold}.reset-password-page .reset-password-form>label{@apply text-sm mt-4 indent-0.5 font-bold}.reset-password-page .reset-password-form>input{@apply border-solid border-neutral-400 border-[1px]
       rounded-md py-2 px-2}.reset-password-page .reset-password-form .resend-code{@apply text-custom-blue-base font-bold cursor-pointer}.reset-password-page .reset-password-form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700}.reset-password-page .reset-password-form .success-message{@apply text-custom-green-base font-bold p-2.5 mt-4
       bg-custom-green-light border-2 border-custom-green-base
-      flex items-start gap-2}.reset-password-page .reset-password-form .success-message span{@apply text-2xl animate-spin}.reset-password-page .reset-password-form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-10 
+      flex items-start gap-2}.reset-password-page .reset-password-form .success-message span{@apply text-2xl animate-spin}.reset-password-page .reset-password-form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-10
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.reset-password-page .reset-password-form button[type=submit] svg{@apply text-2xl animate-spin}.admin-dashboard-layout{@apply flex w-full flex-col lg:flex-row}.admin-dashboard-layout>.top-nav-container{@apply flex lg:hidden justify-between items-center
     w-screen overflow-hidden py-2 px-4 h-20 fixed top-0 left-0
     bg-white z-[99999]}.admin-dashboard-layout>.top-nav-container>.nav-logo{@apply w-32 justify-center items-center bg-transparent max-h-[90%] h-full}.admin-dashboard-layout>.top-nav-container>.nav-logo img{@apply max-h-full object-contain w-24}.admin-dashboard-layout>.top-nav-container>.hamburger-btn{@apply text-3xl}.admin-dashboard-layout>.mobile-nav-back-drop{@apply fixed h-screen w-screen top-0 left-0 backdrop-blur-sm bg-[#11111177]
@@ -25,40 +25,40 @@
       mb-10 w-8/12 self-center px-4 hidden lg:block}.admin-dashboard-layout>.side-nav-container .side-nav{@apply text-custom-white-base w-full flex-grow}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container{@apply flex flex-col gap-[0.4rem]}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container>.close-nav-btn{@apply mb-6 self-end w-fit lg:hidden mr-8
           text-xl}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a{@apply text-base py-4 relative px-10
           after:content-[""] after:absolute after:right-0 after:top-0
-          after:w-[6px] after:h-full after:bg-custom-blue-dark 
+          after:w-[6px] after:h-full after:bg-custom-blue-dark
           flex justify-start items-center gap-4 text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a:hover{@apply bg-custom-blue-darker}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a:hover::after{@apply bg-custom-blue-darker}.admin-dashboard-layout>.side-nav-container .side-nav .nav-items-container a .nav-icon{@apply text-2xl text-custom-white-dark}.admin-dashboard-layout>.side-nav-container .logout-btn{@apply text-base relative px-10 w-full
       flex items-center justify-start gap-4
-      text-custom-white-dark font-bold mt-16}.admin-dashboard-layout>.side-nav-container .logout-btn svg{@apply text-2xl text-custom-white-dark}.admin-sections-container{@apply flex flex-col flex-grow pb-10 max-h-screen h-screen 
-  bg-custom-white-dark overflow-y-auto overflow-x-hidden 
+      text-custom-white-dark font-bold mt-16}.admin-dashboard-layout>.side-nav-container .logout-btn svg{@apply text-2xl text-custom-white-dark}.admin-sections-container{@apply flex flex-col flex-grow pb-10 max-h-screen h-screen
+  bg-custom-white-dark overflow-y-auto overflow-x-hidden
   pt-32 py-10 lg:py-12 px-6 sm:px-8 md:px-12}.admin-sections-container .header{@apply flex justify-between items-center mb-8 sm:mb-12
     gap-2}.admin-sections-container .header h1{@apply text-2xl font-extrabold}.admin-sections-container .header>button{@apply bg-custom-blue-base text-white
       rounded-xl sm:rounded-lg text-base font-bold
-      pl-2.5 pb-2.5 pr-2 pt-2 sm:px-4 sm:py-2.5}.admin-sections-container .header>button svg{@apply block sm:hidden text-xl}.admin-sections-container .header>button span{@apply hidden sm:block}.admin-sections-container .section-table{@apply grid grid-cols-[8fr_1fr] gap-3}.admin-sections-container .section-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center 
+      pl-2.5 pb-2.5 pr-2 pt-2 sm:px-4 sm:py-2.5}.admin-sections-container .header>button svg{@apply block sm:hidden text-xl}.admin-sections-container .header>button span{@apply hidden sm:block}.admin-sections-container .section-table{@apply grid grid-cols-[8fr_1fr] gap-3}.admin-sections-container .section-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center
       px-10 rounded-md font-semibold mb-4
-      hidden sm:grid}.admin-sections-container .section-table .table-header p{@apply font-extrabold text-lg}.admin-sections-container .section-table .table-header p:nth-child(1){@apply justify-self-start}.admin-sections-container .section-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center 
-      bg-white rounded-md cursor-pointer hover:shadow-md 
+      hidden sm:grid}.admin-sections-container .section-table .table-header p{@apply font-extrabold text-lg}.admin-sections-container .section-table .table-header p:nth-child(1){@apply justify-self-start}.admin-sections-container .section-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center
+      bg-white rounded-md cursor-pointer hover:shadow-md
       duration-200 gap-2 flex sm:grid flex-col-reverse
       p-6 sm:py-5 sm:px-10 border-2 border-custom-gray-base}.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(1){@apply justify-self-start font-semibold sm:font-normal}.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(2){@apply rounded-md text-xs font-bold py-1 px-2
         h-fit w-fit}.section-content-container{@apply mx-4 max-w-7xl w-full}.section-content-container h2{@apply text-xl font-extrabold}.section-content-container h3{@apply text-lg}.section-content-container h2,.section-content-container h3,.section-content-container p{@apply empty:h-4}.section-content-container a{@apply underline text-custom-blue-light font-semibold}.section-content-container img{@apply inline-block}.section-content-container iframe{@apply w-full max-w-7xl inline-block}.section-content-container ul{@apply px-8 list-none}.section-content-container ul>li>p{@apply relative before:absolute before:content-["•"]
-        before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.section-content-container ul>li ul{@apply list-none px-8}.section-content-container ul>li ul>li>p{@apply relative before:absolute before:content-["◦"] 
-          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.section-content-container ol{@apply flex flex-col gap-2}.section-content-container ol li{@apply list-decimal ml-8 max-w-3xl}.add-chapter-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+        before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.section-content-container ul>li ul{@apply list-none px-8}.section-content-container ul>li ul>li>p{@apply relative before:absolute before:content-["◦"]
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.section-content-container ol{@apply flex flex-col gap-2}.section-content-container ol li{@apply list-decimal ml-8 max-w-3xl}.add-chapter-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
   items-center bg-[#00000044] z-[999999]}.add-chapter-form form{@apply flex flex-col gap-2 bg-white
     overflow-y-auto top-0 left-0 z-10 px-4 py-6 sm:p-8
     fixed sm:relative rounded-none sm:rounded-lg
     w-full h-screen sm:h-fit sm:max-w-md sm:max-h-[95%]}.add-chapter-form form .close-btn{@apply absolute w-fit right-6 top-6}.add-chapter-form form .close-btn svg{@apply text-3xl}.add-chapter-form form h3{@apply text-2xl font-extrabold mb-4 mr-16}.add-chapter-form form label{@apply mt-2 text-sm font-bold indent-1}.add-chapter-form form label span{@apply text-custom-red font-bold}.add-chapter-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base}.add-chapter-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.add-chapter-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
+      bg-red-200 border-2 border-red-700}.add-chapter-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5 mt-auto sm:mt-8
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-chapter-form form button[type=submit] svg{@apply text-2xl animate-spin}.add-sub-chapter-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[9999]}.add-sub-chapter-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-chapter-form form button[type=submit] svg{@apply text-2xl animate-spin}.add-sub-chapter-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[9999]}.add-sub-chapter-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full
     max-w-md z-10 relative max-h-[95%] overflow-y-auto}.add-sub-chapter-form form .close-btn{@apply absolute w-fit right-6 top-6}.add-sub-chapter-form form .close-btn svg{@apply text-3xl}.add-sub-chapter-form form h3{@apply text-2xl font-extrabold mb-4}.add-sub-chapter-form form label{@apply mt-2 text-sm font-bold indent-1}.add-sub-chapter-form form label span{@apply text-custom-red font-bold}.add-sub-chapter-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base}.add-sub-chapter-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.add-sub-chapter-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-8 
+      bg-red-200 border-2 border-red-700}.add-sub-chapter-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-8
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-sub-chapter-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-manage-section-layout{@apply flex w-full flex-col lg:flex-row}.admin-manage-section-layout>.top-nav-container{@apply flex lg:hidden justify-between items-center
     w-screen overflow-hidden py-2 px-4 h-20 fixed top-0 left-0
     bg-white z-[99999]}.admin-manage-section-layout>.top-nav-container>.nav-logo{@apply w-fit justify-center items-center bg-transparent max-h-[90%] h-full}.admin-manage-section-layout>.top-nav-container>.nav-logo img{@apply max-h-full object-contain w-24}.admin-manage-section-layout>.top-nav-container>.hamburger-btn{@apply text-3xl}.admin-manage-section-layout>.mobile-nav-back-drop{@apply fixed h-screen w-screen top-0 left-0 backdrop-blur-sm bg-[#11111177]
-    lg:hidden z-[99999]}.admin-manage-section-layout .side-nav-container{@apply flex-col overflow-x-hidden overflow-y-auto 
+    lg:hidden z-[99999]}.admin-manage-section-layout .side-nav-container{@apply flex-col overflow-x-hidden overflow-y-auto
     h-screen max-h-screen bg-custom-blue-dark
     transition-[width] duration-300 items-center w-full max-w-[20rem]
     justify-start top-0 right-0 z-[999999]
@@ -74,54 +74,54 @@
           items-center hover:bg-custom-blue-darker font-bold
           rounded-md pr-4 pl-6 text-base}.admin-manage-section-layout .side-nav-container nav div a span{@apply overflow-hidden}.admin-manage-section{@apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden gap-10 items-center
-  pt-32 py-10 lg:py-12 
+  pt-32 py-10 lg:py-12
   px-6 sm:px-8 md:px-12}.admin-manage-section>.header{@apply flex max-w-7xl w-full items-start h-auto
     gap-4}.admin-manage-section>.header .back-btn{@apply text-2xl py-3.5}.admin-manage-section>.header h1{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow flex
       items-start py-3 flex-col sm:flex-row gap-0 sm:gap-4}.admin-manage-section>.header h1 span{@apply text-xs py-1 px-2 rounded-md uppercase h-fit my-1}.admin-manage-section>.header .edit-btn{@apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3 mt-1}.admin-manage-section>.header .activate-btn{@apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2 my-3}.admin-manage-section>.edit-title-form{@apply flex max-w-7xl w-full items-center bg-white p-2
-    rounded-md gap-2 flex-col sm:flex-row}.admin-manage-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-manage-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-manage-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-manage-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base 
+    rounded-md gap-2 flex-col sm:flex-row}.admin-manage-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-manage-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-manage-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-manage-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base
         rounded-md text-white}.admin-manage-section>.edit-title-form .btn-container button[type=button]{@apply text-black
         rounded-md bg-custom-white-darker}.admin-manage-section .chapters-container{@apply flex flex-col w-full gap-4 max-w-7xl}.admin-manage-section .chapters-container li{@apply rounded-md pl-4 pr-6 font-bold text-lg overflow-hidden
-      bg-white hover:shadow-md flex relative flex-col 
+      bg-white hover:shadow-md flex relative flex-col
       sm:flex-row py-4 sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-[4.5rem]}.admin-manage-section .chapters-container li a{@apply flex items-center flex-grow gap-4 py-2 sm:py-3 z-10}.admin-manage-section .chapters-container li a img{@apply min-w-32 self-center
           absolute sm:static top-0 left-0 object-cover sm:object-contain
           opacity-10 sm:opacity-100 w-full sm:w-32 px-0 sm:px-4
           h-full sm:h-auto sm:max-h-12}.admin-manage-section .chapters-container li div{@apply flex mb-2 sm:mb-0 gap-4 self-end sm:self-auto z-50}.admin-manage-section .chapters-container li div button:nth-child(1){@apply text-custom-blue-light}.admin-manage-section .chapters-container li div button:nth-child(2){@apply text-custom-red}.test-section{@apply flex flex-col flex-grow pb-10 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center
-  pt-32 py-10 lg:py-12 
+  pt-32 py-10 lg:py-12
   px-6 sm:px-8 md:px-12}.test-section>.header{@apply flex items-start w-full gap-6}.test-section>.header .back-btn{@apply text-3xl py-0.5}.test-section>.header h1{@apply text-2xl font-extrabold flex-grow}.test-section>.header .setting-btn{@apply text-2xl py-0.5}.test-section .content{@apply flex flex-col w-full}.test-section .content .add-btn{@apply text-base font-bold bg-custom-blue-base rounded-md text-white
       px-4 py-2 w-fit mb-6 self-end}.test-section .test-question-container{@apply w-full flex flex-col gap-6}.test-section .test-question-container>li{@apply w-full flex flex-col bg-white rounded-md
       relative shadow-md pl-14 sm:pl-[4.5rem] p-4 py-6 sm:p-6}.test-section .test-question-container>li .numbering{@apply top-6 left-4 sm:left-6 absolute font-bold text-lg}.test-section .test-question-container>li .top{@apply flex items-start mb-4 gap-6 justify-between}.test-section .test-question-container>li .top .question{@apply font-bold text-lg}.test-section .test-question-container>li .top .question .tiptap-image{@apply mt-4}.test-section .test-question-container>li .top .action-btn-container{@apply flex items-center gap-3 text-lg sm:text-xl mt-1}.test-section .test-question-container>li .top .action-btn-container button:nth-child(1){@apply text-custom-blue-light}.test-section .test-question-container>li .top .action-btn-container button:nth-child(2){@apply text-custom-red}.test-section .test-question-container>li .question-choices{@apply list-[lower-alpha] list-inside text-base
         grid gap-y-1 grid-cols-1 sm:grid-cols-2
-        ml-0 sm:ml-8}.question-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.question-form form{@apply flex flex-col gap-2 bg-white w-full 
+        ml-0 sm:ml-8}.question-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.question-form form{@apply flex flex-col gap-2 bg-white w-full
     z-10 overflow-y-auto sm:max-h-[90%] sm:max-w-lg
     sm:rounded-lg fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.question-form form .close-btn{@apply absolute w-fit right-6 top-6}.question-form form .close-btn svg{@apply text-3xl}.question-form form h3{@apply text-2xl font-extrabold mb-4 mr-16}.question-form form>label{@apply mt-2 text-sm font-bold indent-1}.question-form form>label span{@apply text-custom-red font-bold}.question-form form .question-editor{@apply bg-white rounded-md min-h-fit border-custom-gray-base border-[1px]
-      flex gap-2 px-2 items-start}.question-form form .question-editor:focus-within{outline:auto}.question-form form .question-editor div:nth-child(1){@apply flex-grow}.question-form form .question-editor div:nth-child(1) .tiptap{@apply bg-white rounded-md h-full min-h-6 outline-none cursor-text 
+      flex gap-2 px-2 items-start}.question-form form .question-editor:focus-within{outline:auto}.question-form form .question-editor div:nth-child(1){@apply flex-grow}.question-form form .question-editor div:nth-child(1) .tiptap{@apply bg-white rounded-md h-full min-h-6 outline-none cursor-text
           flex-grow py-2 my-[1px]}.question-form form .question-editor>button{@apply text-xl mt-2.5}.question-form form input{@apply bg-white rounded-md p-2 min-h-6 cursor-text border-[1px]
-      border-custom-gray-base}.question-form form .other-answer-container{@apply flex relative}.question-form form .other-answer-container input{@apply w-full pr-8}.question-form form .other-answer-container button{@apply absolute right-0 text-lg h-full pr-2.5}.question-form form .add-answer-btn{@apply w-full px-6 bg-custom-gray-base self-end text-base font-bold 
+      border-custom-gray-base}.question-form form .other-answer-container{@apply flex relative}.question-form form .other-answer-container input{@apply w-full pr-8}.question-form form .other-answer-container button{@apply absolute right-0 text-lg h-full pr-2.5}.question-form form .add-answer-btn{@apply w-full px-6 bg-custom-gray-base self-end text-base font-bold
       text-neutral-800 rounded-lg py-2.5 hover:bg-custom-white-darker}.question-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.question-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
+      bg-red-200 border-2 border-red-700}.question-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.question-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-chapter-section{@apply flex flex-col flex-grow max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center pb-28
-  pt-32 py-10 lg:py-12 
+  pt-32 py-10 lg:py-12
   px-6 sm:px-8 md:px-12}.admin-chapter-section>.header{@apply flex items-start max-w-7xl w-full gap-4 sm:gap-6}.admin-chapter-section>.header .back-btn{@apply text-3xl py-2}.admin-chapter-section>.header h1{@apply text-2xl font-extrabold flex-grow py-2}.admin-chapter-section>.header .edit-content-btn{@apply text-base font-bold bg-custom-blue-base text-white
-      p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-chapter-section>.header .edit-content-btn svg{@apply block sm:hidden text-xl}.admin-chapter-section>.header .edit-content-btn span{@apply hidden sm:block}.admin-chapter-section>.header .edit-title-btn{@apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3 lg:whitespace-nowrap relative}.admin-chapter-section>.header .edit-title-btn:hover:after{@apply content-["Edit_title"] absolute text-sm bg-gray-600 text-white px-2.5 py-1.5
         font-bold rounded-md top-[calc(100%+0.25rem)] left-1/2 -translate-x-1/2}.admin-chapter-section>.header .upload-cover-image{@apply text-base font-bold bg-custom-blue-base text-white
       p-2 pl-2.5 sm:px-4 sm:py-2 whitespace-nowrap flex items-center
       flex-nowrap gap-2 rounded-lg sm:rounded-md my-1}.admin-chapter-section>.header .upload-cover-image svg{@apply text-xl sm:text-lg}.admin-chapter-section>.header .upload-cover-image span{@apply hidden sm:block}.admin-chapter-section>.edit-title-form{@apply flex max-w-7xl w-full items-center bg-white p-2
-    rounded-md min-h-14 flex-col sm:flex-row}.admin-chapter-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-chapter-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-chapter-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-chapter-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base 
+    rounded-md min-h-14 flex-col sm:flex-row}.admin-chapter-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-chapter-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-chapter-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-chapter-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base
         rounded-md text-white}.admin-chapter-section>.edit-title-form .btn-container button[type=button]{@apply text-black
         rounded-md bg-custom-white-darker}.admin-chapter-section .nav-links{@apply w-full flex flex-col gap-4 max-w-7xl}.admin-chapter-section .nav-links .sub-chapters-container{@apply flex flex-col w-full gap-4}.admin-chapter-section .nav-links .sub-chapters-container li{@apply rounded-md px-6 font-bold text-lg
         bg-white hover:shadow-md flex items-center
         sm:py-0 border-2 border-custom-gray-base
-        gap-2 sm:gap-4 h-fit sm:h-auto min-h-16}.admin-chapter-section .nav-links .sub-chapters-container li a{@apply flex-grow h-full py-5}.admin-chapter-section .nav-links .sub-chapters-container li div{@apply flex gap-4 h-fit}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(1){@apply text-custom-blue-light}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(2){@apply text-custom-red}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(3){@apply rotate-45}.admin-chapter-section .nav-links .chapter-test-item{@apply rounded-md px-6 font-bold text-lg 
+        gap-2 sm:gap-4 h-fit sm:h-auto min-h-16}.admin-chapter-section .nav-links .sub-chapters-container li a{@apply flex-grow h-full py-5}.admin-chapter-section .nav-links .sub-chapters-container li div{@apply flex gap-4 h-fit}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(1){@apply text-custom-blue-light}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(2){@apply text-custom-red}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(3){@apply rotate-45}.admin-chapter-section .nav-links .chapter-test-item{@apply rounded-md px-6 font-bold text-lg
       bg-white hover:shadow-md flex w-full
       sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-16}.admin-chapter-section .nav-links .chapter-test-item a{@apply w-full h-full py-5}.admin-chapter-section .button-container{@apply flex gap-2 sm:mt-8 w-full max-w-7xl
@@ -129,29 +129,29 @@
       py-3.5 rounded-lg bg-custom-blue-base
       w-52 sm:w-56}.admin-sub-chapter-section{@apply flex flex-col flex-grow pb-28 max-h-screen h-screen bg-custom-white-dark
   overflow-y-auto overflow-x-hidden p-12 gap-10 items-center
-  pt-32 py-10 lg:py-12 
+  pt-32 py-10 lg:py-12
   px-6 sm:px-8 md:px-12}.admin-sub-chapter-section>.header{@apply flex items-start max-w-7xl
     w-full min-h-14 gap-6}.admin-sub-chapter-section>.header .back-btn{@apply text-3xl}.admin-sub-chapter-section>.header h1{@apply text-2xl font-extrabold text-left flex-grow}.admin-sub-chapter-section>.header .edit-content-btn{@apply text-base font-bold bg-custom-blue-base text-white
-      p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-sub-chapter-section>.header .edit-content-btn svg{@apply block sm:hidden text-xl}.admin-sub-chapter-section>.header .edit-content-btn span{@apply hidden sm:block}.admin-sub-chapter-section>.header .edit-title-btn{@apply text-xl text-custom-blue-light hover:bg-custom-gray-base
       rounded-full p-3}.admin-sub-chapter-section>.edit-title-form{@apply flex max-w-7xl w-full items-center bg-white p-2
-    rounded-md min-h-14 flex-col sm:flex-row}.admin-sub-chapter-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-sub-chapter-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-sub-chapter-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-sub-chapter-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base 
+    rounded-md min-h-14 flex-col sm:flex-row}.admin-sub-chapter-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-sub-chapter-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-sub-chapter-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-sub-chapter-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base
         rounded-md text-white}.admin-sub-chapter-section>.edit-title-form .btn-container button[type=button]{@apply text-black
-        rounded-md bg-custom-white-darker}.admin-students-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+        rounded-md bg-custom-white-darker}.admin-students-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden items-center
   pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-students-container>.header{@apply flex justify-between items-center mb-12 w-full gap-4}.admin-students-container>.header h1{@apply font-extrabold text-2xl}.admin-students-container>.header>button{@apply bg-custom-blue-base text-white
-      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
-      rounded-lg sm:rounded-md}.admin-students-container>.header>button svg{@apply block sm:hidden text-xl}.admin-students-container>.header>button span{@apply hidden sm:block}.admin-students-container .no-course{@apply text-lg}.admin-students-container .student-table{@apply grid grid-cols-[5fr_1fr] gap-3 w-full}.admin-students-container .student-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-      font-semibold mb-4 hidden sm:grid}.admin-students-container .student-table .table-header p{@apply font-extrabold text-lg text-center}.admin-students-container .student-table .table-header p:nth-child(1){@apply justify-self-start}.admin-students-container .student-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center 
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
+      rounded-lg sm:rounded-md}.admin-students-container>.header>button svg{@apply block sm:hidden text-xl}.admin-students-container>.header>button span{@apply hidden sm:block}.admin-students-container .no-course{@apply text-lg}.admin-students-container .student-table{@apply grid grid-cols-[5fr_1fr] gap-3 w-full}.admin-students-container .student-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
+      font-semibold mb-4 hidden sm:grid}.admin-students-container .student-table .table-header p{@apply font-extrabold text-lg text-center}.admin-students-container .student-table .table-header p:nth-child(1){@apply justify-self-start}.admin-students-container .student-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center
       bg-white rounded-md cursor-pointer hover:shadow-md duration-200
       flex flex-col sm:grid gap-1 p-6 sm:py-5 sm:px-10
       border-2 border-custom-gray-base}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(1){@apply justify-self-start font-bold sm:font-normal}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(2){@apply sm:font-bold text-xs sm:text-lg}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(2) span{@apply sm:hidden font-bold}.edit-student-form{@apply grid gap-4 grid-cols-1 md:grid-cols-2
   sm:pb-10 lg:pt-12 mx-6 md:mx-12}.edit-student-form>.header{@apply mb-4 col-span-full flex items-center gap-4}.edit-student-form>.header button{@apply text-2xl}.edit-student-form>.header h1{@apply text-2xl font-extrabold}.edit-student-form h2{@apply col-span-full text-lg font-bold}.edit-student-form h2:nth-of-type(n + 2){@apply mt-6}.edit-student-form>.username{@apply text-lg font-bold col-span-full}.edit-student-form>.fields{@apply col-span-1 w-full flex flex-col gap-2}.edit-student-form>.fields label{@apply mt-2 text-sm font-bold indent-1}.edit-student-form>.fields label span{@apply text-custom-red font-bold}.edit-student-form>.fields input,.edit-student-form>.fields select{@apply bg-white rounded-md p-2 h-10 border-[1px]
       border-custom-gray-base w-full}.edit-student-form>.fields input{@apply cursor-text}.edit-student-form>.fields select{@apply cursor-pointer}.edit-student-form>.fields input:-moz-read-only{@apply cursor-not-allowed bg-custom-white-base}.edit-student-form>.fields input:read-only{@apply cursor-not-allowed bg-custom-white-base}.edit-student-form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
     bg-red-200 border-2 border-red-700 h-fit}.edit-student-form .btn-container{@apply col-start-1 md:col-start-2 flex w-full justify-end
-    items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4}.edit-student-form .btn-container button[type=submit]{@apply w-full sm:w-40 bg-custom-blue-base text-base font-bold 
+    items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4}.edit-student-form .btn-container button[type=submit]{@apply w-full sm:w-40 bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.edit-student-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.edit-student-form .btn-container button[type=button]{@apply w-full sm:w-40 bg-custom-gray-base text-base font-bold 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.edit-student-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.edit-student-form .btn-container button[type=button]{@apply w-full sm:w-40 bg-custom-gray-base text-base font-bold
       text-black rounded-lg py-2.5 h-12}.reset-student-password{@apply grid gap-4 grid-cols-1 md:grid-cols-2
   sm:pb-10 lg:pt-12 mx-6 md:mx-12 mb-8}.reset-student-password h2{@apply col-span-full text-lg font-bold}.reset-student-password>.username{@apply text-lg font-bold col-span-full}.reset-student-password>.fields{@apply col-span-1 w-full flex flex-col gap-2}.reset-student-password>.fields label{@apply mt-2 text-sm font-bold indent-1}.reset-student-password>.fields input{@apply bg-white rounded-md p-2 h-10 border-[1px]
       border-custom-gray-base w-full cursor-text outline-none}.reset-student-password>.btn-container{@apply col-start-1 flex gap-5 items-center justify-end mr-4}.reset-student-password>.btn-container button{@apply font-medium flex gap-1.5 items-center leading-3}.reset-student-password>.btn-container button:disabled{@apply opacity-50}.confirm-reset-student-password-modal{@apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
@@ -162,14 +162,14 @@
     col-span-1}.add-student-form .fields label{@apply mt-2 text-sm font-bold indent-1 w-fit}.add-student-form .fields label span{@apply text-custom-red font-bold}.add-student-form .fields input,.add-student-form .fields select{@apply bg-white rounded-md p-2 h-10 border-[1px]
       border-custom-gray-base w-full}.add-student-form .fields select,.add-student-form .fields .course-select input{@apply cursor-pointer}.add-student-form .fields .course-select{@apply w-full relative}.add-student-form .fields .course-select:before{@apply absolute bg-white rounded-md p-2 cursor-pointer border-[1px]
         border-custom-gray-base content-[attr(course-name)] h-full w-full
-        overflow-hidden pointer-events-none text-ellipsis whitespace-nowrap pr-8}.add-student-form .fields .course-select ul{@apply absolute top-full left-0 bg-white rounded-md 
+        overflow-hidden pointer-events-none text-ellipsis whitespace-nowrap pr-8}.add-student-form .fields .course-select ul{@apply absolute top-full left-0 bg-white rounded-md
         border-custom-gray-dark border-[1px] max-h-52
         overflow-y-auto p-1 flex flex-col gap-1 translate-y-0.5}.add-student-form .fields .course-select ul li{@apply hover:bg-custom-white-darker p-1.5 cursor-pointer rounded}.add-student-form .student-address{@apply col-span-full}.add-student-form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
     bg-red-200 border-2 border-red-700 h-fit}.add-student-form .btn-container{@apply md:col-start-2 flex w-full justify-end
-    items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4}.add-student-form .btn-container button[type=submit]{@apply w-full sm:w-40 bg-custom-blue-base text-base font-bold 
+    items-center mt-4 flex-col sm:flex-row gap-2 sm:gap-4}.add-student-form .btn-container button[type=submit]{@apply w-full sm:w-40 bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-student-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.add-student-form .btn-container button[type=button]{@apply w-full sm:w-40 bg-custom-gray-base text-base font-bold 
-      text-black rounded-lg py-2.5 h-12}.admin-students-layout{@apply flex flex-col flex-grow h-screen max-h-screen 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-student-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.add-student-form .btn-container button[type=button]{@apply w-full sm:w-40 bg-custom-gray-base text-base font-bold
+      text-black rounded-lg py-2.5 h-12}.admin-students-layout{@apply flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden
   pt-28 pb-6 lg:pt-0 lg:pb-10}.admin-students-layout>.top-search-bar{@apply lg:w-full flex m-0 gap-0 sm:gap-1 mx-6 md:mx-12 lg:mx-0}.admin-students-layout>.top-search-bar>input{@apply flex-grow py-3 h-full outline-none
       min-w-8 px-4 sm:px-6 md:px-12}.admin-students-layout>.top-search-bar>button{@apply bg-white text-xl py-4
@@ -180,21 +180,21 @@
         absolute top-full left-0 w-full mt-0.5 text-sm sm:text-base
         shadow-md}.admin-students-layout>.header .mobile-nav ul::before{@apply content-[""] w-full bg-transparent
           absolute top-0 left-0 h-12 -translate-y-full}.admin-students-layout>.header .mobile-nav ul li{@apply p-2 rounded-sm w-full font-normal cursor-pointer text-sm}.admin-students-layout>.header .mobile-nav ul li:hover{@apply bg-custom-gray-base}.all-students-table{@apply grid gap-3 mx-6 md:mx-12 grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
-  xl:grid-cols-[1fr_2fr_2fr_repeat(3,1fr)]}.all-students-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
-    font-semibold mb-4 hidden xl:grid}.all-students-table .table-header p{@apply font-extrabold text-base text-center}.all-students-table li:nth-child(n+2){@apply justify-items-center bg-white rounded-md cursor-pointer 
+  xl:grid-cols-[1fr_2fr_2fr_repeat(3,1fr)]}.all-students-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
+    font-semibold mb-4 hidden xl:grid}.all-students-table .table-header p{@apply font-extrabold text-base text-center}.all-students-table li:nth-child(n+2){@apply justify-items-center bg-white rounded-md cursor-pointer
     hover:shadow-md duration-200 p-5 xl:py-5 xl:px-10 gap-2
     flex flex-col xl:grid xl:grid-cols-subgrid xl:col-span-full
     border-2 border-custom-gray-base items-start xl:items-center}.all-students-table li:nth-child(n+2) p{@apply text-center}.all-students-table li:nth-child(n+2) p span{@apply font-bold text-sm xl:hidden}.all-students-table li:nth-child(n+2) p:nth-child(5){@apply rounded-md text-xs font-bold py-1 px-2 h-fit w-fit
       -order-1 xl:order-none}.all-students-table li:nth-child(n+2) div{@apply flex self-end xl:self-center justify-center items-center gap-4 h-fit}.all-students-table li:nth-child(n+2) div button svg{@apply text-xl}.all-students-table li:nth-child(n+2) div button:nth-child(1) svg{@apply text-custom-blue-light}.all-students-table li:nth-child(n+2) div button:nth-child(2) svg{@apply text-custom-red}.all-students-table li:nth-child(n+2) div button:nth-child(3) svg{@apply text-custom-green-base}.student-profile{@apply grid w-full gap-4 grid-cols-1 md:grid-cols-2}.student-profile .header{@apply mb-4 col-span-full flex items-center gap-4}.student-profile .header button{@apply text-2xl}.student-profile .header h1{@apply text-2xl font-extrabold flex-grow}.student-profile .header button:last-child{@apply bg-custom-blue-base text-white
-      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.student-profile .header button:last-child:disabled{@apply opacity-80 brightness-90}.student-profile .header button:last-child svg{@apply block sm:hidden text-xl}.student-profile .header button:last-child span{@apply hidden sm:block}.student-profile h2{@apply col-span-full text-lg font-bold}.student-profile h2:nth-of-type(n + 2){@apply mt-6}.student-profile .fields{@apply w-full flex flex-col gap-2 col-span-1}.student-profile .fields label{@apply mt-2 text-sm font-bold indent-1 w-fit}.student-profile .fields label span{@apply text-custom-red font-bold}.student-profile .fields input:disabled{@apply bg-custom-white-base rounded-md p-2 h-10 border-[1px]
       border-custom-gray-base w-full}.exam-details-table{@apply grid gap-3 mx-6 md:mx-12
-  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] lg:grid-cols-4}.exam-details-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+  grid-cols-[repeat(auto-fill,minmax(275px,1fr))] lg:grid-cols-4}.exam-details-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden lg:grid}.exam-details-table .table-header p{@apply font-extrabold text-base text-center}.exam-details-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
     rounded-md cursor-pointer border-2 border-custom-gray-base
     hover:shadow-md duration-200 items-start lg:items-center
     lg:col-span-full flex flex-col lg:grid p-5 xl:py-5 xl:px-10}.exam-details-table li:nth-child(n+2) p{@apply text-center}.exam-details-table li:nth-child(n+2) p span{@apply font-bold text-sm lg:hidden}.exam-details-table li:nth-child(n+2) p:nth-child(3){@apply rounded-md text-xs font-bold py-1 px-2 h-fit
-      -order-1 lg:order-none mb-1 lg:mb-0}.exam-details-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit 
+      -order-1 lg:order-none mb-1 lg:mb-0}.exam-details-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit
       text-custom-blue-light font-bold self-end lg:self-center
       mt-2 lg:mt-0}.exam-details-table li:nth-child(n+2) button p{@apply whitespace-nowrap}.exam-details-table li:nth-child(n+2) button svg{@apply text-xl}.student-exam-details-table{@apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col}.student-exam-details-table>.header{@apply flex text-2xl font-extrabold gap-4 items-start}.student-exam-details-table>.header button{@apply my-1}.student-exam-details-table>table{@apply text-left mt-4 bg-white shadow-md rounded-lg}.student-exam-details-table>table thead{@apply hidden md:table-header-group}.student-exam-details-table>table tr{@apply border-b-2 border-custom-white-darker
       flex flex-col md:table-row p-4 py-6 md:p-0
@@ -202,22 +202,22 @@
       text-sm}.student-exam-details-table>table .title{@apply md:font-bold}.student-exam-details-table>table .status{@apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
       uppercase}.latest-registrations-table{@apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
   grid-cols-[repeat(auto-fit,minmax(275px,1fr))]
-  xl:grid-cols-[15%,10%,20%,20%,10%,auto,5%]}.latest-registrations-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+  xl:grid-cols-[15%,10%,20%,20%,10%,auto,5%]}.latest-registrations-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden xl:grid}.latest-registrations-table .table-header p{@apply font-extrabold text-base text-center}.latest-registrations-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white
     rounded-md cursor-pointer hover:shadow-md duration-200
-    border-2 border-custom-gray-base flex flex-col 
+    border-2 border-custom-gray-base flex flex-col
     xl:grid xl:col-span-full items-start gap-1 xl:gap-0
     p-6 xl:py-5 2xl:px-10}.latest-registrations-table li:nth-child(n+2) p{@apply xl:text-center}.latest-registrations-table li:nth-child(n+2) p::before{@apply xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
       text-sm}.latest-registrations-table li:nth-child(n+2) p:nth-child(4){@apply break-all}.latest-registrations-table li:nth-child(n+2) p:nth-child(6){@apply rounded-md text-xs font-bold py-1 px-2 h-fit
       -order-1 xl:order-none mb-1 xl:mb-0}.latest-registrations-table li:nth-child(n+2) p:nth-child(6)::before{@apply hidden}.latest-registrations-table li:nth-child(n+2) button:last-child{@apply text-custom-green-base text-xl self-end xl:self-center}.latest-completions-table{@apply grid gap-3 xl:gap-x-6 mx-6 md:mx-12
   grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
   lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
-  xl:grid-cols-5}.latest-completions-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md 
+  xl:grid-cols-5}.latest-completions-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden xl:grid}.latest-completions-table .table-header p{@apply font-extrabold text-base text-center}.latest-completions-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white duration-200
     p-6 xl:py-5 xl:px-10 rounded-md cursor-pointer hover:shadow-md
     flex flex-col xl:grid items-start xl:items-center xl:col-span-full
     border-2 border-custom-gray-base gap-1}.latest-completions-table li:nth-child(n+2) p{@apply xl:text-center}.latest-completions-table li:nth-child(n+2)>p::before{@apply xl:hidden content-[attr(col-title)_":_"] font-bold capitalize
-      text-sm}.latest-completions-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit 
+      text-sm}.latest-completions-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit
       text-custom-blue-light font-bold self-end xl:self-center
       mt-4 xl:mt-0}.latest-completions-table li:nth-child(n+2) button p{@apply whitespace-nowrap}.latest-completions-table li:nth-child(n+2) button svg{@apply text-xl}.student-completions-table{@apply gap-3 mx-6 sm:mx-12 my-4 lg:my-12 flex flex-col}.student-completions-table>.header{@apply flex text-2xl font-extrabold gap-4 items-start}.student-completions-table>.header button{@apply my-1}.student-completions-table>.progress{@apply mt-4 p-6 bg-white rounded-md w-full shadow-md
     max-w-96}.student-completions-table>.progress h3{@apply font-bold text-base mb-2}.student-completions-table>.progress .progress-bar{@apply flex items-center gap-2}.student-completions-table>.progress .progress-bar .progress-graph{@apply bg-custom-white-darker h-4 rounded-full overflow-hidden relative
@@ -228,103 +228,114 @@
         self-end md:self-center mt-4 lg:mt-0}.student-completions-table>table th:nth-child(5) button,.student-completions-table>table td:nth-child(5) button{@apply flex flex-nowrap whitespace-nowrap items-center
           gap-2}.student-completions-table>table th:nth-child(5) button svg,.student-completions-table>table td:nth-child(5) button svg{@apply text-xl}.student-completions-table>table th:nth-child(5)::before,.student-completions-table>table td:nth-child(5)::before{@apply hidden}.student-completions-table>table th{@apply whitespace-nowrap}.student-completions-table>table th:nth-child(1){@apply md:w-[30%]}.student-completions-table>table th:nth-child(3){@apply md:w-[10%]}.student-completions-table>table th:nth-child(5){@apply md:w-[20%]}.student-completions-table>table td::before{@apply md:hidden content-[attr(data-cell)_":_"] font-bold capitalize
       text-sm}.student-completions-table>table td:nth-child(2){@apply flex items-center md:table-cell flex-wrap}.student-completions-table>table .title{@apply md:font-bold}.student-completions-table>table .progress{@apply rounded-md text-xs w-fit px-2 py-1 font-extrabold
-      uppercase}.create-section-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+      uppercase}.create-section-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
   items-center bg-[#00000044] z-[999999]}.create-section-form form{@apply flex flex-col gap-2 bg-white
     relative overflow-y-auto
     h-screen w-screen sm:h-auto sm:w-full
     sm:max-h-[95%] sm:max-w-md rounded-none sm:rounded-lg
     px-4 py-6 sm:p-8}.create-section-form form .close-btn{@apply absolute w-fit right-4 top-6 sm:right-6}.create-section-form form .close-btn svg{@apply text-3xl}.create-section-form form h3{@apply text-2xl font-extrabold mb-4 mr-16}.create-section-form form label{@apply mt-2 text-sm font-bold indent-1}.create-section-form form label span{@apply text-custom-red font-bold}.create-section-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base}.create-section-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.create-section-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
+      bg-red-200 border-2 border-red-700}.create-section-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5
       flex items-center justify-center h-12 disabled:cursor-not-allowed
-      mt-auto sm:mt-8}.create-section-form form button[type=submit] svg{@apply text-2xl animate-spin}.created-section-modal{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044]}.created-section-modal>div{@apply flex flex-col p-8 rounded-lg bg-white w-full 
+      mt-auto sm:mt-8}.create-section-form form button[type=submit] svg{@apply text-2xl animate-spin}.created-section-modal{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044]}.created-section-modal>div{@apply flex flex-col p-8 rounded-lg bg-white w-full
     max-w-md z-10 relative max-h-[95%] overflow-y-auto
-    justify-center}.created-section-modal>div h3{@apply text-xl font-extrabold mb-2}.created-section-modal>div p{@apply text-sm}.created-section-modal>div button{@apply w-full bg-custom-blue-base text-base font-bold 
+    justify-center}.created-section-modal>div h3{@apply text-xl font-extrabold mb-2}.created-section-modal>div p{@apply text-sm}.created-section-modal>div button{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5 mt-10
-      flex items-center justify-center h-12}.admin-courses-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+      flex items-center justify-center h-12}.admin-courses-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden items-center
   pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-courses-container>.header{@apply flex justify-between items-center mb-6 sm:mb-12
     w-full gap-4}.admin-courses-container>.header h1{@apply font-extrabold text-2xl}.admin-courses-container>.header>button{@apply bg-custom-blue-base text-white
-      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-courses-container>.header>button svg{@apply block sm:hidden text-xl}.admin-courses-container>.header>button span{@apply hidden sm:block}.admin-courses-container .course-table{@apply flex-col gap-6 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
     w-full}.admin-courses-container .course-table li{@apply flex flex-col justify-start relative
       gap-x-8 gap-2 bg-white rounded-lg cursor-pointer
       duration-500 border-2 border-custom-gray-base}.admin-courses-container .course-table li .status{@apply rounded-md text-xs font-extrabold py-1 px-2 h-fit
         absolute z-10 top-3 right-3 border-[1.5px]}.admin-courses-container .course-table li>img{@apply object-cover w-full max-h-44 text-center leading-[11rem]
-        min-h-44 rounded-tl-lg rounded-tr-lg}.admin-courses-container .course-table li>p{@apply text-sm}.admin-courses-container .course-table li .course-details{@apply flex flex-col px-4 flex-grow gap-2 my-1}.admin-courses-container .course-table li .course-details .course-name{@apply w-fit}.admin-courses-container .course-table li .course-details .course-type span{@apply font-bold}.admin-courses-container .course-table li .course-details .course-desc{@apply text-xs mb-2}.admin-courses-container .course-table li>.bottom{@apply flex justify-between items-center px-4 pb-4 mt-4}.admin-courses-container .course-table li>.bottom .course-price{@apply font-bold text-xl flex-grow flex items-end}.admin-courses-container .course-table li>.bottom .btn-container{@apply flex justify-center items-center gap-4 h-fit}.admin-courses-container .course-table li>.bottom .btn-container>button svg{@apply text-xl}.admin-courses-container .course-table li>.bottom .btn-container>button:nth-child(1) svg{@apply text-custom-blue-light}.admin-courses-container .course-table li>.bottom .btn-container>button:nth-child(2) svg{@apply text-custom-red}.admin-courses-container .course-name-tooltip{@apply max-w-72}.add-course-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.add-course-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+        min-h-44 rounded-tl-lg rounded-tr-lg}.admin-courses-container .course-table li>p{@apply text-sm}.admin-courses-container .course-table li .course-details{@apply flex flex-col px-4 flex-grow gap-2 my-1}.admin-courses-container .course-table li .course-details .course-name{@apply w-fit}.admin-courses-container .course-table li .course-details .course-type span{@apply font-bold}.admin-courses-container .course-table li .course-details .course-desc{@apply text-xs mb-2}.admin-courses-container .course-table li>.bottom{@apply flex justify-between items-center px-4 pb-4 mt-4}.admin-courses-container .course-table li>.bottom .course-price{@apply font-bold text-xl flex-grow flex items-end}.admin-courses-container .course-table li>.bottom .btn-container{@apply flex justify-center items-center gap-4 h-fit}.admin-courses-container .course-table li>.bottom .btn-container>button svg{@apply text-xl}.admin-courses-container .course-table li>.bottom .btn-container>button:nth-child(1) svg{@apply text-custom-blue-light}.admin-courses-container .course-table li>.bottom .btn-container>button:nth-child(2) svg{@apply text-custom-red}.admin-courses-container .course-name-tooltip{@apply max-w-72}.add-course-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.add-course-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full
     max-w-xl overflow-y-auto sm:max-h-[95%]
     sm:rounded-lg fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.add-course-form form .close-btn{@apply absolute w-fit right-4 sm:right-6 top-6}.add-course-form form .close-btn svg{@apply text-3xl}.add-course-form form h3{@apply text-2xl font-extrabold mb-4}.add-course-form form label{@apply mt-2 text-sm font-bold indent-1}.add-course-form form label span{@apply text-red-800 font-bold}.add-course-form form .upload-img-box{@apply flex flex-col cursor-pointer text-base items-center py-8 px-3 rounded-md
       bg-custom-white-dark border-[1px] border-custom-gray-base m-0 mb-4}.add-course-form form .upload-img-box span{@apply text-black font-bold text-3xl}.add-course-form form input,.add-course-form form select,.add-course-form form textarea{@apply bg-white rounded-md border-custom-gray-base border-[1px]}.add-course-form form input,.add-course-form form select{@apply p-2 h-10}.add-course-form form textarea{@apply p-2 min-h-20 resize-none}.add-course-form form select{@apply cursor-pointer}.add-course-form form .img-to-upload-container{@apply w-full relative}.add-course-form form .img-to-upload-container>button{@apply absolute top-0 right-0 text-3xl translate-x-1/2
         -translate-y-1/2 bg-white rounded-full mb-4}.add-course-form form .img-to-upload-container>img{@apply object-contain max-h-64}.add-course-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.add-course-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-course-form form button[type=submit] svg{@apply text-2xl animate-spin}.edit-course-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.edit-course-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+      bg-red-200 border-2 border-red-700}.add-course-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-course-form form button[type=submit] svg{@apply text-2xl animate-spin}.edit-course-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.edit-course-form form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full
     max-w-xl overflow-y-auto sm:max-h-[95%]
     sm:rounded-lg fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.edit-course-form form .close-btn{@apply absolute w-fit right-4 sm:right-6 top-6}.edit-course-form form .close-btn svg{@apply text-3xl}.edit-course-form form h3{@apply text-2xl font-extrabold}.edit-course-form form .course-name{@apply text-lg mb-4}.edit-course-form form .course-name span{@apply font-bold}.edit-course-form form>label{@apply mt-2 text-sm font-bold indent-1}.edit-course-form form>label span{@apply text-custom-red font-bold}.edit-course-form form>input,.edit-course-form form>select,.edit-course-form form>textarea{@apply bg-white rounded-md p-2 h-10 cursor-text border-[1px]
-      border-custom-gray-base}.edit-course-form form>select{@apply cursor-pointer}.edit-course-form form>textarea{@apply p-2 min-h-20 resize-none}.edit-course-form form .course-img-box{@apply w-full max-h-56 h-fit rounded-md relative mb-4}.edit-course-form form .course-img-box>label{@apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)] 
+      border-custom-gray-base}.edit-course-form form>select{@apply cursor-pointer}.edit-course-form form>textarea{@apply p-2 min-h-20 resize-none}.edit-course-form form .course-img-box{@apply w-full max-h-56 h-fit rounded-md relative mb-4}.edit-course-form form .course-img-box>label{@apply h-full w-full absolute top-0 left-0 bg-[rgba(0,0,0,0.7)]
         opacity-0 flex flex-col text-white cursor-pointer rounded-md
         items-center justify-center gap-1}.edit-course-form form .course-img-box>label svg{@apply text-4xl}.edit-course-form form .course-img-box>label span{@apply font-bold}.edit-course-form form .course-img-box:hover>label{@apply opacity-100 duration-500 transition-all}.edit-course-form form .course-img-box>input[type=file]{@apply hidden}.edit-course-form form .course-img-box>img{@apply object-cover rounded-lg self-center h-56 max-h-56 w-full}.edit-course-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.edit-course-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
-      flex items-center justify-center min-h-12 disabled:cursor-not-allowed}.edit-course-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-coupons-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+      bg-red-200 border-2 border-red-700}.edit-course-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
+      flex items-center justify-center min-h-12 disabled:cursor-not-allowed}.edit-course-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-coupons-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden
   pt-32 py-10 lg:py-12 px-6 sm:px-8 md:px-12}.admin-coupons-container>.header{@apply justify-between items-center mb-12 flex gap-4}.admin-coupons-container>.header h1{@apply font-extrabold text-2xl}.admin-coupons-container>.header>button{@apply bg-custom-blue-base text-white
-      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap 
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-coupons-container>.header>button svg{@apply block sm:hidden text-xl}.admin-coupons-container>.header>button span{@apply hidden sm:block}.admin-coupons-container .coupon-table{@apply gap-3 grid lg:grid-cols-6
-    grid-cols-[repeat(auto-fill,minmax(275px,1fr))]}.admin-coupons-container .coupon-table li{@apply justify-items-center lg:grid-cols-subgrid lg:col-span-full}.admin-coupons-container .coupon-table li p{@apply lg:text-center}.admin-coupons-container .coupon-table .table-header{@apply text-lg font-extrabold gap-x-8 mb-4 px-4 
+    grid-cols-[repeat(auto-fill,minmax(275px,1fr))]}.admin-coupons-container .coupon-table li{@apply justify-items-center lg:grid-cols-subgrid lg:col-span-full}.admin-coupons-container .coupon-table li p{@apply lg:text-center}.admin-coupons-container .coupon-table .table-header{@apply text-lg font-extrabold gap-x-8 mb-4 px-4
       justify-items-center hidden lg:grid}.admin-coupons-container .coupon-table li:nth-child(n+2){@apply bg-white p-4 lg:py-5 lg:px-3 rounded-md hover:shadow-md
       flex flex-col gap-1 lg:grid items-start min-h-[4.5rem]
       border-2 border-custom-gray-base}.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(1){@apply lg:font-extrabold}.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5){@apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit
         -order-1 lg:order-none}.admin-coupons-container .coupon-table li:nth-child(n+2) p::before{@apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
         text-sm}.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5)::before{@apply hidden}.admin-coupons-container .coupon-table div{@apply flex justify-center items-center gap-4 h-fit
-      self-end lg:self-center mt-4 lg:mt-0}.admin-coupons-container .coupon-table div button svg{@apply text-xl}.admin-coupons-container .coupon-table div button:nth-child(1) svg{@apply text-custom-blue-light}.admin-coupons-container .coupon-table div button:nth-child(2) svg{@apply text-custom-red}.add-coupon-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.add-coupon-form form{@apply flex flex-col gap-2 bg-white w-full overflow-y-auto 
+      self-end lg:self-center mt-4 lg:mt-0}.admin-coupons-container .coupon-table div button svg{@apply text-xl}.admin-coupons-container .coupon-table div button:nth-child(1) svg{@apply text-custom-blue-light}.admin-coupons-container .coupon-table div button:nth-child(2) svg{@apply text-custom-red}.add-coupon-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.add-coupon-form form{@apply flex flex-col gap-2 bg-white w-full overflow-y-auto
     fixed h-screen top-0 left-0 sm:max-w-md sm:relative
     sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8}.add-coupon-form form .close-btn{@apply absolute w-fit right-6 top-6}.add-coupon-form form .close-btn svg{@apply text-3xl}.add-coupon-form form h3{@apply text-2xl font-extrabold mb-4}.add-coupon-form form label{@apply mt-2 text-sm font-bold indent-1}.add-coupon-form form label span{@apply text-custom-red font-bold}.add-coupon-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base w-full}.add-coupon-form form input#coupon-code{@apply lowercase}.add-coupon-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.add-coupon-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-coupon-form form button[type=submit] svg{@apply text-2xl animate-spin}.edit-coupon-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
+      bg-red-200 border-2 border-red-700}.add-coupon-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.add-coupon-form form button[type=submit] svg{@apply text-2xl animate-spin}.edit-coupon-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
   items-center bg-[#00000044] z-[999999]}.edit-coupon-form form{@apply flex flex-col rounded-lg gap-2 bg-white w-full
     overflow-y-auto fixed h-screen top-0 left-0 sm:max-w-md sm:relative
     sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8}.edit-coupon-form form .close-btn{@apply absolute w-fit right-6 top-6}.edit-coupon-form form .close-btn svg{@apply text-3xl}.edit-coupon-form form h3{@apply text-2xl font-extrabold}.edit-coupon-form form .coupon-code{@apply text-lg mb-4}.edit-coupon-form form .coupon-code span{@apply font-bold}.edit-coupon-form form label{@apply mt-2 text-sm font-bold indent-1}.edit-coupon-form form label span{@apply text-custom-red font-bold}.edit-coupon-form form input,.edit-coupon-form form select{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base}.edit-coupon-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.edit-coupon-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.edit-coupon-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-billing-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+      bg-red-200 border-2 border-red-700}.edit-coupon-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.edit-coupon-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-billing-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden
-  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-billing-container .header{@apply flex justify-between items-center mb-6 lg:mb-12}.admin-billing-container .header h1{@apply font-extrabold text-2xl}.admin-billing-container .billing-table{@apply flex-col gap-3 grid lg:grid-cols-6 
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-billing-container .header{@apply flex justify-between items-center mb-6 lg:mb-12}.admin-billing-container .header h1{@apply font-extrabold text-2xl}.admin-billing-container .billing-table{@apply flex-col gap-3 grid lg:grid-cols-6
     md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
     grid-cols-[repeat(auto-fill,minmax(275px,1fr))]}.admin-billing-container .billing-table li{@apply place-items-start}.admin-billing-container .billing-table li p{@apply text-center}.admin-billing-container .billing-table .table-header{@apply text-base font-extrabold gap-x-8 grid-cols-subgrid
       mb-4 px-4 justify-items-center hidden lg:grid lg:col-span-full}.admin-billing-container .billing-table li:nth-child(n+2){@apply bg-white py-5 px-6 rounded-md items-start lg:place-items-center
       hover:shadow-md border-2 lg:grid lg:grid-cols-subgrid flex flex-col
       lg:col-span-full border-custom-gray-base min-h-[4.5rem]}.admin-billing-container .billing-table li:nth-child(n+2) p{@apply text-left lg:text-center}.admin-billing-container .billing-table li:nth-child(n+2) p:first-child{@apply lg:break-all}.admin-billing-container .billing-table li:nth-child(n+2) p::before{@apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
-        text-sm}.admin-billing-container .billing-table button svg{@apply text-xl text-custom-blue-light}.admin-settings-section{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
+        text-sm}.admin-billing-container .billing-table button svg{@apply text-xl text-custom-blue-light}.admin-affiliations-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
+  bg-custom-white-dark overflow-x-hidden items-center
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-affiliations-container>.header{@apply flex justify-between items-center mb-12 w-full gap-4}.admin-affiliations-container>.header h1{@apply font-extrabold text-2xl}.admin-affiliations-container>.header>button{@apply bg-custom-blue-base text-white
+      text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
+      rounded-lg sm:rounded-md}.admin-affiliations-container>.header>button svg{@apply block sm:hidden text-xl}.admin-affiliations-container>.header>button span{@apply hidden sm:block}.admin-affiliations-container .affiliation-table{@apply w-full grid grid-cols-4 gap-3}.admin-affiliations-container .affiliation-table li{@apply grid grid-cols-subgrid col-span-full px-6}.admin-affiliations-container .affiliation-table li p{@apply text-left lg:text-center}.admin-affiliations-container .affiliation-table li:first-child{@apply font-bold}.admin-affiliations-container .affiliation-table li:nth-child(n+2){@apply bg-white py-5 rounded-md items-start lg:place-items-center border-2}.affiliation-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.affiliation-form form{@apply flex flex-col gap-2 bg-white w-full overflow-y-auto
+    fixed h-screen top-0 left-0 sm:max-w-md sm:relative
+    sm:max-h-[95%] sm:rounded-lg sm:h-fit px-4 py-6 sm:p-8}.affiliation-form form .close-btn{@apply absolute w-fit right-6 top-6}.affiliation-form form .close-btn svg{@apply text-3xl}.affiliation-form form h3{@apply text-2xl font-extrabold mb-4}.affiliation-form form label{@apply mt-2 text-sm font-bold indent-1}.affiliation-form form label span{@apply text-custom-red font-bold}.affiliation-form form input{@apply bg-white rounded-md p-2 h-10 cursor-text border-[1px]
+      border-custom-gray-base w-full}.affiliation-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
+      bg-red-200 border-2 border-red-700}.affiliation-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.affiliation-form form button[type=submit] svg{@apply text-2xl animate-spin}.admin-settings-section{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden items-center
   pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12}.admin-settings-section h1{@apply font-extrabold text-2xl mb-12 w-full}.admin-settings-form{@apply flex flex-col rounded-lg gap-2 bg-inherit
     w-full z-10 relative mb-12}.admin-settings-form>*{@apply max-w-xl}.admin-settings-form h2{@apply text-xl font-extrabold mb-2}.admin-settings-form label{@apply mt-2 text-sm font-bold indent-1}.admin-settings-form label span{@apply text-custom-red font-bold}.admin-settings-form input{@apply h-10}.admin-settings-form textarea{@apply min-h-16 h-16}.admin-settings-form .email-body-editor{@apply min-h-28}.admin-settings-form .email-body-editor .tiptap{@apply min-h-28 max-h-96 overflow-y-auto}.admin-settings-form .email-body-editor .tiptap[contenteditable=false]{@apply cursor-not-allowed}.admin-settings-form .email-body-editor .tiptap p{font-size:1rem !important}.admin-settings-form textarea,.admin-settings-form input,.admin-settings-form .email-body-editor{@apply bg-white rounded-md p-2 cursor-pointer border-[1px]
     border-custom-gray-base ml-0.5}.admin-settings-form textarea .tiptap,.admin-settings-form input .tiptap,.admin-settings-form .email-body-editor .tiptap{@apply focus:outline-none cursor-text}.admin-settings-form textarea[disabled],.admin-settings-form input[disabled],.admin-settings-form .email-body-editor[disabled]{@apply cursor-not-allowed bg-custom-white-base border-custom-white-darker}.admin-settings-form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700}.admin-settings-form .success-message{@apply text-custom-green-base font-bold p-2.5 mt-4
-    bg-custom-green-light border-2 border-custom-green-base}.admin-settings-form .btn-container{@apply flex w-full mt-4 gap-2 justify-end}.admin-settings-form .btn-container>button{@apply w-28 rounded-lg h-11 text-base font-bold}.admin-settings-form .btn-container .edit-btn{@apply bg-custom-blue-base  
-      text-white}.admin-settings-form .btn-container button[type=submit]{@apply bg-custom-blue-base  
+    bg-custom-green-light border-2 border-custom-green-base}.admin-settings-form .btn-container{@apply flex w-full mt-4 gap-2 justify-end}.admin-settings-form .btn-container>button{@apply w-28 rounded-lg h-11 text-base font-bold}.admin-settings-form .btn-container .edit-btn{@apply bg-custom-blue-base
+      text-white}.admin-settings-form .btn-container button[type=submit]{@apply bg-custom-blue-base
       text-white disabled:cursor-not-allowed
-      flex items-center justify-center}.admin-settings-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.admin-settings-form .btn-container .cancel-btn{@apply bg-custom-gray-base 
-      text-black}.test-setting-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.test-setting-form form{@apply flex flex-col p-8 gap-2 bg-white w-full 
+      flex items-center justify-center}.admin-settings-form .btn-container button[type=submit] svg{@apply text-2xl animate-spin}.admin-settings-form .btn-container .cancel-btn{@apply bg-custom-gray-base
+      text-black}.test-setting-form{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.test-setting-form form{@apply flex flex-col p-8 gap-2 bg-white w-full
     overflow-y-auto sm:max-h-[90%] sm:max-w-lg
     sm:rounded-lg fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.test-setting-form form .close-btn{@apply absolute w-fit right-6 top-6}.test-setting-form form .close-btn svg{@apply text-3xl}.test-setting-form form h3{@apply text-2xl font-extrabold mb-4 mr-16}.test-setting-form form label{@apply mt-2 text-sm font-bold indent-1}.test-setting-form form label span{@apply text-custom-red font-bold}.test-setting-form form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
       border-custom-gray-base}.test-setting-form form .error-message{@apply text-red-700 font-bold p-2.5 mt-4
-      bg-red-200 border-2 border-red-700}.test-setting-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
-      text-white rounded-lg py-2.5 mt-auto sm:mt-8 
+      bg-red-200 border-2 border-red-700}.test-setting-form form button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
+      text-white rounded-lg py-2.5 mt-auto sm:mt-8
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.test-setting-form form button[type=submit] svg{@apply text-2xl animate-spin}.upload-chapter-cover-modal{@apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
-  justify-center items-center top-0 left-0 z-[999999]}.upload-chapter-cover-modal>div{@apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full 
+  justify-center items-center top-0 left-0 z-[999999]}.upload-chapter-cover-modal>div{@apply flex flex-col p-8 rounded-xl gap-2 bg-white w-full
     z-10 overflow-y-auto sm:max-h-[90%] sm:max-w-lg
     sm:rounded-lg fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.upload-chapter-cover-modal>div .header{@apply flex gap-6 items-start max-w-full}.upload-chapter-cover-modal>div .header h3{@apply text-xl font-extrabold flex-grow}.upload-chapter-cover-modal>div .header .close-btn{@apply w-fit}.upload-chapter-cover-modal>div .header .close-btn svg{@apply text-3xl}.upload-chapter-cover-modal>div .upload-image-box{@apply relative bg-center bg-no-repeat bg-cover mt-3 rounded-md
@@ -332,49 +343,49 @@
         items-center justify-center gap-2 bg-[rgba(0,0,0,0.8)] duration-150
         absolute top-0 left-0}.upload-chapter-cover-modal>div .upload-image-box>label:hover{@apply bg-[rgba(0,0,0,0.7)]}.upload-chapter-cover-modal>div .upload-image-box>label svg{@apply text-4xl}.upload-chapter-cover-modal>div .upload-image-box>label span{@apply font-bold text-lg}.upload-chapter-cover-modal>div .upload-image-box>input{@apply hidden}.upload-chapter-cover-modal>div .error-message{@apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700}.upload-chapter-cover-modal>div .success-message{@apply text-custom-green-base font-bold p-2.5 mt-4
-      bg-custom-green-light border-2 border-custom-green-base}.upload-chapter-cover-modal>div .upload-btn{@apply w-full bg-custom-blue-base text-base font-bold 
+      bg-custom-green-light border-2 border-custom-green-base}.upload-chapter-cover-modal>div .upload-btn{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5 mt-auto sm:mt-8 gap-2
-      flex items-center justify-center h-12 disabled:cursor-not-allowed}.upload-chapter-cover-modal>div .upload-btn svg{@apply text-2xl animate-spin}.activate-section-modal{@apply w-screen h-screen top-0 left-0 absolute flex justify-center  
-  items-center bg-[#00000044] z-[999999]}.activate-section-modal>div{@apply flex flex-col p-8 bg-white overflow-y-auto 
+      flex items-center justify-center h-12 disabled:cursor-not-allowed}.upload-chapter-cover-modal>div .upload-btn svg{@apply text-2xl animate-spin}.activate-section-modal{@apply w-screen h-screen top-0 left-0 absolute flex justify-center
+  items-center bg-[#00000044] z-[999999]}.activate-section-modal>div{@apply flex flex-col p-8 bg-white overflow-y-auto
     justify-start sm:justify-center px-4 py-6 sm:p-8
     fixed sm:relative rounded-none sm:rounded-lg
-    w-full h-screen sm:h-fit sm:max-w-md sm:max-h-[95%]}.activate-section-modal>div .top{@apply flex items-start gap-2}.activate-section-modal>div .top h3{@apply text-xl font-extrabold mb-2 flex-grow mt-1 mr-16}.activate-section-modal>div .top button{@apply text-3xl}.activate-section-modal>div p{@apply text-base max-w-xs}.activate-section-modal>div>button{@apply w-full bg-custom-blue-base text-base font-bold 
+    w-full h-screen sm:h-fit sm:max-w-md sm:max-h-[95%]}.activate-section-modal>div .top{@apply flex items-start gap-2}.activate-section-modal>div .top h3{@apply text-xl font-extrabold mb-2 flex-grow mt-1 mr-16}.activate-section-modal>div .top button{@apply text-3xl}.activate-section-modal>div p{@apply text-base max-w-xs}.activate-section-modal>div>button{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5 mt-auto sm:mt-8
       flex items-center justify-center h-12 disabled:cursor-not-allowed}.activate-section-modal>div>button svg{@apply text-2xl animate-spin}.admin-policy{@apply w-full mb-20 flex flex-col}.admin-policy .header{@apply flex mb-4 gap-4 items-center}.admin-policy .header>h2{@apply text-xl font-extrabold}.admin-policy .header>.edit-btn{@apply text-custom-blue-light text-lg p-3}.admin-policy .header>.edit-btn:hover{@apply rounded-full bg-custom-white-darker}.admin-policy .policy-content{@apply focus:outline-none sm:py-10 sm:px-8 max-w-7xl bg-custom-white-base
   rounded-xl border-custom-white-darker border-2}.admin-policy .policy-content h2{@apply text-xl font-extrabold}.admin-policy .policy-content h3{@apply text-lg}.admin-policy .policy-content a{@apply underline text-custom-blue-light font-semibold}.admin-policy .policy-content img{@apply inline-block max-h-72 object-contain
-    max-w-full sm:max-w-screen-md}.admin-policy .policy-content iframe{@apply w-full max-w-7xl inline-block}.admin-policy .policy-content p{@apply min-h-5}.admin-policy .policy-content>ul{@apply px-8 list-none}.admin-policy .policy-content>ul>li>p{@apply relative before:absolute before:content-["•"] 
-        before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-content>ul>li ul{@apply list-none px-8}.admin-policy .policy-content>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"] 
-          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-content ol{@apply px-8 list-decimal}.admin-policy .policy-editor{@apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+    max-w-full sm:max-w-screen-md}.admin-policy .policy-content iframe{@apply w-full max-w-7xl inline-block}.admin-policy .policy-content p{@apply min-h-5}.admin-policy .policy-content>ul{@apply px-8 list-none}.admin-policy .policy-content>ul>li>p{@apply relative before:absolute before:content-["•"]
+        before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-content>ul>li ul{@apply list-none px-8}.admin-policy .policy-content>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"]
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-content ol{@apply px-8 list-decimal}.admin-policy .policy-editor{@apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto
   w-full max-w-7xl}.admin-policy .policy-editor .editor-styling-btn-container{@apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
     z-50 flex-wrap}.admin-policy .policy-editor .editor-styling-btn-container button{@apply p-1 rounded font-bold text-xl}.admin-policy .policy-editor .tiptap{@apply focus:outline-none px-4 py-4 sm:py-4 sm:px-12}.admin-policy .policy-editor .tiptap h2{@apply text-xl font-extrabold}.admin-policy .policy-editor .tiptap h3{@apply text-lg}.admin-policy .policy-editor .tiptap a{@apply underline text-custom-blue-light font-semibold}.admin-policy .policy-editor .tiptap img{@apply inline-block max-h-72 object-contain
-      max-w-full sm:max-w-screen-md}.admin-policy .policy-editor .tiptap iframe{@apply w-full max-w-7xl inline-block}.admin-policy .policy-editor .tiptap>ul{@apply px-8 list-none}.admin-policy .policy-editor .tiptap>ul>li>p{@apply relative before:absolute before:content-["•"] 
-          before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-editor .tiptap>ul>li ul{@apply list-none px-8}.admin-policy .policy-editor .tiptap>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"] 
+      max-w-full sm:max-w-screen-md}.admin-policy .policy-editor .tiptap iframe{@apply w-full max-w-7xl inline-block}.admin-policy .policy-editor .tiptap>ul{@apply px-8 list-none}.admin-policy .policy-editor .tiptap>ul>li>p{@apply relative before:absolute before:content-["•"]
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-editor .tiptap>ul>li ul{@apply list-none px-8}.admin-policy .policy-editor .tiptap>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"]
             before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.admin-policy .policy-editor .tiptap ol{@apply px-8 list-decimal}.admin-policy .policy-editor .editor-primary-btn-container{@apply flex mt-8 py-4 w-full bg-custom-white-darker
     justify-end px-6 items-center gap-2 sm:gap-3}.admin-policy .policy-editor .editor-primary-btn-container button{@apply text-base font-bold px-4 py-1 rounded-md}.admin-policy .policy-editor .editor-primary-btn-container .save-btn{@apply bg-custom-blue-base text-white px-6}.admin-policy .policy-editor .editor-primary-btn-container .cancel-btn{@apply bg-white}.admin-policy .policy-editor .link-url-form{@apply h-screen w-screen top-0 left-0 fixed bg-[rgba(0,0,0,0.5)]
     z-[9999] flex items-center justify-center}.admin-policy .policy-editor .link-url-form>form{@apply flex flex-col bg-white w-full max-w-lg
       rounded-lg p-8 gap-4 relative}.admin-policy .policy-editor .link-url-form>form>h3{@apply text-2xl font-bold}.admin-policy .policy-editor .link-url-form>form>input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-        border-custom-gray-base}.admin-policy .policy-editor .link-url-form>form>.close-btn{@apply absolute top-8 right-8 text-2xl}.admin-policy .policy-editor .link-url-form>form>button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
+        border-custom-gray-base}.admin-policy .policy-editor .link-url-form>form>.close-btn{@apply absolute top-8 right-8 text-2xl}.admin-policy .policy-editor .link-url-form>form>button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
         text-white rounded-lg py-2.5 mt-2
         flex items-center justify-center h-12 disabled:cursor-not-allowed}.admin-policy .policy-editor .link-url-form>form>button[type=submit] svg{@apply text-2xl animate-spin}.public-policy{@apply w-full py-12 px-5 sm:px-6
   flex flex-col items-center}.public-policy .policy-content{@apply focus:outline-none sm:py-10 sm:px-8 max-w-7xl bg-custom-white-base
   rounded-xl border-custom-white-darker border-2}.public-policy .policy-content h2{@apply text-xl font-extrabold}.public-policy .policy-content h3{@apply text-lg}.public-policy .policy-content a{@apply underline text-custom-blue-light font-semibold}.public-policy .policy-content img{@apply inline-block max-h-72 object-contain
-    max-w-full sm:max-w-screen-md}.public-policy .policy-content iframe{@apply w-full max-w-7xl inline-block}.public-policy .policy-content p{@apply min-h-5}.public-policy .policy-content>ul{@apply px-8 list-none}.public-policy .policy-content>ul>li>p{@apply relative before:absolute before:content-["•"] 
-        before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)]}.public-policy .policy-content>ul>li ul{@apply list-none px-8}.public-policy .policy-content>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"] 
-          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.public-policy .policy-content ol{@apply px-8 list-decimal}.content-editor{@apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto 
+    max-w-full sm:max-w-screen-md}.public-policy .policy-content iframe{@apply w-full max-w-7xl inline-block}.public-policy .policy-content p{@apply min-h-5}.public-policy .policy-content>ul{@apply px-8 list-none}.public-policy .policy-content>ul>li>p{@apply relative before:absolute before:content-["•"]
+        before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.public-policy .policy-content>ul>li ul{@apply list-none px-8}.public-policy .policy-content>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"]
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.public-policy .policy-content ol{@apply px-8 list-decimal}.content-editor{@apply flex flex-col bg-white rounded-md gap-2 max-h-[700px] overflow-y-auto
   max-w-7xl w-full}.content-editor .editor-styling-btn-container{@apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
-    z-50 flex-wrap}.content-editor .editor-styling-btn-container button{@apply p-1 rounded font-bold text-xl}.content-editor .tiptap{@apply focus:outline-none py-4 px-12}.content-editor .tiptap h2{@apply text-xl font-extrabold}.content-editor .tiptap h3{@apply text-lg}.content-editor .tiptap a{@apply underline text-custom-blue-light font-semibold}.content-editor .tiptap img{@apply inline-block}.content-editor .tiptap iframe{@apply w-full max-w-7xl inline-block}.content-editor .tiptap>ul{@apply px-8 list-none}.content-editor .tiptap>ul>li>p{@apply relative before:absolute before:content-["•"] 
-          before:-translate-x-4  before:-translate-y-1 before:text-[calc(1em+4px)]}.content-editor .tiptap>ul>li ul{@apply list-none px-8}.content-editor .tiptap>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"] 
+    z-50 flex-wrap}.content-editor .editor-styling-btn-container button{@apply p-1 rounded font-bold text-xl}.content-editor .tiptap{@apply focus:outline-none py-4 px-12}.content-editor .tiptap h2{@apply text-xl font-extrabold}.content-editor .tiptap h3{@apply text-lg}.content-editor .tiptap a{@apply underline text-custom-blue-light font-semibold}.content-editor .tiptap img{@apply inline-block}.content-editor .tiptap iframe{@apply w-full max-w-7xl inline-block}.content-editor .tiptap>ul{@apply px-8 list-none}.content-editor .tiptap>ul>li>p{@apply relative before:absolute before:content-["•"]
+          before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.content-editor .tiptap>ul>li ul{@apply list-none px-8}.content-editor .tiptap>ul>li ul>li>p{@apply relative before:absolute before:content-["◦"]
             before:-translate-x-4 before:-translate-y-1 before:text-[calc(1em+4px)]}.content-editor .tiptap ol{@apply px-8 list-decimal}.content-editor .editor-primary-btn-container{@apply flex mt-8 py-4 w-full bg-custom-white-darker
     justify-end px-6 items-center gap-2 sm:gap-3}.content-editor .editor-primary-btn-container button{@apply text-base font-bold px-4 py-1 rounded-md}.content-editor .editor-primary-btn-container .save-btn{@apply bg-custom-blue-base text-white px-6}.content-editor .editor-primary-btn-container .cancel-btn{@apply bg-white}.content-editor .link-url-form{@apply h-screen w-screen top-0 left-0 fixed bg-[rgba(0,0,0,0.5)]
     z-[9999] flex items-center justify-center}.content-editor .link-url-form>form{@apply flex flex-col bg-white w-full max-w-lg
       rounded-lg p-8 gap-4 relative}.content-editor .link-url-form>form>h3{@apply text-2xl font-bold}.content-editor .link-url-form>form>input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-        border-custom-gray-base}.content-editor .link-url-form>form>.close-btn{@apply absolute top-8 right-8 text-2xl}.content-editor .link-url-form>form>button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold 
+        border-custom-gray-base}.content-editor .link-url-form>form>.close-btn{@apply absolute top-8 right-8 text-2xl}.content-editor .link-url-form>form>button[type=submit]{@apply w-full bg-custom-blue-base text-base font-bold
         text-white rounded-lg py-2.5 mt-2
         flex items-center justify-center h-12 disabled:cursor-not-allowed}.content-editor .link-url-form>form>button[type=submit] svg{@apply text-2xl animate-spin}.image-gallery-modal{@apply fixed top-0 left-0 w-screen h-screen
   bg-[rgba(0,0,0,0.3)] flex justify-center items-center
-  z-50}.image-gallery-modal>div{@apply bg-white p-6 rounded-md w-full 
-    flex flex-col justify-start sm:justify-center 
-    sm:max-h-[90%] sm:max-w-xl sm:rounded-lg 
+  z-50}.image-gallery-modal>div{@apply bg-white p-6 rounded-md w-full
+    flex flex-col justify-start sm:justify-center
+    sm:max-h-[90%] sm:max-w-xl sm:rounded-lg
     fixed sm:relative top-0 left-0
     h-screen sm:h-fit px-4 py-6 sm:p-8}.image-gallery-modal>div h3{@apply text-2xl font-extrabold mb-6}.image-gallery-modal>div .close-btn{@apply absolute w-fit right-6 top-6}.image-gallery-modal>div .close-btn svg{@apply text-3xl}.image-gallery-modal>div .fetching-image{@apply flex text-xl items-center justify-center gap-2 mb-6 font-bold}.image-gallery-modal>div .fetching-image span{@apply animate-spin text-2xl}.image-gallery-modal>div .uploaded-image-container{@apply grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] mb-8
       overflow-y-auto justify-center justify-items-center px-2 h-fit
@@ -382,22 +393,22 @@
         border-2 hover:border-custom-blue-light cursor-pointer
         rounded-md w-28 sm:w-36}.image-gallery-modal>div .select-btn-container{@apply flex gap-2 w-full flex-col mt-auto}.image-gallery-modal>div .select-btn-container button{@apply text-base font-bold text-white bg-custom-blue-base px-4 py-2
         rounded-lg w-full disabled:bg-custom-gray-dark disabled:cursor-not-allowed}.image-gallery-modal>div .select-btn-container .upload-img-btn{@apply bg-custom-blue-dark flex gap-2 items-center justify-center}.image-gallery-modal>div .select-btn-container .upload-img-btn span{@apply text-2xl}.image-gallery-modal>div .upload-img{@apply flex flex-col cursor-pointer w-full px-4 py-8
-      bg-custom-white-dark mb-8 rounded-md border-2 
+      bg-custom-white-dark mb-8 rounded-md border-2
       border-custom-white-darker items-center justify-center
       text-custom-gray-dark}.image-gallery-modal>div .upload-img svg{@apply text-5xl}.image-gallery-modal>div .upload-img span{@apply font-bold text-lg text-center}.image-gallery-modal>div .file-type-error{@apply w-full text-center text-red-700 font-bold p-2.5 mb-4
       bg-red-200 border-2 border-red-700}.image-gallery-modal>div .img-to-upload{@apply w-full max-h-60 object-contain h-auto mb-8}.image-gallery-modal>div .upload-btn-container{@apply flex gap-2 w-full flex-col mt-auto}.image-gallery-modal>div .upload-btn-container button{@apply text-base font-bold text-white px-4 py-2
         rounded-lg w-full}.image-gallery-modal>div .upload-btn-container button:nth-of-type(1){@apply bg-custom-blue-base}.image-gallery-modal>div .upload-btn-container button:nth-of-type(2){@apply bg-custom-white-darker text-black}.embed-youtube-modal{@apply fixed top-0 left-0 w-screen h-screen
   bg-[rgba(0,0,0,0.3)] flex justify-center items-center
-  z-50}.embed-youtube-modal>form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full 
+  z-50}.embed-youtube-modal>form{@apply flex flex-col p-8 rounded-lg gap-2 bg-white w-full
     max-w-md z-10 relative max-h-[95%] overflow-y-auto}.embed-youtube-modal>form h3{@apply text-2xl font-extrabold mb-4}.embed-youtube-modal>form .close-btn{@apply absolute w-fit right-6 top-6}.embed-youtube-modal>form .close-btn svg{@apply text-3xl}.embed-youtube-modal>form label{@apply mt-2 text-sm font-bold indent-1}.embed-youtube-modal>form label span{@apply text-custom-red font-bold}.embed-youtube-modal>form input{@apply bg-white rounded-md p-2 h-10 cursor-pointer border-[1px]
-      border-custom-gray-base}.embed-youtube-modal>form .confirm-btn{@apply w-full bg-custom-blue-base text-base font-bold 
+      border-custom-gray-base}.embed-youtube-modal>form .confirm-btn{@apply w-full bg-custom-blue-base text-base font-bold
       text-white rounded-lg py-2.5 mt-8}.confirm-delete-modal{@apply w-screen h-screen fixed bg-[rgba(0,0,0,0.3)] flex
   justify-center items-end sm:items-center top-0 left-0 z-[999999]}.confirm-delete-modal>div{@apply flex flex-col p-8 rounded-xl gap-2 bg-white
     sm:max-w-md z-10 relative sm:max-h-[95%] overflow-y-auto
     w-full m-4 sm:m-0}.confirm-delete-modal>div .header{@apply flex gap-6 items-start max-w-full}.confirm-delete-modal>div .header p{@apply text-lg flex-grow}.confirm-delete-modal>div .header p span{@apply font-extrabold italic}.confirm-delete-modal>div .header .close-btn{@apply w-fit}.confirm-delete-modal>div .header .close-btn svg{@apply text-3xl}.confirm-delete-modal>div .confirm-btn{@apply font-bold text-base w-full mt-8
       rounded-md py-2 bg-custom-blue-base text-white}.sub-chapters-progress-modal{@apply fixed top-0 left-0 w-screen h-screen
   bg-[rgba(0,0,0,0.3)] flex justify-center items-center
-  z-[999999]}.sub-chapters-progress-modal>div{@apply bg-white p-4 sm:p-6 sm:pb-8 w-full justify-start items-center 
+  z-[999999]}.sub-chapters-progress-modal>div{@apply bg-white p-4 sm:p-6 sm:pb-8 w-full justify-start items-center
     flex flex-col overflow-y-auto overflow-x-hidden h-screen md:h-fit
     md:max-w-2xl md:max-h-[85%] top-0 left-0 fixed md:relative
     md:rounded-md}.sub-chapters-progress-modal>div .close-btn{@apply self-end mb-2 sm:mb-1}.sub-chapters-progress-modal>div .close-btn svg{@apply text-3xl}.sub-chapters-progress-modal>div h3{@apply font-bold text-xl mb-4 sm:text-center w-11/12}.sub-chapters-progress-modal>div>table{@apply text-left mx-4 w-full}.sub-chapters-progress-modal>div>table thead{@apply hidden sm:table-header-group}.sub-chapters-progress-modal>div>table tr{@apply border-b-2 border-custom-white-darker
