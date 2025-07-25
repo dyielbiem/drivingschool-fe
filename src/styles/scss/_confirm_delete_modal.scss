@@ -12,10 +12,6 @@
 
       p {
         @apply text-lg flex-grow;
-
-        span {
-          @apply font-extrabold italic;
-        }
       }
 
       .close-btn {

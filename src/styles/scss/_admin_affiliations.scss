@@ -25,6 +25,10 @@
     }
   }
 
+  .no-affiliations {
+    @apply text-lg;
+  }
+
   .affiliation-table {
     @apply w-full grid grid-cols-4 gap-3;
 
@@ -42,6 +46,25 @@
 
     li:nth-child(n + 2) {
       @apply bg-white py-5 rounded-md items-start lg:place-items-center border-2;
+
+      & > div {
+        @apply flex justify-center items-center gap-4 h-fit
+      self-end lg:self-center mt-4 lg:mt-0;
+
+        button {
+          svg {
+            @apply text-xl;
+          }
+
+          &:nth-child(1) svg {
+            @apply text-custom-blue-light;
+          }
+
+          &:nth-child(2) svg {
+            @apply text-custom-red;
+          }
+        }
+      }
     }
   }
 }
