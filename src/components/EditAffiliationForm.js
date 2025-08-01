@@ -41,7 +41,7 @@ const EditAffiliationForm = ({ affiliationToEdit, onAffiliationEdited }) => {
         </button>
         <h3>Edit affiliation</h3>
         <label htmlFor="affiliation-name">
-          Affiliation name <span>*</span>
+          Name <span>*</span>
         </label>
         <input
           type="text"
@@ -50,8 +50,15 @@ const EditAffiliationForm = ({ affiliationToEdit, onAffiliationEdited }) => {
           defaultValue={affiliationToEdit.affiliationName}
           required
         />
+        <label htmlFor="affiliation-info">Information</label>
+        <input
+          type="text"
+          name="affiliation-info"
+          id="affiliation-info"
+          defaultValue={affiliationToEdit.affiliationInfo || ""}
+        />
         <label htmlFor="affiliation-code">
-          Affiliation code <span>*</span>
+          Code <span>*</span>
         </label>
         <input
           type="text"

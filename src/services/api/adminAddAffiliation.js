@@ -1,6 +1,10 @@
 import { adminRefreshAccessToken } from "./refreshAccessToken";
 
-const adminAddAffiliation = async (affiliationName, affiliationCode) => {
+const adminAddAffiliation = async (
+  affiliationName,
+  affiliationInfo,
+  affiliationCode
+) => {
   try {
     const fetchMethod = async (accessToken) => {
       const response = await fetch(
@@ -13,6 +17,7 @@ const adminAddAffiliation = async (affiliationName, affiliationCode) => {
           },
           body: JSON.stringify({
             affiliationName,
+            affiliationInfo,
             affiliationCode
           })
         }
