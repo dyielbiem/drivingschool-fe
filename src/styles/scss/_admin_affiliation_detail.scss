@@ -28,14 +28,14 @@
   }
 
   .affiliation-student-table {
-    @apply w-full grid grid-cols-4 gap-3 mt-4;
+    @apply w-full grid grid-cols-7 gap-3 mt-4;
 
     h2 {
       @apply font-bold text-xl;
     }
 
     li {
-      @apply grid grid-cols-subgrid col-span-full px-6;
+      @apply grid grid-cols-subgrid col-span-full px-8;
 
       p {
         @apply text-left lg:text-center;
@@ -50,8 +50,17 @@
       @apply bg-white py-5 rounded-md items-start lg:place-items-center border-2;
 
       & > div {
-        @apply flex justify-center items-center gap-4 h-fit
+        @apply inline-block justify-center items-center gap-4 h-fit
+        break-words text-center max-w-full w-full whitespace-normal
         self-end lg:self-center mt-4 lg:mt-0;
+      }
+
+      & > div:nth-child(4) {
+        @apply inline-block overflow-hidden text-ellipsis whitespace-nowrap;
+      }
+
+      & > div:last-child {
+        @apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit;
       }
     }
   }

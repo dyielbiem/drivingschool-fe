@@ -12,26 +12,33 @@ import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 
 import adminFetchAffiliations from "@/services/api/adminFetchAffiliations";
 import adminDeleteAffiliation from "@/services/api/adminDeleteAffiliation";
-import { formatDate } from "@/utils";
 
 const TableHeader = () => {
   return (
     <li>
       <p>Name</p>
+      <p>Information</p>
       <p>Code</p>
-      <p>Date Added</p>
+      <p>Students Enrolled</p>
     </li>
   );
 };
 
 const TableRow = ({ affiliations, onEditClick, onDeleteClick, onView }) => {
   return affiliations.map((item, idx) => {
-    const { affiliationID, affiliationName, affiliationCode, dateAdded } = item;
+    const {
+      affiliationID,
+      affiliationName,
+      affiliationInfo = "",
+      affiliationCode,
+      studentCount
+    } = item;
     return (
       <li key={idx}>
         <p>{affiliationName}</p>
+        <p>{affiliationInfo}</p>
         <p>{affiliationCode}</p>
-        <p>{formatDate(dateAdded)}</p>
+        <p>{studentCount}</p>
         <div>
           <button
             onClick={() => onEditClick(affiliationID)}

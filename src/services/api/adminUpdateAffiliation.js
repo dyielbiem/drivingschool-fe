@@ -3,6 +3,7 @@ import { adminRefreshAccessToken } from "./refreshAccessToken";
 const adminUpdateAffiliation = async (
   affiliationID,
   affiliationName,
+  affiliationInfo,
   affiliationCode
 ) => {
   try {
@@ -18,6 +19,7 @@ const adminUpdateAffiliation = async (
           body: JSON.stringify({
             affiliationID,
             affiliationName,
+            affiliationInfo,
             affiliationCode
           })
         }

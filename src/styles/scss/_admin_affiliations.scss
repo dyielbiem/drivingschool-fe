@@ -30,7 +30,7 @@
   }
 
   .affiliation-table {
-    @apply w-full grid grid-cols-4 gap-3;
+    @apply w-full grid grid-cols-5 gap-3;
 
     li {
       @apply grid grid-cols-subgrid col-span-full px-6;
