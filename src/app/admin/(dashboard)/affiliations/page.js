@@ -3,7 +3,8 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { FaPen, FaTrashCan } from "react-icons/fa6";
+import { FaPen, FaTrashCan, FaEye } from "react-icons/fa6";
+import { Tooltip } from "react-tooltip";
 
 import AddAffiliationForm from "@/components/AddAffiliationForm";
 import EditAffiliationForm from "@/components/EditAffiliationForm";
@@ -23,7 +24,7 @@ const TableHeader = () => {
   );
 };
 
-const TableRow = ({ affiliations, onEditClick, onDeleteClick }) => {
+const TableRow = ({ affiliations, onEditClick, onDeleteClick, onView }) => {
   return affiliations.map((item, idx) => {
     const { affiliationID, affiliationName, affiliationCode, dateAdded } = item;
     return (
@@ -32,11 +33,26 @@ const TableRow = ({ affiliations, onEditClick, onDeleteClick }) => {
         <p>{affiliationCode}</p>
         <p>{formatDate(dateAdded)}</p>
         <div>
-          <button onClick={() => onEditClick(affiliationID)}>
+          <button
+            onClick={() => onEditClick(affiliationID)}
+            data-tooltip-id="affiliation-tooltip"
+            data-tooltip-content="Edit Affiliation"
+          >
             <FaPen />
           </button>
-          <button onClick={() => onDeleteClick(affiliationID)}>
+          <button
+            onClick={() => onDeleteClick(affiliationID)}
+            data-tooltip-id="affiliation-tooltip"
+            data-tooltip-content="Delete Affiliation"
+          >
             <FaTrashCan />
+          </button>
+          <button
+            onClick={() => onView(affiliationID)}
+            data-tooltip-id="affiliation-tooltip"
+            data-tooltip-content="View Affiliation"
+          >
+            <FaEye />
           </button>
         </div>
       </li>
@@ -88,6 +104,9 @@ const Affiliations = () => {
     router.replace(`${pathname}?delete_affiliation=${affiliationID}`);
   };
 
+  const handleViewClick = (affiliationID) =>
+    router.push(`${pathname}/${affiliationID}`);
+
   const handleAffiliationAdded = useCallback((newAffiliation) => {
     setAffiliations((prevState) => [newAffiliation, ...prevState]);
   }, []);
@@ -131,6 +150,7 @@ const Affiliations = () => {
             affiliations={affiliations}
             onEditClick={handleEditClick}
             onDeleteClick={handleDeleteClick}
+            onView={handleViewClick}
           />
         </ul>
       )}
@@ -150,6 +170,7 @@ const Affiliations = () => {
           confirmAction={handleConfirmDelete}
         />
       )}
+      <Tooltip id="affiliation-tooltip" />
     </div>
   );
 };

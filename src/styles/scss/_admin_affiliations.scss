@@ -63,6 +63,10 @@
           &:nth-child(2) svg {
             @apply text-custom-red;
           }
+
+          &:nth-child(3) svg {
+            @apply text-custom-green-base;
+          }
         }
       }
     }
