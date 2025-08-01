@@ -1,0 +1,58 @@
+.admin-affiliation-detail {
+  @apply p-12 flex flex-col flex-grow h-screen max-h-screen 
+  bg-custom-white-dark overflow-x-hidden items-start
+  pt-32 pb-6 lg:py-12 px-6 sm:px-8 md:px-12;
+
+  .header {
+    @apply mb-8 flex-col w-full;
+
+    & > div:nth-child(1) {
+      @apply mb-1 col-span-full flex items-center gap-4;
+
+      button {
+        @apply text-2xl;
+      }
+
+      h1 {
+        @apply text-2xl font-extrabold flex-grow;
+      }
+    }
+
+    & > div:nth-child(2) {
+      @apply ml-10;
+    }
+  }
+
+  .no-students {
+    @apply text-lg self-center;
+  }
+
+  .affiliation-student-table {
+    @apply w-full grid grid-cols-4 gap-3 mt-4;
+
+    h2 {
+      @apply font-bold text-xl;
+    }
+
+    li {
+      @apply grid grid-cols-subgrid col-span-full px-6;
+
+      p {
+        @apply text-left lg:text-center;
+      }
+    }
+
+    li:nth-of-type(1) {
+      @apply font-bold text-center;
+    }
+
+    li:nth-of-type(n + 2) {
+      @apply bg-white py-5 rounded-md items-start lg:place-items-center border-2;
+
+      & > div {
+        @apply flex justify-center items-center gap-4 h-fit
+        self-end lg:self-center mt-4 lg:mt-0;
+      }
+    }
+  }
+}
