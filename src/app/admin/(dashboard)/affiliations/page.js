@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FaPen, FaTrashCan, FaEye } from "react-icons/fa6";
+import { IoAddSharp } from "react-icons/io5";
 import { Tooltip } from "react-tooltip";
 
 import AddAffiliationForm from "@/components/AddAffiliationForm";
@@ -35,10 +36,10 @@ const TableRow = ({ affiliations, onEditClick, onDeleteClick, onView }) => {
     } = item;
     return (
       <li key={idx}>
-        <p>{affiliationName}</p>
-        <p>{affiliationInfo}</p>
-        <p>{affiliationCode}</p>
-        <p>{studentCount}</p>
+        <p data-label="Name: ">{affiliationName}</p>
+        <p data-label="Information: ">{affiliationInfo || "--"}</p>
+        <p data-label="Code: ">{affiliationCode}</p>
+        <p data-label="Enrolled Students: ">{studentCount}</p>
         <div>
           <button
             onClick={() => onEditClick(affiliationID)}
@@ -145,7 +146,9 @@ const Affiliations = () => {
     <div className="admin-affiliations-container">
       <div className="header">
         <h1>Manage Affiliations</h1>
-        <button onClick={handleAddClick}>Add affiliation</button>
+        <button onClick={handleAddClick}>
+          <span>Add affiliation</span> <IoAddSharp />
+        </button>
       </div>
       {!isFetching && affiliations.length === 0 && (
         <span className="no-affiliations">No affiliations found.</span>
