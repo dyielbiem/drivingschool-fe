@@ -36,7 +36,7 @@
       pl-2.5 pb-2.5 pr-2 pt-2 sm:px-4 sm:py-2.5}.admin-sections-container .header>button svg{@apply block sm:hidden text-xl}.admin-sections-container .header>button span{@apply hidden sm:block}.admin-sections-container .section-table{@apply grid grid-cols-[8fr_1fr] gap-3}.admin-sections-container .section-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center
       px-10 rounded-md font-semibold mb-4
       hidden sm:grid}.admin-sections-container .section-table .table-header p{@apply font-extrabold text-lg}.admin-sections-container .section-table .table-header p:nth-child(1){@apply justify-self-start}.admin-sections-container .section-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center
-      bg-white rounded-md cursor-pointer hover:shadow-md
+      bg-white rounded-md cursor-pointer
       duration-200 gap-2 flex sm:grid flex-col-reverse
       p-6 sm:py-5 sm:px-10 border-2 border-custom-gray-base}.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(1){@apply justify-self-start font-semibold sm:font-normal}.admin-sections-container .section-table li:nth-child(n+2) p:nth-child(2){@apply rounded-md text-xs font-bold py-1 px-2
         h-fit w-fit}.section-content-container{@apply mx-4 max-w-7xl w-full}.section-content-container h2{@apply text-xl font-extrabold}.section-content-container h3{@apply text-lg}.section-content-container h2,.section-content-container h3,.section-content-container p{@apply empty:h-4}.section-content-container a{@apply underline text-custom-blue-light font-semibold}.section-content-container img{@apply inline-block}.section-content-container iframe{@apply w-full max-w-7xl inline-block}.section-content-container ul{@apply px-8 list-none}.section-content-container ul>li>p{@apply relative before:absolute before:content-["•"]
@@ -83,7 +83,7 @@
     rounded-md gap-2 flex-col sm:flex-row}.admin-manage-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-manage-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-manage-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-manage-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base
         rounded-md text-white}.admin-manage-section>.edit-title-form .btn-container button[type=button]{@apply text-black
         rounded-md bg-custom-white-darker}.admin-manage-section .chapters-container{@apply flex flex-col w-full gap-4 max-w-7xl}.admin-manage-section .chapters-container li{@apply rounded-md pl-4 pr-6 font-bold text-lg overflow-hidden
-      bg-white hover:shadow-md flex relative flex-col
+      bg-white flex relative flex-col
       sm:flex-row py-4 sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-[4.5rem]}.admin-manage-section .chapters-container li a{@apply flex items-center flex-grow gap-4 py-2 sm:py-3 z-10}.admin-manage-section .chapters-container li a img{@apply min-w-32 self-center
           absolute sm:static top-0 left-0 object-cover sm:object-contain
@@ -119,10 +119,10 @@
     rounded-md min-h-14 flex-col sm:flex-row}.admin-chapter-section>.edit-title-form input{@apply text-2xl font-extrabold max-w-7xl w-full flex-grow outline-none}.admin-chapter-section>.edit-title-form .btn-container{@apply flex gap-2 self-end}.admin-chapter-section>.edit-title-form .btn-container button{@apply text-base px-3 py-1.5 font-bold}.admin-chapter-section>.edit-title-form .btn-container button[type=submit]{@apply bg-custom-blue-base
         rounded-md text-white}.admin-chapter-section>.edit-title-form .btn-container button[type=button]{@apply text-black
         rounded-md bg-custom-white-darker}.admin-chapter-section .nav-links{@apply w-full flex flex-col gap-4 max-w-7xl}.admin-chapter-section .nav-links .sub-chapters-container{@apply flex flex-col w-full gap-4}.admin-chapter-section .nav-links .sub-chapters-container li{@apply rounded-md px-6 font-bold text-lg
-        bg-white hover:shadow-md flex items-center
+        bg-white flex items-center
         sm:py-0 border-2 border-custom-gray-base
         gap-2 sm:gap-4 h-fit sm:h-auto min-h-16}.admin-chapter-section .nav-links .sub-chapters-container li a{@apply flex-grow h-full py-5}.admin-chapter-section .nav-links .sub-chapters-container li div{@apply flex gap-4 h-fit}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(1){@apply text-custom-blue-light}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(2){@apply text-custom-red}.admin-chapter-section .nav-links .sub-chapters-container li div button:nth-child(3){@apply rotate-45}.admin-chapter-section .nav-links .chapter-test-item{@apply rounded-md px-6 font-bold text-lg
-      bg-white hover:shadow-md flex w-full
+      bg-white flex w-full
       sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-16}.admin-chapter-section .nav-links .chapter-test-item a{@apply w-full h-full py-5}.admin-chapter-section .button-container{@apply flex gap-2 sm:mt-8 w-full max-w-7xl
     items-end justify-end flex-col sm:flex-row}.admin-chapter-section .button-container button{@apply font-bold text-white text-base
@@ -143,7 +143,7 @@
       text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-students-container>.header>button svg{@apply block sm:hidden text-xl}.admin-students-container>.header>button span{@apply hidden sm:block}.admin-students-container .no-course{@apply text-lg}.admin-students-container .student-table{@apply grid grid-cols-[5fr_1fr] gap-3 w-full}.admin-students-container .student-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden sm:grid}.admin-students-container .student-table .table-header p{@apply font-extrabold text-lg text-center}.admin-students-container .student-table .table-header p:nth-child(1){@apply justify-self-start}.admin-students-container .student-table li:nth-child(n+2){@apply grid-cols-subgrid col-span-full justify-items-center
-      bg-white rounded-md cursor-pointer hover:shadow-md duration-200
+      bg-white rounded-md cursor-pointer duration-200
       flex flex-col sm:grid gap-1 p-6 sm:py-5 sm:px-10
       border-2 border-custom-gray-base}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(1){@apply justify-self-start font-bold sm:font-normal}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(2){@apply sm:font-bold text-xs sm:text-lg}.admin-students-container .student-table li:nth-child(n+2) p:nth-child(2) span{@apply sm:hidden font-bold}.edit-student-form{@apply grid gap-4 grid-cols-1 md:grid-cols-2
   sm:pb-10 lg:pt-12 mx-6 md:mx-12}.edit-student-form>.header{@apply mb-4 col-span-full flex items-center gap-4}.edit-student-form>.header button{@apply text-2xl}.edit-student-form>.header h1{@apply text-2xl font-extrabold}.edit-student-form h2{@apply col-span-full text-lg font-bold}.edit-student-form h2:nth-of-type(n + 2){@apply mt-6}.edit-student-form>.username{@apply text-lg font-bold col-span-full}.edit-student-form>.fields{@apply col-span-1 w-full flex flex-col gap-2}.edit-student-form>.fields label{@apply mt-2 text-sm font-bold indent-1}.edit-student-form>.fields label span{@apply text-custom-red font-bold}.edit-student-form>.fields input,.edit-student-form>.fields select{@apply bg-white rounded-md p-2 h-10 border-[1px]
@@ -182,7 +182,7 @@
           absolute top-0 left-0 h-12 -translate-y-full}.admin-students-layout>.header .mobile-nav ul li{@apply p-2 rounded-sm w-full font-normal cursor-pointer text-sm}.admin-students-layout>.header .mobile-nav ul li:hover{@apply bg-custom-gray-base}.all-students-table{@apply grid gap-3 mx-6 md:mx-12 grid-cols-[repeat(auto-fill,minmax(275px,1fr))]
   xl:grid-cols-[1fr_2fr_2fr_repeat(3,1fr)]}.all-students-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
     font-semibold mb-4 hidden xl:grid}.all-students-table .table-header p{@apply font-extrabold text-base text-center}.all-students-table li:nth-child(n+2){@apply justify-items-center bg-white rounded-md cursor-pointer
-    hover:shadow-md duration-200 p-5 xl:py-5 xl:px-10 gap-2
+    duration-200 p-5 xl:py-5 xl:px-10 gap-2
     flex flex-col xl:grid xl:grid-cols-subgrid xl:col-span-full
     border-2 border-custom-gray-base items-start xl:items-center}.all-students-table li:nth-child(n+2) p{@apply text-center}.all-students-table li:nth-child(n+2) p span{@apply font-bold text-sm xl:hidden}.all-students-table li:nth-child(n+2) p:nth-child(5){@apply rounded-md text-xs font-bold py-1 px-2 h-fit w-fit
       -order-1 xl:order-none}.all-students-table li:nth-child(n+2) div{@apply flex self-end xl:self-center justify-center items-center gap-4 h-fit}.all-students-table li:nth-child(n+2) div button svg{@apply text-xl}.all-students-table li:nth-child(n+2) div button:nth-child(1) svg{@apply text-custom-blue-light}.all-students-table li:nth-child(n+2) div button:nth-child(2) svg{@apply text-custom-red}.all-students-table li:nth-child(n+2) div button:nth-child(3) svg{@apply text-custom-green-base}.student-profile{@apply grid w-full gap-4 grid-cols-1 md:grid-cols-2}.student-profile .header{@apply mb-4 col-span-full flex items-center gap-4}.student-profile .header button{@apply text-2xl}.student-profile .header h1{@apply text-2xl font-extrabold flex-grow}.student-profile .header button:last-child{@apply bg-custom-blue-base text-white
@@ -192,7 +192,7 @@
   grid-cols-[repeat(auto-fill,minmax(275px,1fr))] lg:grid-cols-4}.exam-details-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden lg:grid}.exam-details-table .table-header p{@apply font-extrabold text-base text-center}.exam-details-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
     rounded-md cursor-pointer border-2 border-custom-gray-base
-    hover:shadow-md duration-200 items-start lg:items-center
+    duration-200 items-start lg:items-center
     lg:col-span-full flex flex-col lg:grid p-5 xl:py-5 xl:px-10}.exam-details-table li:nth-child(n+2) p{@apply text-center}.exam-details-table li:nth-child(n+2) p span{@apply font-bold text-sm lg:hidden}.exam-details-table li:nth-child(n+2) p:nth-child(3){@apply rounded-md text-xs font-bold py-1 px-2 h-fit
       -order-1 lg:order-none mb-1 lg:mb-0}.exam-details-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit
       text-custom-blue-light font-bold self-end lg:self-center
@@ -204,7 +204,7 @@
   grid-cols-[repeat(auto-fit,minmax(275px,1fr))]
   xl:grid-cols-[15%,10%,20%,20%,10%,auto,5%]}.latest-registrations-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden xl:grid}.latest-registrations-table .table-header p{@apply font-extrabold text-base text-center}.latest-registrations-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white
-    rounded-md cursor-pointer hover:shadow-md duration-200
+    rounded-md cursor-pointer duration-200
     border-2 border-custom-gray-base flex flex-col
     xl:grid xl:col-span-full items-start gap-1 xl:gap-0
     p-6 xl:py-5 2xl:px-10}.latest-registrations-table li:nth-child(n+2) p{@apply xl:text-center}.latest-registrations-table li:nth-child(n+2) p::before{@apply xl:hidden content-[attr(col-title)_":_"] capitalize font-bold
@@ -214,7 +214,7 @@
   lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
   xl:grid-cols-5}.latest-completions-table .table-header{@apply grid-cols-subgrid col-span-full justify-items-center px-10 rounded-md
       font-semibold mb-4 hidden xl:grid}.latest-completions-table .table-header p{@apply font-extrabold text-base text-center}.latest-completions-table li:nth-child(n+2){@apply grid-cols-subgrid justify-items-center bg-white duration-200
-    p-6 xl:py-5 xl:px-10 rounded-md cursor-pointer hover:shadow-md
+    p-6 xl:py-5 xl:px-10 rounded-md cursor-pointer
     flex flex-col xl:grid items-start xl:items-center xl:col-span-full
     border-2 border-custom-gray-base gap-1}.latest-completions-table li:nth-child(n+2) p{@apply xl:text-center}.latest-completions-table li:nth-child(n+2)>p::before{@apply xl:hidden content-[attr(col-title)_":_"] font-bold capitalize
       text-sm}.latest-completions-table li:nth-child(n+2) button{@apply flex justify-center items-center gap-3 h-fit
@@ -278,7 +278,7 @@
       text-base font-bold p-2 sm:px-4 sm:py-2 whitespace-nowrap
       rounded-lg sm:rounded-md}.admin-coupons-container>.header>button svg{@apply block sm:hidden text-xl}.admin-coupons-container>.header>button span{@apply hidden sm:block}.admin-coupons-container .coupon-table{@apply gap-3 grid lg:grid-cols-6
     grid-cols-[repeat(auto-fill,minmax(275px,1fr))]}.admin-coupons-container .coupon-table li{@apply justify-items-center lg:grid-cols-subgrid lg:col-span-full}.admin-coupons-container .coupon-table li p{@apply lg:text-center}.admin-coupons-container .coupon-table .table-header{@apply text-lg font-extrabold gap-x-8 mb-4 px-4
-      justify-items-center hidden lg:grid}.admin-coupons-container .coupon-table li:nth-child(n+2){@apply bg-white p-4 lg:py-5 lg:px-3 rounded-md hover:shadow-md
+      justify-items-center hidden lg:grid}.admin-coupons-container .coupon-table li:nth-child(n+2){@apply bg-white p-4 lg:py-5 lg:px-3 rounded-md
       flex flex-col gap-1 lg:grid items-start min-h-[4.5rem]
       border-2 border-custom-gray-base}.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(1){@apply lg:font-extrabold}.admin-coupons-container .coupon-table li:nth-child(n+2) p:nth-child(5){@apply rounded-md text-xs font-extrabold py-1 px-2 h-fit w-fit
         -order-1 lg:order-none}.admin-coupons-container .coupon-table li:nth-child(n+2) p::before{@apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
@@ -303,7 +303,7 @@
     md:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
     grid-cols-[repeat(auto-fill,minmax(275px,1fr))]}.admin-billing-container .billing-table li{@apply place-items-start}.admin-billing-container .billing-table li p{@apply text-center}.admin-billing-container .billing-table .table-header{@apply text-base font-extrabold gap-x-8 grid-cols-subgrid
       mb-4 px-4 justify-items-center hidden lg:grid lg:col-span-full}.admin-billing-container .billing-table li:nth-child(n+2){@apply bg-white py-5 px-6 rounded-md items-start lg:place-items-center
-      hover:shadow-md border-2 lg:grid lg:grid-cols-subgrid flex flex-col
+      border-2 lg:grid lg:grid-cols-subgrid flex flex-col
       lg:col-span-full border-custom-gray-base min-h-[4.5rem]}.admin-billing-container .billing-table li:nth-child(n+2) p{@apply text-left lg:text-center}.admin-billing-container .billing-table li:nth-child(n+2) p:first-child{@apply lg:break-all}.admin-billing-container .billing-table li:nth-child(n+2) p::before{@apply lg:hidden content-[attr(col-title)_":_"] capitalize font-bold
         text-sm}.admin-billing-container .billing-table button svg{@apply text-xl text-custom-blue-light}.admin-affiliations-container{@apply p-12 flex flex-col flex-grow h-screen max-h-screen
   bg-custom-white-dark overflow-x-hidden items-center

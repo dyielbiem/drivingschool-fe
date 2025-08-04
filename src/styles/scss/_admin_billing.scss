@@ -31,7 +31,7 @@
 
     li:nth-child(n + 2) {
       @apply bg-white py-5 px-6 rounded-md items-start lg:place-items-center
-      hover:shadow-md border-2 lg:grid lg:grid-cols-subgrid flex flex-col
+      border-2 lg:grid lg:grid-cols-subgrid flex flex-col
       lg:col-span-full border-custom-gray-base min-h-[4.5rem];
 
       p {

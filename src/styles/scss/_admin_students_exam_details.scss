@@ -14,7 +14,7 @@
   li:nth-child(n + 2) {
     @apply grid-cols-subgrid justify-items-center bg-white gap-1 lg:gap-2
     rounded-md cursor-pointer border-2 border-custom-gray-base
-    hover:shadow-md duration-200 items-start lg:items-center
+    duration-200 items-start lg:items-center
     lg:col-span-full flex flex-col lg:grid p-5 xl:py-5 xl:px-10;
 
     p {

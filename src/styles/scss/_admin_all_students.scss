@@ -13,7 +13,7 @@
 
   li:nth-child(n + 2) {
     @apply justify-items-center bg-white rounded-md cursor-pointer 
-    hover:shadow-md duration-200 p-5 xl:py-5 xl:px-10 gap-2
+    duration-200 p-5 xl:py-5 xl:px-10 gap-2
     flex flex-col xl:grid xl:grid-cols-subgrid xl:col-span-full
     border-2 border-custom-gray-base items-start xl:items-center;
 

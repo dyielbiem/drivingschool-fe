@@ -89,7 +89,7 @@
 
       li {
         @apply rounded-md px-6 font-bold text-lg
-        bg-white hover:shadow-md flex items-center
+        bg-white flex items-center
         sm:py-0 border-2 border-custom-gray-base
         gap-2 sm:gap-4 h-fit sm:h-auto min-h-16;
 
@@ -117,7 +117,7 @@
 
     .chapter-test-item {
       @apply rounded-md px-6 font-bold text-lg 
-      bg-white hover:shadow-md flex w-full
+      bg-white flex w-full
       sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-16;
 
