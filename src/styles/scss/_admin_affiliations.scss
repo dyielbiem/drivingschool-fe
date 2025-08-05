@@ -26,30 +26,36 @@
   }
 
   .no-affiliations {
-    @apply text-lg;
+    @apply text-lg text-center;
   }
 
   .affiliation-table {
     @apply w-full grid grid-cols-5 gap-3;
 
     li {
-      @apply grid grid-cols-subgrid col-span-full px-6;
+      @apply grid-cols-subgrid col-span-full px-6;
 
       p {
-        @apply text-left lg:text-center;
+        @apply text-left md:text-center;
       }
     }
 
     li:first-child {
-      @apply font-bold;
+      @apply font-bold hidden md:grid;
     }
 
     li:nth-child(n + 2) {
-      @apply bg-white py-5 rounded-md items-start lg:place-items-center border-2;
+      @apply flex flex-col md:grid bg-white py-5 rounded-md items-start
+        md:place-items-center border-2;
+
+      & > p {
+        @apply max-w-full inline-block break-words before:font-bold
+        before:content-[attr(data-label)] before:md:hidden;
+      }
 
       & > div {
         @apply flex justify-center items-center gap-4 h-fit
-      self-end lg:self-center mt-4 lg:mt-0;
+          self-end lg:self-center mt-4 md:mt-0;
 
         button {
           svg {

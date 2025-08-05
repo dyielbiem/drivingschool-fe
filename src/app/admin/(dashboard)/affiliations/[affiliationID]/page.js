@@ -50,8 +50,8 @@ const StudentTable = ({ students, courses }) => {
         <div>Username</div>
         <div>Name</div>
         <div>Email</div>
-        <div>Course Enrolled</div>
-        <div>Course Amount</div>
+        <div>Course enrolled</div>
+        <div>Course amount</div>
         <div>Enrollment date</div>
         <div>Status</div>
       </li>
@@ -70,12 +70,13 @@ const StudentTable = ({ students, courses }) => {
 
         return (
           <li key={idx}>
-            <div>{studentUserName}</div>
-            <div>
+            <div data-label="Username: ">{studentUserName}</div>
+            <div data-label="Name: ">
               {mailingFirstName} {mailingLastName}
             </div>
-            <div>{mailingEmail}</div>
+            <div data-label="Email: ">{mailingEmail}</div>
             <div
+              data-label="Course enrolled: "
               data-tooltip-id="affiliation-student-tooltip"
               data-tooltip-content={
                 enrolledCourse.courseName || "Deleted course"
@@ -83,8 +84,12 @@ const StudentTable = ({ students, courses }) => {
             >
               {enrolledCourse.courseName || "Deleted course"}
             </div>
-            <div>$ {enrolledCourse.coursePrice || "XX.XX"}</div>
-            <div>{formatDate(enrollmentDate)}</div>
+            <div data-label="Course amount: ">
+              $ {enrolledCourse.coursePrice || "XX.XX"}
+            </div>
+            <div data-label="Enrollment date: ">
+              {formatDate(enrollmentDate)}
+            </div>
             <div
               className={`${
                 isActive

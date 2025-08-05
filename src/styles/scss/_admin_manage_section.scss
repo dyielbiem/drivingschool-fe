@@ -64,7 +64,7 @@
 
     li {
       @apply rounded-md pl-4 pr-6 font-bold text-lg overflow-hidden
-      bg-white hover:shadow-md flex relative flex-col 
+      bg-white flex relative flex-col 
       sm:flex-row py-4 sm:py-0 border-2 border-custom-gray-base
       gap-2 sm:gap-4 h-fit sm:h-auto min-h-[4.5rem];
 

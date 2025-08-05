@@ -43,7 +43,7 @@
     }
 
     li:nth-child(n + 2) {
-      @apply bg-white p-4 lg:py-5 lg:px-3 rounded-md hover:shadow-md
+      @apply bg-white p-4 lg:py-5 lg:px-3 rounded-md
       flex flex-col gap-1 lg:grid items-start min-h-[4.5rem]
       border-2 border-custom-gray-base;
 
