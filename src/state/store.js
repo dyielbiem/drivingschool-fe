@@ -13,7 +13,6 @@ export const useStudentsInSection = create((set) => ({
   setStudents: (newValue) => {
     set({ students: newValue });
   },
-
   setUpdateStudent: (updatedStudent) => {
     set((state) => ({
       students: state.students.map((eachStudent) => {
