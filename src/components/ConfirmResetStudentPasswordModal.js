@@ -21,7 +21,7 @@ const ConfirmResetStudentPasswordModal = ({
     const { ok, json } = await adminResetStudentPassword(student);
 
     if (ok) {
-      onSuccessPasswordReset(json.newPassword);
+      onSuccessPasswordReset(json.newPassWord);
       onClose();
     }
 
