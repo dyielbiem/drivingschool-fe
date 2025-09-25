@@ -1,4 +1,4 @@
-import { ToastContainer, Slide } from "react-toastify";
+import { ToastContainer, Bounce } from "react-toastify";
 
 import AdminSideNav from "@/components/AdminSideNav";
 
@@ -17,7 +17,7 @@ const AdminDashboardLayout = ({ children }) => {
         pauseOnHover={false}
         draggable={false}
         theme="light"
-        transition={Slide}
+        transition={Bounce}
         closeButton={false}
       />
     </main>
