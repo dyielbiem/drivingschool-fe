@@ -1,7 +1,14 @@
 "use client";
 
-import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import TextAlign from "@tiptap/extension-text-align";
+import Image from "@tiptap/extension-image";
+import Youtube from "@tiptap/extension-youtube";
+import Underline from "@tiptap/extension-underline";
+import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEditor, EditorContent } from "@tiptap/react";
+import { Link } from "@tiptap/extension-link";
 import { CiCircleList } from "react-icons/ci";
 import {
   MdFormatBold,
@@ -18,77 +25,28 @@ import {
   MdOutlineFormatUnderlined
 } from "react-icons/md";
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
-import { RiImageAddFill } from "react-icons/ri";
+import { RiImageAddFill, RiFontSize } from "react-icons/ri";
 import { BsYoutube } from "react-icons/bs";
-import TextAlign from "@tiptap/extension-text-align";
-import Image from "@tiptap/extension-image";
-import Youtube from "@tiptap/extension-youtube";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { Extension } from "@tiptap/core";
-import { Link } from "@tiptap/extension-link";
-import Underline from "@tiptap/extension-underline";
+
 import ImageGalleryModal from "./ImageGalleryModal";
 import EmbedYoutubeModal from "./EmbedYoutubeModal";
 import LinkURLForm from "./LinkURLForm";
-
-const Indent = Extension.create({
-  name: "indent",
-
-  addOptions() {
-    return {
-      types: ["heading", "paragraph"],
-      defaultIndent: "0%"
-    };
-  },
-
-  addGlobalAttributes() {
-    return [
-      {
-        types: this.options.types,
-        attributes: {
-          indent: {
-            default: this.options.defaultIndent,
-            parseHTML: (element) =>
-              element.style.marginLeft || this.options.defaultIndent,
-            renderHTML: (attributes) => {
-              if (attributes.indent === this.options.defaultIndent) {
-                return {};
-              }
-
-              return {
-                style: `margin-left: ${attributes.indent}`
-              };
-            }
-          }
-        }
-      }
-    ];
-  },
-
-  addCommands() {
-    return {
-      setIndentation:
-        (indentValue) =>
-        ({ commands }) => {
-          return this.options.types.every((type) =>
-            commands.updateAttributes(type, { indent: indentValue })
-          );
-        }
-    };
-  }
-});
+import { Indent, FontSize } from "@/utils/tiptapCustomExtension";
 
 const ContentEditor = ({ editorAction, editorContent }) => {
-  const [isSaveLoading, setIsSaveLoading] = useState(false);
-  const [isLinkURLVisible, setIsLinkURLVisible] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const [isSaveLoading, setIsSaveLoading] = useState(false);
+  const [isLinkURLVisible, setIsLinkURLVisible] = useState(false);
+  const [fontSize, setFontSize] = useState("");
+
   const editor = useEditor({
     extensions: [
       StarterKit,
       Indent,
+      FontSize,
       Underline,
       TextAlign.configure({
         types: ["listItem", "heading", "paragraph"]
@@ -104,12 +62,17 @@ const ContentEditor = ({ editorAction, editorContent }) => {
         autolink: true
       })
     ],
-    content: editorContent
+    content: editorContent,
+    onSelectionUpdate({ editor }) {
+      setFontSize(
+        editor.state.selection.$from
+          ?.node?.()
+          ?.attrs?.fontSize?.replace?.(/[^0-9]/g, "") || ""
+      );
+    }
   });
 
-  if (!editor) {
-    return <></>;
-  }
+  if (!editor) return null;
 
   const handleSetLink = (link) => {
     editor
@@ -141,11 +104,18 @@ const ContentEditor = ({ editorAction, editorContent }) => {
     editor.chain().focus().sinkListItem("listItem").run();
   };
 
-  const handleIndentClick = () => {
-    const indent = Number(
-      editor.getAttributes("paragraph").indent?.slice(0, -1) ??
-        editor.getAttributes("heading").indent?.slice(0, -1)
+  const getCurrentIndent = () =>
+    Number(
+      String(
+        editor.getAttributes("paragraph").indent ??
+          editor.getAttributes("heading").indent ??
+          editor.state.selection.$from?.node?.()?.attrs?.indent ??
+          0
+      ).replace(/[^0-9]/g, "")
     );
+
+  const handleIndentClick = () => {
+    const indent = getCurrentIndent();
 
     if (indent >= 40) return;
 
@@ -157,10 +127,7 @@ const ContentEditor = ({ editorAction, editorContent }) => {
   };
 
   const handleOutdentClick = () => {
-    const indent = Number(
-      editor.getAttributes("paragraph").indent?.slice(0, -1) ??
-        editor.getAttributes("heading").indent?.slice(0, -1)
-    );
+    const indent = getCurrentIndent();
 
     if (indent <= 0) return;
 
@@ -169,6 +136,11 @@ const ContentEditor = ({ editorAction, editorContent }) => {
       .focus()
       .setIndentation(`${indent - 4}%`)
       .run();
+  };
+
+  const handleFontSizeChange = (fontSize) => {
+    editor.chain().setFontSize(`${fontSize}px`).run();
+    setFontSize(fontSize);
   };
 
   const handleImageClick = () => {
@@ -217,6 +189,19 @@ const ContentEditor = ({ editorAction, editorContent }) => {
   return (
     <div className="content-editor">
       <div className="editor-styling-btn-container">
+        <div className="font-size-container">
+          <label htmlFor="font-size-input">
+            <RiFontSize />
+          </label>
+          <input
+            type="number"
+            name="font-size-input"
+            id="font-size-input"
+            value={fontSize}
+            onChange={(e) => handleFontSizeChange(e.target.value)}
+            min={8}
+          />
+        </div>
         <button
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()

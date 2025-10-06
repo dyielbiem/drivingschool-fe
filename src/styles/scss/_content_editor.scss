@@ -6,6 +6,19 @@
     @apply flex gap-2 bg-custom-gray-base px-3 py-2.5 rounded-t-md sticky top-0
     z-50 flex-wrap;
 
+    .font-size-container {
+      @apply flex gap-1.5 items-center bg-white pl-1 rounded-[4px]
+      cursor-text;
+
+      svg {
+        @apply text-base cursor-text;
+      }
+
+      input {
+        @apply w-14 rounded-[4px] px-1 appearance-none outline-none;
+      }
+    }
+
     button {
       @apply p-1 rounded font-bold text-xl;
     }
@@ -15,7 +28,7 @@
     @apply focus:outline-none py-4 px-12;
 
     h2 {
-      @apply text-xl font-extrabold;
+      @apply text-xl font-extrabold leading-[1.25em];
     }
 
     h3 {
