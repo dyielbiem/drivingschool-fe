@@ -2,7 +2,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const ImageWithFallback = ({ src, alt, height, width, fallBackSrc }) => {
+const ImageWithFallback = ({
+  src,
+  alt,
+  height,
+  width,
+  fallBackSrc,
+  unoptimized = false
+}) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
@@ -16,6 +23,7 @@ const ImageWithFallback = ({ src, alt, height, width, fallBackSrc }) => {
       height={height}
       alt={alt}
       onError={() => setImgSrc(fallBackSrc)}
+      unoptimized={unoptimized}
     />
   );
 };
