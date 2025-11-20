@@ -1,101 +1,120 @@
 "use server";
 import validator from "validator";
 import adminAddStudent from "@/services/api/adminAddStudent";
+
 const handleStudentSubmit = async (prevState, formData) => {
-  const formDataObject = {
-    userName: formData.get("student-username"),
-    courseID: formData.get("student-course"),
-    passWord: formData.get("student-password"),
-    confirmPassWord: formData.get("student-confirm-password"),
-    firstName: formData.get("student-first-name"),
-    lastName: formData.get("student-last-name"),
-    address: formData.get("student-address"),
-    city: formData.get("student-city"),
-    state: formData.get("student-state"),
-    zip: formData.get("student-zip"),
-    email: formData.get("student-email"),
-    phoneNumber: formData.get("student-phone"),
-    birthDate: formData.get("student-birthdate"),
-    highSchool: formData.get("student-high-school").trim() || "",
-    parentFirstName: formData.get("parent-first-name"),
-    parentLastName: formData.get("parent-last-name"),
-    parentEmail: formData.get("parent-email"),
-    parentPhoneNumber: formData.get("parent-phone"),
-    billingInformation: {
-      firstName: formData.get("student-billing-first-name") || "",
-      lastName: formData.get("student-billing-last-name") || "",
-      address: formData.get("student-billing-address") || "",
-      city: formData.get("student-billing-city") || "",
-      state: formData.get("student-billing-state") || "",
-      zip: formData.get("student-billing-zip") || "",
-      email: formData.get("student-billing-email") || "",
-      phoneNumber: formData.get("student-billing-phone") || ""
-    }
+  const userName = formData.get("student-username");
+  const courseID = formData.get("student-course");
+  const passWord = formData.get("student-password");
+  const confirmPassWord = formData.get("student-confirm-password");
+  const firstName = formData.get("student-first-name");
+  const lastName = formData.get("student-last-name");
+  const address = formData.get("student-address");
+  const city = formData.get("student-city");
+  const state = formData.get("student-state");
+  const zip = formData.get("student-zip");
+  const email = formData.get("student-email");
+  const phoneNumber = formData.get("student-phone");
+  const birthDate = formData.get("student-birthdate");
+  const highSchool = formData.get("student-high-school").trim() || "";
+  const couponCode = formData.get("student-coupon-code");
+  const parentFirstName = formData.get("parent-first-name");
+  const parentLastName = formData.get("parent-last-name");
+  const parentEmail = formData.get("parent-email");
+  const parentPhoneNumber = formData.get("parent-phone");
+  const billingInformation = {
+    firstName: formData.get("student-billing-first-name") || "",
+    lastName: formData.get("student-billing-last-name") || "",
+    address: formData.get("student-billing-address") || "",
+    city: formData.get("student-billing-city") || "",
+    state: formData.get("student-billing-state") || "",
+    zip: formData.get("student-billing-zip") || "",
+    email: formData.get("student-billing-email") || "",
+    phoneNumber: formData.get("student-billing-phone") || ""
+  };
+  let cardInformation = {
+    cardNumber: formData.get("student-card-number") || "",
+    cardCode: formData.get("student-card-code") || "",
+    cardExpiration: formData.get("student-card-expiration") || ""
   };
 
-  const zipRegex = /^[0-9]{1,20}$/;
+  const formResponse = {
+    message: "",
+    ok: false
+  };
 
-  if (!validator.isStrongPassword(formDataObject.passWord))
-    return {
-      message:
-        "Password must be at least 8 characters long with at least 1 lowercase, 1 uppercase, 1 number, and 1 symbol",
-      ok: false
-    };
-
-  if (formDataObject.passWord !== formDataObject.confirmPassWord)
-    return {
-      message: "Passwords do not match",
-      ok: false
-    };
-
-  if (!zipRegex.test(formDataObject.zip))
-    return {
-      message: "Please enter a valid zip code",
-      ok: false
-    };
-
+  const cardInfoValues = Object.values(cardInformation);
   if (
-    formDataObject.billingInformation.zip &&
-    !zipRegex.test(formDataObject.billingInformation.zip)
-  )
-    return {
-      message: "Please enter a valid billing zip code",
-      ok: false
-    };
+    cardInfoValues.some((value) => !!value) &&
+    !cardInfoValues.every((value) => !!value)
+  ) {
+    formResponse.message = "Please complete the card information";
+    return formResponse;
+  }
 
-  const response = await adminAddStudent(
-    formDataObject.userName,
-    formDataObject.passWord,
-    formDataObject.confirmPassWord,
-    formDataObject.courseID,
-    formDataObject.firstName,
-    formDataObject.lastName,
-    formDataObject.highSchool,
-    formDataObject.address,
-    formDataObject.city,
-    formDataObject.state,
-    formDataObject.zip,
-    formDataObject.country,
-    formDataObject.birthDate,
-    formDataObject.email,
-    formDataObject.phoneNumber,
-    formDataObject.parentFirstName,
-    formDataObject.parentLastName,
-    formDataObject.parentEmail,
-    formDataObject.parentPhoneNumber,
-    formDataObject.billingInformation
+  if (cardInfoValues.every((value) => !!value)) {
+    const [year, month] = cardInformation.cardExpiration
+      .split("-")
+      .map((value) => Number(value));
+
+    if (month > 12 || month < 1 || year < new Date().getFullYear()) {
+      formResponse.message = "Card expiration is invalid";
+      return formResponse;
+    }
+
+    const billingInfoValues = Object.values(billingInformation);
+    if (!billingInfoValues.every((value) => !!value)) {
+      formResponse.message = "Please complete the billing information";
+      return formResponse;
+    }
+  } else {
+    cardInformation = null;
+  }
+
+  if (!validator.isStrongPassword(passWord)) {
+    formResponse.message =
+      "Password must be at least 8 characters long with at least 1 lowercase, 1 uppercase, 1 number, and 1 symbol";
+    return formResponse;
+  }
+
+  if (passWord !== confirmPassWord) {
+    formResponse.message = "Passwords do not match";
+    return formResponse;
+  }
+
+  const { ok, json } = await adminAddStudent(
+    userName,
+    passWord,
+    confirmPassWord,
+    courseID,
+    firstName,
+    lastName,
+    highSchool,
+    address,
+    city,
+    state,
+    zip,
+    "US",
+    birthDate,
+    email,
+    phoneNumber,
+    parentFirstName,
+    parentLastName,
+    parentEmail,
+    parentPhoneNumber,
+    billingInformation,
+    cardInformation,
+    couponCode
   );
 
-  if (!response.ok)
-    return {
-      message: response?.json?.error || "An error occured",
-      ok: false
-    };
+  if (!ok) {
+    formResponse.message = json?.error || "An error occured";
+    return formResponse;
+  }
 
-  return {
-    message: undefined,
-    ok: true
-  };
+  formResponse.message = undefined;
+  formResponse.ok = true;
+  return formResponse;
 };
 
 export default handleStudentSubmit;

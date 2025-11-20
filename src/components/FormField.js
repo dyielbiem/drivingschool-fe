@@ -1,5 +1,10 @@
 import CustomSelect from "./CustomSelect";
 
+const getElementMap = (type) => {
+  if (type === "select") return CustomSelect;
+  return "input";
+};
+
 const FormField = ({
   id,
   type,
@@ -10,22 +15,21 @@ const FormField = ({
   otherInputProps = {},
   selectProps = {}
 }) => {
+  const Element = getElementMap(type);
+
   return (
     <div className={`fields ${className}`}>
       <label htmlFor={id}>
         {label} {required && <span>*</span>} {format && `(${format})`}
       </label>
-      {type === "select" ? (
-        <CustomSelect {...selectProps} id={id} required={required} />
-      ) : (
-        <input
-          type={type}
-          name={id}
-          id={id}
-          required={required}
-          {...otherInputProps}
-        />
-      )}
+      <Element
+        type={type}
+        name={id}
+        id={id}
+        required={required}
+        {...selectProps}
+        {...otherInputProps}
+      />
     </div>
   );
 };

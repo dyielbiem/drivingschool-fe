@@ -11,7 +11,7 @@ const handleStudentUpdate = async (prevState, formData) => {
     mailingCity: formData.get("city"),
     mailingState: formData.get("state"),
     mailingZip: formData.get("zip"),
-    mailingCountry: formData.get("country") || "United States",
+    mailingCountry: formData.get("country") || "US",
     mailingEmail: formData.get("email"),
     mailingPhoneNumber: formData.get("phone-number"),
     birthDate: formData.get("birth-date"),
