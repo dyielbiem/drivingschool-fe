@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -93,8 +93,12 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     {
       id: "student-zip",
       type: "text",
-      label: "Zip Code",
-      required: true
+      label: "Zip code",
+      required: true,
+      otherInputProps: {
+        pattern: "^\\d+$",
+        maxLength: 20
+      }
     },
     {
       id: "student-email",
@@ -110,7 +114,8 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       format: "XXX-XXX-XXXX",
       required: true,
       otherInputProps: {
-        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$",
+        maxLength: 12
       }
     },
     {
@@ -123,6 +128,50 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       id: "student-high-school",
       type: "text",
       label: "High school name"
+    },
+    {
+      id: "student-coupon-code",
+      type: "text",
+      label: "Coupon code",
+      required: false,
+      otherInputProps: {
+        autoComplete: "off"
+      }
+    }
+  ];
+
+  const cardInfoFields = [
+    {
+      id: "student-card-number",
+      type: "text",
+      label: "Card number (13-16 digits)",
+      required: false,
+      otherInputProps: {
+        minLength: 13,
+        maxLength: 16,
+        pattern: "^\\d+$"
+      }
+    },
+    {
+      id: "student-card-code",
+      type: "text",
+      label: "Card code (3-4 digits)",
+      required: false,
+      otherInputProps: {
+        minLength: 3,
+        maxLength: 4,
+        pattern: "^\\d+$"
+      }
+    },
+    {
+      id: "student-card-expiration",
+      type: "text",
+      label: "Card expiration (YYYY-MM)",
+      required: false,
+      otherInputProps: {
+        pattern: "^\\d{4}-\\d{2}$",
+        maxLength: 7
+      }
     }
   ];
 
@@ -165,7 +214,11 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       id: "student-billing-zip",
       type: "text",
       label: "Zip code",
-      required: false
+      required: false,
+      otherInputProps: {
+        pattern: "^\\d+$",
+        maxLength: 20
+      }
     },
     {
       id: "student-billing-email",
@@ -180,7 +233,8 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       required: false,
       format: "XXX-XXX-XXXX",
       otherInputProps: {
-        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$",
+        maxLength: 12
       }
     }
   ];
@@ -208,13 +262,16 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       required: false,
       format: "XXX-XXX-XXXX",
       otherInputProps: {
-        pattern: "^\\d{3}-\\d{3}-\\d{4}$"
+        pattern: "^\\d{3}-\\d{3}-\\d{4}$",
+        maxLength: 12
       }
     }
   ];
 
   const router = useRouter();
   const pathname = usePathname();
+  const formRef = useRef(null);
+
   const initialState = {
     message: undefined,
     ok: false
@@ -226,22 +283,37 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
   );
 
   useEffect(() => {
-    if (!formState?.ok) return;
+    if (!formState?.ok) {
+      const container = formState.message && formRef?.current?.parentNode;
+      container?.scrollTo({
+        top: formRef.current.parentNode.scrollHeight,
+        behavior: "smooth"
+      });
+
+      return;
+    }
+
     setStudentSections((state) =>
       state.map((item) => {
         if (!item?.isActive) return item;
         return { ...item, NoOfStudents: item.NoOfStudents + 1 };
       })
     );
+
     router.push(pathname);
-  }, [formState?.ok, pathname, router, setStudentSections]);
+  }, [formState, pathname, router, setStudentSections]);
 
   const goBack = () => {
     router.push(pathname);
   };
 
   return (
-    <form action={formAction} className="add-student-form" autoComplete="off">
+    <form
+      ref={formRef}
+      action={formAction}
+      className="add-student-form"
+      autoComplete="off"
+    >
       <div className="header">
         <button type="button" onClick={goBack}>
           <IoMdArrowRoundBack />
@@ -253,9 +325,23 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       <h2>Student Information</h2>
       <MultiFields section={studentInfoFields} />
 
+      <hr />
+
+      {/* Card Information */}
+      <h2>Card Information</h2>
+      <MultiFields section={cardInfoFields} />
+
+      <hr />
+
       {/* Billing Information */}
       <h2>Billing Information</h2>
+      <p className="note">
+        <strong>Important:</strong> Billing information is required when card
+        information is provided.
+      </p>
       <MultiFields section={billingInfoFields} />
+
+      <hr />
 
       {/* Parent Information */}
       <h2>Parent Information</h2>

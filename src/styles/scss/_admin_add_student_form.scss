@@ -21,6 +21,10 @@
     @apply mt-6;
   }
 
+  .note {
+    @apply col-span-full text-sm italic;
+  }
+
   .fields {
     @apply w-full flex flex-col gap-2
     col-span-1;
@@ -63,6 +67,10 @@
         }
       }
     }
+  }
+
+  hr {
+    @apply h-[1px] w-full col-span-full mt-8;
   }
 
   .student-address {

@@ -35,7 +35,7 @@ const handleLoginSubmit = async (role, redirectPath, prevState, formData) => {
   cookies().set("refreshToken", response?.json?.refreshToken, {
     sameSite: "none",
     secure: true,
-    maxAge: formDataObject.rememberMe === "on" ? 86400 * 365 : ""
+    maxAge: formDataObject.rememberMe === "on" ? 86400 * 365 : 86400
   });
 
   redirect(redirectPath);

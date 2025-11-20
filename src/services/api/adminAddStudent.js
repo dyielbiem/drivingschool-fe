@@ -19,7 +19,9 @@ const adminAddStudent = async (
   parentLastName,
   parentEmail,
   parentPhoneNumber,
-  billingInformation
+  billingInformation,
+  cardInformation,
+  couponCode
 ) => {
   try {
     const fetchMethod = async (accessToken) => {
@@ -51,7 +53,9 @@ const adminAddStudent = async (
             parentLastName,
             parentEmail,
             parentPhoneNumber,
-            billingInformation
+            billingInformation,
+            cardInformation,
+            couponCode
           })
         }
       );
