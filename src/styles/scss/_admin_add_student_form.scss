@@ -1,5 +1,5 @@
 .add-student-form {
-  @apply grid w-full gap-0 md:gap-4 grid-cols-1 md:grid-cols-2;
+  @apply w-full gap-0 md:gap-4 grid-cols-1 md:grid-cols-2;
 
   .header {
     @apply mb-4 sm:col-span-full flex items-center gap-4;
@@ -101,4 +101,38 @@
       text-black rounded-lg py-2.5 h-12;
     }
   }
+}
+
+.stripe-form {
+  @apply w-full flex flex-col;
+
+  .header {
+    @apply mb-4 sm:col-span-full flex items-center gap-4;
+
+    button {
+      @apply text-2xl;
+    }
+
+    h1 {
+      @apply text-2xl font-extrabold;
+    }
+  }
+
+  .amount {
+    @apply text-lg mb-6 pl-2;
+  }
+
+  button[type="submit"] {
+    @apply w-full sm:w-40 bg-custom-blue-base text-base font-bold 
+      text-white rounded-lg py-2.5 mt-6 self-end
+      flex items-center justify-center h-12 disabled:cursor-not-allowed;
+
+    svg {
+      @apply text-2xl animate-spin;
+    }
+  }
+}
+
+.stripe-element-error {
+  @apply text-base font-bold mt-8;
 }

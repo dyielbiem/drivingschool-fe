@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -9,6 +9,7 @@ import { stateOptions } from "@/constants";
 import FormButton from "./FormButton";
 import FormErrorMessage from "./FormErrorMessage";
 import FormField from "./FormField";
+import StripeForm from "./StripeForm";
 
 const MultiFields = ({ section }) => {
   return section.map((field, idx) => <FormField key={idx} {...field} />);
@@ -140,40 +141,40 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
     }
   ];
 
-  const cardInfoFields = [
-    {
-      id: "student-card-number",
-      type: "text",
-      label: "Card number (13-16 digits)",
-      required: false,
-      otherInputProps: {
-        minLength: 13,
-        maxLength: 16,
-        pattern: "^\\d+$"
-      }
-    },
-    {
-      id: "student-card-code",
-      type: "text",
-      label: "Card code (3-4 digits)",
-      required: false,
-      otherInputProps: {
-        minLength: 3,
-        maxLength: 4,
-        pattern: "^\\d+$"
-      }
-    },
-    {
-      id: "student-card-expiration",
-      type: "text",
-      label: "Card expiration (YYYY-MM)",
-      required: false,
-      otherInputProps: {
-        pattern: "^\\d{4}-\\d{2}$",
-        maxLength: 7
-      }
-    }
-  ];
+  // const cardInfoFields = [
+  //   {
+  //     id: "student-card-number",
+  //     type: "text",
+  //     label: "Card number (13-16 digits)",
+  //     required: false,
+  //     otherInputProps: {
+  //       minLength: 13,
+  //       maxLength: 16,
+  //       pattern: "^\\d+$"
+  //     }
+  //   },
+  //   {
+  //     id: "student-card-code",
+  //     type: "text",
+  //     label: "Card code (3-4 digits)",
+  //     required: false,
+  //     otherInputProps: {
+  //       minLength: 3,
+  //       maxLength: 4,
+  //       pattern: "^\\d+$"
+  //     }
+  //   },
+  //   {
+  //     id: "student-card-expiration",
+  //     type: "text",
+  //     label: "Card expiration (YYYY-MM)",
+  //     required: false,
+  //     otherInputProps: {
+  //       pattern: "^\\d{4}-\\d{2}$",
+  //       maxLength: 7
+  //     }
+  //   }
+  // ];
 
   const billingInfoFields = [
     {
@@ -271,10 +272,16 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
   const router = useRouter();
   const pathname = usePathname();
   const formRef = useRef(null);
+  const [clientSecret, setClientSecret] = useState(null);
+  const [stripePk, setStripePk] = useState(null);
+  const [amountToPay, setAmountToPay] = useState(null);
 
   const initialState = {
     message: undefined,
-    ok: false
+    ok: false,
+    clientSecret,
+    stripePk,
+    amountToPay
   };
 
   const [formState, formAction] = useFormState(
@@ -293,6 +300,13 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
       return;
     }
 
+    if (formState.clientSecret) {
+      setClientSecret(formState.clientSecret);
+      setStripePk(formState.stripePk);
+      setAmountToPay(formState.amountToPay);
+      return;
+    }
+
     setStudentSections((state) =>
       state.map((item) => {
         if (!item?.isActive) return item;
@@ -308,55 +322,69 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
   };
 
   return (
-    <form
-      ref={formRef}
-      action={formAction}
-      className="add-student-form"
-      autoComplete="off"
-    >
-      <div className="header">
-        <button type="button" onClick={goBack}>
-          <IoMdArrowRoundBack />
-        </button>
-        <h1>Add student</h1>
-      </div>
-
-      {/* Student Information */}
-      <h2>Student Information</h2>
-      <MultiFields section={studentInfoFields} />
-
-      <hr />
-
-      {/* Card Information */}
-      <h2>Card Information</h2>
-      <MultiFields section={cardInfoFields} />
-
-      <hr />
-
-      {/* Billing Information */}
-      <h2>Billing Information</h2>
-      <p className="note">
-        <strong>Important:</strong> Billing information is required when card
-        information is provided.
-      </p>
-      <MultiFields section={billingInfoFields} />
-
-      <hr />
-
-      {/* Parent Information */}
-      <h2>Parent Information</h2>
-      <MultiFields section={parentInfoFields} />
-
-      {formState?.message && (
-        <FormErrorMessage>{formState.message}</FormErrorMessage>
+    <>
+      {clientSecret && (
+        <StripeForm
+          stripePk={stripePk}
+          clientSecret={clientSecret}
+          amountToPay={amountToPay}
+          onBack={() => {
+            setClientSecret(null);
+            setStripePk(null);
+          }}
+        />
       )}
-      <div className="btn-container">
-        <FormButton>Submit</FormButton>
-        <button type="button" onClick={goBack}>
-          Cancel
-        </button>
-      </div>
-    </form>
+      <form
+        ref={formRef}
+        action={formAction}
+        className={`add-student-form ${clientSecret ? "hidden" : "grid"}`}
+        autoComplete="off"
+      >
+        <div className="header">
+          <button type="button" onClick={goBack}>
+            <IoMdArrowRoundBack />
+          </button>
+          <h1>Add student</h1>
+        </div>
+
+        {/* Student Information */}
+        <h2>Student Information</h2>
+        <MultiFields section={studentInfoFields} />
+
+        <hr />
+
+        {/* Card Information */}
+        {/* <h2>Card Information</h2>
+      <MultiFields section={cardInfoFields} /> */}
+
+        <hr />
+
+        {/* Billing Information */}
+        <h2>Billing Information</h2>
+        <p className="note">
+          <strong>Important:</strong> If billing information is provided and the
+          full discount voucher is not used, payment is required.
+        </p>
+        <MultiFields section={billingInfoFields} />
+
+        <hr />
+
+        {/* Parent Information */}
+        <h2>Parent Information</h2>
+        <MultiFields section={parentInfoFields} />
+
+        {formState?.message && (
+          <FormErrorMessage>{formState.message}</FormErrorMessage>
+        )}
+
+        <div className="btn-container">
+          <FormButton>Submit</FormButton>
+          <button type="button" onClick={goBack}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

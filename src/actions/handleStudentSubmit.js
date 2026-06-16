@@ -22,7 +22,7 @@ const handleStudentSubmit = async (prevState, formData) => {
   const parentLastName = formData.get("parent-last-name");
   const parentEmail = formData.get("parent-email");
   const parentPhoneNumber = formData.get("parent-phone");
-  const billingInformation = {
+  let billingInformation = {
     firstName: formData.get("student-billing-first-name") || "",
     lastName: formData.get("student-billing-last-name") || "",
     address: formData.get("student-billing-address") || "",
@@ -32,43 +32,59 @@ const handleStudentSubmit = async (prevState, formData) => {
     email: formData.get("student-billing-email") || "",
     phoneNumber: formData.get("student-billing-phone") || ""
   };
-  let cardInformation = {
-    cardNumber: formData.get("student-card-number") || "",
-    cardCode: formData.get("student-card-code") || "",
-    cardExpiration: formData.get("student-card-expiration") || ""
-  };
+  // let cardInformation = {
+  //   cardNumber: formData.get("student-card-number") || "",
+  //   cardCode: formData.get("student-card-code") || "",
+  //   cardExpiration: formData.get("student-card-expiration") || ""
+  // };
 
   const formResponse = {
     message: "",
-    ok: false
+    ok: false,
+    clientSecret: null,
+    stripePk: null,
+    amountToPay: null
   };
 
-  const cardInfoValues = Object.values(cardInformation);
+  // const cardInfoValues = Object.values(cardInformation);
+  // if (
+  //   cardInfoValues.some((value) => !!value) &&
+  //   !cardInfoValues.every((value) => !!value)
+  // ) {
+  //   formResponse.message = "Please complete the card information";
+  //   return formResponse;
+  // }
+
+  // if (cardInfoValues.every((value) => !!value)) {
+  //   const [year, month] = cardInformation.cardExpiration
+  //     .split("-")
+  //     .map((value) => Number(value));
+
+  //   if (month > 12 || month < 1 || year < new Date().getFullYear()) {
+  //     formResponse.message = "Card expiration is invalid";
+  //     return formResponse;
+  //   }
+
+  //   const billingInfoValues = Object.values(billingInformation);
+  //   if (!billingInfoValues.every((value) => !!value)) {
+  //     formResponse.message = "Please complete the billing information";
+  //     return formResponse;
+  //   }
+  // } else {
+  //   cardInformation = null;
+  // }
+
+  const billingInfoValues = Object.values(billingInformation);
   if (
-    cardInfoValues.some((value) => !!value) &&
-    !cardInfoValues.every((value) => !!value)
+    billingInfoValues.some((value) => !!value) &&
+    !billingInfoValues.every((value) => !!value)
   ) {
-    formResponse.message = "Please complete the card information";
+    formResponse.message = "Please complete the billing information";
     return formResponse;
   }
 
-  if (cardInfoValues.every((value) => !!value)) {
-    const [year, month] = cardInformation.cardExpiration
-      .split("-")
-      .map((value) => Number(value));
-
-    if (month > 12 || month < 1 || year < new Date().getFullYear()) {
-      formResponse.message = "Card expiration is invalid";
-      return formResponse;
-    }
-
-    const billingInfoValues = Object.values(billingInformation);
-    if (!billingInfoValues.every((value) => !!value)) {
-      formResponse.message = "Please complete the billing information";
-      return formResponse;
-    }
-  } else {
-    cardInformation = null;
+  if (billingInfoValues.every((value) => !value)) {
+    billingInformation = null;
   }
 
   if (!validator.isStrongPassword(passWord)) {
@@ -103,13 +119,19 @@ const handleStudentSubmit = async (prevState, formData) => {
     parentEmail,
     parentPhoneNumber,
     billingInformation,
-    cardInformation,
+    null,
     couponCode
   );
 
   if (!ok) {
     formResponse.message = json?.error || "An error occured";
     return formResponse;
+  }
+
+  if (json.clientSecret) {
+    formResponse.clientSecret = json.clientSecret;
+    formResponse.stripePk = json.stripePk;
+    formResponse.amountToPay = json.amountToPay;
   }
 
   formResponse.message = undefined;

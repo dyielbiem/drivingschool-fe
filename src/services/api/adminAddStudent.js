@@ -55,7 +55,8 @@ const adminAddStudent = async (
             parentPhoneNumber,
             billingInformation,
             cardInformation,
-            couponCode
+            couponCode,
+            paymentMethod: "stripe"
           })
         }
       );

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.6.0",
+    "@stripe/stripe-js": "^9.8.0",
     "@tiptap/extension-bold": "^2.2.1",
     "@tiptap/extension-bullet-list": "^2.2.1",
     "@tiptap/extension-heading": "^2.2.1",
