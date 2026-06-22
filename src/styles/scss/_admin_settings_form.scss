@@ -45,7 +45,7 @@
   textarea,
   input,
   .email-body-editor {
-    @apply bg-white rounded-md p-2 cursor-pointer border-[1px]
+    @apply bg-white rounded-md p-2 cursor-text border-[1px]
     border-custom-gray-base ml-0.5;
 
     & .tiptap {
@@ -60,6 +60,14 @@
   .error-message {
     @apply text-red-700 font-bold p-2.5 mt-4
       bg-red-200 border-2 border-red-700;
+  }
+
+  .stripe-warning-message {
+    @apply text-red-700 flex flex-row items-center gap-1;
+
+    svg {
+      @apply text-xl;
+    }
   }
 
   .success-message {
