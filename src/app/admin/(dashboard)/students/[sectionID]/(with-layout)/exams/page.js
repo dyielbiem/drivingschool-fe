@@ -1,19 +1,16 @@
 "use client";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { RiExternalLinkFill } from "react-icons/ri";
+import { BiLoaderAlt } from "react-icons/bi";
 
-import { useStudentsInSection } from "@/state/store";
+import adminFetchStudentsPerSection from "@/services/api/adminFetchStudentsPerSection";
 
 import Navigate from "@/components/Navigate";
 import Pagination from "@/components/Pagination";
 import StudentExamDetailsTable from "@/components/StudentExamDetailsTable";
 
-const sortAlphabetical = (a, b) =>
-  a.studentUserName.localeCompare(b.studentUserName);
-
-const StudentExamDetails = ({ studentParam, sectionID }) => {
-  const { students } = useStudentsInSection();
+const StudentExamDetails = ({ students, studentParam, sectionID }) => {
   const student = students.find(
     (item) => item.studentUserName === studentParam
   );
@@ -78,11 +75,34 @@ const AdminStudentExams = ({ params: { sectionID } }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const search = searchParams.get("search");
   const page = Number(searchParams.get("page"));
-  const searchKey = searchParams.get("search")?.toLowerCase?.();
   const studentParam = searchParams.get("student");
 
-  const { students, noOfRows } = useStudentsInSection();
+  const [isLoading, setIsLoading] = useState(true);
+  const [students, setStudents] = useState([]);
+  const [numberOfPage, setNumberOfPage] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const { ok, json } = await adminFetchStudentsPerSection(
+        sectionID,
+        page,
+        null,
+        search
+      );
+
+      if (ok) {
+        setStudents(json.studentList);
+        setNumberOfPage(json.totalPages);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [sectionID, page, search]);
 
   const handleView = useCallback(
     (studentUserName) => {
@@ -93,51 +113,35 @@ const AdminStudentExams = ({ params: { sectionID } }) => {
     [pathname, router, searchParams]
   );
 
-  const studentToRender = useMemo(() => {
-    const sortedStudents = [...students].sort(sortAlphabetical);
-    const firstStudentInPageIdx = (page - 1) * noOfRows;
-    const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
+  if (isLoading) {
+    return (
+      <div className="students-per-section-loader">
+        <BiLoaderAlt />
+      </div>
+    );
+  }
 
-    if (!searchKey)
-      return sortedStudents.slice(firstStudentInPageIdx, lastStudentInPageIdx);
-
-    return sortedStudents.filter((eachStudent) => {
-      const {
-        studentUserName,
-        mailingFirstName,
-        mailingLastName,
-        mailingEmail
-      } = eachStudent;
-
-      const searchableFields = {
-        username: studentUserName?.toLowerCase() || "",
-        email: mailingEmail?.toLowerCase() || "",
-        fullName: `${mailingFirstName} ${mailingLastName}`.toLowerCase()
-      };
-
-      return Object.values(searchableFields).some((field) =>
-        field.includes(searchKey)
-      );
-    });
-  }, [noOfRows, page, searchKey, students]);
-
-  if (students.length === 0) return null;
+  if (students.length === 0)
+    return <p className="no-students-per-section">No students found</p>;
 
   if (studentParam)
     return (
-      <StudentExamDetails studentParam={studentParam} sectionID={sectionID} />
+      <StudentExamDetails
+        students={students}
+        studentParam={studentParam}
+        sectionID={sectionID}
+      />
     );
 
   return (
     <>
       <ul className="exam-details-table">
         <TableHeader />
-        <TableData students={studentToRender} onView={handleView} />
+        <TableData students={students} onView={handleView} />
       </ul>
       <Pagination
-        isVisible={students.length !== 0 && !searchKey}
-        itemsLength={Number(students.length)}
-        noOfRows={noOfRows}
+        isVisible={students.length !== 0}
+        numberOfPage={numberOfPage}
       />
     </>
   );

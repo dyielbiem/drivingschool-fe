@@ -1,24 +1,16 @@
 "use client";
-import { useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { parseDate } from "chrono-node";
 import { RiExternalLinkFill } from "react-icons/ri";
+import { BiLoaderAlt } from "react-icons/bi";
+
+import adminFetchStudentsPerSection from "@/services/api/adminFetchStudentsPerSection";
 
 import Navigate from "@/components/Navigate";
 import Pagination from "@/components/Pagination";
 import StudentCompletionsTable from "@/components/StudentCompletionsTable";
 
 import { formatDate } from "@/utils";
-import { useStudentsInSection } from "@/state/store";
-
-const sortLatestToOldest = (a, b) => {
-  const dateA = parseDate(a?.completionDate);
-  const dateB = parseDate(b?.completionDate);
-  if (dateA && !dateB) return -1;
-  if (!dateA && dateB) return 1;
-  if (dateA && dateB) return dateB - dateA;
-  return 0;
-};
 
 const TableHeader = () => (
   <li className="table-header">
@@ -58,48 +50,43 @@ const TableData = ({ students, onView }) => {
   });
 };
 
-const AdminLatestStudentCompletion = () => {
+const AdminLatestStudentCompletion = ({ params: { sectionID } }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const page = Number(searchParams.get("page"));
-  const searchKey = searchParams.get("search")?.toLocaleLowerCase?.();
+  const search = searchParams.get("search");
   const studentParam = searchParams.get("student");
 
-  const { students, noOfRows } = useStudentsInSection();
+  const [isLoading, setIsLoading] = useState(true);
+  const [students, setStudents] = useState([]);
+  const [numberOfPage, setNumberOfPage] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const { ok, json } = await adminFetchStudentsPerSection(
+        sectionID,
+        page,
+        "latestCompletions",
+        search
+      );
+
+      if (ok) {
+        setStudents(json.studentList);
+        setNumberOfPage(json.totalPages);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [sectionID, page, search]);
 
   const studentToView = useMemo(() => {
     return students.find((item) => item.studentUserName === studentParam);
   }, [studentParam, students]);
-
-  const studentsToRender = useMemo(() => {
-    const sortedStudents = [...students].sort(sortLatestToOldest);
-    const firstStudentInPageIdx = (page - 1) * noOfRows;
-    const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
-
-    if (!searchKey)
-      return sortedStudents.slice(firstStudentInPageIdx, lastStudentInPageIdx);
-
-    return sortedStudents.filter((eachStudent) => {
-      const {
-        studentUserName,
-        mailingFirstName,
-        mailingLastName,
-        mailingEmail
-      } = eachStudent;
-
-      const searchableFields = {
-        username: studentUserName?.toLowerCase() || "",
-        email: mailingEmail?.toLowerCase() || "",
-        fullName: `${mailingFirstName} ${mailingLastName}`.toLowerCase()
-      };
-
-      return Object.values(searchableFields).some((field) =>
-        field.includes(searchKey)
-      );
-    });
-  }, [noOfRows, page, students, searchKey]);
 
   const handleView = (studentUserName) => {
     const currentParams = new URLSearchParams(searchParams);
@@ -107,7 +94,16 @@ const AdminLatestStudentCompletion = () => {
     router.push(`${pathname}?${currentParams}`);
   };
 
-  if (students.length === 0) return null;
+  if (isLoading) {
+    return (
+      <div className="students-per-section-loader">
+        <BiLoaderAlt />
+      </div>
+    );
+  }
+
+  if (students.length === 0)
+    return <p className="no-students-per-section">No students found</p>;
 
   if (studentToView) return <StudentCompletionsTable student={studentToView} />;
 
@@ -118,12 +114,11 @@ const AdminLatestStudentCompletion = () => {
     <>
       <ul className="latest-completions-table">
         <TableHeader />
-        <TableData students={studentsToRender} onView={handleView} />
+        <TableData students={students} onView={handleView} />
       </ul>
       <Pagination
-        isVisible={students.length !== 0 && !searchKey}
-        itemsLength={Number(students.length)}
-        noOfRows={noOfRows}
+        isVisible={students.length !== 0}
+        numberOfPage={numberOfPage}
       />
     </>
   );

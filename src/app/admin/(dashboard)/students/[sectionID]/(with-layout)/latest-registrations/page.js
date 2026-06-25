@@ -1,23 +1,14 @@
 "use client";
-import { useMemo, useCallback } from "react";
-import { parseDate } from "chrono-node";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Tooltip } from "react-tooltip";
 import { FaEye } from "react-icons/fa6";
+import { BiLoaderAlt } from "react-icons/bi";
 
+import adminFetchStudentsPerSection from "@/services/api/adminFetchStudentsPerSection";
 import dateFormatter from "@/utils/dateFormatter";
-import { useStudentsInSection } from "@/state/store";
 
 import Pagination from "@/components/Pagination";
-
-const sortLatestToOldest = (a, b) => {
-  const dateA = parseDate(a?.enrollmentDate);
-  const dateB = parseDate(b?.enrollmentDate);
-  if (dateA && !dateB) return -1;
-  if (!dateA && dateB) return 1;
-  if (dateA && dateB) return dateB - dateA;
-  return 0;
-};
 
 const TableHeader = () => (
   <li className="table-header">
@@ -79,38 +70,33 @@ const AdminLatestStudentRegistration = ({ params: { sectionID } }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const { students, noOfRows } = useStudentsInSection();
-
-  const searchKey = searchParams.get("search")?.toLocaleLowerCase?.();
+  const search = searchParams.get("search");
   const page = Number(searchParams.get("page"));
 
-  const studentsToRender = useMemo(() => {
-    const sortedStudents = [...students].sort(sortLatestToOldest);
-    const firstStudentInPageIdx = (page - 1) * noOfRows;
-    const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
+  const [isLoading, setIsLoading] = useState(true);
+  const [students, setStudents] = useState([]);
+  const [numberOfPage, setNumberOfPage] = useState(0);
 
-    if (!searchKey)
-      return sortedStudents.slice(firstStudentInPageIdx, lastStudentInPageIdx);
-
-    return sortedStudents.filter((eachStudent) => {
-      const {
-        studentUserName,
-        mailingFirstName,
-        mailingLastName,
-        mailingEmail
-      } = eachStudent;
-
-      const searchableFields = {
-        username: studentUserName?.toLowerCase() || "",
-        email: mailingEmail?.toLowerCase() || "",
-        fullName: `${mailingFirstName} ${mailingLastName}`.toLowerCase()
-      };
-
-      return Object.values(searchableFields).some((field) =>
-        field.includes(searchKey)
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const { ok, json } = await adminFetchStudentsPerSection(
+        sectionID,
+        page,
+        "latestRegistrations",
+        search
       );
-    });
-  }, [noOfRows, page, students, searchKey]);
+
+      if (ok) {
+        setStudents(json.studentList);
+        setNumberOfPage(json.totalPages);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [sectionID, page, search]);
 
   const handleView = useCallback(
     (studentUserName) => {
@@ -121,18 +107,26 @@ const AdminLatestStudentRegistration = ({ params: { sectionID } }) => {
     [router, sectionID]
   );
 
-  if (students.length === 0) return null;
+  if (isLoading) {
+    return (
+      <div className="students-per-section-loader">
+        <BiLoaderAlt />
+      </div>
+    );
+  }
+
+  if (students.length === 0)
+    return <p className="no-students-per-section">No students found</p>;
 
   return (
     <>
       <ul className="latest-registrations-table">
         <TableHeader />
-        <TableData students={studentsToRender} onView={handleView} />
+        <TableData students={students} onView={handleView} />
       </ul>
       <Pagination
-        isVisible={students?.length !== 0 && !searchKey}
-        itemsLength={Number(students?.length)}
-        noOfRows={noOfRows}
+        isVisible={students?.length !== 0}
+        numberOfPage={numberOfPage}
       />
       <Tooltip id="latest-registrations-table-tooltip" />
     </>
