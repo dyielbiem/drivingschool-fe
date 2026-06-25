@@ -3,8 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { HiMiniEllipsisHorizontal } from "react-icons/hi2";
 
-const Pagination = ({ isVisible = true, itemsLength, noOfRows }) => {
-  const numberOfPage = Math.ceil(itemsLength / noOfRows);
+const Pagination = ({ isVisible = true, numberOfPage }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page"));

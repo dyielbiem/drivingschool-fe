@@ -79,6 +79,7 @@ const AdminStudentsHeader = ({ section }) => {
   const navigateParams = useMemo(() => {
     const currentParams = new URLSearchParams(searchParams);
     currentParams.delete("student");
+    currentParams.set("page", 1);
     return currentParams;
   }, [searchParams]);
 

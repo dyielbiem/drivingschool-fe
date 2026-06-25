@@ -1,16 +1,18 @@
 "use client";
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaTrashCan, FaPen, FaEye } from "react-icons/fa6";
 import { Tooltip } from "react-tooltip";
+import { BiLoaderAlt } from "react-icons/bi";
 
 import Pagination from "@/components/Pagination";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal";
 import EditStudentForm from "@/components/EditStudentForm";
 import ResetStudentPassword from "@/components/ResetStudentPassword";
 
+import adminFetchStudentsPerSection from "@/services/api/adminFetchStudentsPerSection";
 import adminDeleteStudent from "@/services/api/adminDeleteStudent";
-import { useStudentsInSection, useAdmin } from "@/state/store";
+import { useAdmin } from "@/state/store";
 
 const TableHeader = () => (
   <li className="table-header">
@@ -138,14 +140,38 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const searchKey = searchParams.get("search")?.toLocaleLowerCase?.();
+  const search = searchParams.get("search");
   const page = Number(searchParams.get("page"));
 
+  const [fetchID, setFetchID] = useState(Date.now());
+  const [isLoading, setIsLoading] = useState(true);
+  const [students, setStudents] = useState([]);
+  const [numberOfPage, setNumberOfPage] = useState(0);
   const [studentToDelete, setStudentToDelete] = useState(null);
   const [studentToEdit, setStudentToEdit] = useState(null);
 
-  const { students, noOfRows, setDeleteStudent } = useStudentsInSection();
   const { admin } = useAdmin();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const { ok, json } = await adminFetchStudentsPerSection(
+        sectionID,
+        page,
+        null,
+        search
+      );
+
+      if (ok) {
+        setStudents(json.studentList);
+        setNumberOfPage(json.totalPages);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [sectionID, page, search, fetchID]);
 
   // Observe for edit_student query
   useEffect(() => {
@@ -186,51 +212,35 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
     setStudentToDelete(student);
   }, [admin, searchParams, students]);
 
-  const sortAlphabetical = (a, b) =>
-    a.studentUserName.localeCompare(b.studentUserName);
-
-  const studentsToRender = useMemo(() => {
-    const sortedStudents = [...students].sort(sortAlphabetical);
-    const firstStudentInPageIdx = (page - 1) * noOfRows;
-    const lastStudentInPageIdx = (page - 1) * noOfRows + noOfRows;
-
-    if (!searchKey)
-      return sortedStudents.slice(firstStudentInPageIdx, lastStudentInPageIdx);
-
-    return sortedStudents.filter((eachStudent) => {
-      const {
-        studentUserName,
-        mailingFirstName,
-        mailingLastName,
-        mailingEmail
-      } = eachStudent;
-
-      const searchableFields = {
-        username: studentUserName?.toLowerCase() || "",
-        email: mailingEmail?.toLowerCase() || "",
-        fullName: `${mailingFirstName} ${mailingLastName}`.toLowerCase()
-      };
-
-      return Object.values(searchableFields).some((field) =>
-        field.includes(searchKey)
-      );
-    });
-  }, [students, searchKey, noOfRows, page]);
-
-  const pathWithNoDeleteQuery = useCallback(() => {
+  const paramsWithoutDeleteQuery = useMemo(() => {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.delete("delete_student");
-    return `${pathname}?${currentParams}`;
-  }, [pathname, searchParams]);
+    return currentParams;
+  }, [searchParams]);
 
   const deleteAction = useCallback(async () => {
-    const response = await adminDeleteStudent(studentToDelete.studentUserName);
-    if (!response.ok) return;
-    setDeleteStudent(studentToDelete.studentUserName);
-    router.push(pathWithNoDeleteQuery());
-  }, [pathWithNoDeleteQuery, router, setDeleteStudent, studentToDelete]);
+    if (!studentToDelete) return;
 
-  if (students.length === 0) return null;
+    const { ok } = await adminDeleteStudent(studentToDelete?.studentUserName);
+    if (!ok) return;
+
+    const params = paramsWithoutDeleteQuery;
+    params.set("page", 1);
+
+    router.push(`${pathname}?${params}`);
+    setFetchID(Date.now());
+  }, [paramsWithoutDeleteQuery, pathname, router, studentToDelete]);
+
+  if (isLoading) {
+    return (
+      <div className="students-per-section-loader">
+        <BiLoaderAlt />
+      </div>
+    );
+  }
+
+  if (students.length === 0)
+    return <p className="no-students-per-section">No students found</p>;
 
   if (studentToEdit) {
     return (
@@ -245,17 +255,16 @@ const AdminAllStudents = ({ params: { sectionID } }) => {
     <>
       <ul className="all-students-table">
         <TableHeader />
-        <TableData students={studentsToRender} sectionID={sectionID} />
+        <TableData students={students} sectionID={sectionID} />
       </ul>
       <Pagination
-        isVisible={students?.length !== 0 && !searchParams.get("search")}
-        itemsLength={Number(students?.length)}
-        noOfRows={noOfRows}
+        isVisible={students?.length !== 0}
+        numberOfPage={numberOfPage}
       />
       {studentToDelete && (
         <ConfirmDeleteModal
           itemToDelete={studentToDelete.studentUserName}
-          pathWhenModalIsClosed={pathWithNoDeleteQuery()}
+          pathWhenModalIsClosed={`${pathname}?${paramsWithoutDeleteQuery}`}
           confirmAction={deleteAction}
         />
       )}

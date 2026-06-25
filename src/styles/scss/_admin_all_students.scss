@@ -53,3 +53,15 @@
     }
   }
 }
+
+.students-per-section-loader {
+  @apply text-5xl self-center text-custom-blue-base mt-16;
+
+  svg {
+    @apply animate-spin;
+  }
+}
+
+.no-students-per-section {
+  @apply text-xl self-center mt-16 text-custom-gray-dark;
+}

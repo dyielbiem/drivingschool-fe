@@ -4,7 +4,6 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { useStudentsInSection } from "@/state/store";
 import adminFetchSectionByID from "@/services/api/adminFetchSectionByID";
-import adminFetchAllStudents from "@/services/api/adminFetchAllStudents";
 
 import AdminStudentsHeader from "@/components/AdminStudentsHeader";
 import TopSearchBar from "@/components/TopSearchBar";
@@ -24,21 +23,14 @@ const AdminStudentsLayout = ({ children, params: { sectionID } }) => {
   }, [pathname, router, searchParams]);
 
   useEffect(() => {
-    const fetchSectionAndStudents = async () => {
+    const fetchData = async () => {
       if (!sectionID) return;
-      const sectionResponse = await adminFetchSectionByID(sectionID);
+      const { ok, json } = await adminFetchSectionByID(sectionID);
 
-      if (!sectionResponse.ok) return;
-      setSection(sectionResponse.json);
-
-      const studentResponse = await adminFetchAllStudents(sectionID);
-      if (!studentResponse.ok) return;
-
-      setStudents(studentResponse.json.allStudents);
-      setNoOfRows(studentResponse.json.noOfRows || 100);
+      ok && setSection(json);
     };
 
-    fetchSectionAndStudents();
+    fetchData();
   }, [sectionID, setNoOfRows, setStudents]);
 
   if (!section) return null;
