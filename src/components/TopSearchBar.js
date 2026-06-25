@@ -13,6 +13,7 @@ const TopSearchBar = ({ placeholder }) => {
     if (!inputRef.current || !inputRef.current.value) return;
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set("search", inputRef.current.value);
+    currentParams.set("page", 1);
     router.push(`${pathname}?${currentParams.toString()}`);
   };
 
@@ -25,6 +26,7 @@ const TopSearchBar = ({ placeholder }) => {
     if (!inputRef.current || inputRef?.current?.value) return;
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.delete("search");
+    currentParams.set("page", 1);
     router.push(`${pathname}?${currentParams}`);
   };
 
