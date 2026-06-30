@@ -362,7 +362,7 @@ const AddStudentForm = ({ courses, setStudentSections }) => {
         {/* Billing Information */}
         <h2>Billing Information</h2>
         <p className="note">
-          <strong>Important:</strong> If billing information is provided and the
+          <strong>Important:</strong> If billing information is provided and
           full discount voucher is not used, payment is required.
         </p>
         <MultiFields section={billingInfoFields} />
